@@ -6,17 +6,17 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public abstract class Block {
-    private float x;
-    private float y;
-    private float width;
-    private float height;
+    private double x;
+    private double y;
+    private double width;
+    private double height;
     private int scale;
 
-    public Block(float x, float y, float w, float h, int s){
-        this.x = x*scale;
-        this.y = y*scale;
-        this.width = width*scale;
-        this.height = height*scale;
+    public Block(double x, double y, double w, double h, int s){
+        this.x = x*s;
+        this.y = y*s;
+        this.width = w*s;
+        this.height = h*s;
         this.scale = s;
     }
 
@@ -41,18 +41,18 @@ public abstract class Block {
 
     public void showBorders(Graphics g){
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.red);
-        g2d.draw(getBotBound());
+        g2d.setColor(Color.black);
         g2d.draw(getTopBound());
-        g2d.draw(getRightBound());
+        g2d.draw(getBotBound());
         g2d.draw(getLeftBound());
+        g2d.draw(getRightBound());
     }
 
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
     
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
@@ -60,19 +60,19 @@ public abstract class Block {
         return scale;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public void setWidth(float width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
@@ -80,11 +80,11 @@ public abstract class Block {
         this.scale = scale;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
     

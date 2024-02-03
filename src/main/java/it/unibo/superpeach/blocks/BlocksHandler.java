@@ -12,13 +12,13 @@ public class BlocksHandler {
         blocks = new ArrayList<Block>();
     }
 
-    public void tickBlock(){
+    public void tickBlocks(){
         for (Block block : blocks) {
             block.tick();
         }
     }
 
-    public void renderBlock(Graphics g){
+    public void renderBlocks(Graphics g){
         for (Block block : blocks) {
             block.render(g);
         }

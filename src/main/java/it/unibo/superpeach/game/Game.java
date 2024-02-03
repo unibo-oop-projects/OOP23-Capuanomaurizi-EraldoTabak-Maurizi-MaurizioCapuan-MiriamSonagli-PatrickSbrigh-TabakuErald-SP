@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.graphics.GameWindow;
 
 public class Game extends Canvas implements Runnable{
@@ -36,6 +37,12 @@ public class Game extends Canvas implements Runnable{
     private void init(){
         new GameWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         blocksHandler = new BlocksHandler();
+        for (int i = 0; i < 20; i++) {
+            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*10, 32, 32, 1));
+        }
+        for (int i = 0; i < 30; i++) {
+            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*15, 32, 32, 1));
+        }
         start();
     }
 
@@ -89,7 +96,7 @@ public class Game extends Canvas implements Runnable{
     }
 
     private void tick(){
-        blocksHandler.tickBlock();
+        blocksHandler.tickBlocks();
     }
 
     private void render(){
@@ -103,7 +110,7 @@ public class Game extends Canvas implements Runnable{
         g.setColor(Color.PINK);
         g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        blocksHandler.renderBlock(g);
+        blocksHandler.renderBlocks(g);
 
         //clean for next frame
         g.dispose();
