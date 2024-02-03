@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.graphics.GameWindow;
 
 public class Game extends Canvas implements Runnable{
@@ -22,6 +23,7 @@ public class Game extends Canvas implements Runnable{
 
     //GAME COMPONENTS
     private Thread mainGameLoop;
+    private BlocksHandler blocksHandler;
 
     public Game(){
         init();
@@ -33,6 +35,7 @@ public class Game extends Canvas implements Runnable{
 
     private void init(){
         new GameWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        blocksHandler = new BlocksHandler();
         start();
     }
 
@@ -86,7 +89,7 @@ public class Game extends Canvas implements Runnable{
     }
 
     private void tick(){
-
+        blocksHandler.tickBlock();
     }
 
     private void render(){
@@ -99,6 +102,8 @@ public class Game extends Canvas implements Runnable{
 
         g.setColor(Color.PINK);
         g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+        blocksHandler.renderBlock(g);
 
         //clean for next frame
         g.dispose();
