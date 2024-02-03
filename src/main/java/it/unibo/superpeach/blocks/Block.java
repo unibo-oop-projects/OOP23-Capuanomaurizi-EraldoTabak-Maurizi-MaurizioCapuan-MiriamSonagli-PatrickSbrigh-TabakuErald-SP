@@ -1,6 +1,8 @@
 package it.unibo.superpeach.blocks;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public abstract class Block {
@@ -20,7 +22,31 @@ public abstract class Block {
 
     public abstract void tick();
     public abstract void render(Graphics g);
-    public abstract Rectangle getBoundingBox();
+
+    public Rectangle getTopBound(){
+        return new Rectangle((int)x, (int)y, (int)width, 0);
+    }
+
+    public Rectangle getBotBound(){
+        return new Rectangle((int)x, (int)(y+height), (int)width, 0);
+    }
+
+    public Rectangle getLeftBound(){
+        return new Rectangle((int)x, (int)y, 0, (int)height);
+    }
+
+    public Rectangle getRightBound(){
+        return new Rectangle((int)(x+width), (int)y, 0, (int)height);
+    }
+
+    public void showBorders(Graphics g){
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.red);
+        g2d.draw(getBotBound());
+        g2d.draw(getTopBound());
+        g2d.draw(getRightBound());
+        g2d.draw(getLeftBound());
+    }
 
     public float getHeight() {
         return height;
