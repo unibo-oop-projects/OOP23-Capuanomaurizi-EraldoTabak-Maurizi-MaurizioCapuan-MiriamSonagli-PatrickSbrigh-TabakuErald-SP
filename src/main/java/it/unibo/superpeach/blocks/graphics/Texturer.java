@@ -12,7 +12,7 @@ public class Texturer {
 
     private BufferedImageLoader loader;
 
-    private BufferedImage blocksSet; //as many as the files we have
+    private BufferedImage blocksSet;
 
     public BufferedImage[] bricksCastle, lucky, pipes;
 
