@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.graphics.Texturer;
@@ -41,10 +42,14 @@ public class Game extends Canvas implements Runnable{
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
         for (int i = 0; i < 20; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*10, 32, 32, 1));
+            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*14, 32, 32, 1, BlockType.LUCKY));
+            blocksHandler.addBlock(new MapFixedBlock(i*32+32, 32*14, 32, 32, 1, BlockType.BRICK));
+            i++;
         }
         for (int i = 0; i < 30; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*15, 32, 32, 1));
+            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*19, 32, 32, 1, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*20, 32, 32, 1, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*21, 32, 32, 1, BlockType.TERRAIN));
         }
         start();
     }

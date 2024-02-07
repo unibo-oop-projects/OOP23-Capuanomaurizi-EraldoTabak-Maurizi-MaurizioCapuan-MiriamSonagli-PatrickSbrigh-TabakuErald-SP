@@ -1,8 +1,6 @@
 package it.unibo.superpeach.blocks;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -10,6 +8,8 @@ import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.game.Game;
 
 public abstract class Block {
+    public enum BlockType {LUCKY, BRICK, TERRAIN};
+
     private double x;
     private double y;
     private double width;
@@ -19,17 +19,26 @@ public abstract class Block {
     private Texturer texturer = Game.getBlocksTexturer();
     private BufferedImage[] sprites;
 
+    private BlockType type;
+
     public Block(double x, double y, double w, double h, int s){
         this.x = x*s;
         this.y = y*s;
         this.width = w*s;
         this.height = h*s;
         this.scale = s;
-        this.sprites = texturer.getLucky();
     }
 
     public abstract void tick();
     public abstract void render(Graphics g);
+
+    public Texturer getTexturer() {
+        return texturer;
+    }
+
+    public BlockType getType() {
+        return type;
+    }
 
     public Rectangle getTopBound(){
         return new Rectangle((int)x, (int)y, (int)width, 0);
@@ -45,15 +54,6 @@ public abstract class Block {
 
     public Rectangle getRightBound(){
         return new Rectangle((int)(x+width), (int)y, 0, (int)height);
-    }
-
-    public void showBorders(Graphics g){
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.BLACK);
-        g2d.draw(getTopBound());
-        g2d.draw(getBotBound());
-        g2d.draw(getLeftBound());
-        g2d.draw(getRightBound());
     }
 
     public double getHeight() {
@@ -78,6 +78,14 @@ public abstract class Block {
 
     public BufferedImage[] getSprites() {
         return sprites;
+    }
+
+    public void setSprites(BufferedImage[] sprites) {
+        this.sprites = sprites;
+    }
+
+    public void setType(BlockType type) {
+        this.type = type;
     }
 
     public void setHeight(double height) {
