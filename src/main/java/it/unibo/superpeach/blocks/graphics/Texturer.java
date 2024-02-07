@@ -35,11 +35,6 @@ public class Texturer {
         loadBricksCastle();
         loadLucky();
         loadPipes();
-
-        System.out.println(pipes.length);
-        for (BufferedImage pipe : pipes) {
-            System.out.println(pipe);
-        }
     }
 
     public void loadBricksCastle(){
