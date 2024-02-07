@@ -11,7 +11,7 @@ public class BufferedImageLoader {
 
     public BufferedImage loadImage(String imgPath){
         try {
-            img = ImageIO.read(getClass().getResource(imgPath));
+            img = ImageIO.read(ClassLoader.getSystemResource(imgPath)/*new File("C:\\Users\\mauri\\Desktop\\SuperPeach\\res\\BlocksTile.png")/*getClass().getResource(imgPath)*/);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.MapFixedBlock;
+import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.GameWindow;
 
 public class Game extends Canvas implements Runnable{
@@ -25,6 +26,7 @@ public class Game extends Canvas implements Runnable{
     //GAME COMPONENTS
     private Thread mainGameLoop;
     private BlocksHandler blocksHandler;
+    private static Texturer blocksTexturer;
 
     public Game(){
         init();
@@ -36,6 +38,7 @@ public class Game extends Canvas implements Runnable{
 
     private void init(){
         new GameWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
         for (int i = 0; i < 20; i++) {
             blocksHandler.addBlock(new MapFixedBlock(i*32, 32*10, 32, 32, 1));
@@ -71,6 +74,7 @@ public class Game extends Canvas implements Runnable{
         int frames = 0;
         int updates = 0;
 
+        //GAMELOOP
         while (running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -115,6 +119,10 @@ public class Game extends Canvas implements Runnable{
         //clean for next frame
         g.dispose();
         buffStrat.show();
+    }
+
+    public static Texturer getBlocksTexturer() {
+        return blocksTexturer;
     }
 
 }

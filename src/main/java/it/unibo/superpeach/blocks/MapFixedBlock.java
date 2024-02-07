@@ -14,6 +14,7 @@ public class MapFixedBlock extends Block{
 
     @Override
     public void render(Graphics g) {
+        g.drawImage(getSprites()[0], (int)getX(), (int)getY(), (int)getWidth(), (int)getHeight(), null);
         showBorders(g);
     }
 

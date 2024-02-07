@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
+import it.unibo.superpeach.blocks.graphics.Texturer;
+import it.unibo.superpeach.game.Game;
 
 public abstract class Block {
     private double x;
@@ -12,12 +16,16 @@ public abstract class Block {
     private double height;
     private int scale;
 
+    private Texturer texturer = Game.getBlocksTexturer();
+    private BufferedImage[] sprites;
+
     public Block(double x, double y, double w, double h, int s){
         this.x = x*s;
         this.y = y*s;
         this.width = w*s;
         this.height = h*s;
         this.scale = s;
+        this.sprites = texturer.getLucky();
     }
 
     public abstract void tick();
@@ -41,7 +49,7 @@ public abstract class Block {
 
     public void showBorders(Graphics g){
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.black);
+        g2d.setColor(Color.BLACK);
         g2d.draw(getTopBound());
         g2d.draw(getBotBound());
         g2d.draw(getLeftBound());
@@ -66,6 +74,10 @@ public abstract class Block {
 
     public double getY() {
         return y;
+    }
+
+    public BufferedImage[] getSprites() {
+        return sprites;
     }
 
     public void setHeight(double height) {

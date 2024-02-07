@@ -25,50 +25,65 @@ public class Texturer {
         loader = new BufferedImageLoader();
 
         try {
-            blocksSet = loader.loadImage("/BlocksTile.png");
+            blocksSet = loader.loadImage("it/unibo/superpeach/tiles/BlocksTile.png");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        getBricksCastle();
-        getLucky();
-        getPipes();
+        loadBricksCastle();
+        loadLucky();
+        loadPipes();
+
+        System.out.println(pipes.length);
+        for (BufferedImage pipe : pipes) {
+            System.out.println(pipe);
+        }
     }
 
-    public BufferedImage[] getBricksCastle(){
+    public void loadBricksCastle(){
         int x = 0;
         int y = 16;
+        int index = 0;
 
         for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT/8; i++) {
             for (int j = 0; j < BRICKSCASTLEBLOCKS_COUNT/2; j++) {
-                bricksCastle[0] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                bricksCastle[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                index++;
             }
         }
-
-        return bricksCastle;
     }
 
-    public BufferedImage[] getLucky(){
+    public void loadLucky(){
         int x = 298;
         int y = 78;
 
         for (int i = 0; i < LUCKYBLOCKS_COUNT; i++) {
-            lucky[0] = blocksSet.getSubimage(x, y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+            lucky[i] = blocksSet.getSubimage(x, y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
         }
-
-        return lucky;
     }
 
-    public BufferedImage[] getPipes(){
+    public void loadPipes(){
         int x = 119;
         int y = 196;
+        int index = 0;
 
         for (int i = 0; i < PIPEBLOCKS_COUNT/2; i++) {
             for (int j = 0; j < PIPEBLOCKS_COUNT/2; j++) {
-                pipes[0] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                pipes[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                index++;
             }
         }
+    }
 
+    public BufferedImage[] getBricksCastle() {
+        return bricksCastle;
+    }
+
+    public BufferedImage[] getLucky() {
+        return lucky;
+    }
+
+    public BufferedImage[] getPipes() {
         return pipes;
     }
 
