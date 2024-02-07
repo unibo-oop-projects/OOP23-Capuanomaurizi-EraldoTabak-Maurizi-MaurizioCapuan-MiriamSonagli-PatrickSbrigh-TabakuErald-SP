@@ -10,6 +10,8 @@ public class Texturer {
     private static final int BLOCK_WIDTH = 16;
     private static final int BLOCK_HEIGHT = 16;
 
+    private static final String FILE_SEPARATOR = System.getProperty("file.separator");
+
     private BufferedImageLoader loader;
 
     private BufferedImage blocksSet;
@@ -25,7 +27,7 @@ public class Texturer {
         loader = new BufferedImageLoader();
 
         try {
-            blocksSet = loader.loadImage("it/unibo/superpeach/tiles/BlocksTile.png");
+            blocksSet = loader.loadImage("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"tiles"+FILE_SEPARATOR+"BlocksTile.png");
         } catch (Exception e) {
             e.printStackTrace();
         }
