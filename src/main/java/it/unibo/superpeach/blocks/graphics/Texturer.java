@@ -28,13 +28,12 @@ public class Texturer {
 
         try {
             blocksSet = loader.loadImage("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"tiles"+FILE_SEPARATOR+"BlocksTile.png");
+            loadBricksCastle();
+            loadLucky();
+            loadPipes();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        loadBricksCastle();
-        loadLucky();
-        loadPipes();
     }
 
     public void loadBricksCastle(){
