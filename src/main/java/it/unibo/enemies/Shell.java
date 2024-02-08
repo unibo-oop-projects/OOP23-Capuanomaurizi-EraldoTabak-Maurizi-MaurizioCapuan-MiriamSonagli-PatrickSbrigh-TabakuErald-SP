@@ -1,4 +1,4 @@
-package main.java.it.unibo.enemies;
+package it.unibo.enemies;
 
 import java.awt.*;
 
