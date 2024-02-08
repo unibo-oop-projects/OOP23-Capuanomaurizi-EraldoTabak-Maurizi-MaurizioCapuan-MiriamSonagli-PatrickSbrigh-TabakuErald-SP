@@ -12,10 +12,11 @@ public abstract class Enemy {
     private boolean isFalling;
     private BufferedImage img;
 
-    public Enemy(double x, double y, BufferedImage img) {
+    public Enemy(double x, double y, BufferedImage img, double speed) {
         setCoords(x, y);
         this.isFalling = false;
         setDimension(img.getWidth(), img.getHeight());
+        this.speed = speed;
     }
 
     public void setCoords(double x, double y) {
@@ -62,4 +63,42 @@ public abstract class Enemy {
     public void setDimension(int width, int height) {
         this.dim = new Dimension(width, height);
     }
+
+    public BufferedImage getImg() {
+        return this.img;
+    }
+
+    public void setImg(BufferedImage img) {
+        this.img = img;
+    }
+
+    public void sprite(Graphics graphic) {
+        BufferedImage im = getImg();
+        graphic.drawImage(im, (int) x, (int) y, null);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle((int) x, (int) y, dim.width, dim.height);
+    }
+
+    // completare i metodi bound
+    public Rectangle getTopBound() {
+        return new Rectangle();
+    }
+
+    public Rectangle getBottomBound() {
+        return new Rectangle();
+    }
+
+    public Rectangle getRightBound() {
+        return new Rectangle();
+    }
+
+    public Rectangle getLeftBound() {
+        return new Rectangle();
+    }
+
+    // tenere a mente che potrebbe servire implementare metodi getter e setter per
+    // la velocità "speed"
+
 }
