@@ -40,4 +40,11 @@ public abstract class Enemy {
         return this.y;
     }
 
+    public boolean getIsFalling() {
+        return this.isFalling;
+    }
+
+    public void setIsFalling(boolean fall) {
+        this.isFalling = fall;
+    }
 }
