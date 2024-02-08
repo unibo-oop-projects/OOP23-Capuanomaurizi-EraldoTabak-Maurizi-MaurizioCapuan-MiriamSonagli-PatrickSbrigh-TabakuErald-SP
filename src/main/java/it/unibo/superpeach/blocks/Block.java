@@ -10,10 +10,10 @@ import it.unibo.superpeach.game.Game;
 public abstract class Block {
     public enum BlockType {LUCKY, BRICK, TERRAIN};
 
-    private double x;
-    private double y;
-    private double width;
-    private double height;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
     private int scale;
 
     private Texturer texturer = Game.getBlocksTexturer();
@@ -21,7 +21,7 @@ public abstract class Block {
 
     private BlockType type;
 
-    public Block(double x, double y, double w, double h, int s){
+    public Block(int x, int y, int w, int h, int s){
         this.x = x*s;
         this.y = y*s;
         this.width = w*s;
@@ -56,11 +56,11 @@ public abstract class Block {
         return new Rectangle((int)(x+width), (int)y, 0, (int)height);
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
     
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
@@ -68,11 +68,11 @@ public abstract class Block {
         return scale;
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
@@ -88,11 +88,11 @@ public abstract class Block {
         this.type = type;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
@@ -100,11 +100,11 @@ public abstract class Block {
         this.scale = scale;
     }
 
-    public void setX(double x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public void setY(double y) {
+    public void setY(int y) {
         this.y = y;
     }
     
