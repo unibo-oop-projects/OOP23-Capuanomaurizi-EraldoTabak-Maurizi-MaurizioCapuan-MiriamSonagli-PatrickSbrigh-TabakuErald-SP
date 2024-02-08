@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.MapBackgroundBlock;
 import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.GameWindow;
@@ -51,6 +52,9 @@ public class Game extends Canvas implements Runnable{
             blocksHandler.addBlock(new MapFixedBlock(i*32, 32*20, 32, 32, 1, BlockType.TERRAIN));
             blocksHandler.addBlock(new MapFixedBlock(i*32, 32*21, 32, 32, 1, BlockType.TERRAIN));
         }
+        blocksHandler.addBlock(new MapBackgroundBlock(6*32, 32*6, 32, 32, 1, BlockType.CLOUD));
+        blocksHandler.addBlock(new MapBackgroundBlock(21*32, 32*18, 32, 32, 1, BlockType.BUSH));
+        blocksHandler.addBlock(new MapBackgroundBlock(8*32, 32*18, 32, 32, 1, BlockType.HILL));
         start();
     }
 

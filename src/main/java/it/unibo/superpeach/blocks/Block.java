@@ -8,7 +8,7 @@ import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.game.Game;
 
 public abstract class Block {
-    public enum BlockType {LUCKY, BRICK, TERRAIN};
+    public enum BlockType {BRICK, TERRAIN, LUCKY, PIPE, BUSH, CLOUD, HILL};
 
     private int x;
     private int y;

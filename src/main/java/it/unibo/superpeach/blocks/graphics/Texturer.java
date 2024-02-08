@@ -7,6 +7,10 @@ public class Texturer {
     private static final int BRICKSCASTLEBLOCKS_COUNT = 16;
     private static final int LUCKYBLOCKS_COUNT = 2;
     private static final int PIPEBLOCKS_COUNT = 4;
+    private static final int CLOUDBLOCKS_COUNT = 6;
+    private static final int BUSHBLOCKS_COUNT = 3;
+    private static final int HILLBLOCKS_COUNT = 6;
+
     private static final int BLOCK_WIDTH = 16;
     private static final int BLOCK_HEIGHT = 16;
 
@@ -16,40 +20,46 @@ public class Texturer {
 
     private BufferedImage blocksSet;
 
-    public BufferedImage[] bricksCastle, lucky, pipes;
+    public BufferedImage[] terrain, lucky, pipe, cloud, bush, hill;
 
     public Texturer(){
 
-        bricksCastle = new BufferedImage[BRICKSCASTLEBLOCKS_COUNT];
+        terrain = new BufferedImage[BRICKSCASTLEBLOCKS_COUNT];
         lucky = new BufferedImage[LUCKYBLOCKS_COUNT];
-        pipes = new BufferedImage[PIPEBLOCKS_COUNT];
+        pipe = new BufferedImage[PIPEBLOCKS_COUNT];
+        cloud = new BufferedImage[CLOUDBLOCKS_COUNT];
+        bush = new BufferedImage[BUSHBLOCKS_COUNT];
+        hill = new BufferedImage[HILLBLOCKS_COUNT];
 
         loader = new BufferedImageLoader();
 
         try {
             blocksSet = loader.loadImage("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"tiles"+FILE_SEPARATOR+"BlocksTile.png");
-            loadBricksCastle();
+            loadTerrain();
             loadLucky();
-            loadPipes();
+            loadPipe();
+            loadCloud();
+            loadBush();
+            loadHill();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void loadBricksCastle(){
+    private void loadTerrain(){
         int x = 0;
         int y = 16;
         int index = 0;
 
         for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT/8; i++) {
             for (int j = 0; j < BRICKSCASTLEBLOCKS_COUNT/2; j++) {
-                bricksCastle[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                terrain[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
                 index++;
             }
         }
     }
 
-    public void loadLucky(){
+    private void loadLucky(){
         int x = 298;
         int y = 78;
 
@@ -58,29 +68,74 @@ public class Texturer {
         }
     }
 
-    public void loadPipes(){
+    private void loadPipe(){
         int x = 119;
         int y = 196;
         int index = 0;
 
         for (int i = 0; i < PIPEBLOCKS_COUNT/2; i++) {
             for (int j = 0; j < PIPEBLOCKS_COUNT/2; j++) {
-                pipes[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                pipe[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
                 index++;
             }
         }
     }
 
-    public BufferedImage[] getBricksCastle() {
-        return bricksCastle;
+    private void loadCloud(){
+        int x = 298;
+        int y = 16;
+        int index = 0;
+
+        for (int i = 0; i < CLOUDBLOCKS_COUNT/3; i++) {
+            for (int j = 0; j < CLOUDBLOCKS_COUNT/2; j++) {
+                cloud[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                index++;
+            }
+        }
+    }
+
+    private void loadBush(){
+        int x = 0;
+        int y = 213;
+
+        for (int i = 0; i < BUSHBLOCKS_COUNT; i++) {
+            bush[i] = blocksSet.getSubimage(x + i*(BLOCK_WIDTH+1), y, BLOCK_WIDTH, BLOCK_HEIGHT);
+        }
+    }
+
+    private void loadHill(){
+        hill[0] = blocksSet.getSubimage(34, 230, BLOCK_WIDTH, BLOCK_HEIGHT);
+
+        int x = 0;
+        int y = 247;
+
+        for (int i = 0; i < HILLBLOCKS_COUNT-1; i++) {
+            hill[i+1] = blocksSet.getSubimage(x + i*(BLOCK_WIDTH+1), y, BLOCK_WIDTH, BLOCK_HEIGHT);
+        }
+    }
+
+    public BufferedImage[] getTerrain() {
+        return terrain;
     }
 
     public BufferedImage[] getLucky() {
         return lucky;
     }
 
-    public BufferedImage[] getPipes() {
-        return pipes;
+    public BufferedImage[] getPipe() {
+        return pipe;
+    }
+
+    public BufferedImage[] getCloud() {
+        return cloud;
+    }
+
+    public BufferedImage[] getBush() {
+        return bush;
+    }
+
+    public BufferedImage[] getHill() {
+        return hill;
     }
 
 }
