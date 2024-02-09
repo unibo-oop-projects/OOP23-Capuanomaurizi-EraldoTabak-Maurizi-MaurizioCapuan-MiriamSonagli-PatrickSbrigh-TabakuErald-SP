@@ -17,6 +17,9 @@ public class MapFixedBlock extends Block{
             case BRICK:
                 setSprites(getTexturer().getTerrain());
                 break;
+            case STONE:
+                setSprites(getTexturer().getTerrain());
+                break;
             case PIPE:
                 setSprites(getTexturer().getPipe());
                 break;
@@ -40,6 +43,9 @@ public class MapFixedBlock extends Block{
                 break;
             case BRICK:
                 g.drawImage(getSprites()[2], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case STONE:
+                g.drawImage(getSprites()[8], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case PIPE:
                 break;
