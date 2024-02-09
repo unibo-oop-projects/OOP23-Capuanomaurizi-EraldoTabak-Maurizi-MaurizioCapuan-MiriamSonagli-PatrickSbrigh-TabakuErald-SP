@@ -51,4 +51,7 @@ public abstract class Player {
         this.width = width;
     }
 
+    public abstract void moveLeft();
+    public abstract void moveRight();
+    public abstract void jump();
 }
