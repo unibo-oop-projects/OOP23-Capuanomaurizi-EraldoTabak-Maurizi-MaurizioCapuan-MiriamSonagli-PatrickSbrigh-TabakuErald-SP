@@ -41,19 +41,19 @@ public abstract class Block {
     }
 
     public Rectangle getTopBound(){
-        return new Rectangle((int)x, (int)y, (int)width, 0);
+        return new Rectangle(x, y, width, 0);
     }
 
     public Rectangle getBotBound(){
-        return new Rectangle((int)x, (int)(y+height), (int)width, 0);
+        return new Rectangle(x, y+height, width, 0);
     }
 
     public Rectangle getLeftBound(){
-        return new Rectangle((int)x, (int)y, 0, (int)height);
+        return new Rectangle(x, y, 0, height);
     }
 
     public Rectangle getRightBound(){
-        return new Rectangle((int)(x+width), (int)y, 0, (int)height);
+        return new Rectangle(x+width, y, 0, height);
     }
 
     public int getHeight() {
