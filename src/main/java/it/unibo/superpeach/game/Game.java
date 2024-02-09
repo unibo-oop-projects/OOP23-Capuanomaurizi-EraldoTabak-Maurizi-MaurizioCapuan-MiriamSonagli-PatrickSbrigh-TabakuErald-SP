@@ -5,12 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.blocks.MapBackgroundBlock;
-import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.GameWindow;
+import it.unibo.superpeach.level.LevelHandler;
 
 public class Game extends Canvas implements Runnable{
 
@@ -30,6 +28,7 @@ public class Game extends Canvas implements Runnable{
     private Thread mainGameLoop;
     private BlocksHandler blocksHandler;
     private static Texturer blocksTexturer;
+    private LevelHandler levelHandler;
 
     public Game(){
         init();
@@ -43,19 +42,8 @@ public class Game extends Canvas implements Runnable{
         new GameWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, this);
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
-        for (int i = 0; i < 20; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*14, 16, 16, GAME_SCALE, BlockType.LUCKY));
-            blocksHandler.addBlock(new MapFixedBlock(i*16+16, 16*14, 16, 16, GAME_SCALE, BlockType.BRICK));
-            i++;
-        }
-        for (int i = 0; i < 30; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*19, 16, 16, GAME_SCALE, BlockType.TERRAIN));
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*20, 16, 16, GAME_SCALE, BlockType.TERRAIN));
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*21, 16, 16, GAME_SCALE, BlockType.TERRAIN));
-        }
-        blocksHandler.addBlock(new MapBackgroundBlock(6*16, 16*6, 16, 16, GAME_SCALE, BlockType.CLOUD));
-        blocksHandler.addBlock(new MapBackgroundBlock(21*16, 16*18, 16, 16, GAME_SCALE, BlockType.BUSH));
-        blocksHandler.addBlock(new MapBackgroundBlock(8*16, 16*18, 16, 16, GAME_SCALE, BlockType.HILL));
+        levelHandler = new LevelHandler(blocksHandler, GAME_SCALE);
+        levelHandler.drawLevel();
         start();
     }
 
@@ -65,17 +53,17 @@ public class Game extends Canvas implements Runnable{
         running = true;
     }
 
-    private synchronized void restart(int newScale){
-        try {
-            mainGameLoop.join();
-            running = false;
-            GAME_SCALE = newScale;
-            System.out.println("print");
-            new Game();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    // private synchronized void restart(int newScale){
+    //     try {
+    //         mainGameLoop.join();
+    //         running = false;
+    //         GAME_SCALE = newScale;
+    //         System.out.println("print");
+    //         new Game();
+    //     } catch (InterruptedException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     private synchronized void stop(){
         try {
