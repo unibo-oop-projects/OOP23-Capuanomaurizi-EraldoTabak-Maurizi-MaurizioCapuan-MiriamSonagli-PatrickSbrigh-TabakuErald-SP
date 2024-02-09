@@ -24,6 +24,7 @@ public class Game extends Canvas implements Runnable{
 
     //GAME VARIABLES
     private boolean running;
+    private int GAME_SCALE = 1;
 
     //GAME COMPONENTS
     private Thread mainGameLoop;
@@ -39,22 +40,22 @@ public class Game extends Canvas implements Runnable{
     }
 
     private void init(){
-        new GameWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        new GameWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, this);
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
         for (int i = 0; i < 20; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*14, 16, 16, 1, BlockType.LUCKY));
-            blocksHandler.addBlock(new MapFixedBlock(i*16+16, 16*14, 16, 16, 1, BlockType.BRICK));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*14, 16, 16, GAME_SCALE, BlockType.LUCKY));
+            blocksHandler.addBlock(new MapFixedBlock(i*16+16, 16*14, 16, 16, GAME_SCALE, BlockType.BRICK));
             i++;
         }
         for (int i = 0; i < 30; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*19, 16, 16, 1, BlockType.TERRAIN));
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*20, 16, 16, 1, BlockType.TERRAIN));
-            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*21, 16, 16, 1, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*19, 16, 16, GAME_SCALE, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*20, 16, 16, GAME_SCALE, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*21, 16, 16, GAME_SCALE, BlockType.TERRAIN));
         }
-        blocksHandler.addBlock(new MapBackgroundBlock(6*16, 16*6, 16, 16, 1, BlockType.CLOUD));
-        blocksHandler.addBlock(new MapBackgroundBlock(21*16, 16*18, 16, 16, 1, BlockType.BUSH));
-        blocksHandler.addBlock(new MapBackgroundBlock(8*16, 16*18, 16, 16, 1, BlockType.HILL));
+        blocksHandler.addBlock(new MapBackgroundBlock(6*16, 16*6, 16, 16, GAME_SCALE, BlockType.CLOUD));
+        blocksHandler.addBlock(new MapBackgroundBlock(21*16, 16*18, 16, 16, GAME_SCALE, BlockType.BUSH));
+        blocksHandler.addBlock(new MapBackgroundBlock(8*16, 16*18, 16, 16, GAME_SCALE, BlockType.HILL));
         start();
     }
 
@@ -62,6 +63,18 @@ public class Game extends Canvas implements Runnable{
         mainGameLoop = new Thread(this);
         mainGameLoop.start();
         running = true;
+    }
+
+    private synchronized void restart(int newScale){
+        try {
+            mainGameLoop.join();
+            running = false;
+            GAME_SCALE = newScale;
+            System.out.println("print");
+            new Game();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private synchronized void stop(){
@@ -121,7 +134,7 @@ public class Game extends Canvas implements Runnable{
         Graphics g = buffStrat.getDrawGraphics();
 
         g.setColor(Color.PINK);
-        g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        g.fillRect(0, 0, WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
 
         blocksHandler.renderBlocks(g);
 
@@ -132,6 +145,10 @@ public class Game extends Canvas implements Runnable{
 
     public static Texturer getBlocksTexturer() {
         return blocksTexturer;
+    }
+
+    public void setGameScale(int s){
+        GAME_SCALE = s;
     }
 
 }
