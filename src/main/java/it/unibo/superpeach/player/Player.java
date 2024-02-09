@@ -31,6 +31,24 @@ public abstract class Player {
         return this.height;
     }
 
-    
+    public void setX(int x){
+        this.x = x*this.scale;
+    }
+
+    public void setY(int y){
+        this.y = y*this.scale;
+    }
+
+    public void setScale(int scale){
+        this.scale = scale;
+    }
+
+    public void setHeight(int height){
+        this.height = height;
+    }
+
+    public void setWidth(int width){
+        this.width = width;
+    }
 
 }
