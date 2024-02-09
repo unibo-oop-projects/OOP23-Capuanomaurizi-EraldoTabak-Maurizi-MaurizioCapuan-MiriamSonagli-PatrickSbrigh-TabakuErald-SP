@@ -34,7 +34,7 @@ public class Texturer {
         loader = new BufferedImageLoader();
 
         try {
-            blocksSet = loader.loadImage("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"tiles"+FILE_SEPARATOR+"BlocksTile.png");
+            blocksSet = loader.loadImage("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"tiles"+FILE_SEPARATOR+"blocks_tile.png");
             loadTerrain();
             loadLucky();
             loadPipe();
