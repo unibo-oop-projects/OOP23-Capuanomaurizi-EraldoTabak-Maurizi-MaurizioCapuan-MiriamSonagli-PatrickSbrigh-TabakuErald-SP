@@ -35,11 +35,4 @@ public class GameWindow {
         return (int)size.getHeight();
     }
 
-    public void changeScale(int scale){
-        size.setSize((int)size.getWidth()*scale, (int)size.getHeight()*scale);
-        frame.setPreferredSize(size);
-        frame.setMinimumSize(size);
-        frame.setMaximumSize(size);
-    }
-
 }

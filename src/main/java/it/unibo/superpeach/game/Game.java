@@ -24,7 +24,7 @@ public class Game extends Canvas implements Runnable{
 
     //GAME VARIABLES
     private boolean running;
-    private int GAME_SCALE = 1;
+    private int GAME_SCALE = 2;
 
     //GAME COMPONENTS
     private Thread mainGameLoop;
