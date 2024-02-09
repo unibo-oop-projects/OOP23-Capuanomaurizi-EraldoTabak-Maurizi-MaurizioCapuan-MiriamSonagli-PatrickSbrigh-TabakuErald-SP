@@ -50,33 +50,33 @@ public class MapBackgroundBlock extends Block{
         int x = getX();
         int y = getY();
         g.drawImage(getSprites()[0], x, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[1], x+32, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[2], x+64, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[3], x, y+32, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[4], x+32, y+32, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[5], x+64, y+32, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[1], x+getWidth(), y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[2], x+getWidth()*2, y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[3], x, y+getHeight(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[4], x+getWidth(), y+getHeight(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[5], x+getWidth()*2, y+getHeight(), getWidth(), getHeight(), null);
     }
 
     private void buildBush(Graphics g){
         int x = getX();
         int y = getY();
         g.drawImage(getSprites()[0], x, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[1], x+32, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[2], x+64, y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[1], x+getWidth(), y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[2], x+getWidth()*2, y, getWidth(), getHeight(), null);
     }
 
     private void buildHill(Graphics g){
         int x = getX();
         int y = getY();
         g.drawImage(getSprites()[1], x, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[1], x+32, y-32, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[0], x+64, y-64, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[2], x+32, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[4], x+96, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[3], x+64, y-32, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[3], x+64, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[5], x+128, y, getWidth(), getHeight(), null);
-        g.drawImage(getSprites()[5], x+96, y-32, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[1], x+getWidth(), y-getHeight(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[0], x+getWidth()*2, y-getHeight()*2, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[2], x+getWidth(), y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[4], x+getWidth()*3, y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[3], x+getWidth()*2, y-getHeight(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[3], x+getWidth()*2, y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[5], x+getWidth()*4, y, getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[5], x+getWidth()*3, y-getHeight(), getWidth(), getHeight(), null);
     }
 
 }

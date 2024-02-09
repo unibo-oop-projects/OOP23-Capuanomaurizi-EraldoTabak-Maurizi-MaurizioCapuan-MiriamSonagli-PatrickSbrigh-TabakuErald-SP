@@ -19,8 +19,8 @@ public class Game extends Canvas implements Runnable{
     private static final int NANOS_PER_SECOND = 1000000000;
     private static final double TICKS_PER_SECOND = 60.0;
     private static final String GAME_NAME = "Super Peach";
-    private static final int WINDOW_WIDTH = 960;
-    private static final int WINDOW_HEIGHT = 720;
+    private static final int WINDOW_WIDTH = 960/2;
+    private static final int WINDOW_HEIGHT = 720/2;
 
     //GAME VARIABLES
     private boolean running;
@@ -43,18 +43,18 @@ public class Game extends Canvas implements Runnable{
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
         for (int i = 0; i < 20; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*14, 32, 32, 1, BlockType.LUCKY));
-            blocksHandler.addBlock(new MapFixedBlock(i*32+32, 32*14, 32, 32, 1, BlockType.BRICK));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*14, 16, 16, 1, BlockType.LUCKY));
+            blocksHandler.addBlock(new MapFixedBlock(i*16+16, 16*14, 16, 16, 1, BlockType.BRICK));
             i++;
         }
         for (int i = 0; i < 30; i++) {
-            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*19, 32, 32, 1, BlockType.TERRAIN));
-            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*20, 32, 32, 1, BlockType.TERRAIN));
-            blocksHandler.addBlock(new MapFixedBlock(i*32, 32*21, 32, 32, 1, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*19, 16, 16, 1, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*20, 16, 16, 1, BlockType.TERRAIN));
+            blocksHandler.addBlock(new MapFixedBlock(i*16, 16*21, 16, 16, 1, BlockType.TERRAIN));
         }
-        blocksHandler.addBlock(new MapBackgroundBlock(6*32, 32*6, 32, 32, 1, BlockType.CLOUD));
-        blocksHandler.addBlock(new MapBackgroundBlock(21*32, 32*18, 32, 32, 1, BlockType.BUSH));
-        blocksHandler.addBlock(new MapBackgroundBlock(8*32, 32*18, 32, 32, 1, BlockType.HILL));
+        blocksHandler.addBlock(new MapBackgroundBlock(6*16, 16*6, 16, 16, 1, BlockType.CLOUD));
+        blocksHandler.addBlock(new MapBackgroundBlock(21*16, 16*18, 16, 16, 1, BlockType.BUSH));
+        blocksHandler.addBlock(new MapBackgroundBlock(8*16, 16*18, 16, 16, 1, BlockType.HILL));
         start();
     }
 
