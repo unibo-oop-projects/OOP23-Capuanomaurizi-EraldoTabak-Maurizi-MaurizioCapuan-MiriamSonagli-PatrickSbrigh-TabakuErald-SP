@@ -11,8 +11,8 @@ public class Texturer {
     private static final int BUSHBLOCKS_COUNT = 3;
     private static final int HILLBLOCKS_COUNT = 6;
 
-    private static final int BLOCK_WIDTH = 16;
-    private static final int BLOCK_HEIGHT = 16;
+    private static final int TILE_BLOCK_WIDTH = 16;
+    private static final int TILE_BLOCK_HEIGHT = 16;
 
     private static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
@@ -53,7 +53,7 @@ public class Texturer {
 
         for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT/8; i++) {
             for (int j = 0; j < BRICKSCASTLEBLOCKS_COUNT/2; j++) {
-                terrain[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                terrain[index] = blocksSet.getSubimage(x + j*(TILE_BLOCK_WIDTH+1), y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
                 index++;
             }
         }
@@ -64,7 +64,7 @@ public class Texturer {
         int y = 78;
 
         for (int i = 0; i < LUCKYBLOCKS_COUNT; i++) {
-            lucky[i] = blocksSet.getSubimage(x, y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+            lucky[i] = blocksSet.getSubimage(x, y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         }
     }
 
@@ -75,7 +75,7 @@ public class Texturer {
 
         for (int i = 0; i < PIPEBLOCKS_COUNT/2; i++) {
             for (int j = 0; j < PIPEBLOCKS_COUNT/2; j++) {
-                pipe[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                pipe[index] = blocksSet.getSubimage(x + j*(TILE_BLOCK_WIDTH+1), y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
                 index++;
             }
         }
@@ -88,7 +88,7 @@ public class Texturer {
 
         for (int i = 0; i < CLOUDBLOCKS_COUNT/3; i++) {
             for (int j = 0; j < CLOUDBLOCKS_COUNT/2; j++) {
-                cloud[index] = blocksSet.getSubimage(x + j*(BLOCK_WIDTH+1), y + i*(BLOCK_HEIGHT+1), BLOCK_WIDTH, BLOCK_HEIGHT);
+                cloud[index] = blocksSet.getSubimage(x + j*(TILE_BLOCK_WIDTH+1), y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
                 index++;
             }
         }
@@ -99,18 +99,18 @@ public class Texturer {
         int y = 213;
 
         for (int i = 0; i < BUSHBLOCKS_COUNT; i++) {
-            bush[i] = blocksSet.getSubimage(x + i*(BLOCK_WIDTH+1), y, BLOCK_WIDTH, BLOCK_HEIGHT);
+            bush[i] = blocksSet.getSubimage(x + i*(TILE_BLOCK_WIDTH+1), y, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         }
     }
 
     private void loadHill(){
-        hill[0] = blocksSet.getSubimage(34, 230, BLOCK_WIDTH, BLOCK_HEIGHT);
+        hill[0] = blocksSet.getSubimage(34, 230, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
 
         int x = 0;
         int y = 247;
 
         for (int i = 0; i < HILLBLOCKS_COUNT-1; i++) {
-            hill[i+1] = blocksSet.getSubimage(x + i*(BLOCK_WIDTH+1), y, BLOCK_WIDTH, BLOCK_HEIGHT);
+            hill[i+1] = blocksSet.getSubimage(x + i*(TILE_BLOCK_WIDTH+1), y, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         }
     }
 
