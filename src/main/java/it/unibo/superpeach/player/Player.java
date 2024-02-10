@@ -1,11 +1,17 @@
 package it.unibo.superpeach.player;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 public abstract class Player {
     private int width;
     private int height;
     private int x;
     private int y;
     private int scale;
+    private Rectangle rectangle;
 
     public Player(int width, int height, int x, int y, int scale){
         this.width = width*scale;
@@ -13,6 +19,7 @@ public abstract class Player {
         this.x = x*scale;
         this.y = y*scale;
         this.scale = scale;
+        this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
     }
 
     public int getX(){
@@ -29,6 +36,10 @@ public abstract class Player {
 
     public int getHeight(){
         return this.height;
+    }
+
+    public Rectangle getRectangle(){
+        return this.rectangle;
     }
 
     public void setX(int x){
@@ -49,6 +60,12 @@ public abstract class Player {
 
     public void setWidth(int width){
         this.width = width;
+    }
+
+    public void showRectangle(Graphics g){
+        Graphics2D graph = (Graphics2D)g;
+        graph.draw(rectangle);
+        graph.setColor(Color.BLACK);
     }
 
     public abstract void moveLeft();
