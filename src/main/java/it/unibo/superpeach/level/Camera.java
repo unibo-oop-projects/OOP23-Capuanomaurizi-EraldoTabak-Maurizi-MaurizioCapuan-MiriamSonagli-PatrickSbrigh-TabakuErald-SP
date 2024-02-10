@@ -10,12 +10,11 @@ public class Camera {
     public Camera(int width, int height){
         gameWidth = width;
         gameHeight = height;
-        System.out.println(width+ " "+height);
     }
 
     public void tick(/*player reference */){
-        cameraX = gameWidth/2 /* - player x */;
-        cameraY = gameHeight/2 /* - player y */;
+        cameraX = 0 /*gameWidth/2 - player x */;
+        cameraY = 0 /*gameHeight/2 - player y */;
     }
 
     public void setCameraX(int x) {

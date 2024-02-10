@@ -115,7 +115,7 @@ public class Game extends Canvas implements Runnable{
     private void tick(){
         blocksHandler.tickBlocks();
         //player should tick camera passing his reference
-            //camera.tick( player );
+        camera.tick();
     }
 
     private void render(){
