@@ -71,4 +71,6 @@ public abstract class Player {
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract void jump();
+    public abstract void render(Graphics g);
+    public abstract void tick();
 }
