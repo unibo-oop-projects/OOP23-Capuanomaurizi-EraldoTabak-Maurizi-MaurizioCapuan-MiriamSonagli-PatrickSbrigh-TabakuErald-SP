@@ -13,7 +13,7 @@ public abstract class Player {
     private int scale;
     private Rectangle rectangle;
 
-    public Player(int width, int height, int x, int y, int scale){
+    public Player(int x, int y, int width, int height, int scale){
         this.width = width*scale;
         this.height = height*scale;
         this.x = x*scale;

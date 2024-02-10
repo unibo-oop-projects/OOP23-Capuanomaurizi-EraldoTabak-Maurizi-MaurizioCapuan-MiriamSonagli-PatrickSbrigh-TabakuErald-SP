@@ -6,7 +6,7 @@ public class PlayerHandler {
     private Player player;
 
     public int setPlayer(Player p){
-        if(this.player.equals(null)){
+        if(this.player == null){
             this.player = p;
             return 0;
         }
@@ -18,7 +18,7 @@ public class PlayerHandler {
     }
 
     public int removePlayer(){
-        if(!this.player.equals(null)){
+        if(this.player != null){
             this.player = null;
             return 0;
         }
