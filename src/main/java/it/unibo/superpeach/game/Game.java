@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.GameWindow;
+import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
 
 public class Game extends Canvas implements Runnable{
@@ -29,6 +30,7 @@ public class Game extends Canvas implements Runnable{
     private BlocksHandler blocksHandler;
     private static Texturer blocksTexturer;
     private LevelHandler levelHandler;
+    private Camera camera;
 
     public Game(){
         init();
@@ -44,6 +46,7 @@ public class Game extends Canvas implements Runnable{
         blocksHandler = new BlocksHandler();
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE);
         levelHandler.drawLevel();
+        camera = new Camera(WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
         start();
     }
 
@@ -111,6 +114,8 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
         blocksHandler.tickBlocks();
+        //player should tick camera passing his reference
+            //camera.tick( player );
     }
 
     private void render(){
@@ -123,6 +128,7 @@ public class Game extends Canvas implements Runnable{
 
         g.setColor(Color.PINK);
         g.fillRect(0, 0, WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
+        g.translate(camera.getCameraX(), camera.getCameraY());
 
         blocksHandler.renderBlocks(g);
 
