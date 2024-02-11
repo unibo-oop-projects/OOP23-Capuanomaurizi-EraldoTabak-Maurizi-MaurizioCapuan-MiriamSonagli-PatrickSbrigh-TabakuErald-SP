@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.PeachMenu;
 import it.unibo.superpeach.keyboard.Keyboard;
@@ -23,6 +24,8 @@ public class Game extends Canvas implements Runnable{
     private static final String GAME_NAME = "Super Peach";
     private static final int WINDOW_WIDTH = 480;
     private static final int WINDOW_HEIGHT = 360;
+    private static final int PLAYER_DEFAULT_X = 15;
+    private static final int PLAYER_DEFAULT_Y = 255;
 
     //GAME VARIABLES
     private boolean running;
@@ -49,7 +52,7 @@ public class Game extends Canvas implements Runnable{
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
         playerHandler = new PlayerHandler();
-        playerHandler.setPlayer(new Peach(50,255,16,32,GAME_SCALE));//TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X,PLAYER_DEFAULT_Y,16,32,GAME_SCALE));//TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
     }
