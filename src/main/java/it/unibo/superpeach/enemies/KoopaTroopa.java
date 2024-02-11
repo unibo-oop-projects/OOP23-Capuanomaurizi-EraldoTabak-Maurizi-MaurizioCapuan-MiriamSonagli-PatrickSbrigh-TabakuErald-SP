@@ -1,13 +1,13 @@
-package it.unibo.enemies;
+package it.unibo.superpeach.enemies;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class KoopaTroopaRed extends KoopaTroopa {
+public class KoopaTroopa extends Enemy {
 
     private int speed = 2;
 
-    public KoopaTroopaRed(double x, double y, BufferedImage img) {
+    public KoopaTroopa(double x, double y, BufferedImage img) {
         super(x, y, img);
         // TODO Auto-generated constructor stub
     }
