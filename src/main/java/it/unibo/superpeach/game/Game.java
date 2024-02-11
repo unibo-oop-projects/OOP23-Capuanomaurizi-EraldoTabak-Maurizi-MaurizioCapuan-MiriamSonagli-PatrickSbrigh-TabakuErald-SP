@@ -6,10 +6,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.PeachMenu;
+import it.unibo.superpeach.keyboard.Keyboard;
 import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
+import it.unibo.superpeach.player.Peach;
+import it.unibo.superpeach.player.PlayerHandler;
 
 public class Game extends Canvas implements Runnable{
 
@@ -20,6 +24,8 @@ public class Game extends Canvas implements Runnable{
     private static final String GAME_NAME = "Super Peach";
     private static final int WINDOW_WIDTH = 480;
     private static final int WINDOW_HEIGHT = 360;
+    private static final int PLAYER_DEFAULT_X = 15;
+    private static final int PLAYER_DEFAULT_Y = 255;
 
     //GAME VARIABLES
     private boolean running;
@@ -33,6 +39,8 @@ public class Game extends Canvas implements Runnable{
     private Camera camera;
     private static PeachMenu window;
 
+    private PlayerHandler playerHandler;
+
     public static void main(String[] args) {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
@@ -43,6 +51,9 @@ public class Game extends Canvas implements Runnable{
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE);
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
+        playerHandler = new PlayerHandler();
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X,PLAYER_DEFAULT_Y,16,32,GAME_SCALE));//TOFIX
+        this.addKeyListener(new Keyboard(playerHandler));
         start();
     }
 
@@ -105,6 +116,7 @@ public class Game extends Canvas implements Runnable{
     private void tick(){
         blocksHandler.tickBlocks();
         //player should tick camera passing his reference
+        playerHandler.tick();
         camera.tick();
     }
 
@@ -121,6 +133,7 @@ public class Game extends Canvas implements Runnable{
         g.translate(camera.getCameraX(), camera.getCameraY());
 
         blocksHandler.renderBlocks(g);
+        playerHandler.render(g);
 
         //clean for next frame
         g.dispose();

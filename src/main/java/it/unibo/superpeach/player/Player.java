@@ -12,6 +12,7 @@ public abstract class Player {
     private int y;
     private int scale;
     private Rectangle rectangle;
+    private boolean jumped;
 
     public Player(int x, int y, int width, int height, int scale){
         this.width = width*scale;
@@ -19,27 +20,32 @@ public abstract class Player {
         this.x = x*scale;
         this.y = y*scale;
         this.scale = scale;
+        this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
     }
 
     public int getX(){
-        return this.x;
+        return this.x/this.scale;
     }
 
     public int getY(){
-        return this.y;
+        return this.y/this.scale;
     }
 
     public int getWidth(){
-        return this.width;
+        return this.width/this.scale;
     }
 
     public int getHeight(){
-        return this.height;
+        return this.height/this.scale;
     }
 
     public Rectangle getRectangle(){
         return this.rectangle;
+    }
+
+    public boolean hasJumped(){
+        return this.jumped;
     }
 
     public void setX(int x){
@@ -62,15 +68,24 @@ public abstract class Player {
         this.width = width;
     }
 
+    public void setHasJumped(boolean jumped){
+        this.jumped = jumped;
+    }
+
+    public void updateRectangle(){
+        this.rectangle = new Rectangle(x, y, width, height);
+    }
+
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
-        graph.draw(rectangle);
         graph.setColor(Color.BLACK);
+        graph.draw(rectangle);
     }
 
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract void jump();
+    public abstract void fall();
     public abstract void render(Graphics g);
     public abstract void tick();
 }
