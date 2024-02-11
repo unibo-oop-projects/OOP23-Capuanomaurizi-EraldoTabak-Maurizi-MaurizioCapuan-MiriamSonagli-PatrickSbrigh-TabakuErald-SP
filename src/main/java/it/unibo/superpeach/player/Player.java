@@ -62,6 +62,10 @@ public abstract class Player {
         this.width = width;
     }
 
+    public void updateRectangle(){
+        this.rectangle = new Rectangle(x, y, width, height);
+    }
+
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
         graph.draw(rectangle);
