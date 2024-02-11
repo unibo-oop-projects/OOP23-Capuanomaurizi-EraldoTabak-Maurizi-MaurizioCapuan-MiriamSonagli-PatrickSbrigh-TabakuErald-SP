@@ -24,7 +24,7 @@ public class LevelHandler {
     }
 
     public void drawLevel(){
-        setLevel("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"level"+FILE_SEPARATOR+"level_blocks_image.png");
+        setLevel("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"level"+FILE_SEPARATOR+"level_blocks.png");
     }
 
     private void setLevel(String lvlImagePath) {
