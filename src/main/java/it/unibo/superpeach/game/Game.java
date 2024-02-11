@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable{
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
         playerHandler = new PlayerHandler();
-        playerHandler.setPlayer(new Peach(50,50,16,32,GAME_SCALE));
+        playerHandler.setPlayer(new Peach(50,255,16,32,GAME_SCALE));//TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
     }
