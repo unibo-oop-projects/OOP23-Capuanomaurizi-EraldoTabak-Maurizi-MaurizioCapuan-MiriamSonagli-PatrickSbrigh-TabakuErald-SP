@@ -10,8 +10,6 @@ import it.unibo.superpeach.blocks.graphics.BufferedImageLoader;
 
 public class LevelHandler {
 
-    private static final String FILE_SEPARATOR = System.getProperty("file.separator");
-
     private BufferedImageLoader loader;
     private BufferedImage levelImage;
     private BlocksHandler blocksHandler;
@@ -24,7 +22,7 @@ public class LevelHandler {
     }
 
     public void drawLevel(){
-        setLevel("it"+FILE_SEPARATOR+"unibo"+FILE_SEPARATOR+"superpeach"+FILE_SEPARATOR+"level"+FILE_SEPARATOR+"level_blocks.png");
+        setLevel("it/unibo/superpeach/level/level_blocks.png");
     }
 
     private void setLevel(String lvlImagePath) {
