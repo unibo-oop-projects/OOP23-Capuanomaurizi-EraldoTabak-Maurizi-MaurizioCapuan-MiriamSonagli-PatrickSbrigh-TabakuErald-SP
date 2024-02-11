@@ -12,6 +12,7 @@ public abstract class Player {
     private int y;
     private int scale;
     private Rectangle rectangle;
+    private boolean jumped;
 
     public Player(int x, int y, int width, int height, int scale){
         this.width = width*scale;
@@ -19,6 +20,7 @@ public abstract class Player {
         this.x = x*scale;
         this.y = y*scale;
         this.scale = scale;
+        this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
     }
 
@@ -42,6 +44,10 @@ public abstract class Player {
         return this.rectangle;
     }
 
+    public boolean hasJumped(){
+        return this.jumped;
+    }
+
     public void setX(int x){
         this.x = x*this.scale;
     }
@@ -62,6 +68,10 @@ public abstract class Player {
         this.width = width;
     }
 
+    public void setHasJumped(boolean jumped){
+        this.jumped = jumped;
+    }
+
     public void updateRectangle(){
         this.rectangle = new Rectangle(x, y, width, height);
     }
@@ -75,6 +85,7 @@ public abstract class Player {
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract void jump();
+    public abstract void fall();
     public abstract void render(Graphics g);
     public abstract void tick();
 }
