@@ -7,7 +7,7 @@ import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.graphics.Texturer;
-import it.unibo.superpeach.graphics.GameWindow;
+import it.unibo.superpeach.graphics.PeachMenu;
 import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
 
@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable{
 
     //GAME VARIABLES
     private boolean running;
-    private int GAME_SCALE = 2;
+    private static int GAME_SCALE = 2;
 
     //GAME COMPONENTS
     private Thread mainGameLoop;
@@ -31,17 +31,13 @@ public class Game extends Canvas implements Runnable{
     private static Texturer blocksTexturer;
     private LevelHandler levelHandler;
     private Camera camera;
-
-    public Game(){
-        init();
-    }
+    private static PeachMenu window;
 
     public static void main(String[] args) {
-        new Game();
+        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
-    private void init(){
-        new GameWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, this);
+    public void init(){
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE);
@@ -56,17 +52,11 @@ public class Game extends Canvas implements Runnable{
         running = true;
     }
 
-    // private synchronized void restart(int newScale){
-    //     try {
-    //         mainGameLoop.join();
-    //         running = false;
-    //         GAME_SCALE = newScale;
-    //         System.out.println("print");
-    //         new Game();
-    //     } catch (InterruptedException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
+    public synchronized void changeScale(int newScale){
+        GAME_SCALE = newScale;
+        window.closeWindow();
+        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
+    }
 
     private synchronized void stop(){
         try {
