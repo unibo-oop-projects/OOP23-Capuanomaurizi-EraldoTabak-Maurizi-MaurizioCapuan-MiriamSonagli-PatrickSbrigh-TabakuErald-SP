@@ -20,10 +20,19 @@ public class MapFixedBlock extends Block{
             case STONE:
                 setSprites(getTexturer().getTerrain());
                 break;
-            case PIPE:
+            case PIPE_LEFT:
+            case PIPE_RIGHT:
+            case PIPE_TOP_LEFT:
+            case PIPE_TOP_RIGHT:
                 setSprites(getTexturer().getPipe());
                 break;
+            case FLAG_TIP:
+            case FLAG_POLE:
+                setSprites(getTexturer().getFlag());
+                break;
             default:
+                //its for sure a castle block, using default to avoid too many code
+                setSprites(getTexturer().getTerrain());
                 break;
         }
     }
@@ -47,15 +56,33 @@ public class MapFixedBlock extends Block{
             case STONE:
                 g.drawImage(getSprites()[8], getX(), getY(), getWidth(), getHeight(), null);
                 break;
-            case PIPE:
+            case PIPE_LEFT:
+                g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case PIPE_RIGHT:
+                g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case PIPE_TOP_LEFT:
+                g.drawImage(getSprites()[2], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case PIPE_TOP_RIGHT:
+                g.drawImage(getSprites()[3], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case FLAG_TIP:
+                g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case FLAG_POLE:
+                g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case CASTLE_DOOR_TOP:
+                g.drawImage(getSprites()[6], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case CASTLE_DOOR_BOT:
+                g.drawImage(getSprites()[14], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             default:
                 break;
         }
     }
-
-    // private void buildPipe(){
-
-    // }
 
 }

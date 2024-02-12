@@ -8,7 +8,19 @@ import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.game.Game;
 
 public abstract class Block {
-    public enum BlockType {BRICK, TERRAIN, LUCKY, PIPE, STONE, BUSH, CLOUD, HILL};
+    public enum BlockType {
+        BRICK,
+        TERRAIN,
+        LUCKY,
+        PIPE_LEFT, PIPE_RIGHT, PIPE_TOP_LEFT, PIPE_TOP_RIGHT,
+        STONE,
+        BUSH_LEFT, BUSH_MIDDLE, BUSH_RIGHT,
+        CLOUD_TOP_LEFT, CLOUD_TOP_MIDDLE, CLOUD_TOP_RIGHT, CLOUD_BOT_LEFT, CLOUD_BOT_MIDDLE, CLOUD_BOT_RIGHT,
+        HILL_UP, HILL_BLANK, HILL_SPOTS1, HILL_SPOTS2, HILL_TOP, HILL_DOWN,
+        FLAG_TIP, FLAG_POLE, FLAG_LEFT, FLAG_RIGHT,
+        CASTLE_BRICK, CASTLE_BALCONY1, CASTLE_BALCONY2, CASTLE_WINDOW_LEFT, CASTLE_WINDOW_RIGHT, CASTLE_DOOR_BOT, CASTLE_DOOR_TOP,
+        DEATH_BLOCK
+    };
 
     private int x;
     private int y;
