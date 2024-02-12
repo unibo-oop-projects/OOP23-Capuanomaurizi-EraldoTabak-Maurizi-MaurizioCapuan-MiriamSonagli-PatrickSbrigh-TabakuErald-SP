@@ -17,8 +17,6 @@ public abstract class Player {
     private int scale;
     private Rectangle rectangle;
     private boolean jumped;
-    private PlayerTexture texture;
-    private BufferedImage[] sprite;
 
     public Player(int x, int y, int width, int height, int scale){
         this.width = width*scale;
@@ -28,8 +26,6 @@ public abstract class Player {
         this.scale = scale;
         this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
-        this.texture = Game.getPlayerTexturer();
-        this.sprite = texture.getPlayerImage();
     }
 
     public int getX(){
@@ -93,15 +89,7 @@ public abstract class Player {
         graph.setColor(Color.BLACK);
         graph.draw(rectangle);
     }
-
-    public BufferedImage[] getSprites(){
-        return this.sprite;
-    }
-
-    public PlayerTexture getPlayerTexture(){
-        return this.texture;
-    }
-
+    
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract void jump();
