@@ -10,6 +10,7 @@ public class Texturer {
     private static final int CLOUDBLOCKS_COUNT = 6;
     private static final int BUSHBLOCKS_COUNT = 3;
     private static final int HILLBLOCKS_COUNT = 6;
+    private static final int FLAGBLOCKS_COUNT = 4;
 
     private static final int TILE_BLOCK_WIDTH = 16;
     private static final int TILE_BLOCK_HEIGHT = 16;
@@ -18,7 +19,7 @@ public class Texturer {
 
     private BufferedImage blocksSet;
 
-    public BufferedImage[] terrain, lucky, pipe, cloud, bush, hill;
+    public BufferedImage[] terrain, lucky, pipe, cloud, bush, hill, flag;
 
     public Texturer(){
 
@@ -28,6 +29,7 @@ public class Texturer {
         cloud = new BufferedImage[CLOUDBLOCKS_COUNT];
         bush = new BufferedImage[BUSHBLOCKS_COUNT];
         hill = new BufferedImage[HILLBLOCKS_COUNT];
+        flag = new BufferedImage[FLAGBLOCKS_COUNT];
 
         loader = new BufferedImageLoader();
 
@@ -39,6 +41,7 @@ public class Texturer {
             loadCloud();
             loadBush();
             loadHill();
+            loadFlag();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,16 +70,10 @@ public class Texturer {
     }
 
     private void loadPipe(){
-        int x = 119;
-        int y = 196;
-        int index = 0;
-
-        for (int i = 0; i < PIPEBLOCKS_COUNT/2; i++) {
-            for (int j = 0; j < PIPEBLOCKS_COUNT/2; j++) {
-                pipe[index] = blocksSet.getSubimage(x + j*(TILE_BLOCK_WIDTH+1), y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
-                index++;
-            }
-        }
+        pipe[0] = blocksSet.getSubimage(119, 196, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        pipe[1] = blocksSet.getSubimage(136, 196, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        pipe[2] = blocksSet.getSubimage(119, 213, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        pipe[3] = blocksSet.getSubimage(136, 213, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
     }
 
     private void loadCloud(){
@@ -112,6 +109,13 @@ public class Texturer {
         }
     }
 
+    private void loadFlag(){
+        flag[0] = blocksSet.getSubimage(136, 230, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        flag[1] = blocksSet.getSubimage(136, 247, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        flag[2] = blocksSet.getSubimage(119, 230, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        flag[3] = blocksSet.getSubimage(119, 247, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+    }
+
     public BufferedImage[] getTerrain() {
         return terrain;
     }
@@ -136,4 +140,7 @@ public class Texturer {
         return hill;
     }
 
+    public BufferedImage[] getFlag() {
+        return flag;
+    }
 }
