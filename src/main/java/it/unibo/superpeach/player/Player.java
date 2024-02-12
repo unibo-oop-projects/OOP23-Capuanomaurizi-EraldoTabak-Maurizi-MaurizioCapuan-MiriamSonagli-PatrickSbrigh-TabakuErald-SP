@@ -4,10 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-
-import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.player.graphics.PlayerTexture;
 
 public abstract class Player {
     private int width;
@@ -89,7 +85,7 @@ public abstract class Player {
         graph.setColor(Color.BLACK);
         graph.draw(rectangle);
     }
-    
+
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract void jump();

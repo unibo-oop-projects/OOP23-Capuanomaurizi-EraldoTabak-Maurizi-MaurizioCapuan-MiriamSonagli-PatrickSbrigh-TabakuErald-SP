@@ -8,7 +8,13 @@ import it.unibo.superpeach.player.graphics.PlayerTexture;
 
 public class Peach extends Player{
     private static final int SPEED_X = 10;
-    private static final int JUMP = 50;
+    private static final int JUMP_HEIGHT = 50;
+    private static final int LOOK_RIGHT = 0;
+    private static final int LOOK_LEFT = 1;
+    private static final int WALK_LEFT = 2;
+    private static final int WALK_RIGHT=3;
+    private static final int JUMP_FALL = 4;
+    private int spriteNeeded = 0;
     private PlayerTexture texture;
     private BufferedImage[] sprite;
 
@@ -28,31 +34,33 @@ public class Peach extends Player{
 
     @Override
     public void moveLeft() {
+        spriteNeeded = LOOK_LEFT;
         setX((getX()/getScale())-SPEED_X);
     }
 
     @Override
     public void moveRight() {
+        spriteNeeded = LOOK_RIGHT;
         setX((getX()/getScale())+SPEED_X);
     }
 
     @Override
     public void jump() {
-        setY((getY()/getScale())-JUMP);
+        spriteNeeded = JUMP_FALL;
+        setY((getY()/getScale())-JUMP_HEIGHT);
         setHasJumped(true);
     }
     
     @Override
     public void fall() {
-        setY((getY()/getScale())+JUMP);
+        spriteNeeded = JUMP_FALL;
+        setY((getY()/getScale())+JUMP_HEIGHT);
         setHasJumped(false);
     }
 
     @Override
     public void render(Graphics g) {
-        showRectangle(g);
-
-        g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[spriteNeeded], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
