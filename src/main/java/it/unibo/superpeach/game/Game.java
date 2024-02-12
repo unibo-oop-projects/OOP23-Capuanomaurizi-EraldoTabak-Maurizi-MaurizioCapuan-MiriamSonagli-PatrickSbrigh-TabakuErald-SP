@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.PeachMenu;
 import it.unibo.superpeach.keyboard.Keyboard;
@@ -14,6 +13,7 @@ import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
 import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
+import it.unibo.superpeach.player.graphics.PlayerTexture;
 
 public class Game extends Canvas implements Runnable{
 
@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable{
     private LevelHandler levelHandler;
     private Camera camera;
     private static PeachMenu window;
-
+    private static PlayerTexture playerTexture;
     private PlayerHandler playerHandler;
 
     public static void main(String[] args) {
@@ -52,6 +52,7 @@ public class Game extends Canvas implements Runnable{
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
         playerHandler = new PlayerHandler();
+        playerTexture = new PlayerTexture();
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X,PLAYER_DEFAULT_Y,16,32,GAME_SCALE));//TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
@@ -146,6 +147,10 @@ public class Game extends Canvas implements Runnable{
 
     public void setGameScale(int s){
         GAME_SCALE = s;
+    }
+
+    public static PlayerTexture getPlayerTexturer(){
+        return playerTexture;
     }
 
 }

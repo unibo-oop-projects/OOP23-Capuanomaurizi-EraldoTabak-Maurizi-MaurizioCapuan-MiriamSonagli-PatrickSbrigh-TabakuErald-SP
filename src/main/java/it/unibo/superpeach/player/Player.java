@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
+import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.player.graphics.PlayerTexture;
 
 public abstract class Player {
     private int width;
@@ -13,6 +17,8 @@ public abstract class Player {
     private int scale;
     private Rectangle rectangle;
     private boolean jumped;
+    private PlayerTexture texture;
+    private BufferedImage[] sprite;
 
     public Player(int x, int y, int width, int height, int scale){
         this.width = width*scale;
@@ -22,6 +28,8 @@ public abstract class Player {
         this.scale = scale;
         this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
+        this.texture = Game.getPlayerTexturer();
+        this.sprite = texture.getPlayerImage();
     }
 
     public int getX(){
@@ -42,6 +50,10 @@ public abstract class Player {
 
     public Rectangle getRectangle(){
         return this.rectangle;
+    }
+
+    public int getScale(){
+        return this.scale;
     }
 
     public boolean hasJumped(){
@@ -80,6 +92,14 @@ public abstract class Player {
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
         graph.draw(rectangle);
+    }
+
+    public BufferedImage[] getSprites(){
+        return this.sprite;
+    }
+
+    public PlayerTexture getPlayerTexture(){
+        return this.texture;
     }
 
     public abstract void moveLeft();

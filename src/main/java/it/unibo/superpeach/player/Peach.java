@@ -35,6 +35,8 @@ public class Peach extends Player{
     @Override
     public void render(Graphics g) {
         showRectangle(g);
+
+        g.drawImage(getSprites()[0], getX()*getScale(), getY()*getScale(), getWidth()*getScale(), getHeight()*getScale(), null);
     }
 
     @Override
