@@ -6,18 +6,16 @@ public class Camera {
 
     private final int gameWidth;
     //private final int gameHeight;
-    private final int gameScale;
     private int cameraX;
     private int cameraY;
 
     public Camera(int width, int height, int scale){
         gameWidth = width*scale;
         //gameHeight = height*scale;
-        gameScale = scale;
     }
 
     public void tick(Player p){
-        cameraX = gameWidth/2 - p.getX()*gameScale;
+        cameraX = gameWidth/2 - p.getX();
         cameraY = 0;
     }
 
