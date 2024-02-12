@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import it.unibo.superpeach.blocks.BlocksHandler;
+
 public abstract class Player {
     private int width;
     private int height;
@@ -13,8 +15,9 @@ public abstract class Player {
     private int scale;
     private Rectangle rectangle;
     private boolean jumped;
+    private BlocksHandler blocksHandler;
 
-    public Player(int x, int y, int width, int height, int scale){
+    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler){
         this.width = width*scale;
         this.height = height*scale;
         this.x = x*scale;
@@ -22,6 +25,7 @@ public abstract class Player {
         this.scale = scale;
         this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
+        this.blocksHandler = blocksHandler;
     }
 
     public int getX(){
