@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.graphics.PeachMenu;
 import it.unibo.superpeach.keyboard.Keyboard;
@@ -50,7 +49,7 @@ public class Game extends Canvas implements Runnable{
         blocksHandler = new BlocksHandler();
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE);
         levelHandler.drawLevel();
-        camera = new Camera(WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
+        camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE);
         playerHandler = new PlayerHandler();
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X,PLAYER_DEFAULT_Y,16,32,GAME_SCALE));//TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
@@ -85,8 +84,6 @@ public class Game extends Canvas implements Runnable{
         double ns = NANOS_PER_SECOND / ticksAmount;
         double delta = 0;
         long timer = System.currentTimeMillis();
-        int frames = 0;
-        int updates = 0;
 
         //GAMELOOP
         while (running) {
@@ -95,18 +92,13 @@ public class Game extends Canvas implements Runnable{
             lastTime = now;
             while (delta >= 1) {
                 tick();
-                updates++;
                 delta--;
             }
             if (running) {
                 render();
-                frames++;
             }
             if(System.currentTimeMillis() - timer >= MILLS_PER_SECOND){
                 timer += MILLS_PER_SECOND;
-                System.out.println("FPS: "+frames+" TPS: "+updates);
-                frames=0;
-                updates=0;
             }
         }
 
@@ -115,9 +107,8 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
         blocksHandler.tickBlocks();
-        //player should tick camera passing his reference
         playerHandler.tick();
-        camera.tick();
+        camera.tick(playerHandler.getPlayer());
     }
 
     private void render(){
@@ -135,17 +126,12 @@ public class Game extends Canvas implements Runnable{
         blocksHandler.renderBlocks(g);
         playerHandler.render(g);
 
-        //clean for next frame
         g.dispose();
         buffStrat.show();
     }
 
     public static Texturer getBlocksTexturer() {
         return blocksTexturer;
-    }
-
-    public void setGameScale(int s){
-        GAME_SCALE = s;
     }
 
 }
