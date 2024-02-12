@@ -83,7 +83,7 @@ public abstract class Player {
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
-        graph.draw(rectangle);
+        graph.draw(rectangle);   
     }
 
     public abstract void moveLeft();

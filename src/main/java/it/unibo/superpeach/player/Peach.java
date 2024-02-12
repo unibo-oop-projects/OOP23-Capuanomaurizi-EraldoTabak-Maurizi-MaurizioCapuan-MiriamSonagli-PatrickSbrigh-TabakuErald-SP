@@ -36,12 +36,18 @@ public class Peach extends Player{
     public void moveLeft() {
         spriteNeeded = LOOK_LEFT;
         setX((getX()/getScale())-SPEED_X);
+        if(hasJumped()){
+            fall();
+        }
     }
 
     @Override
     public void moveRight() {
         spriteNeeded = LOOK_RIGHT;
         setX((getX()/getScale())+SPEED_X);
+        if(hasJumped()){
+            fall();
+        }
     }
 
     @Override
