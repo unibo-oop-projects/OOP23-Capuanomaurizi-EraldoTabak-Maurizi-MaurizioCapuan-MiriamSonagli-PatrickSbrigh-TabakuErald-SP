@@ -83,7 +83,23 @@ public abstract class Player {
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
-        graph.draw(rectangle);   
+        graph.draw(rectangle);
+    }
+
+    public Rectangle getTopBound(){
+        return new Rectangle(getX(), getY(), getWidth(), 0);
+    }
+
+    public Rectangle getBottomBound(){
+        return new Rectangle(getX(), getY()+getHeight(), getWidth(), 0);
+    }
+
+    public Rectangle getLeftBound(){
+        return new Rectangle(getX(), getY(), 0, getHeight());
+    }
+
+    public Rectangle getRightBound(){
+        return new Rectangle(getX()+getWidth(), getY(), 0 ,getHeight());
     }
 
     public abstract void moveLeft();
