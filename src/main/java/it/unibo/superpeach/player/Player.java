@@ -33,19 +33,19 @@ public abstract class Player {
     }
 
     public int getX(){
-        return this.x/this.scale;
+        return this.x;
     }
 
     public int getY(){
-        return this.y/this.scale;
+        return this.y;
     }
 
     public int getWidth(){
-        return this.width/this.scale;
+        return this.width;
     }
 
     public int getHeight(){
-        return this.height/this.scale;
+        return this.height;
     }
 
     public Rectangle getRectangle(){

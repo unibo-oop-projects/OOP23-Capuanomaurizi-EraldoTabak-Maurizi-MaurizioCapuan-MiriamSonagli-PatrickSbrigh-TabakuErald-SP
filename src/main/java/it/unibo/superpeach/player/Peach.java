@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public class Peach extends Player{
     private static final int SPEED_X = 10;
-    private static final int JUMP = 47;
+    private static final int JUMP = 50;
 
     public Peach(int x, int y, int width, int height, int scale){
         super(x, y, width, height, scale);
@@ -12,23 +12,23 @@ public class Peach extends Player{
 
     @Override
     public void moveLeft() {
-        setX(getX()-SPEED_X);
+        setX((getX()/getScale())-SPEED_X);
     }
 
     @Override
     public void moveRight() {
-        setX(getX()+SPEED_X);
+        setX((getX()/getScale())+SPEED_X);
     }
 
     @Override
     public void jump() {
-        setY(getY()-JUMP);
+        setY((getY()/getScale())-JUMP);
         setHasJumped(true);
     }
     
     @Override
     public void fall() {
-        setY(getY()+JUMP);
+        setY((getY()/getScale())+JUMP);
         setHasJumped(false);
     }
 
@@ -36,14 +36,11 @@ public class Peach extends Player{
     public void render(Graphics g) {
         showRectangle(g);
 
-        g.drawImage(getSprites()[0], getX()*getScale(), getY()*getScale(), getWidth()*getScale(), getHeight()*getScale(), null);
+        g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
     public void tick() {
         updateRectangle();
     }
-
-
-    
 }
