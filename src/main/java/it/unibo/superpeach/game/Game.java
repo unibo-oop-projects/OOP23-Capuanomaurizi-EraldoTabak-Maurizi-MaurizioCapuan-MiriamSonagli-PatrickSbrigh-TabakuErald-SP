@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable{
     private static final int WINDOW_WIDTH = 480;
     private static final int WINDOW_HEIGHT = 360;
     private static final int PLAYER_DEFAULT_X = 15;
-    private static final int PLAYER_DEFAULT_Y = 255;
+    private static final int PLAYER_DEFAULT_Y = 274;
 
     //GAME VARIABLES
     private boolean running;
