@@ -5,11 +5,18 @@ import java.awt.image.BufferedImage;
 
 public class Shell extends Enemy {
 
-    private int speed = 6;
+    public Shell(double x, double y, BufferedImage img, float speed) {
+        super(x, y, img, speed);
+    }
 
-    public Shell(double x, double y, BufferedImage img) {
-        super(x, y, img);
-        // TODO Auto-generated constructor stub
+    @Override
+    public void render(Graphics g) {
+        sprite(g);
+    }
+
+    @Override
+    public void tick() {
+
     }
 
 }
