@@ -1,9 +1,7 @@
 package it.unibo.superpeach.graphics;
-
-import javax.swing.*;
-
 import it.unibo.superpeach.game.Game;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +26,6 @@ public class PeachMenu extends JFrame {
         frame.setLocationRelativeTo(null); //centre screen
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         frame.setVisible(true);
 
         Color customColor = new Color(149, 69, 169);
@@ -42,45 +39,28 @@ public class PeachMenu extends JFrame {
         titleLabel.setFont(new Font("Monospaced", Font.BOLD, 40*scale));
         panel.add(titleLabel);
 
-        JButton startButton = new JButton("START GAME");
-        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        startButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        startButton.setBackground(customColor);
-        startButton.setFocusable(false);
-        startButton.setBorderPainted(false);
+        CustomButton startButton = new CustomButton("START GAME", customColor, scale);
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Come avvio il gioco??
                 panel.setVisible(false);
                 frame.remove(panel);
                 frame.add(game);
                 game.init();
             }
         });
-        panel.add(startButton);
 
-        JButton optionsButton = new JButton("OPTIONS");
-        optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        optionsButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        optionsButton.setBackground(customColor);
-        optionsButton.setFocusable(false);
-        optionsButton.setBorderPainted(false);
+        CustomButton optionsButton = new CustomButton("OPTIONS", customColor, scale);
         optionsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aprire un menu delle opzioni
-                JOptionPane.showMessageDialog(panel, "Opzioni del gioco");
-            }
+            // Aprire un menu delle opzioni
+            JOptionPane.showMessageDialog(panel, "Opzioni del gioco");
+        }
         });
         panel.add(optionsButton);
 
-        JButton GUIScaleButton = new JButton("GUI Scale: " + scale);
-        GUIScaleButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        GUIScaleButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        GUIScaleButton.setBackground(customColor);
-        GUIScaleButton.setFocusable(false);
-        GUIScaleButton.setBorderPainted(false);
+        CustomButton GUIScaleButton = new CustomButton("GUI Scale: " + scale, customColor, scale);
         GUIScaleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,16 +69,10 @@ public class PeachMenu extends JFrame {
         });
         panel.add(GUIScaleButton);
 
-        JButton exitButton = new JButton("EXIT");
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        exitButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        exitButton.setBackground(customColor);
-        exitButton.setFocusable(false);
-        exitButton.setBorderPainted(false);
+        CustomButton exitButton = new CustomButton("EXIT", customColor, scale);
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Chiudo l'applicazione
                 System.exit(0);
             }
         });
