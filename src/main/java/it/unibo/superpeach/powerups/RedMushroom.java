@@ -8,8 +8,12 @@ public class RedMushroom extends PowerUp {
         super(x, y);
     }
 
-    // Metodo per gestire il movimento del fungo rosso
-    public void move(){
+    public void move(int movement){
+        this.setX(this.getX() + movement);
+    }
+
+    public void isFalling () {
         
     }
+
 }
