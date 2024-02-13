@@ -5,9 +5,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import it.unibo.superpeach.blocks.Block;
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.Block.BlockType;
 
 public abstract class Player {
+    private static final int PADDING_BOUND = 5;
     private int width;
     private int height;
     private int x;
@@ -87,24 +90,53 @@ public abstract class Player {
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
+        graph.draw(getBottomBound());
+        graph.draw(getTopBound());
+        graph.draw(getLeftBound());
+        graph.draw(getRightBound());
         graph.draw(rectangle);
+
     }
 
     public Rectangle getTopBound(){
-        return new Rectangle(getX(), getY(), getWidth(), 0);
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, PADDING_BOUND);
     }
 
     public Rectangle getBottomBound(){
-        return new Rectangle(getX(), getY()+getHeight(), getWidth(), 0);
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+(getHeight()-PADDING_BOUND), getWidth()/2, PADDING_BOUND);
     }
 
     public Rectangle getLeftBound(){
-        return new Rectangle(getX(), getY(), 0, getHeight());
+        return new Rectangle(getX(), getY()+PADDING_BOUND, PADDING_BOUND, getHeight()-2*PADDING_BOUND);
     }
 
     public Rectangle getRightBound(){
-        return new Rectangle(getX()+getWidth(), getY(), 0 ,getHeight());
+        return new Rectangle(getX()+getWidth()-PADDING_BOUND, getY()+PADDING_BOUND, PADDING_BOUND ,getHeight()-2*PADDING_BOUND);
     }
+
+    public void collision(){
+        for(int i = 0;i<blocksHandler.getBlocks().size();i++){
+            Block block = blocksHandler.getBlocks().get(i);
+            Rectangle rec = new Rectangle((int)block.getX(), (int)block.getY(), (int)getWidth(), (int)getHeight());
+            if(block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT){
+                if(rec.intersects(getLeftBound())){
+                    setX(block.getX()/block.getScale()+block.getWidth()/block.getScale());
+                } 
+                else if(rec.intersects(getRightBound())){
+                    setX(block.getX()/block.getScale()-getWidth()/getScale());
+                }
+                else if(rec.intersects(getBottomBound())){
+                    setY(block.getY()/block.getScale()-getHeight()/getScale());
+                }
+                else if(rec.intersects(getTopBound())){
+                    setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                }
+    
+            }
+        }
+    }
+
+    
 
     public abstract void moveLeft();
     public abstract void moveRight();

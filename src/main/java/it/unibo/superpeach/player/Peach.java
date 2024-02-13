@@ -72,6 +72,6 @@ public class Peach extends Player{
 
     @Override
     public void tick() {
-        updateRectangle();
+        collision();
     }
 }
