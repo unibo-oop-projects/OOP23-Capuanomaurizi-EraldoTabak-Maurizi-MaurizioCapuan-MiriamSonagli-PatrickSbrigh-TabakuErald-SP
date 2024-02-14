@@ -10,7 +10,6 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.Block.BlockType;
 
 public abstract class Player {
-    private static final int PADDING_BOUND = 8;
     private static final int FALL_SPEED = 3;
     private int width;
     private int height;
@@ -22,6 +21,7 @@ public abstract class Player {
     private BlocksHandler blocksHandler;
     private int moveX;
     private int moveY;
+    private int padding_bound = 5;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler){
         this.width = width*scale;
@@ -34,6 +34,7 @@ public abstract class Player {
         this.blocksHandler = blocksHandler;
         moveX = 0;
         moveY = 0;
+        padding_bound *=scale;
     }
 
     public int getX(){
@@ -104,19 +105,19 @@ public abstract class Player {
     }
 
     public Rectangle getTopBound(){
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, PADDING_BOUND);
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, getHeight()/2);
     }
 
     public Rectangle getBottomBound(){
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+(getHeight()-PADDING_BOUND), getWidth()/2, PADDING_BOUND);
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+(getHeight()/2), getWidth()/2, getHeight()/2);
     }
 
     public Rectangle getLeftBound(){
-        return new Rectangle(getX(), getY()+PADDING_BOUND, PADDING_BOUND, getHeight()-2*PADDING_BOUND);
+        return new Rectangle(getX(), getY()+padding_bound, padding_bound, getHeight()-2*padding_bound);
     }
 
     public Rectangle getRightBound(){
-        return new Rectangle(getX()+getWidth()-PADDING_BOUND, getY()+PADDING_BOUND, PADDING_BOUND ,getHeight()-2*PADDING_BOUND);
+        return new Rectangle(getX()+getWidth()-padding_bound, getY()+padding_bound, padding_bound ,getHeight()-2*padding_bound);
     }
 
     public void collision(){
@@ -127,37 +128,38 @@ public abstract class Player {
                 || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                 || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN){
                 if(rec.intersects(getLeftBound())){
-                    setX(block.getX()/block.getScale()+block.getWidth()/block.getScale());
+                    setX((block.getX()+block.getWidth())/getScale());
+                    moveX = 0;
                 } 
-                else if(rec.intersects(getRightBound())){
+                if(rec.intersects(getRightBound())){
                     setX(block.getX()/block.getScale()-getWidth()/getScale());
+                    moveX = 0;
                 }
-                else if(rec.intersects(getBottomBound())){
-                    setY(block.getY()/block.getScale()-getHeight()/getScale());
-                    moveY = 0;
-                    jumped = false;
-                }
-                else if(rec.intersects(getTopBound())){
-                    setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
-                    moveY = 0;
-                }
-            }
-            else if(block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK){
                 if(rec.intersects(getBottomBound())){
                     setY(block.getY()/block.getScale()-getHeight()/getScale());
                     moveY = 0;
-                    jumped = false;
                 }
-                else if(rec.intersects(getTopBound())){
+                if(rec.intersects(getTopBound())){
                     setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
                     moveY = FALL_SPEED;
-                    //chiama metodo per blocchi
                 }
-                else if(rec.intersects(getLeftBound())){
-                    setX(block.getX()/block.getScale()+block.getWidth()/block.getScale());
+            }
+            else if(block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK){
+                if(rec.intersects(getLeftBound())){
+                    setX((block.getX()+block.getWidth())/getScale());
+                    moveX = 0;
                 } 
-                else if(rec.intersects(getRightBound())){
+                if(rec.intersects(getRightBound())){
                     setX(block.getX()/block.getScale()-getWidth()/getScale());
+                    moveX = 0;
+                }
+                if(rec.intersects(getBottomBound())){
+                    setY(block.getY()/block.getScale()-getHeight()/getScale());
+                    moveY = 0;
+                }
+                if(rec.intersects(getTopBound())){
+                    setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                    moveY = FALL_SPEED;
                 }
             }
         }
@@ -180,7 +182,7 @@ public abstract class Player {
     }
 
     public void fall() {
-        setMoveY(FALL_SPEED);
+        moveY = FALL_SPEED;
     }
 
     public abstract void moveLeft();

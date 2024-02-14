@@ -8,8 +8,8 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
 
 public class Peach extends Player{
-    private static final int SPEED_X = 8;
-    private static final int JUMP_HEIGHT = 30;
+    private static final int SPEED_X = 5;
+    private static final int JUMP_HEIGHT = 25;
     private static final int LOOK_RIGHT = 0;
     private static final int LOOK_LEFT = 1;
     private static final int WALK_LEFT = 2;
@@ -37,25 +37,21 @@ public class Peach extends Player{
     public void moveLeft() {
         spriteNeeded = LOOK_LEFT;
         setMoveX(-SPEED_X);
-        if(hasJumped()){
-            fall();
-        }
     }
 
     @Override
     public void moveRight() {
         spriteNeeded = LOOK_RIGHT;
         setMoveX(SPEED_X);
-        if(hasJumped()){
-            fall();
-        }
     }
 
     @Override
     public void jump() {
-        spriteNeeded = JUMP_FALL;
-        setMoveY(-JUMP_HEIGHT);
-        setHasJumped(true);
+        if(!hasJumped()){
+            spriteNeeded = JUMP_FALL;
+            setMoveY(-JUMP_HEIGHT);
+            setHasJumped(true);
+        }
     }
 
     @Override
