@@ -16,6 +16,9 @@ import it.unibo.superpeach.level.LevelHandler;
 import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
+import it.unibo.superpeach.powerups.PowerupsHandler;
+import it.unibo.superpeach.powerups.RedMushroom;
+import it.unibo.superpeach.powerups.Star;
 import it.unibo.superpeach.powerups.graphics.Textures;
 
 public class Game extends Canvas implements Runnable {
@@ -46,6 +49,7 @@ public class Game extends Canvas implements Runnable {
     private EnemiesHandler enemiesHandler;
     private static TexturerEnemies enemiesTexture;
     private static Textures powerupsTexture;
+    private PowerupsHandler powerupsHandler;
 
     public static void main(String[] args) {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
@@ -62,6 +66,7 @@ public class Game extends Canvas implements Runnable {
         camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE);
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
+        powerupsHandler = new PowerupsHandler();
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
@@ -138,6 +143,7 @@ public class Game extends Canvas implements Runnable {
         blocksHandler.renderBlocks(g);
         enemiesHandler.renderEnemies(g);
         playerHandler.render(g);
+        powerupsHandler.renderPowerups(g);
 
         g.dispose();
         buffStrat.show();
