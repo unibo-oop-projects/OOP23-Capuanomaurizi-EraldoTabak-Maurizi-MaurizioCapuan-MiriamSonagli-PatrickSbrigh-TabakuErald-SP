@@ -4,8 +4,6 @@ import java.awt.Graphics;
 
 public class MapBackgroundBlock extends Block{
 
-
-
     public MapBackgroundBlock(int x, int y, int width, int height, int scale, BlockType type){
         super(x, y, width, height, scale);
         setType(type);
@@ -40,11 +38,6 @@ public class MapBackgroundBlock extends Block{
                 setSprites(getTexturer().getTerrain());
                 break;
         }
-    }
-
-    @Override
-    public void tick() {
-        
     }
 
     @Override

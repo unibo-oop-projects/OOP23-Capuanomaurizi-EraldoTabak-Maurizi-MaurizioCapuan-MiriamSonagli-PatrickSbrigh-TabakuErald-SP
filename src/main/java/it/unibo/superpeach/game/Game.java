@@ -108,7 +108,6 @@ public class Game extends Canvas implements Runnable{
     }
 
     private void tick(){
-        blocksHandler.tickBlocks();
         playerHandler.tick();
         camera.tick(playerHandler.getPlayer());
     }
