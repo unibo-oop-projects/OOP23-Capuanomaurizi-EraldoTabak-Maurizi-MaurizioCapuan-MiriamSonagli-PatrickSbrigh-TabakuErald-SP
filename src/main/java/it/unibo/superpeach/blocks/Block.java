@@ -52,19 +52,23 @@ public abstract class Block {
     }
 
     public Rectangle getTopBound(){
-        return new Rectangle(x, y, width, 0);
+        return new Rectangle(x, y, width, 5*scale);
     }
 
     public Rectangle getBotBound(){
-        return new Rectangle(x, y+height, width, 0);
+        return new Rectangle(x, y+height, width, 5*scale);
     }
 
     public Rectangle getLeftBound(){
-        return new Rectangle(x, y, 0, height);
+        return new Rectangle(x, y, 5*scale, height);
     }
 
     public Rectangle getRightBound(){
-        return new Rectangle(x+width, y, 0, height);
+        return new Rectangle(x+width, y, 5*scale, height);
+    }
+    
+    public Rectangle getBoundingBox(){
+        return new Rectangle(x, y, width, height);
     }
 
     public int getHeight() {
