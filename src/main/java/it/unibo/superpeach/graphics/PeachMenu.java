@@ -54,6 +54,7 @@ public class PeachMenu extends JFrame {
             }
         });
         panel.add(startButton);
+        panel.add(Box.createVerticalStrut(20));
 
         CustomButton optionsButton = new CustomButton("VOLUME", customColor, scale);
         optionsButton.addActionListener(new ActionListener() {
@@ -110,6 +111,7 @@ public class PeachMenu extends JFrame {
             }
         });
         panel.add(optionsButton);
+        panel.add(Box.createVerticalStrut(20));
 
         CustomButton GUIScaleButton = new CustomButton("GUI Scale: " + scale, customColor, scale);
         GUIScaleButton.addActionListener(new ActionListener() {
@@ -119,6 +121,7 @@ public class PeachMenu extends JFrame {
             }
         });
         panel.add(GUIScaleButton);
+        panel.add(Box.createVerticalStrut(20));
 
         CustomButton exitButton = new CustomButton("EXIT", customColor, scale);
         exitButton.addActionListener(new ActionListener() {
@@ -134,8 +137,8 @@ public class PeachMenu extends JFrame {
     }
 
     public void closeWindow(){
-        frame.setVisible(false); //you can't see me!
-        frame.dispose(); //Destroy the JFrame object
+        frame.setVisible(false);
+        frame.dispose();
     }
 
 }
