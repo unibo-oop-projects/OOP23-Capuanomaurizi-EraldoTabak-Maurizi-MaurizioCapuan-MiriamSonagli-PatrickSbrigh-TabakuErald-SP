@@ -3,6 +3,10 @@ package it.unibo.superpeach.enemies;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import it.unibo.superpeach.blocks.Block;
+import it.unibo.superpeach.blocks.Block.BlockType;
+import it.unibo.superpeach.blocks.BlocksHandler;
+
 public abstract class Enemy implements EnemyInt {
 
     private double x;
