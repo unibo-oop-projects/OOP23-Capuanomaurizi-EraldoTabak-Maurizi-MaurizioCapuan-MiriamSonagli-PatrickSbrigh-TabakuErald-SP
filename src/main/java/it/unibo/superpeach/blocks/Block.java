@@ -41,7 +41,6 @@ public abstract class Block {
         this.scale = s;
     }
 
-    public abstract void tick();
     public abstract void render(Graphics g);
 
     public Texturer getTexturer() {
