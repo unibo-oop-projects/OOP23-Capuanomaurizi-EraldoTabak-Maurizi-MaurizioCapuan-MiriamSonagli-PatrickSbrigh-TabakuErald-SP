@@ -3,12 +3,13 @@ package it.unibo.superpeach.player;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
 
 public class Peach extends Player{
-    private static final int SPEED_X = 10;
-    private static final int JUMP_HEIGHT = 50;
+    private static final int SPEED_X = 5;
+    private static final int JUMP_HEIGHT = 25;
     private static final int LOOK_RIGHT = 0;
     private static final int LOOK_LEFT = 1;
     private static final int WALK_LEFT = 2;
@@ -18,8 +19,8 @@ public class Peach extends Player{
     private PlayerTexture texture;
     private BufferedImage[] sprite;
 
-    public Peach(int x, int y, int width, int height, int scale){
-        super(x, y, width, height, scale);
+    public Peach(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler){
+        super(x, y, width, height, scale, blocksHandler);
         this.texture = Game.getPlayerTexturer();
         this.sprite = texture.getPlayerImage();
     }
@@ -35,36 +36,37 @@ public class Peach extends Player{
     @Override
     public void moveLeft() {
         spriteNeeded = LOOK_LEFT;
-        setX((getX()/getScale())-SPEED_X);
+        setMoveX(-SPEED_X);
     }
 
     @Override
     public void moveRight() {
         spriteNeeded = LOOK_RIGHT;
-        setX((getX()/getScale())+SPEED_X);
+        setMoveX(SPEED_X);
     }
 
     @Override
     public void jump() {
-        spriteNeeded = JUMP_FALL;
-        setY((getY()/getScale())-JUMP_HEIGHT);
-        setHasJumped(true);
-    }
-    
-    @Override
-    public void fall() {
-        spriteNeeded = JUMP_FALL;
-        setY((getY()/getScale())+JUMP_HEIGHT);
-        setHasJumped(false);
+        if(!hasJumped()){
+            spriteNeeded = JUMP_FALL;
+            setMoveY(-JUMP_HEIGHT);
+            setHasJumped(true);
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getSprites()[spriteNeeded], getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[spriteNeeded], getX(), (int)getY(), getWidth(), getHeight(), null);
+        showRectangle(g);
     }
 
     @Override
     public void tick() {
         updateRectangle();
+        setY(getY()/getScale()+getMoveY());
+        setX(getX()/getScale()+getMoveX());
+        fall();
+        collision();
+
     }
 }
