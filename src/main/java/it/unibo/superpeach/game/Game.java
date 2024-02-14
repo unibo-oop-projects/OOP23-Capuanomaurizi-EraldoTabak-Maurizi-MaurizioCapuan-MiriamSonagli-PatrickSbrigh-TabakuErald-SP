@@ -7,6 +7,8 @@ import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.graphics.Texturer;
+import it.unibo.superpeach.enemies.EnemiesHandler;
+import it.unibo.superpeach.enemies.graphics.TexturerEnemies;
 import it.unibo.superpeach.graphics.PeachMenu;
 import it.unibo.superpeach.keyboard.Keyboard;
 import it.unibo.superpeach.level.Camera;
@@ -15,9 +17,9 @@ import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable {
 
-    //GAME CONSTANTS
+    // GAME CONSTANTS
     private static final int MILLS_PER_SECOND = 1000;
     private static final int NANOS_PER_SECOND = 1000000000;
     private static final double TICKS_PER_SECOND = 60.0;
@@ -27,11 +29,11 @@ public class Game extends Canvas implements Runnable{
     private static final int PLAYER_DEFAULT_X = 15;
     private static final int PLAYER_DEFAULT_Y = 255;
 
-    //GAME VARIABLES
+    // GAME VARIABLES
     private boolean running;
     private static int GAME_SCALE = 2;
 
-    //GAME COMPONENTS
+    // GAME COMPONENTS
     private Thread mainGameLoop;
     private BlocksHandler blocksHandler;
     private static Texturer blocksTexturer;
@@ -41,11 +43,14 @@ public class Game extends Canvas implements Runnable{
     private static PlayerTexture playerTexture;
     private PlayerHandler playerHandler;
 
+    private static TexturerEnemies enemiesTexturer;
+    private EnemiesHandler enemiesHandler;
+
     public static void main(String[] args) {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
-    public void init(){
+    public void init() {
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE);
@@ -53,24 +58,27 @@ public class Game extends Canvas implements Runnable{
         camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE);
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X,PLAYER_DEFAULT_Y,16,32,GAME_SCALE));//TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
+        // prove
+        enemiesTexturer = new TexturerEnemies();
+        enemiesHandler = new EnemiesHandler();
     }
 
-    private synchronized void start(){
+    private synchronized void start() {
         mainGameLoop = new Thread(this);
         mainGameLoop.start();
         running = true;
     }
 
-    public synchronized void changeScale(int newScale){
+    public synchronized void changeScale(int newScale) {
         GAME_SCALE = newScale;
         window.closeWindow();
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
-    private synchronized void stop(){
+    private synchronized void stop() {
         try {
             mainGameLoop.join();
             running = false;
@@ -87,7 +95,7 @@ public class Game extends Canvas implements Runnable{
         double delta = 0;
         long timer = System.currentTimeMillis();
 
-        //GAMELOOP
+        // GAMELOOP
         while (running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -99,7 +107,7 @@ public class Game extends Canvas implements Runnable{
             if (running) {
                 render();
             }
-            if(System.currentTimeMillis() - timer >= MILLS_PER_SECOND){
+            if (System.currentTimeMillis() - timer >= MILLS_PER_SECOND) {
                 timer += MILLS_PER_SECOND;
             }
         }
@@ -107,22 +115,22 @@ public class Game extends Canvas implements Runnable{
         stop();
     }
 
-    private void tick(){
+    private void tick() {
         blocksHandler.tickBlocks();
         playerHandler.tick();
         camera.tick(playerHandler.getPlayer());
     }
 
-    private void render(){
+    private void render() {
         BufferStrategy buffStrat = this.getBufferStrategy();
-        if(buffStrat == null){
+        if (buffStrat == null) {
             this.createBufferStrategy(3);
             return;
-        } 
+        }
         Graphics g = buffStrat.getDrawGraphics();
 
         g.setColor(Color.PINK);
-        g.fillRect(0, 0, WINDOW_WIDTH*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE);
+        g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
         g.translate(camera.getCameraX(), camera.getCameraY());
 
         blocksHandler.renderBlocks(g);
@@ -136,7 +144,7 @@ public class Game extends Canvas implements Runnable{
         return blocksTexturer;
     }
 
-    public static PlayerTexture getPlayerTexturer(){
+    public static PlayerTexture getPlayerTexturer() {
         return playerTexture;
     }
 

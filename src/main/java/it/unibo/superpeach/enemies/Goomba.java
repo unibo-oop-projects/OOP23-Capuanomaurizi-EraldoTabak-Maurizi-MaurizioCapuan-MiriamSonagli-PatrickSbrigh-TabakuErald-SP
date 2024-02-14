@@ -5,11 +5,18 @@ import java.awt.image.BufferedImage;
 
 public class Goomba extends Enemy {
 
-    private int speed = 4;
+    public Goomba(double x, double y, BufferedImage img, float speed, int scale) {
+        super(x, y, img, speed, scale);
+    }
 
-    public Goomba(double x, double y, BufferedImage img) {
-        super(x, y, img);
-        // TODO Auto-generated constructor stub
+    @Override
+    public void render(Graphics g) {
+        sprite(g);
+    }
+
+    @Override
+    public void tick() {
+
     }
 
 }
