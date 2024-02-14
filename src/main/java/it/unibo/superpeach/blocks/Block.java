@@ -11,7 +11,7 @@ public abstract class Block {
     public enum BlockType {
         BRICK,
         TERRAIN,
-        LUCKY,
+        LUCKY, POPPED_LUCKY,
         PIPE_LEFT, PIPE_RIGHT, PIPE_TOP_LEFT, PIPE_TOP_RIGHT,
         STONE,
         BUSH_LEFT, BUSH_MIDDLE, BUSH_RIGHT,

@@ -46,6 +46,9 @@ public class MapFixedBlock extends Block{
             case LUCKY:
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
                 break;
+            case POPPED_LUCKY:
+                g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null);
+                break;
             case BRICK:
                 g.drawImage(getSprites()[2], getX(), getY(), getWidth(), getHeight(), null);
                 break;
@@ -78,6 +81,12 @@ public class MapFixedBlock extends Block{
                 break;
             default:
                 break;
+        }
+    }
+
+    public void interact(){
+        if(getType() == BlockType.LUCKY) {
+            setType(BlockType.POPPED_LUCKY);
         }
     }
 
