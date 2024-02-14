@@ -3,64 +3,49 @@ package it.unibo.superpeach.enemies;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import it.unibo.superpeach.blocks.Block;
-import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.enemies.graphics.TexturerEnemies;
+import it.unibo.superpeach.game.Game;
 
-public abstract class Enemy implements EnemyInt {
+public abstract class Enemy {
 
-    private double x;
-    private double y;
+    private static final int FALL_SPEED = 3;
+
+    private int x;
+    private int y;
     private Dimension dim;
-    private double speed;
+    private int speed;
     private boolean isFalling;
-    private BufferedImage img;
+    private BlocksHandler blocksHandler;
     private int scale;
 
-    public Enemy(double x, double y, BufferedImage img, float speed, int scale) {
-        setCoords(scale * x, scale * y);
+    private TexturerEnemies texturer = Game.getEnemyTexturer();
+    private BufferedImage[] sprites;
+
+    public Enemy(int x, int y, int width, int height, int scale) {
+        this.x = x * scale;
+        this.y = y * scale;
         this.isFalling = false;
-        setDimension(img.getWidth(), img.getHeight());
-        this.speed = speed;
+        this.scale = scale;
+        setDimension(width * scale, height * scale);
     }
 
-    @Override
-    public void setCoords(double x, double y) {
-        setX(x);
-        setY(y);
-    }
-
-    @Override
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    @Override
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    @Override
-    public double getX() {
+    public int getX() {
         return this.x;
     }
 
-    @Override
-    public double getY() {
+    public int getY() {
         return this.y;
     }
 
-    @Override
     public boolean getIsFalling() {
         return this.isFalling;
     }
 
-    @Override
     public void setIsFalling(boolean fall) {
         this.isFalling = fall;
     }
 
-    @Override
     public void updateCoords() {
         this.x += this.speed;
 
@@ -69,61 +54,48 @@ public abstract class Enemy implements EnemyInt {
         }
     }
 
-    @Override
     public Dimension getDimension() {
         return this.dim;
     }
 
-    @Override
     public void setDimension(int width, int height) {
         this.dim = new Dimension(width, height);
     }
 
-    @Override
-    public BufferedImage getImg() {
-        return this.img;
-    }
-
-    @Override
-    public void setImg(BufferedImage img) {
-        this.img = img;
-    }
-
-    @Override
-    public void sprite(Graphics graphic) {
-        BufferedImage im = getImg();
-        graphic.drawImage(im, (int) x, (int) y, null);
-    }
-
-    @Override
     public Rectangle getBounds() {
         return new Rectangle((int) x, (int) y, dim.width, dim.height);
     }
 
-    @Override
     public Rectangle getTopBound() {
         return new Rectangle((int) x + dim.width, (int) y, dim.width, dim.height);
     }
 
-    @Override
     public Rectangle getBottomBound() {
         return new Rectangle((int) x + dim.width, (int) y, dim.width, dim.height);
     }
 
-    @Override
     public Rectangle getRightBound() {
         return new Rectangle((int) x, (int) y + dim.height, dim.width, dim.height);
     }
 
-    @Override
     public Rectangle getLeftBound() {
         return new Rectangle((int) x, (int) y + dim.height, dim.width, dim.height);
     }
 
-    @Override
+    public BufferedImage[] getSprites() {
+        return this.sprites;
+    }
+
+    public void setSprites(BufferedImage[] sprites) {
+        this.sprites = sprites;
+    }
+
+    public TexturerEnemies getTexturer() {
+        return texturer;
+    }
+
     public abstract void render(Graphics g);
 
-    @Override
     public abstract void tick();
 
     // tenere a mente che potrebbe servire implementare metodi getter e setter per

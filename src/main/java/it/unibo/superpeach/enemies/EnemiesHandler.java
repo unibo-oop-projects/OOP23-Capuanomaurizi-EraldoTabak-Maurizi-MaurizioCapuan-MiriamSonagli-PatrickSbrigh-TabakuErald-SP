@@ -4,8 +4,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.superpeach.enemies.Enemy;
-
 public class EnemiesHandler {
 
     private List<Enemy> enemies;
@@ -15,13 +13,13 @@ public class EnemiesHandler {
     }
 
     public void tickEnemies() {
-        for (EnemyInt enemy : enemies) {
+        for (Enemy enemy : enemies) {
             enemy.tick();
         }
     }
 
     public void renderEnemies(Graphics g) {
-        for (EnemyInt enemy : enemies) {
+        for (Enemy enemy : enemies) {
             enemy.render(g);
         }
     }
@@ -30,7 +28,7 @@ public class EnemiesHandler {
         enemies.add(b);
     }
 
-    public void removeEnemy(EnemyInt b) {
+    public void removeEnemy(Enemy b) {
         enemies.remove(b);
     }
 

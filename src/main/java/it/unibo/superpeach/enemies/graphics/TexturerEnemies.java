@@ -36,11 +36,11 @@ public class TexturerEnemies {
     }
 
     private void loadGoomba() {
-        int x = 20;
-        int y = 20;
+        int x = 0;
+        int y = 4;
 
         for (int i = 0; i < GOOMBA_COUNT; i++) {
-            goomba[i] = enemySet.getSubimage(x + i * (ENEMY_WIDTH + 1), y, ENEMY_WIDTH, GOOMBA_HEIGHT);
+            goomba[i] = enemySet.getSubimage(x + i * ENEMY_WIDTH, y, ENEMY_WIDTH, GOOMBA_HEIGHT);
         }
     }
 
@@ -51,6 +51,14 @@ public class TexturerEnemies {
         for (int i = 0; i < KOOPATROOPA_COUNT; i++) {
             koopaTroopa[i] = enemySet.getSubimage(x + i * (ENEMY_WIDTH + 1), y, ENEMY_WIDTH, KOOPA_HEIGHT);
         }
+    }
+
+    public BufferedImage[] getGoombaImg() {
+        return this.goomba;
+    }
+
+    public BufferedImage[] getKoopaImg() {
+        return this.koopaTroopa;
     }
 
 }

@@ -5,13 +5,13 @@ import java.awt.image.BufferedImage;
 
 public class KoopaTroopa extends Enemy {
 
-    public KoopaTroopa(double x, double y, BufferedImage img, float speed, int scale) {
-        super(x, y, img, speed, scale);
+    public KoopaTroopa(int x, int y, int width, int height, int scale) {
+        super(x, y, width, height, scale);
     }
 
     @Override
     public void render(Graphics g) {
-        sprite(g);
+        // sprite(g);
     }
 
     @Override
