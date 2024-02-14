@@ -10,7 +10,8 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.Block.BlockType;
 
 public abstract class Player {
-    private static final int PADDING_BOUND = 5;
+    private static final int PADDING_BOUND = 8;
+    private static final int FALL_SPEED = 3;
     private int width;
     private int height;
     private int x;
@@ -19,6 +20,8 @@ public abstract class Player {
     private Rectangle rectangle;
     private boolean jumped;
     private BlocksHandler blocksHandler;
+    private int moveX;
+    private int moveY;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler){
         this.width = width*scale;
@@ -29,6 +32,8 @@ public abstract class Player {
         this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
         this.blocksHandler = blocksHandler;
+        moveX = 0;
+        moveY = 0;
     }
 
     public int getX(){
@@ -129,17 +134,23 @@ public abstract class Player {
                 }
                 else if(rec.intersects(getBottomBound())){
                     setY(block.getY()/block.getScale()-getHeight()/getScale());
+                    moveY = 0;
+                    jumped = false;
                 }
                 else if(rec.intersects(getTopBound())){
                     setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                    moveY = 0;
                 }
             }
             else if(block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK){
                 if(rec.intersects(getBottomBound())){
                     setY(block.getY()/block.getScale()-getHeight()/getScale());
+                    moveY = 0;
+                    jumped = false;
                 }
                 else if(rec.intersects(getTopBound())){
                     setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                    moveY = FALL_SPEED;
                     //chiama metodo per blocchi
                 }
                 else if(rec.intersects(getLeftBound())){
@@ -152,10 +163,29 @@ public abstract class Player {
         }
     }
 
+    public void setMoveY(int moveY){
+        this.moveY = moveY; 
+    }
+    
+    public void setMoveX(int moveX){
+        this.moveX = moveX; 
+    }
+    
+    public int getMoveY(){
+        return this.moveY; 
+    }
+    
+    public int getMoveX(){
+        return this.moveX;
+    }
+
+    public void fall() {
+        setMoveY(FALL_SPEED);
+    }
+
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract void jump();
-    public abstract void fall();
     public abstract void render(Graphics g);
     public abstract void tick();
 }
