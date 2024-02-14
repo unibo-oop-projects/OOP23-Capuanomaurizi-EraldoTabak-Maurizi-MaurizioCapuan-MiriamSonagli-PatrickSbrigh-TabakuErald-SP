@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
 
@@ -19,8 +20,8 @@ public class Peach extends Player{
     private PlayerTexture texture;
     private BufferedImage[] sprite;
 
-    public Peach(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler){
-        super(x, y, width, height, scale, blocksHandler);
+    public Peach(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
+        super(x, y, width, height, scale, blocksHandler, enemiesHandler);
         this.texture = Game.getPlayerTexturer();
         this.sprite = texture.getPlayerImage();
     }

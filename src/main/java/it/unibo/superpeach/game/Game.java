@@ -59,7 +59,7 @@ public class Game extends Canvas implements Runnable {
         camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE);
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler));// TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
 

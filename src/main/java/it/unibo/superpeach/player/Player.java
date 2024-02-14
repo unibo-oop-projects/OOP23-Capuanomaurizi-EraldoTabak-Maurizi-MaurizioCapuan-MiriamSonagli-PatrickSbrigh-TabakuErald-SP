@@ -8,6 +8,8 @@ import java.awt.Rectangle;
 import it.unibo.superpeach.blocks.Block;
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.Block.BlockType;
+import it.unibo.superpeach.enemies.EnemiesHandler;
+import it.unibo.superpeach.enemies.Enemy;
 
 public abstract class Player {
     private static final int FALL_SPEED = 3;
@@ -19,11 +21,12 @@ public abstract class Player {
     private Rectangle rectangle;
     private boolean jumped;
     private BlocksHandler blocksHandler;
+    private EnemiesHandler enemiesHandler;
     private int moveX;
     private int moveY;
     private int padding_bound = 5;
 
-    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler){
+    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
         this.width = width*scale;
         this.height = height*scale;
         this.x = x*scale;
@@ -35,6 +38,7 @@ public abstract class Player {
         moveX = 0;
         moveY = 0;
         padding_bound *=scale;
+        this.enemiesHandler = enemiesHandler;      
     }
 
     public int getX(){
@@ -206,37 +210,37 @@ public abstract class Player {
                 }
             }
             else if(block.getType() == BlockType.DEATH_BLOCK){
-                if(block.getBoundingBox().contains(getBottomBound())){
+                if(block.getBoundingBox().intersects(getBottomBound())){
                     System.out.println("MORTO");
                     //MUORI o cava power up o vita
                 }
-                else if(block.getBoundingBox().contains(getTopBound())){
+                else if(block.getBoundingBox().intersects(getTopBound())){
                     System.out.println("MORTO");
                     //MUORI
                 }
-                else if(block.getBoundingBox().contains(getLeftBound())){
+                else if(block.getBoundingBox().intersects(getLeftBound())){
                     System.out.println("MORTO");
                     //MUORI
                 }
-                else if(block.getBoundingBox().contains(getRightBound())){
+                else if(block.getBoundingBox().intersects(getRightBound())){
                     System.out.println("MORTO");
                     //MUORI
                 }
             }
             else if(block.getType() == BlockType.CASTLE_DOOR_BOT || block.getType() == BlockType.CASTLE_DOOR_TOP){
-                if(block.getBoundingBox().contains(getBottomBound())){
+                if(block.getBoundingBox().intersects(getBottomBound())){
                     System.out.println("VINTO");
                     //vinci aggiungi punti
                 }
-                else if(block.getBoundingBox().contains(getTopBound())){
+                else if(block.getBoundingBox().intersects(getTopBound())){
                     System.out.println("VINTO");
                     //vinci aggiungi punti
                 }
-                else if(block.getBoundingBox().contains(getLeftBound())){
+                else if(block.getBoundingBox().intersects(getLeftBound())){
                     System.out.println("VINTO");
                     //vinci aggiungi punti
                 }
-                else if(block.getBoundingBox().contains(getRightBound())){
+                else if(block.getBoundingBox().intersects(getRightBound())){
                     System.out.println("VINTO");
                     //vinci aggiungi punti
                 }
@@ -258,6 +262,10 @@ public abstract class Player {
                     //FIX
                 }
             }
+        }
+
+        for(Enemy enemy : enemiesHandler.getEnemies()){
+            
         }
     }
 
