@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Shell extends Enemy {
 
-    public Shell(double x, double y, BufferedImage img, float speed) {
-        super(x, y, img, speed);
+    public Shell(double x, double y, BufferedImage img, float speed, int scale) {
+        super(x, y, img, speed, scale);
     }
 
     @Override
