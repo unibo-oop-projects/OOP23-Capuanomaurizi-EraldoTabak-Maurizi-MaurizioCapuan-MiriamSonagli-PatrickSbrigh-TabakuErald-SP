@@ -16,6 +16,7 @@ import it.unibo.superpeach.level.LevelHandler;
 import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
+import it.unibo.superpeach.powerups.graphics.Textures;
 
 public class Game extends Canvas implements Runnable {
 
@@ -44,6 +45,7 @@ public class Game extends Canvas implements Runnable {
     private PlayerHandler playerHandler;
     private EnemiesHandler enemiesHandler;
     private static TexturerEnemies enemiesTexture;
+    private static Textures powerupsTexture;
 
     public static void main(String[] args) {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
@@ -52,6 +54,7 @@ public class Game extends Canvas implements Runnable {
     public void init() {
         enemiesHandler = new EnemiesHandler();
         enemiesTexture = new TexturerEnemies();
+        powerupsTexture = new Textures();
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE, enemiesHandler);
@@ -150,6 +153,10 @@ public class Game extends Canvas implements Runnable {
 
     public static TexturerEnemies getEnemyTexturer() {
         return enemiesTexture;
+    }
+
+    public static Textures getPowerupsTextures() {
+        return powerupsTexture;
     }
 
 }
