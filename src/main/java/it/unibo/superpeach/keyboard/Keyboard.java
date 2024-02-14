@@ -18,19 +18,18 @@ public class Keyboard extends KeyAdapter {
         if(pressed == KeyEvent.VK_SPACE){
             if(!playHand.getPlayer().hasJumped()){
                 playHand.getPlayer().jump();
-                playHand.getPlayer().setHasJumped(true);
-            }
-            else{
-                playHand.getPlayer().fall();
             }
         }
-        else if(pressed == KeyEvent.VK_A){
+        
+        if(pressed == KeyEvent.VK_A){
             playHand.getPlayer().moveLeft();
         }
-        else if(pressed == KeyEvent.VK_D){
+        
+        if(pressed == KeyEvent.VK_D){
             playHand.getPlayer().moveRight();
         }
-        else if(pressed == KeyEvent.VK_ESCAPE){
+        
+        if(pressed == KeyEvent.VK_ESCAPE){
 
         }
     }
@@ -39,9 +38,11 @@ public class Keyboard extends KeyAdapter {
         int pressed = e.getKeyCode();
     
         if(pressed == KeyEvent.VK_SPACE){
-            if(playHand.getPlayer().hasJumped()){
-                playHand.getPlayer().fall();
-            }
+            playHand.getPlayer().setHasJumped(false);
+        }
+        
+        if(pressed == KeyEvent.VK_A || pressed == KeyEvent.VK_D){
+            playHand.getPlayer().setMoveX(0);;
         }
     }
 }

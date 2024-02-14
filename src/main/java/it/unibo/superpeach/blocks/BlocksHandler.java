@@ -6,34 +6,33 @@ import java.util.List;
 
 public class BlocksHandler {
 
-    private List<Block> blocks;
+    private List<Block> fixedBlocks;
+    private List<Block> backgroundBlocks;
 
     public BlocksHandler(){
-        blocks = new ArrayList<Block>();
-    }
-
-    public void tickBlocks(){
-        for (Block block : blocks) {
-            block.tick();
-        }
+        fixedBlocks = new ArrayList<Block>();
+        backgroundBlocks = new ArrayList<Block>();
     }
 
     public void renderBlocks(Graphics g){
-        for (Block block : blocks) {
+        for (Block block : fixedBlocks) {
+            block.render(g);
+        }
+        for (Block block : backgroundBlocks) {
             block.render(g);
         }
     }
 
-    public void addBlock(Block b){
-        blocks.add(b);
+    public void addFixedBlock(Block b){
+        fixedBlocks.add(b);
     }
 
-    public void removeBlock(Block b){
-        blocks.remove(b);
+    public void addBackgroundBlock(Block b){
+        backgroundBlocks.add(b);
     }
 
     public List<Block> getBlocks() {
-        return List.copyOf(blocks);
+        return List.copyOf(fixedBlocks);
     }
 
 }

@@ -38,10 +38,6 @@ public class MapFixedBlock extends Block{
     }
 
     @Override
-    public void tick() {
-    }
-
-    @Override
     public void render(Graphics g) {
         switch (getType()) {
             case TERRAIN:
