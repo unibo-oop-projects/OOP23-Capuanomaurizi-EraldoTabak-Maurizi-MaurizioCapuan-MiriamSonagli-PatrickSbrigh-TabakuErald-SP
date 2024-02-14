@@ -2,46 +2,98 @@ package it.unibo.superpeach.powerups;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.powerups.graphics.Textures;
+
 
 public abstract class PowerUp {
 
-    //DEVO AGGIUNGERE LE IMMAGINI
-    private double x;
-    private double y;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private double movement;
     private boolean isFalling;
+    private Textures textures = Game.getPowerupsTextures();
+    private BufferedImage[] image = textures.getPowerups();
 
-    public PowerUp(double x, double y) {
-        pUpCoords(x, y);
+    
+    public PowerUp(int x, int y, int w, int h) {
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
         this.isFalling = false;
     }
 
-    public void pUpCoords(double x, double y) {
-        setX(x);
-        setY(y);
-    }
+    public abstract void render(Graphics g);
 
-    public void setX(double x) {
+    public abstract void tick();
+
+    public BufferedImage[] getImage() {
+        return image;
+    }
+    
+    public void setX(int x) {
         this.x = x;
     }
 
-    public void setY(double y) {
+    public void setY(int y) {
         this.y = y;
     }
 
-    public double getX() {
-        return this.x;
+    public void setWidth(int w) {
+        this.width = w;
     }
 
-    public double getY() {
+    public void setHeight(int h) {
+        this.height = h;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+    
+    public int getY() {
         return this.y;
     }
 
-    public boolean getIsFalling() {
-        return this.isFalling;
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void setMovement(double movement) {
+        this.movement = movement;
+    }
+
+    public double getMovement() {
+        return this.movement;
     }
 
     public void setIsFalling(boolean fall) {
         this.isFalling = fall;
+    }
+    
+    public boolean getIsFalling() {
+        return this.isFalling;
+    }
+
+    public void movesRight(int movement){
+        this.setX(this.getX() + movement);
+    }
+
+    public void movesLeft(int movement) {
+        this.setX(this.getX() - movement);
+    }
+
+    public void fallingDown() {
+        if (this.isFalling) {
+            this.y += this.movement;
+        }
     }
 
     // Metodo per controllare la collisione con il personaggio
