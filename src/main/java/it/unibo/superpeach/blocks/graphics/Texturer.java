@@ -3,7 +3,7 @@ package it.unibo.superpeach.blocks.graphics;
 import java.awt.image.BufferedImage;
 
 public class Texturer {
-    
+
     private static final int BRICKSCASTLEBLOCKS_COUNT = 16;
     private static final int LUCKYBLOCKS_COUNT = 2;
     private static final int PIPEBLOCKS_COUNT = 4;
@@ -21,7 +21,7 @@ public class Texturer {
 
     public BufferedImage[] terrain, lucky, pipe, cloud, bush, hill, flag;
 
-    public Texturer(){
+    public Texturer() {
 
         terrain = new BufferedImage[BRICKSCASTLEBLOCKS_COUNT];
         lucky = new BufferedImage[LUCKYBLOCKS_COUNT];
@@ -47,69 +47,71 @@ public class Texturer {
         }
     }
 
-    private void loadTerrain(){
+    private void loadTerrain() {
         int x = 0;
         int y = 16;
         int index = 0;
 
-        for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT/8; i++) {
-            for (int j = 0; j < BRICKSCASTLEBLOCKS_COUNT/2; j++) {
-                terrain[index] = blocksSet.getSubimage(x + j*(TILE_BLOCK_WIDTH+1), y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT / 8; i++) {
+            for (int j = 0; j < BRICKSCASTLEBLOCKS_COUNT / 2; j++) {
+                terrain[index] = blocksSet.getSubimage(x + j * (TILE_BLOCK_WIDTH + 1), y + i * (TILE_BLOCK_HEIGHT + 1),
+                        TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
                 index++;
             }
         }
     }
 
-    private void loadLucky(){
+    private void loadLucky() {
         int x = 298;
         int y = 78;
 
         for (int i = 0; i < LUCKYBLOCKS_COUNT; i++) {
-            lucky[i] = blocksSet.getSubimage(x, y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+            lucky[i] = blocksSet.getSubimage(x, y + i * (TILE_BLOCK_HEIGHT + 1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         }
     }
 
-    private void loadPipe(){
+    private void loadPipe() {
         pipe[0] = blocksSet.getSubimage(119, 196, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         pipe[1] = blocksSet.getSubimage(136, 196, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         pipe[2] = blocksSet.getSubimage(119, 213, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         pipe[3] = blocksSet.getSubimage(136, 213, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
     }
 
-    private void loadCloud(){
+    private void loadCloud() {
         int x = 298;
         int y = 16;
         int index = 0;
 
-        for (int i = 0; i < CLOUDBLOCKS_COUNT/3; i++) {
-            for (int j = 0; j < CLOUDBLOCKS_COUNT/2; j++) {
-                cloud[index] = blocksSet.getSubimage(x + j*(TILE_BLOCK_WIDTH+1), y + i*(TILE_BLOCK_HEIGHT+1), TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        for (int i = 0; i < CLOUDBLOCKS_COUNT / 3; i++) {
+            for (int j = 0; j < CLOUDBLOCKS_COUNT / 2; j++) {
+                cloud[index] = blocksSet.getSubimage(x + j * (TILE_BLOCK_WIDTH + 1), y + i * (TILE_BLOCK_HEIGHT + 1),
+                        TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
                 index++;
             }
         }
     }
 
-    private void loadBush(){
+    private void loadBush() {
         int x = 0;
         int y = 213;
 
         for (int i = 0; i < BUSHBLOCKS_COUNT; i++) {
-            bush[i] = blocksSet.getSubimage(x + i*(TILE_BLOCK_WIDTH+1), y, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+            bush[i] = blocksSet.getSubimage(x + i * (TILE_BLOCK_WIDTH + 1), y, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         }
     }
 
-    private void loadHill(){
+    private void loadHill() {
         hill[0] = blocksSet.getSubimage(34, 230, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
 
         int x = 0;
         int y = 247;
 
-        for (int i = 0; i < HILLBLOCKS_COUNT-1; i++) {
-            hill[i+1] = blocksSet.getSubimage(x + i*(TILE_BLOCK_WIDTH+1), y, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        for (int i = 0; i < HILLBLOCKS_COUNT - 1; i++) {
+            hill[i + 1] = blocksSet.getSubimage(x + i * (TILE_BLOCK_WIDTH + 1), y, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         }
     }
 
-    private void loadFlag(){
+    private void loadFlag() {
         flag[0] = blocksSet.getSubimage(136, 230, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         flag[1] = blocksSet.getSubimage(136, 247, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         flag[2] = blocksSet.getSubimage(119, 230, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
