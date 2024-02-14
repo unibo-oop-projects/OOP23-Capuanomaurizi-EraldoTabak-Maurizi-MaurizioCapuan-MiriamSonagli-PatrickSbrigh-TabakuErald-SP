@@ -241,6 +241,23 @@ public abstract class Player {
                     //vinci aggiungi punti
                 }
             }
+            else if(block.getType() == BlockType.FLAG_TIP){
+                if(block.getBoundingBox().intersects(getTopBound())){
+                    System.out.println("1000 Punti");
+                    //vinci aggiungi punti
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    System.out.println("1000 Punti");
+                    //vinci aggiungi punti
+                }
+            }
+            else if(block.getType() == BlockType.FLAG_RIGHT || block.getType() == BlockType.FLAG_LEFT || block.getType() == BlockType.FLAG_POLE){
+                if(block.getBoundingBox().intersects(getRightBound())){
+                    System.out.println("500 Punti");
+                    //vinci aggiungi punti
+                    //FIX
+                }
+            }
         }
     }
 
