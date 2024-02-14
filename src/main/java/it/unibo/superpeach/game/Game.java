@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable{
     private static final int WINDOW_WIDTH = 480;
     private static final int WINDOW_HEIGHT = 360;
     private static final int PLAYER_DEFAULT_X = 15;
-    private static final int PLAYER_DEFAULT_Y = 255;
+    private static final int PLAYER_DEFAULT_Y = 0;
 
     //GAME VARIABLES
     private boolean running;
@@ -53,7 +53,7 @@ public class Game extends Canvas implements Runnable{
         camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE);
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X,PLAYER_DEFAULT_Y,16,32,GAME_SCALE));//TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X,PLAYER_DEFAULT_Y,16,32,GAME_SCALE, blocksHandler));//TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
     }

@@ -5,7 +5,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import it.unibo.superpeach.blocks.Block;
+import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.Block.BlockType;
+
 public abstract class Player {
+    private static final int FALL_SPEED = 3;
     private int width;
     private int height;
     private int x;
@@ -13,8 +18,12 @@ public abstract class Player {
     private int scale;
     private Rectangle rectangle;
     private boolean jumped;
+    private BlocksHandler blocksHandler;
+    private int moveX;
+    private int moveY;
+    private int padding_bound = 5;
 
-    public Player(int x, int y, int width, int height, int scale){
+    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler){
         this.width = width*scale;
         this.height = height*scale;
         this.x = x*scale;
@@ -22,6 +31,10 @@ public abstract class Player {
         this.scale = scale;
         this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
+        this.blocksHandler = blocksHandler;
+        moveX = 0;
+        moveY = 0;
+        padding_bound *=scale;
     }
 
     public int getX(){
@@ -83,13 +96,98 @@ public abstract class Player {
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
+        graph.draw(getBottomBound());
+        graph.draw(getTopBound());
+        graph.draw(getLeftBound());
+        graph.draw(getRightBound());
         graph.draw(rectangle);
+
+    }
+
+    public Rectangle getTopBound(){
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, getHeight()/2);
+    }
+
+    public Rectangle getBottomBound(){
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+(getHeight()/2), getWidth()/2, getHeight()/2);
+    }
+
+    public Rectangle getLeftBound(){
+        return new Rectangle(getX(), getY()+padding_bound, padding_bound, getHeight()-2*padding_bound);
+    }
+
+    public Rectangle getRightBound(){
+        return new Rectangle(getX()+getWidth()-padding_bound, getY()+padding_bound, padding_bound ,getHeight()-2*padding_bound);
+    }
+
+    public void collision(){
+        for(int i = 0;i<blocksHandler.getBlocks().size();i++){
+            Block block = blocksHandler.getBlocks().get(i);
+            Rectangle rec = new Rectangle((int)block.getX(), (int)block.getY(), (int)getWidth(), (int)getHeight());
+            if(block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT 
+                || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
+                || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN){
+                if(rec.intersects(getLeftBound())){
+                    setX((block.getX()+block.getWidth())/getScale());
+                    moveX = 0;
+                } 
+                if(rec.intersects(getRightBound())){
+                    setX(block.getX()/block.getScale()-getWidth()/getScale());
+                    moveX = 0;
+                }
+                if(rec.intersects(getBottomBound())){
+                    setY(block.getY()/block.getScale()-getHeight()/getScale());
+                    moveY = 0;
+                }
+                if(rec.intersects(getTopBound())){
+                    setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                    moveY = FALL_SPEED;
+                }
+            }
+            else if(block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK){
+                if(rec.intersects(getLeftBound())){
+                    setX((block.getX()+block.getWidth())/getScale());
+                    moveX = 0;
+                } 
+                if(rec.intersects(getRightBound())){
+                    setX(block.getX()/block.getScale()-getWidth()/getScale());
+                    moveX = 0;
+                }
+                if(rec.intersects(getBottomBound())){
+                    setY(block.getY()/block.getScale()-getHeight()/getScale());
+                    moveY = 0;
+                }
+                if(rec.intersects(getTopBound())){
+                    setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                    moveY = FALL_SPEED;
+                }
+            }
+        }
+    }
+
+    public void setMoveY(int moveY){
+        this.moveY = moveY; 
+    }
+    
+    public void setMoveX(int moveX){
+        this.moveX = moveX; 
+    }
+    
+    public int getMoveY(){
+        return this.moveY; 
+    }
+    
+    public int getMoveX(){
+        return this.moveX;
+    }
+
+    public void fall() {
+        moveY = FALL_SPEED;
     }
 
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract void jump();
-    public abstract void fall();
     public abstract void render(Graphics g);
     public abstract void tick();
 }
