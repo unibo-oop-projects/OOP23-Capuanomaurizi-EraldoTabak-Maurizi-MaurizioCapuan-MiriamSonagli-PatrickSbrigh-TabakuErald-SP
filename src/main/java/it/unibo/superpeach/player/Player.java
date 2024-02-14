@@ -205,6 +205,42 @@ public abstract class Player {
                     moveX=0;
                 }
             }
+            else if(block.getType() == BlockType.DEATH_BLOCK){
+                if(block.getBoundingBox().contains(getBottomBound())){
+                    System.out.println("MORTO");
+                    //MUORI o cava power up o vita
+                }
+                else if(block.getBoundingBox().contains(getTopBound())){
+                    System.out.println("MORTO");
+                    //MUORI
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    System.out.println("MORTO");
+                    //MUORI
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    System.out.println("MORTO");
+                    //MUORI
+                }
+            }
+            else if(block.getType() == BlockType.CASTLE_DOOR_BOT || block.getType() == BlockType.CASTLE_DOOR_TOP){
+                if(block.getBoundingBox().contains(getBottomBound())){
+                    System.out.println("VINTO");
+                    //vinci aggiungi punti
+                }
+                else if(block.getBoundingBox().contains(getTopBound())){
+                    System.out.println("VINTO");
+                    //vinci aggiungi punti
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    System.out.println("VINTO");
+                    //vinci aggiungi punti
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    System.out.println("VINTO");
+                    //vinci aggiungi punti
+                }
+            }
         }
     }
 
