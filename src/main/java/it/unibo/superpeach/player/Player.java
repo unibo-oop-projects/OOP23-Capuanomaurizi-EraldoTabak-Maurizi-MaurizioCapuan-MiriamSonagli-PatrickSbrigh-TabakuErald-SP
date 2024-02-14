@@ -96,8 +96,8 @@ public abstract class Player {
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
-        graph.draw(getBottomBound());
-        graph.draw(getTopBound());
+        //graph.draw(getBottomBound());
+        //graph.draw(getTopBound());
         graph.draw(getLeftBound());
         graph.draw(getRightBound());
         graph.draw(rectangle);
@@ -105,64 +105,123 @@ public abstract class Player {
     }
 
     public Rectangle getTopBound(){
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, getHeight()/2);
+        //return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, getHeight()/2);
+        //return new Rectangle(getX(), getY(), getWidth(), getHeight()/2);
+        //return new Rectangle(getX(), getY(), getWidth(), padding_bound);
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, padding_bound);
     }
 
     public Rectangle getBottomBound(){
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+(getHeight()/2), getWidth()/2, getHeight()/2);
+        //return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+(getHeight()/2), getWidth()/2, getHeight()/2);
+        //return new Rectangle(getX(), getY()+(getHeight()/2), getWidth(), getHeight()/2);
+        //return new Rectangle(getX(), getY()+getHeight()-padding_bound, getWidth(), padding_bound);
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
     }
 
     public Rectangle getLeftBound(){
         return new Rectangle(getX(), getY()+padding_bound, padding_bound, getHeight()-2*padding_bound);
+        //return new Rectangle(getX(), getY(), getWidth()/2, getHeight());
+        //return new Rectangle(getX(), getY(), padding_bound, getHeight());
     }
 
     public Rectangle getRightBound(){
         return new Rectangle(getX()+getWidth()-padding_bound, getY()+padding_bound, padding_bound ,getHeight()-2*padding_bound);
+        //return new Rectangle(getX()+getWidth()/2, getY(), getWidth()/2 ,getHeight());
+        //return new Rectangle(getX()+getWidth()-padding_bound, getY(), padding_bound, getHeight());
     }
 
     public void collision(){
-        for(int i = 0;i<blocksHandler.getBlocks().size();i++){
-            Block block = blocksHandler.getBlocks().get(i);
-            Rectangle rec = new Rectangle((int)block.getX(), (int)block.getY(), (int)getWidth(), (int)getHeight());
+        for(Block block : blocksHandler.getBlocks()){
             if(block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT 
-                || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
-                || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN){
-                if(rec.intersects(getLeftBound())){
-                    setX((block.getX()+block.getWidth())/getScale());
-                    moveX = 0;
-                } 
-                if(rec.intersects(getRightBound())){
-                    setX(block.getX()/block.getScale()-getWidth()/getScale());
-                    moveX = 0;
+            || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
+            || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
+            || block.getType() == BlockType.POPPED_LUCKY){
+                if(block.getBoundingBox().contains(getBottomBound())){
+                    setYCollisionBottom(block);
+                    moveY=0;
                 }
-                if(rec.intersects(getBottomBound())){
-                    setY(block.getY()/block.getScale()-getHeight()/getScale());
-                    moveY = 0;
-                }
-                if(rec.intersects(getTopBound())){
-                    setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                else if(block.getBoundingBox().contains(getTopBound())){
+                    setYCollisionTop(block);
                     moveY = FALL_SPEED;
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    setXCollisionLeft(block);
+                    moveX=0;
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    setXCollisionRight(block);
+                    moveX=0;
+                }
+                else if(block.getBoundingBox().intersects(getBottomBound())){
+                    setYCollisionBottom(block);
+                    moveY=0;
+                }
+                else if(block.getBoundingBox().intersects(getTopBound())){
+                    setYCollisionTop(block);
+                    moveY = FALL_SPEED;
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    setXCollisionLeft(block);
+                    moveX=0;
+                }
+                else if(block.getBoundingBox().intersects(getRightBound())){
+                    setXCollisionRight(block);
+                    moveX=0;
                 }
             }
             else if(block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK){
-                if(rec.intersects(getLeftBound())){
-                    setX((block.getX()+block.getWidth())/getScale());
-                    moveX = 0;
-                } 
-                if(rec.intersects(getRightBound())){
-                    setX(block.getX()/block.getScale()-getWidth()/getScale());
-                    moveX = 0;
+                if(block.getBoundingBox().contains(getBottomBound())){
+                    setYCollisionBottom(block);
+                    moveY=0;
                 }
-                if(rec.intersects(getBottomBound())){
-                    setY(block.getY()/block.getScale()-getHeight()/getScale());
-                    moveY = 0;
-                }
-                if(rec.intersects(getTopBound())){
-                    setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+                else if(block.getBoundingBox().contains(getTopBound())){
+                    setYCollisionTop(block);
                     moveY = FALL_SPEED;
+                    //add method
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    setXCollisionLeft(block);
+                    moveX=0;
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    setXCollisionRight(block);
+                    moveX=0;
+                }
+                else if(block.getBoundingBox().intersects(getBottomBound())){
+                    setYCollisionBottom(block);
+                    moveY=0;
+                }
+                else if(block.getBoundingBox().intersects(getTopBound())){
+                    setYCollisionTop(block);
+                    moveY = FALL_SPEED;
+                    //addmethod
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    setXCollisionLeft(block);
+                    moveX=0;
+                }
+                else if(block.getBoundingBox().intersects(getRightBound())){
+                    setXCollisionRight(block);
+                    moveX=0;
                 }
             }
         }
+    }
+
+    private void setYCollisionTop(Block block){
+        setY(block.getY()/block.getScale()+block.getHeight()/block.getScale());
+    }
+
+    private void setYCollisionBottom(Block block){
+        setY(block.getY()/block.getScale()-getHeight()/getScale());
+    }
+
+    private void setXCollisionLeft(Block block){
+        setX((block.getX()+block.getWidth())/getScale());
+    }
+
+    private void setXCollisionRight(Block block){
+        setX(block.getX()/block.getScale()-getWidth()/getScale());
     }
 
     public void setMoveY(int moveY){
