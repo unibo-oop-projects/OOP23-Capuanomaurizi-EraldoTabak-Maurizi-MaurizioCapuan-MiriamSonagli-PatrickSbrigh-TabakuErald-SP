@@ -42,18 +42,19 @@ public class Game extends Canvas implements Runnable {
     private static PeachMenu window;
     private static PlayerTexture playerTexture;
     private PlayerHandler playerHandler;
-
-    private static TexturerEnemies enemiesTexturer;
     private EnemiesHandler enemiesHandler;
+    private static TexturerEnemies enemiesTexture;
 
     public static void main(String[] args) {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
     public void init() {
+        enemiesHandler = new EnemiesHandler();
+        enemiesTexture = new TexturerEnemies();
         blocksTexturer = new Texturer();
         blocksHandler = new BlocksHandler();
-        levelHandler = new LevelHandler(blocksHandler, GAME_SCALE);
+        levelHandler = new LevelHandler(blocksHandler, GAME_SCALE, enemiesHandler);
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE);
         playerHandler = new PlayerHandler();
@@ -61,9 +62,7 @@ public class Game extends Canvas implements Runnable {
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
-        // prove
-        enemiesTexturer = new TexturerEnemies();
-        enemiesHandler = new EnemiesHandler();
+
     }
 
     private synchronized void start() {
@@ -117,6 +116,7 @@ public class Game extends Canvas implements Runnable {
 
     private void tick() {
         playerHandler.tick();
+        enemiesHandler.tickEnemies();
         camera.tick(playerHandler.getPlayer());
     }
 
@@ -133,6 +133,7 @@ public class Game extends Canvas implements Runnable {
         g.translate(camera.getCameraX(), camera.getCameraY());
 
         blocksHandler.renderBlocks(g);
+        enemiesHandler.renderEnemies(g);
         playerHandler.render(g);
 
         g.dispose();
@@ -145,6 +146,10 @@ public class Game extends Canvas implements Runnable {
 
     public static PlayerTexture getPlayerTexturer() {
         return playerTexture;
+    }
+
+    public static TexturerEnemies getEnemyTexturer() {
+        return enemiesTexture;
     }
 
 }

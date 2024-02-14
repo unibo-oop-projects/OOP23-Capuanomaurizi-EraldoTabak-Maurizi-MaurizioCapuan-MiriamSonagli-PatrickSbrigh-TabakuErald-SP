@@ -1,17 +1,21 @@
 package it.unibo.superpeach.enemies;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
+import it.unibo.superpeach.blocks.BlocksHandler;
 
 public class KoopaTroopa extends Enemy {
 
-    public KoopaTroopa(double x, double y, BufferedImage img, float speed, int scale) {
-        super(x, y, img, speed, scale);
+    public KoopaTroopa(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
+        super(x, y, width, height, scale, blocksHandler);
+        setSprites(getTexturer().getKoopaImg());
+        this.isFalling = true;
     }
 
     @Override
     public void render(Graphics g) {
-        sprite(g);
+        g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
+                null);
     }
 
     @Override
