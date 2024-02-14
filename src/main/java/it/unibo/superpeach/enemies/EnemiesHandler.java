@@ -28,7 +28,7 @@ public class EnemiesHandler {
         enemies.add(b);
     }
 
-    public void removeEnemy(Enemy b) {
+    public void removeEnemy(Enemy b) { // la cosa del null (?)
         enemies.remove(b);
     }
 

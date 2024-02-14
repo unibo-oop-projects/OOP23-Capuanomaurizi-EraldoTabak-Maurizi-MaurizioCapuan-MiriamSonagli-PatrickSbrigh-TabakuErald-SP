@@ -2,16 +2,14 @@ package it.unibo.superpeach.enemies.graphics;
 
 import java.awt.image.BufferedImage;
 
-import it.unibo.superpeach.blocks.graphics.BufferedImageLoader;
-
 public class TexturerEnemies {
 
-    private static final int GOOMBA_COUNT = 13;
-    private static final int KOOPATROOPA_COUNT = 5;
+    private static final int GOOMBA_COUNT = 1;
+    private static final int KOOPATROOPA_COUNT = 1;
 
     private static final int ENEMY_WIDTH = 16;
     private static final int GOOMBA_HEIGHT = 16;
-    private static final int KOOPA_HEIGHT = 32;
+    private static final int KOOPA_HEIGHT = 23;
 
     private BufferedImageLoaderEnemies loader;
 
@@ -45,11 +43,11 @@ public class TexturerEnemies {
     }
 
     private void loadKoopaTroopa() {
-        int x = 40;
-        int y = 20;
+        int x = 180;
+        int y = 0;
 
         for (int i = 0; i < KOOPATROOPA_COUNT; i++) {
-            koopaTroopa[i] = enemySet.getSubimage(x + i * (ENEMY_WIDTH + 1), y, ENEMY_WIDTH, KOOPA_HEIGHT);
+            koopaTroopa[i] = enemySet.getSubimage(x + i * ENEMY_WIDTH, y, ENEMY_WIDTH, KOOPA_HEIGHT);
         }
     }
 
