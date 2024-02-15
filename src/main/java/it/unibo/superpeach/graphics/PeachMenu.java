@@ -32,7 +32,8 @@ public class PeachMenu extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        Color customColor = new Color(149, 69, 169);
+        Color customColor = new Color(149, 69, 169);    //per ocra: 218, 165, 32
+        // Color customColor1 = new Color(101, 67, 33)      //PER LE SCRITTE
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
