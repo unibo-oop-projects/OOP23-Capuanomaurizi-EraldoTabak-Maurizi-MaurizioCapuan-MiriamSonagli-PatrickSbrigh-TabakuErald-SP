@@ -11,34 +11,32 @@ import it.unibo.superpeach.game.Game;
 
 public abstract class Enemy {
 
-    private static final int FALL_SPEED = 3;
-    private static final int PADDING_BOUND = 8;
+    private static final int FALL_SPEED = 1;
+    private int PADDING_BOUND = 4;
 
     private int x;
     private int y;
     private Dimension dim;
     private int speed;
-    protected boolean isFalling;
+    private boolean isFalling;
     private BlocksHandler blocksHandler;
     private int scale;
 
     private TexturerEnemies texturer = Game.getEnemyTexturer();
     private BufferedImage[] sprites;
 
-    private int moveY;
     private boolean direction;
-
     private boolean isAlive;
 
     public Enemy(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
         this.x = x * scale;
         this.y = y * scale;
-        this.isFalling = false;
         this.scale = scale;
         setDimension(width * scale, height * scale);
         this.blocksHandler = blocksHandler;
-        this.direction = true;
+        this.direction = false;
         this.isAlive = true;
+        this.PADDING_BOUND *= scale;
     }
 
     public int getX() {
@@ -85,10 +83,6 @@ public abstract class Enemy {
         return new Rectangle(x, y, dim.width, dim.height);
     }
 
-    public Rectangle getTopBound() {
-        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2, PADDING_BOUND);
-    }
-
     public Rectangle getBottomBound() {
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + (getHeight() - PADDING_BOUND),
                 getWidth() / 2, PADDING_BOUND);
@@ -125,18 +119,18 @@ public abstract class Enemy {
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
                     || block.getType() == BlockType.POPPED_LUCKY) {
-                if (block.getBoundingBox().contains(getBottomBound())) {
-                    setYCollisionBottom(block);
-                } else if (block.getBoundingBox().contains(getLeftBound())) {
+                if (block.getBoundingBox().contains(getLeftBound())) {
                     setXCollisionLeft(block);
                 } else if (block.getBoundingBox().contains(getRightBound())) {
                     setXCollisionRight(block);
-                } else if (block.getBoundingBox().intersects(getBottomBound())) {
+                } else if (block.getBoundingBox().contains(getBottomBound())) {
                     setYCollisionBottom(block);
                 } else if (block.getBoundingBox().intersects(getLeftBound())) {
                     setXCollisionLeft(block);
                 } else if (block.getBoundingBox().intersects(getRightBound())) {
                     setXCollisionRight(block);
+                } else if (block.getBoundingBox().intersects(getBottomBound())) {
+                    setYCollisionBottom(block);
                 }
             } else if (block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
             } else if (block.getBoundingBox().contains(getBottomBound())) {
@@ -153,7 +147,6 @@ public abstract class Enemy {
                 setXCollisionRight(block);
             } else if (block.getType() == BlockType.DEATH_BLOCK) {
                 if (block.getBoundingBox().intersects(getBottomBound())
-                        || block.getBoundingBox().intersects(getTopBound())
                         || block.getBoundingBox().intersects(getLeftBound())
                         || block.getBoundingBox().intersects(getRightBound())) {
                     System.out.println("MORTO");
@@ -164,11 +157,11 @@ public abstract class Enemy {
     }
 
     private void setY(int y) {
-        this.y = y;
+        this.y = y * scale;
     }
 
     private void setX(int x) {
-        this.x = x;
+        this.x = x * scale;
     }
 
     private int getWidth() {
@@ -187,7 +180,7 @@ public abstract class Enemy {
         return FALL_SPEED;
     }
 
-    public static int getPaddingBound() {
+    public int getPaddingBound() {
         return PADDING_BOUND;
     }
 
@@ -223,14 +216,6 @@ public abstract class Enemy {
         this.texturer = texturer;
     }
 
-    public int getMoveY() {
-        return moveY;
-    }
-
-    public void setMoveY(int moveY) {
-        this.moveY = moveY;
-    }
-
     public boolean getDirection() {
         return this.direction;
     }
@@ -248,7 +233,7 @@ public abstract class Enemy {
     }
 
     private void setYCollisionBottom(Block block) {
-        setY(block.getY() / block.getScale() - getHeight() / getScale());
+        setY(block.getY() / scale - getHeight() / scale);
         setFalling(false);
     }
 
@@ -260,6 +245,15 @@ public abstract class Enemy {
     private void setXCollisionRight(Block block) {
         setX(block.getX() / block.getScale() - getWidth() / getScale());
         changeDirection();
+    }
+
+    public void showRectangle(Graphics g) {
+        Graphics2D graph = (Graphics2D) g;
+        graph.setColor(Color.BLACK);
+        graph.draw(getBottomBound());
+        graph.draw(getLeftBound());
+        graph.draw(getRightBound());
+        graph.draw(new Rectangle(getX(), getY(), getWidth(), getHeight()));
     }
 
 }
