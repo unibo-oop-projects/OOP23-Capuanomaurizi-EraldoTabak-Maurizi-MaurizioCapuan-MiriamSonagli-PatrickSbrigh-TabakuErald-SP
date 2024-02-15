@@ -3,6 +3,7 @@ package it.unibo.superpeach.level;
 import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.LuckyBlock;
 import it.unibo.superpeach.blocks.MapBackgroundBlock;
 import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.Block.BlockType;
@@ -10,6 +11,7 @@ import it.unibo.superpeach.blocks.graphics.BufferedImageLoader;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.Goomba;
 import it.unibo.superpeach.enemies.KoopaTroopa;
+import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public class LevelHandler {
 
@@ -52,7 +54,13 @@ public class LevelHandler {
                     } else if (r == 0 && g == 0 && b == 0) {
                         blocksHandler.addFixedBlock(new MapFixedBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.STONE));
                     } else if (r == 255 && g == 201 && b == 14) {
-                        blocksHandler.addFixedBlock(new MapFixedBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.LUCKY));
+                        blocksHandler.addFixedBlock(new LuckyBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.LUCKY, PowerUpType.COIN));
+                    } else if (r == 255 && g == 202 && b == 14) {
+                        blocksHandler.addFixedBlock(new LuckyBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.LUCKY, PowerUpType.RED_MUSHROOM));
+                    } else if (r == 255 && g == 203 && b == 14) {
+                        blocksHandler.addFixedBlock(new LuckyBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.LUCKY, PowerUpType.LIFE_MUSHROOM));
+                    } else if (r == 255 && g == 204 && b == 14) {
+                        blocksHandler.addFixedBlock(new LuckyBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.LUCKY, PowerUpType.STAR));
                     } else if (r == 255 && g == 127 && b == 39) {
                         blocksHandler.addFixedBlock(new MapFixedBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.DEATH_BLOCK));
                     }

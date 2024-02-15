@@ -6,16 +6,16 @@ import java.util.List;
 
 public class BlocksHandler {
 
-    private List<Block> fixedBlocks;
+    private List<MapFixedBlock> fixedBlocks;
     private List<Block> backgroundBlocks;
 
     public BlocksHandler(){
-        fixedBlocks = new ArrayList<Block>();
+        fixedBlocks = new ArrayList<MapFixedBlock>();
         backgroundBlocks = new ArrayList<Block>();
     }
 
     public void renderBlocks(Graphics g){
-        for (Block block : fixedBlocks) {
+        for (MapFixedBlock block : fixedBlocks) {
             block.render(g);
         }
         for (Block block : backgroundBlocks) {
@@ -23,7 +23,7 @@ public class BlocksHandler {
         }
     }
 
-    public void addFixedBlock(Block b){
+    public void addFixedBlock(MapFixedBlock b){
         fixedBlocks.add(b);
     }
 
@@ -31,7 +31,11 @@ public class BlocksHandler {
         backgroundBlocks.add(b);
     }
 
-    public List<Block> getBlocks() {
+    public void removeFixedBlock(Block b){
+        fixedBlocks.remove(b);
+    }
+
+    public List<MapFixedBlock> getBlocks() {
         return List.copyOf(fixedBlocks);
     }
 
