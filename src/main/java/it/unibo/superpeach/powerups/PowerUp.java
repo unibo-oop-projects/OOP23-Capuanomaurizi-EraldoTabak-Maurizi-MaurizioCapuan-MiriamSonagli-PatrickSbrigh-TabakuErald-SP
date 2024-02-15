@@ -7,7 +7,6 @@ import it.unibo.superpeach.blocks.Block;
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.powerups.graphics.Textures;
-import it.unibo.superpeach.enemies.graphics.TexturerEnemies;
 
 
 public abstract class PowerUp {
@@ -30,7 +29,7 @@ public abstract class PowerUp {
     private BufferedImage[] image = textures.getPowerups();
 
     
-    public PowerUp(int x, int y, int w, int h, int s, int m) {
+    public PowerUp(int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
         this.x = x*s;
         this.y = y*s;
         this.width = w*s;
@@ -38,7 +37,6 @@ public abstract class PowerUp {
         this.scale = s;
         this.isFalling = false;
         this.isAlive = true;    //NON CREDO SERVA
-        movement = m;
         this.direction = false;
         this.blocksHandler = blocksHandler;
     }
@@ -155,8 +153,8 @@ public abstract class PowerUp {
         return this.isAlive;
     }
 
-    public void setIsAlive() {
-        this.isAlive = !this.isAlive;
+    public void die() {
+        this.isAlive = false;
     }
 
     public Rectangle getBounds() {
@@ -237,11 +235,8 @@ public abstract class PowerUp {
             } else if (block.getBoundingBox().intersects(getRightBound())) {
                 setXCollisionRight(block);
             } else if (block.getType() == BlockType.DEATH_BLOCK) {
-                if (block.getBoundingBox().intersects(getBottomBound())
-                        || block.getBoundingBox().intersects(getLeftBound())
-                        || block.getBoundingBox().intersects(getRightBound())) {
-                    System.out.println("DEAD");
-                    setIsAlive();
+                if (block.getBoundingBox().intersects(getBottomBound())) {
+                    die();
                 }
             }
         }

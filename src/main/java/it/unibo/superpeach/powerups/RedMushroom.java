@@ -2,10 +2,12 @@ package it.unibo.superpeach.powerups;
 
 import java.awt.*;
 
+import it.unibo.superpeach.blocks.BlocksHandler;
+
 public class RedMushroom extends PowerUp {
     
-    public RedMushroom (int x, int y, int w, int h, int s, int m) {
-        super(x, y, w, h, s, m);
+    public RedMushroom (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
+        super(x, y, w, h, s, blocksHandler);
         setMovement(1);
         setIsFalling(false);
     }
@@ -17,8 +19,9 @@ public class RedMushroom extends PowerUp {
 
     @Override
     public void tick() {
-        updateCoords();
+        setIsFalling(true);
         collisions();
+        updateCoords();
     }
 
 }

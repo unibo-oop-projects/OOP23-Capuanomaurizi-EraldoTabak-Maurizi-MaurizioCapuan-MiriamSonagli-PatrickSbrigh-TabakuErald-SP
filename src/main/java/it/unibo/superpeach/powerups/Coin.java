@@ -2,10 +2,12 @@ package it.unibo.superpeach.powerups;
 
 import java.awt.*;
 
+import it.unibo.superpeach.blocks.BlocksHandler;
+
 public class Coin extends PowerUp{
 
-    public Coin (int x, int y, int w, int h, int s, int m) {
-        super(x, y, w, h, s, m);
+    public Coin (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
+        super(x, y, w, h, s, blocksHandler);
         setMovement(0);
         setIsFalling(false);
     }

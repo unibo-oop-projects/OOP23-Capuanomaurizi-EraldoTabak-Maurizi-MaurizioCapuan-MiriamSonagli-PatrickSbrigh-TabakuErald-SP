@@ -2,10 +2,12 @@ package it.unibo.superpeach.powerups;
 
 import java.awt.Graphics;
 
+import it.unibo.superpeach.blocks.BlocksHandler;
+
 public class Star extends PowerUp{
 
-    public Star (int x, int y, int w, int h, int s, int m) {
-        super(x, y, w, h, s, m);
+    public Star (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
+        super(x, y, w, h, s, blocksHandler);
         setMovement(2);
         setIsFalling(false);
     }
@@ -17,8 +19,9 @@ public class Star extends PowerUp{
 
     @Override
     public void tick() {
-        updateCoords();
+        setIsFalling(true);
         collisions();
+        updateCoords();
     }
     
 }

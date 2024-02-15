@@ -2,12 +2,14 @@ package it.unibo.superpeach.powerups;
 
 import java.awt.*;
 
+import it.unibo.superpeach.blocks.BlocksHandler;
+
 public class LifeMushroom extends PowerUp{
 
-    public LifeMushroom (int x, int y, int w, int h, int s, int m) {
-        super(x, y, w, h, s, m);
+    public LifeMushroom (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
+        super(x, y, w, h, s, blocksHandler);
         setMovement(2);
-        setIsFalling(false);
+        setIsFalling(true);
     }
 
     @Override
@@ -17,8 +19,9 @@ public class LifeMushroom extends PowerUp{
 
     @Override
     public void tick() {
-        updateCoords();
+        setIsFalling(true);
         collisions();
+        updateCoords();
     }
     
 }
