@@ -18,7 +18,6 @@ public class Goomba extends Enemy {
     public void render(Graphics g) {
         g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
                 null);
-        showRectangle(g);
 
     }
 

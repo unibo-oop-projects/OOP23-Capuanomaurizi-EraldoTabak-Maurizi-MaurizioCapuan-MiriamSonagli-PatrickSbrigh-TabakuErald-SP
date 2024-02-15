@@ -115,6 +115,11 @@ public abstract class Enemy {
 
     public void collision() {
         for (Block block : blocksHandler.getBlocks()) {
+            if (block.getType() == BlockType.DEATH_BLOCK) {
+                if (block.getBoundingBox().intersects(getBottomBound())) {
+                    die();
+                }
+            }
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
@@ -145,14 +150,8 @@ public abstract class Enemy {
                 setXCollisionLeft(block);
             } else if (block.getBoundingBox().intersects(getRightBound())) {
                 setXCollisionRight(block);
-            } else if (block.getType() == BlockType.DEATH_BLOCK) {
-                if (block.getBoundingBox().intersects(getBottomBound())
-                        || block.getBoundingBox().intersects(getLeftBound())
-                        || block.getBoundingBox().intersects(getRightBound())) {
-                    System.out.println("MORTO");
-                    setIsAlive();
-                }
             }
+
         }
     }
 
@@ -228,8 +227,8 @@ public abstract class Enemy {
         return this.isAlive;
     }
 
-    public void setIsAlive() {
-        this.isAlive = !this.isAlive;
+    public void die() {
+        this.isAlive = false;
     }
 
     private void setYCollisionBottom(Block block) {
@@ -245,15 +244,6 @@ public abstract class Enemy {
     private void setXCollisionRight(Block block) {
         setX(block.getX() / block.getScale() - getWidth() / getScale());
         changeDirection();
-    }
-
-    public void showRectangle(Graphics g) {
-        Graphics2D graph = (Graphics2D) g;
-        graph.setColor(Color.BLACK);
-        graph.draw(getBottomBound());
-        graph.draw(getLeftBound());
-        graph.draw(getRightBound());
-        graph.draw(new Rectangle(getX(), getY(), getWidth(), getHeight()));
     }
 
 }
