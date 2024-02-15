@@ -10,7 +10,7 @@ import it.unibo.superpeach.player.graphics.PlayerTexture;
 
 public class Peach extends Player{
     private static final int SPEED_X = 4;
-    private static final int JUMP_HEIGHT = 25;
+    private static final int JUMP_HEIGHT = 55;
     private static final int LOOK_RIGHT = 0;
     private static final int LOOK_LEFT = 1;
     private static final int JUMP_FALL = 4;

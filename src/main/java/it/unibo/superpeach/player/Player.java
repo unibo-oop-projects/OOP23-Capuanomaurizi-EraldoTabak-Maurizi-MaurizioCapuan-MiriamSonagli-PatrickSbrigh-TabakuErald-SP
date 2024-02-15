@@ -12,7 +12,7 @@ import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.Enemy;
 
 public abstract class Player {
-    private static final int FALL_SPEED = 3;
+    private static final int FALL_SPEED = 4;
     private static final int LIFE_START = 3;
     private static final int POINT_LUCKY_BRICK = 200;
     private static final int POINT_WIN = 2000;
@@ -124,8 +124,8 @@ public abstract class Player {
     public void showRectangle(Graphics g){
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
-        //graph.draw(getBottomBound());
-        //graph.draw(getTopBound());
+        graph.draw(getBottomBound());
+        graph.draw(getTopBound());
         graph.draw(getLeftBound());
         graph.draw(getRightBound());
         graph.draw(rectangle);
@@ -133,7 +133,7 @@ public abstract class Player {
     }
 
     public Rectangle getTopBound(){
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, padding_bound);
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, padding_bound*(padding_bound/getScale()));
     }
 
     public Rectangle getBottomBound(){
@@ -157,73 +157,57 @@ public abstract class Player {
             || block.getType() == BlockType.POPPED_LUCKY){
                 if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
-                    moveY=0;
                 }
                 else if(block.getBoundingBox().contains(getTopBound())){
                     setYCollisionTop(block);
-                    moveY = FALL_SPEED;
                 }
                 else if(block.getBoundingBox().contains(getLeftBound())){
                     setXCollisionLeft(block);
-                    moveX=0;
                 }
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
-                    moveX=0;
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
-                    moveY=0;
                 }
                 else if(block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
-                    moveY = FALL_SPEED;
                 }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
                     setXCollisionLeft(block);
-                    moveX=0;
                 }
                 else if(block.getBoundingBox().intersects(getRightBound())){
                     setXCollisionRight(block);
-                    moveX=0;
                 }
             }
             else if(block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK){
-                if(block.getBoundingBox().contains(getBottomBound())){
-                    setYCollisionBottom(block);
-                    moveY=0;
-                }
-                else if(block.getBoundingBox().contains(getTopBound())){
+                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
-                    moveY = FALL_SPEED;
                     changePoint(POINT_LUCKY_BRICK);
                     //add method
                 }
+                else if(block.getBoundingBox().contains(getBottomBound())){
+                    setYCollisionBottom(block);
+                }
                 else if(block.getBoundingBox().contains(getLeftBound())){
                     setXCollisionLeft(block);
-                    moveX=0;
                 }
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
-                    moveX=0;
-                }
-                else if(block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    moveY=0;
                 }
                 else if(block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
-                    moveY = FALL_SPEED;
                     changePoint(POINT_LUCKY_BRICK);
                     //addmethod
                 }
+                else if(block.getBoundingBox().intersects(getBottomBound())){
+                    setYCollisionBottom(block);
+                }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
                     setXCollisionLeft(block);
-                    moveX=0;
                 }
                 else if(block.getBoundingBox().intersects(getRightBound())){
                     setXCollisionRight(block);
-                    moveX=0;
                 }
             }
             else if(block.getType() == BlockType.DEATH_BLOCK){
