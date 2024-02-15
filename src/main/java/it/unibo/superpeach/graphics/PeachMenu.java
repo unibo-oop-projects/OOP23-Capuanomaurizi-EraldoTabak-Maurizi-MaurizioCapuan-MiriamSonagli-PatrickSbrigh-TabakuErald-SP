@@ -20,6 +20,7 @@ public class PeachMenu extends JFrame {
     private Dimension size;
     @SuppressWarnings("unused")
     private final Game game;
+    private Clip clip;
 
     public PeachMenu(String title, int width, int height, int scale, Game game) {
 
@@ -76,55 +77,67 @@ public class PeachMenu extends JFrame {
                 // Nuovo frame per il pannello delle opzioni
                 JFrame optionsFrame = new JFrame("Volume Options");
                 optionsFrame.setSize(300, 200); // Imposta le dimensioni del frame
-                optionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Chiudo solo il frame delle opzioni quando viene chiuso
+                optionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Chiudi solo il frame delle opzioni quando viene chiuso
 
                 // Nuovo pannello per le opzioni
                 JPanel optionsPanel = new JPanel();
                 optionsPanel.setLayout(new FlowLayout());
 
-                // Slider per regolare il volume
-                JSlider volumeSlider = new JSlider(JSlider.HORIZONTAL, 0, 100 , 50) {
+                // Aggiunta di una JComboBox per la selezione della canzone
+                String[] songList = {
+                    "src/main/resources/it/unibo/superpeach/music/Sound1.wav",
+                    "src/main/resources/it/unibo/superpeach/music/Sound2.wav",
+                    "src/main/resources/it/unibo/superpeach/music/Sound3.wav"
+                }; 
+
+                JComboBox<String> songComboBox = new JComboBox<>(songList);
+                optionsPanel.add(songComboBox);
+
+                // Aggiunta di un pulsante per confermare la selezione della canzone
+                JButton selectButton = new JButton("Select");
+                selectButton.addActionListener(new ActionListener() {
                     @Override
-                    public void updateUI() {
-                        setUI(new BasicSliderUI(this) {
-                            @Override
-                            public void paintThumb(Graphics g) {
-                                Rectangle knobBounds = thumbRect;
-                                int w = knobBounds.width;
-                                int h = knobBounds.height;
-                                Graphics2D g2d = (Graphics2D) g.create();
-                                g2d.setColor(customColor);
-                                g2d.fillRect(knobBounds.x, knobBounds.y, w, h);
-                                g2d.dispose();
-                            }
-                        });
-                    }
-                };
-                volumeSlider.setMajorTickSpacing(10);
-                volumeSlider.setMinorTickSpacing(1);
-                volumeSlider.setPaintTicks(true);
-                volumeSlider.setPaintLabels(true);
-                
-                // Cambiamento del volume
-                volumeSlider.addChangeListener(new ChangeListener() {
-                    @Override
-                    public void stateChanged(ChangeEvent e) {
-                        JSlider source = (JSlider) e.getSource();
-                        int volume = source.getValue();
-                        System.out.println("Volume: " + volume);
-                        // Qui puoi applicare il volume alla tua musica
+                    public void actionPerformed(ActionEvent e) {
+                        // Recupera la canzone selezionata
+                        String selectedSong = (String) songComboBox.getSelectedItem();
+                        // Aggiorna la riproduzione della canzone
+                        updateSong(selectedSong);
+                        // Chiudi la finestra delle opzioni
+                        optionsFrame.dispose();
                     }
                 });
+                optionsPanel.add(selectButton);
 
-                optionsPanel.add(volumeSlider);
                 optionsFrame.add(optionsPanel);
                 optionsFrame.setLocationRelativeTo(null); // Centra il frame delle opzioni nello schermo
                 optionsFrame.setVisible(true);
-
             }
+
+            // Metodo per aggiornare la canzone selezionata
+            private void updateSong(String selectedSong) {
+                // Ferma la canzone corrente se è in riproduzione
+                if (clip != null && clip.isRunning()) {
+                    clip.stop();
+                    clip.close();
+                }
+    
+                // Carica e avvia la nuova canzone selezionata
+                File audioFile = new File(selectedSong);
+                try {
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                    clip = AudioSystem.getClip();
+                    clip.open(audioStream);
+                    clip.loop(Clip.LOOP_CONTINUOUSLY); // Riproduci in loop
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
         });
         panel.add(optionsButton);
         panel.add(Box.createVerticalStrut(10*scale));
+
+
 
         CustomButton GUIScaleButton = new CustomButton("GUI Scale: " + scale, customColor, customColor1, scale);
         GUIScaleButton.addActionListener(new ActionListener() {
@@ -145,8 +158,8 @@ public class PeachMenu extends JFrame {
         });
         panel.add(exitButton);
 
-
-        File audioFile = new File("src/main/resources/it/unibo/superpeach/music/Sound.wav"); // Cambia il percorso con il tuo file audio
+        /*
+        File audioFile = new File("src/main/resources/it/unibo/superpeach/music/Sound1.wav");
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             Clip clip = AudioSystem.getClip();
@@ -156,7 +169,7 @@ public class PeachMenu extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        */
 
 
         frame.add(panel);
