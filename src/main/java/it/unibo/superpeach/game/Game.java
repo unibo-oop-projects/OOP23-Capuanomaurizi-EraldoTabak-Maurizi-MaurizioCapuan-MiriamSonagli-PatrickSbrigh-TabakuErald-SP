@@ -16,7 +16,6 @@ import it.unibo.superpeach.level.LevelHandler;
 import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
-import it.unibo.superpeach.powerups.Coin;
 import it.unibo.superpeach.powerups.PowerupsHandler;
 import it.unibo.superpeach.powerups.graphics.Textures;
 
@@ -66,7 +65,6 @@ public class Game extends Canvas implements Runnable {
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
         powerupsHandler = new PowerupsHandler();
-        powerupsHandler.addPowerUp(new Coin(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 16, 2));
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
