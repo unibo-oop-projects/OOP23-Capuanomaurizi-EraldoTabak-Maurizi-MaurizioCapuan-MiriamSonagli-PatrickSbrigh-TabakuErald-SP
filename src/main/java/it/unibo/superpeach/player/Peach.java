@@ -65,5 +65,6 @@ public class Peach extends Player{
         setX(getX()/getScale()+getMoveX());
         fall();
         collision();
+        deleteStar();
     }
 }

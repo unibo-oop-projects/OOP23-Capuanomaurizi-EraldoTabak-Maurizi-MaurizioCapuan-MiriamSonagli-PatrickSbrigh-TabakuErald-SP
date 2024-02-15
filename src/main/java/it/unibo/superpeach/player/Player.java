@@ -24,6 +24,7 @@ public abstract class Player {
     private static final int CONSECUTIVE_JUMP = 3;
     private static final int MIN_X = 240;
     private static final int MAX_X = 3504;
+    private static final int TICK_FOR_STAR = 200;
     private int width;
     private int height;
     private int x;
@@ -46,6 +47,7 @@ public abstract class Player {
     private boolean hasWon;
     private boolean hasLost;
     private PowerUpType typePowerUp;
+    private int numTickStar;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
         this.width = width*scale;
@@ -70,6 +72,7 @@ public abstract class Player {
         this.hasWon = false;
         this.hasLost = false;
         this.typePowerUp = PowerUpType.STAR;
+        this.numTickStar = 0;
     }
 
     public int getX(){
@@ -398,8 +401,8 @@ public abstract class Player {
     }
 
     private void dead(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM || typePowerUp == PowerUpType.STAR){
-           // typePowerUp = null;
+        if(typePowerUp == PowerUpType.RED_MUSHROOM){
+           typePowerUp = null;
         }
         else{
             life--;
@@ -464,6 +467,18 @@ public abstract class Player {
 
     public boolean hadLost(){
         return this.hasLost;
+    }
+
+    public void deleteStar(){
+        if(typePowerUp == PowerUpType.STAR){
+            if(numTickStar >= TICK_FOR_STAR){
+                typePowerUp = null;
+                numTickStar = 0;
+            }
+            else{
+                numTickStar++;
+            }
+        }
     }
 
     public abstract void moveLeft();
