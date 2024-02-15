@@ -37,9 +37,13 @@ public class PeachMenu extends JFrame {
         Color customColor = new Color(218, 165, 32);    //149, 69, 169
         Color customColor1 = new Color(101, 67, 33);    //PER LE SCRITTE
 
-        JPanel panel = new JPanel();
+        String imagePath = "src/main/resources/it/unibo/superpeach/tiles/Background.png";
+        ImagePanel panel = new ImagePanel(imagePath);
+        //panel.setLayout(new BorderLayout());
+
+        //JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Color.PINK);
+        //panel.setBackground(Color.PINK);
 
         JLabel titleLabel = new JLabel("SUPER PEACH");
         
