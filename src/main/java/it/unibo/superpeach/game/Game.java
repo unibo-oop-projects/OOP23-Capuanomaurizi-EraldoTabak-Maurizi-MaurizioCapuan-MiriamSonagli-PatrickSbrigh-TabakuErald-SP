@@ -17,8 +17,6 @@ import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
 import it.unibo.superpeach.powerups.PowerupsHandler;
-import it.unibo.superpeach.powerups.RedMushroom;
-import it.unibo.superpeach.powerups.Star;
 import it.unibo.superpeach.powerups.graphics.Textures;
 
 public class Game extends Canvas implements Runnable {

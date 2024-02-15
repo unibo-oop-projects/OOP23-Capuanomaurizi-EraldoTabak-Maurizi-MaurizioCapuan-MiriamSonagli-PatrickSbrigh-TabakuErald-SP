@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 
 import it.unibo.superpeach.blocks.Block;
 import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.Enemy;
@@ -179,11 +180,10 @@ public abstract class Player {
     }
 
     public void collision(){
-        for(Block block : blocksHandler.getBlocks()){
+        for(MapFixedBlock block : blocksHandler.getBlocks()){
             if(block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT 
             || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
-            || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
-            || block.getType() == BlockType.POPPED_LUCKY){
+            || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN) {
                 if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
@@ -215,7 +215,7 @@ public abstract class Player {
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
                     changePoint(POINT_LUCKY_BRICK);
-                    //add method
+                    block.popLuckyBlock();
                 }
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
@@ -227,10 +227,30 @@ public abstract class Player {
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
                 }
-                else if(block.getBoundingBox().intersects(getTopBound())){
+                else if(block.getBoundingBox().intersects(getBottomBound())){
+                    setYCollisionBottom(block);
+                    resetCosecutiveJump();
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    setXCollisionLeft(block);
+                }
+                else if(block.getBoundingBox().intersects(getRightBound())){
+                    setXCollisionRight(block);
+                }
+            }
+            else if(block.getType() == BlockType.POPPED_LUCKY){
+                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
-                    changePoint(POINT_LUCKY_BRICK);
-                    //addmethod
+                }
+                else if(block.getBoundingBox().contains(getBottomBound())){
+                    setYCollisionBottom(block);
+                    resetCosecutiveJump();
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    setXCollisionLeft(block);
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    setXCollisionRight(block);
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
@@ -247,7 +267,7 @@ public abstract class Player {
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
                     changePoint(POINT_LUCKY_BRICK);
-                    //add method
+                    blocksHandler.removeFixedBlock(block);
                 }
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
@@ -258,11 +278,6 @@ public abstract class Player {
                 }
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
-                }
-                else if(block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                    changePoint(POINT_LUCKY_BRICK);
-                    //addmethod
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
