@@ -52,6 +52,7 @@ public abstract class Player {
     private PowerUpType typePowerUp;
     private int numTickStar;
     private PowerupsHandler powerupsHandler;
+    private int coins;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powersUpHandler){
         this.width = width*scale;
@@ -78,6 +79,7 @@ public abstract class Player {
         this.typePowerUp = null;
         this.numTickStar = 0;
         this.powerupsHandler = powersUpHandler;
+        this.coins = 0;
     }
 
     public int getX(){
@@ -114,6 +116,10 @@ public abstract class Player {
 
     public int getConsecutiveJump(){
         return this.consecutiveJumps;
+    }
+
+    public int getCoins(){
+        return this.coins;
     }
 
     public boolean hasJumped(){
@@ -408,6 +414,10 @@ public abstract class Player {
         for(PowerUp power : powerupsHandler.getPowerups()){
             if(touchPowerUp(power)){
                 //controlla il tipo di power up
+                // sevita aggiungi vita
+                //se soldo somma soldo
+                //se fungo chiama become big
+                //se stella rendi stella
             }
         }
     }
@@ -423,6 +433,7 @@ public abstract class Player {
 
     private void becomeBig(){
         this.height *= 2;
+        typePowerUp = PowerUpType.RED_MUSHROOM;
     }
 
     private void dead(){
