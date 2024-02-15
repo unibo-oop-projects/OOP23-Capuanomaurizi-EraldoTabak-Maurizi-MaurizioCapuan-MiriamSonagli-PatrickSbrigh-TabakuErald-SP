@@ -2,6 +2,8 @@ package it.unibo.superpeach.blocks;
 
 import java.awt.Graphics;
 
+import it.unibo.superpeach.powerups.*;
+import it.unibo.superpeach.powerups.Star;
 import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public class LuckyBlock extends MapFixedBlock{
@@ -27,8 +29,26 @@ public class LuckyBlock extends MapFixedBlock{
     }
 
     @Override
-    public void popLuckyBlock() {
+    public void popLuckyBlock(PowerupsHandler powerupsHandler, BlocksHandler blocksHandler) {
         if(getType() == BlockType.LUCKY){
+            switch (containedPowerUp) {
+                case RED_MUSHROOM:
+                    powerupsHandler.addPowerUp(new Star(getX()/getScale(), getY()/getScale()-16, 16, 16, getScale(), blocksHandler));
+                    //System.out.println(getScale());
+                    break;
+                case STAR:
+                    powerupsHandler.addPowerUp(new Star(getX(), getY()-16*getScale(), getWidth(), getHeight(), getScale(), blocksHandler));
+                    System.out.println("star creato");
+                    break;
+                case LIFE_MUSHROOM:
+                    powerupsHandler.addPowerUp(new LifeMushroom(getX(), getY()-16*getScale(), getWidth(), getHeight(), getScale(), blocksHandler));
+                    System.out.println("life creato");
+                    break;
+                case COIN:
+                    powerupsHandler.addPowerUp(new Coin(getX(), getY()-16*getScale(), getWidth(), getHeight(), getScale(), blocksHandler));
+                    System.out.println("coin creato");
+                    break;
+            }
             setType(BlockType.POPPED_LUCKY);
         }
     }

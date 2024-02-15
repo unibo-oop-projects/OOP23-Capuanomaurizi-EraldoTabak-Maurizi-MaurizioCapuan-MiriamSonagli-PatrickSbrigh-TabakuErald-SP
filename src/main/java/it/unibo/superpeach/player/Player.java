@@ -11,6 +11,7 @@ import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.Enemy;
+import it.unibo.superpeach.powerups.PowerupsHandler;
 
 public abstract class Player {
     private static final int FALL_SPEED = 4;
@@ -32,6 +33,7 @@ public abstract class Player {
     private boolean jumped;
     private BlocksHandler blocksHandler;
     private EnemiesHandler enemiesHandler;
+    private PowerupsHandler powerupsHandler;
     private int moveX;
     private int moveY;
     private int padding_bound = 5;
@@ -46,7 +48,7 @@ public abstract class Player {
     private boolean hasWon;
     private boolean hasLost;
 
-    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
+    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powerupsHandler){
         this.width = width*scale;
         this.height = height*scale;
         this.x = x*scale;
@@ -55,6 +57,7 @@ public abstract class Player {
         this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
         this.blocksHandler = blocksHandler;
+        this.powerupsHandler = powerupsHandler;
         moveX = 0;
         moveY = 0;
         padding_bound *=scale;
@@ -219,7 +222,7 @@ public abstract class Player {
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
                     changePoint(POINT_LUCKY_BRICK);
-                    block.popLuckyBlock();
+                    block.popLuckyBlock(powerupsHandler, blocksHandler);
                 }
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);

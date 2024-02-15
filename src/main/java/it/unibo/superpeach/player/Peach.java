@@ -7,6 +7,7 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
+import it.unibo.superpeach.powerups.PowerupsHandler;
 
 public class Peach extends Player{
     private static final int SPEED_X = 4;
@@ -18,8 +19,8 @@ public class Peach extends Player{
     private PlayerTexture texture;
     private BufferedImage[] sprite;
 
-    public Peach(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
-        super(x, y, width, height, scale, blocksHandler, enemiesHandler);
+    public Peach(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powerupsHandler){
+        super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerupsHandler);
         this.texture = Game.getPlayerTexturer();
         this.sprite = texture.getPlayerImage();
     }

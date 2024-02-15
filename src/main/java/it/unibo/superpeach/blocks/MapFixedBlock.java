@@ -2,6 +2,8 @@ package it.unibo.superpeach.blocks;
 
 import java.awt.Graphics;
 
+import it.unibo.superpeach.powerups.PowerupsHandler;
+
 public class MapFixedBlock extends Block{
 
     public MapFixedBlock(int x, int y, int width, int height, int scale, BlockType type) {
@@ -81,8 +83,7 @@ public class MapFixedBlock extends Block{
         }
     }
 
-    public void popLuckyBlock(){
-        return;
+    public void popLuckyBlock(PowerupsHandler powerupsHandler, BlocksHandler blocksHandler){
     }
 
 }
