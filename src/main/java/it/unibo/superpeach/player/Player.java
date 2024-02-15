@@ -166,9 +166,9 @@ public abstract class Player {
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
         graph.draw(getBottomBound());
-        graph.draw(getTopBound());
-        graph.draw(getLeftBound());
-        graph.draw(getRightBound());
+        //graph.draw(getTopBound());
+        //graph.draw(getLeftBound());
+        //graph.draw(getRightBound());
         graph.draw(rectangle);
 
     }
@@ -185,7 +185,7 @@ public abstract class Player {
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
         }
         else{
-            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/2), getWidth()/2, padding_bound/2);
+            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound*2), getWidth()/2, padding_bound*2);
         }
     }
 
@@ -317,8 +317,10 @@ public abstract class Player {
             else if(block.getType() == BlockType.BRICK){
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
-                    changePoint(POINT_LUCKY_BRICK);
-                    blocksHandler.removeFixedBlock(block);
+                    if(typePowerUp != null){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
                 }
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
@@ -520,6 +522,10 @@ public abstract class Player {
                 numTickStar++;
             }
         }
+    }
+
+    private boolean isFalling(){
+        return moveY<0;
     }
 
     public abstract void moveLeft();
