@@ -12,7 +12,8 @@ import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public class Peach extends Player{
     private static final int SPEED_X = 4;
-    private static final int JUMP_HEIGHT = 55;
+    private static final int JUMP_HEIGHT_NORM = 45;
+    private static final int JUMP_HEIGHT_BIG = 55;
     private static final int LOOK_RIGHT_NORM = 0;
     private static final int LOOK_LEFT_NORM = 1;
     private static final int JUMP_FALL_NORM = 2;
@@ -68,7 +69,13 @@ public class Peach extends Player{
             else if(whatPowerUp() == PowerUpType.STAR){
                 spriteNeeded = JUMP_FALL_STAR;
             }
-            setMoveY(-JUMP_HEIGHT);
+
+            if(whatPowerUp() == PowerUpType.RED_MUSHROOM){
+                setMoveY(-JUMP_HEIGHT_BIG);
+            }
+            else{
+                setMoveY(-JUMP_HEIGHT_NORM);
+            }
             setHasJumped(true);
             setConsecutiveJump(1);
         }

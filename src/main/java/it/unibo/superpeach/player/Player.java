@@ -23,10 +23,11 @@ public abstract class Player {
     private static final int POINT_KILLED_ENEMY = 300;
     private static final int POINT_FLAG_POLE = 500;
     private static final int POINT_FLAG_TIP = 1000;
-    private static final int CONSECUTIVE_JUMP = 3;
+    private static final int CONSECUTIVE_JUMP = 2;
     private static final int MIN_X = 240;
     private static final int MAX_X = 3504;
     private static final int TICK_FOR_STAR = 700;
+    private static final int PADDING = 5;
     private int width;
     private int height;
     private int x;
@@ -38,7 +39,7 @@ public abstract class Player {
     private EnemiesHandler enemiesHandler;
     private int moveX;
     private int moveY;
-    private int padding_bound = 5;
+    private int padding_bound;
     private int point;
     private int life;
     private boolean addedPointFlag;
@@ -63,7 +64,7 @@ public abstract class Player {
         this.blocksHandler = blocksHandler;
         this.moveX = 0;
         this.moveY = 0;
-        this.padding_bound *=scale;
+        this.padding_bound = PADDING*getScale();
         this.enemiesHandler = enemiesHandler;
         this.point = 0;
         this.life = LIFE_START;
@@ -167,20 +168,28 @@ public abstract class Player {
     }
 
     public Rectangle getTopBound(){
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, padding_bound*(padding_bound/getScale()));
+        if(typePowerUp == PowerUpType.RED_MUSHROOM){
+            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound)*((padding_bound/getScale())));
+        }
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/2)*((padding_bound)/getScale()));
     }
 
     public Rectangle getBottomBound(){
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
+        if(typePowerUp == PowerUpType.RED_MUSHROOM){
+            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
+        }
+        else{
+            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/2), getWidth()/2, padding_bound/2);
+        }
     }
 
     public Rectangle getLeftBound(){
-        return new Rectangle(getX(), getY()+padding_bound, padding_bound, getHeight()-2*padding_bound);
+        return new Rectangle(getX(), getY()+(padding_bound), (padding_bound), getHeight()-2*(padding_bound));
 
     }
 
     public Rectangle getRightBound(){
-        return new Rectangle(getX()+getWidth()-padding_bound, getY()+padding_bound, padding_bound ,getHeight()-2*padding_bound);
+        return new Rectangle(getX()+getWidth()-(padding_bound), getY()+(padding_bound), (padding_bound) ,getHeight()-2*(padding_bound));
     }
 
     public void resetCosecutiveJump(){
@@ -412,9 +421,14 @@ public abstract class Player {
         //controlla se tocco il power up
     }
 
+    private void becomeBig(){
+        this.height *= 2;
+    }
+
     private void dead(){
         if(typePowerUp == PowerUpType.RED_MUSHROOM){
            typePowerUp = null;
+           this.height /=2;
         }
         else{
             life--;

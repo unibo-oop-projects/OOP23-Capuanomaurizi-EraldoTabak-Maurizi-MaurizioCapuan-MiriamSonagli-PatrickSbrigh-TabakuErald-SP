@@ -30,6 +30,7 @@ public class Game extends Canvas implements Runnable {
     private static final int WINDOW_HEIGHT = 360;
     private static final int PLAYER_DEFAULT_X = 240;
     private static final int PLAYER_DEFAULT_Y = 0;
+    private static final int PLAYER_DEFAULT_WID_HEIG = 16;
 
     // GAME VARIABLES
     private boolean running;
@@ -65,7 +66,7 @@ public class Game extends Canvas implements Runnable {
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
         powerupsHandler = new PowerupsHandler();
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler));// TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG, PLAYER_DEFAULT_WID_HEIG, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
 
