@@ -11,6 +11,7 @@ import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.Enemy;
+import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public abstract class Player {
     private static final int FALL_SPEED = 4;
@@ -35,7 +36,6 @@ public abstract class Player {
     private int moveX;
     private int moveY;
     private int padding_bound = 5;
-    private boolean hasHealt;
     private int point;
     private int life;
     private boolean addedPointFlag;
@@ -45,6 +45,7 @@ public abstract class Player {
     private int consecutiveJumps;
     private boolean hasWon;
     private boolean hasLost;
+    private PowerUpType typePowerUp;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
         this.width = width*scale;
@@ -55,11 +56,10 @@ public abstract class Player {
         this.jumped = false;
         this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
         this.blocksHandler = blocksHandler;
-        moveX = 0;
-        moveY = 0;
-        padding_bound *=scale;
-        this.enemiesHandler = enemiesHandler;   
-        this.hasHealt = false;   
+        this.moveX = 0;
+        this.moveY = 0;
+        this.padding_bound *=scale;
+        this.enemiesHandler = enemiesHandler;
         this.point = 0;
         this.life = LIFE_START;
         this.addedPointFlag= false;
@@ -69,6 +69,7 @@ public abstract class Player {
         this.consecutiveJumps = 0;
         this.hasWon = false;
         this.hasLost = false;
+        this.typePowerUp = PowerUpType.STAR;
     }
 
     public int getX(){
@@ -224,22 +225,46 @@ public abstract class Player {
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
                 }
                 else if(block.getBoundingBox().contains(getLeftBound())){
                     setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
                 }
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
                 }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
                     setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
                 }
                 else if(block.getBoundingBox().intersects(getRightBound())){
                     setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
                 }
             }
             else if(block.getType() == BlockType.POPPED_LUCKY){
@@ -276,22 +301,46 @@ public abstract class Player {
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
                 }
                 else if(block.getBoundingBox().contains(getLeftBound())){
                     setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
                 }
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
                 }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
                     setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
                 }
                 else if(block.getBoundingBox().intersects(getRightBound())){
                     setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
                 }
             }
             else if(block.getType() == BlockType.DEATH_BLOCK){
@@ -349,8 +398,8 @@ public abstract class Player {
     }
 
     private void dead(){
-        if(hasHealt){
-            hasHealt = !hasHealt;
+        if(typePowerUp == PowerUpType.RED_MUSHROOM || typePowerUp == PowerUpType.STAR){
+           // typePowerUp = null;
         }
         else{
             life--;
