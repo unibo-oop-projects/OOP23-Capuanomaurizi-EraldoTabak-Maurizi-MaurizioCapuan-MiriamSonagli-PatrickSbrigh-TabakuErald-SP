@@ -8,6 +8,8 @@ import it.unibo.superpeach.powerups.graphics.Textures;
 
 public abstract class PowerUp {
 
+    public enum PowerUpType { RED_MUSHROOM, STAR, LIFE_MUSHROOM, COIN};
+
     private int x;
     private int y;
     private int width;
