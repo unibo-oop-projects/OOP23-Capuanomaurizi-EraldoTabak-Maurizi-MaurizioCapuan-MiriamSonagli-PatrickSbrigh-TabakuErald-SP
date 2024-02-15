@@ -16,8 +16,13 @@ public class KoopaTroopa extends Enemy {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
-                null);
+        if (getDirection()) {
+            g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
+                    null);
+        } else {
+            g.drawImage(getSprites()[1], getX(), getY(), getDimension().width, getDimension().height,
+                    null);
+        }
     }
 
     @Override
@@ -26,5 +31,4 @@ public class KoopaTroopa extends Enemy {
         this.collision();
         this.updateCoords();
     }
-
 }

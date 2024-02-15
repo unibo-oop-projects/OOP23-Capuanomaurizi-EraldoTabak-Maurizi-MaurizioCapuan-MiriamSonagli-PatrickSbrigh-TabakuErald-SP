@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class TexturerEnemies {
 
     private static final int GOOMBA_COUNT = 1;
-    private static final int KOOPATROOPA_COUNT = 1;
+    private static final int KOOPATROOPA_COUNT = 2;
 
     private static final int ENEMY_WIDTH = 16;
     private static final int GOOMBA_HEIGHT = 16;
@@ -34,21 +34,16 @@ public class TexturerEnemies {
     }
 
     private void loadGoomba() {
-        int x = 0;
-        int y = 4;
 
-        for (int i = 0; i < GOOMBA_COUNT; i++) {
-            goomba[i] = enemySet.getSubimage(x + i * ENEMY_WIDTH, y, ENEMY_WIDTH, GOOMBA_HEIGHT);
-        }
+        goomba[0] = enemySet.getSubimage(0, 4, ENEMY_WIDTH, GOOMBA_HEIGHT);
+
     }
 
     private void loadKoopaTroopa() {
-        int x = 180;
-        int y = 0;
 
-        for (int i = 0; i < KOOPATROOPA_COUNT; i++) {
-            koopaTroopa[i] = enemySet.getSubimage(x + i * ENEMY_WIDTH, y, ENEMY_WIDTH, KOOPA_HEIGHT);
-        }
+        koopaTroopa[0] = enemySet.getSubimage(180, 0, ENEMY_WIDTH, KOOPA_HEIGHT);
+        koopaTroopa[1] = enemySet.getSubimage(211, 0, ENEMY_WIDTH, KOOPA_HEIGHT);
+
     }
 
     public BufferedImage[] getGoombaImg() {

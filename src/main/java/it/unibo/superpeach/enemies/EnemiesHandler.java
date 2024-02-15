@@ -2,7 +2,9 @@ package it.unibo.superpeach.enemies;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class EnemiesHandler {
 
@@ -13,11 +15,17 @@ public class EnemiesHandler {
     }
 
     public void tickEnemies() {
+        Set<Enemy> enemiesToRemove = new HashSet<>();
         for (Enemy enemy : enemies) {
             enemy.tick();
             if (!enemy.getIsAlive()) {
-                removeEnemy(enemy);
+                enemiesToRemove.add(enemy);
             }
+        }
+
+        for (Enemy enemy : enemiesToRemove) {
+            enemies.remove(enemy);
+
         }
     }
 
@@ -27,12 +35,12 @@ public class EnemiesHandler {
         }
     }
 
-    public void addEnemy(Enemy b) {
-        enemies.add(b);
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
     }
 
-    public void removeEnemy(Enemy b) { // la cosa del null (?)
-        enemies.remove(b);
+    public void removeEnemy(Enemy enemy) { // la cosa del null (?)
+        enemies.remove(enemy);
     }
 
     public List<Enemy> getEnemies() {
