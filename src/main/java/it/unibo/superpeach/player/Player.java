@@ -268,12 +268,14 @@ public abstract class Player {
         else{
             life--;
             if(life <1){
-                //gameOver
+                System.out.println("GAME OVER");
             }
             else{
-                //respown
+                setX((getX()/getScale())-50);
+                setY(0);
             }
         }
+        System.out.println("LE TUE VITE SONO: "+ this.life);
     }
 
     private boolean isDeadForEnemy(Enemy enemy){
