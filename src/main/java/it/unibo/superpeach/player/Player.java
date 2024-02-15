@@ -24,7 +24,7 @@ public abstract class Player {
     private static final int CONSECUTIVE_JUMP = 3;
     private static final int MIN_X = 240;
     private static final int MAX_X = 3504;
-    private static final int TICK_FOR_STAR = 200;
+    private static final int TICK_FOR_STAR = 700;
     private int width;
     private int height;
     private int x;
@@ -71,7 +71,7 @@ public abstract class Player {
         this.consecutiveJumps = 0;
         this.hasWon = false;
         this.hasLost = false;
-        this.typePowerUp = PowerUpType.STAR;
+        this.typePowerUp = null;
         this.numTickStar = 0;
     }
 
@@ -349,7 +349,6 @@ public abstract class Player {
             else if(block.getType() == BlockType.DEATH_BLOCK){
                 if(block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())
                 || block.getBoundingBox().intersects(getLeftBound()) || block.getBoundingBox().intersects(getRightBound())){
-                    System.out.println("MORTO");
                     dead();
                 }
             }
@@ -380,7 +379,6 @@ public abstract class Player {
                         changePoint(POINT_FLAG_POLE);
                         addedPointFlag = true;
                     }
-                    //FIX
                 }
             }
         }
@@ -397,7 +395,6 @@ public abstract class Player {
 
     private void changePoint(int point){
         this.point += point;
-        System.out.println("I TUOI CAZZO DI PUNTI SONO: "+ this.point);
     }
 
     private void dead(){
@@ -414,7 +411,10 @@ public abstract class Player {
                 setY(respawnY);
             }
         }
-        System.out.println("LE TUE VITE SONO: "+ this.life);
+    }
+
+    public PowerUpType whatPowerUp(){
+        return this.typePowerUp;
     }
 
     private boolean isDeadForEnemy(Enemy enemy){
@@ -474,6 +474,7 @@ public abstract class Player {
             if(numTickStar >= TICK_FOR_STAR){
                 typePowerUp = null;
                 numTickStar = 0;
+
             }
             else{
                 numTickStar++;

@@ -7,13 +7,17 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
+import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public class Peach extends Player{
     private static final int SPEED_X = 4;
     private static final int JUMP_HEIGHT = 55;
-    private static final int LOOK_RIGHT = 0;
-    private static final int LOOK_LEFT = 1;
-    private static final int JUMP_FALL = 4;
+    private static final int LOOK_RIGHT_NORM = 0;
+    private static final int LOOK_LEFT_NORM = 1;
+    private static final int JUMP_FALL_NORM = 2;
+    private static final int LOOK_RIGHT_STAR = 3;
+    private static final int LOOK_LEFT_STAR = 4;
+    private static final int JUMP_FALL_STAR = 5;
     private int spriteNeeded = 0;
     private PlayerTexture texture;
     private BufferedImage[] sprite;
@@ -34,20 +38,35 @@ public class Peach extends Player{
 
     @Override
     public void moveLeft() {
-        spriteNeeded = LOOK_LEFT;
+        if(whatPowerUp() == null){
+            spriteNeeded = LOOK_LEFT_NORM;
+        }
+        else if(whatPowerUp() == PowerUpType.STAR){
+            spriteNeeded = LOOK_LEFT_STAR;
+        }
         setMoveX(-SPEED_X);
     }
 
     @Override
     public void moveRight() {
-        spriteNeeded = LOOK_RIGHT;
+        if(whatPowerUp() == null){
+            spriteNeeded = LOOK_RIGHT_NORM;
+        }
+        else if(whatPowerUp() == PowerUpType.STAR){
+            spriteNeeded = LOOK_RIGHT_STAR;
+        }
         setMoveX(SPEED_X);
     }
 
     @Override
     public void jump() {
         if(!hasJumped() && canJump()){
-            spriteNeeded = JUMP_FALL;
+            if(whatPowerUp() == null){
+                spriteNeeded = JUMP_FALL_NORM;
+            }
+            else if(whatPowerUp() == PowerUpType.STAR){
+                spriteNeeded = JUMP_FALL_STAR;
+            }
             setMoveY(-JUMP_HEIGHT);
             setHasJumped(true);
             setConsecutiveJump(1);
