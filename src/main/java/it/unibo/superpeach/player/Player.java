@@ -21,6 +21,8 @@ public abstract class Player {
     private static final int POINT_FLAG_POLE = 500;
     private static final int POINT_FLAG_TIP = 1000;
     private static final int CONSECUTIVE_JUMP = 3;
+    private static final int MIN_X = 192;
+    private static final int MAX_X = 3456;
     private int width;
     private int height;
     private int x;
@@ -110,7 +112,9 @@ public abstract class Player {
     }
 
     public void setX(int x){
-        this.x = x*this.scale;
+        if(x >= MIN_X && x <= MAX_X){
+            this.x = x*this.scale;
+        }
     }
 
     public void setY(int y){
