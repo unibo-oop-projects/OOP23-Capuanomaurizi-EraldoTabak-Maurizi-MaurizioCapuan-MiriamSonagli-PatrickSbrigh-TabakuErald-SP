@@ -123,6 +123,7 @@ public class Game extends Canvas implements Runnable {
     private void tick() {
         playerHandler.tick();
         enemiesHandler.tickEnemies();
+        powerupsHandler.tickPowerups();
         camera.tick(playerHandler.getPlayer());
     }
 

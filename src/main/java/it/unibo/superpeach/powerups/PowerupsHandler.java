@@ -12,7 +12,7 @@ public class PowerupsHandler {
         powerups = new ArrayList<PowerUp>();
     }
 
-    public void tickEnemies() {
+    public void tickPowerups() {
         for (PowerUp powerup : powerups) {
             powerup.tick();
         }

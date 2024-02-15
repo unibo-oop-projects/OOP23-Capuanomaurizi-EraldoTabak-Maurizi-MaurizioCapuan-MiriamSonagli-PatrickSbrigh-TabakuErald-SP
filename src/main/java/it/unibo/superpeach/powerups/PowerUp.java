@@ -20,11 +20,11 @@ public abstract class PowerUp {
     private int scale;
     private int movement;
     private boolean isFalling;
-    private boolean isAlive;    //NON CREDO SERVA
+    private boolean isAlive;
     private boolean direction;
     private BlocksHandler blocksHandler;
 
-    private int PADDING_BOUND = 4;
+    private int PADDING_BOUND;
     private Textures textures = Game.getPowerupsTextures();
     private BufferedImage[] image = textures.getPowerups();
 
@@ -36,9 +36,10 @@ public abstract class PowerUp {
         this.height = h*s;
         this.scale = s;
         this.isFalling = false;
-        this.isAlive = true;    //NON CREDO SERVA
+        this.isAlive = true;
         this.direction = false;
         this.blocksHandler = blocksHandler;
+        this.PADDING_BOUND = 4*scale;
     }
 
     public abstract void render(Graphics g);
@@ -58,11 +59,11 @@ public abstract class PowerUp {
     }
     
     public void setX(int x) {
-        this.x = x;
+        this.x = x * scale;
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.y = y * scale;
     }
 
     public void setWidth(int w) {
@@ -90,7 +91,7 @@ public abstract class PowerUp {
     }
 
     public int getScale() {
-        return scale;
+        return this.scale;
     }
 
     public void setScale(int scale) {
@@ -139,9 +140,9 @@ public abstract class PowerUp {
 
     public void updateCoords() {
         if (getDirection()) {
-            movesLeft(movement);;
+            movesLeft(movement);
         } else {
-            movesRight(movement);;
+            movesRight(movement);
         }
 
         if (this.isFalling) {
@@ -198,7 +199,7 @@ public abstract class PowerUp {
     }
 
     private void setXCollisionRight(Block block) {
-        setX(block.getX() / block.getScale() - getWidth() / getScale());
+        setX(block.getX() - getWidth() / getScale());
         changeDirection();
     }
 
@@ -207,7 +208,7 @@ public abstract class PowerUp {
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
-                    || block.getType() == BlockType.POPPED_LUCKY) {
+                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
                 if (block.getBoundingBox().contains(getLeftBound())) {
                     setXCollisionLeft(block);
                 } else if (block.getBoundingBox().contains(getRightBound())) {
@@ -221,19 +222,6 @@ public abstract class PowerUp {
                 } else if (block.getBoundingBox().intersects(getBottomBound())) {
                     setYCollisionBottom(block);
                 }
-            } else if (block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
-            } else if (block.getBoundingBox().contains(getBottomBound())) {
-                setYCollisionBottom(block);
-            } else if (block.getBoundingBox().contains(getLeftBound())) {
-                setXCollisionLeft(block);
-            } else if (block.getBoundingBox().contains(getRightBound())) {
-                setXCollisionRight(block);
-            } else if (block.getBoundingBox().intersects(getBottomBound())) {
-                setYCollisionBottom(block);
-            } else if (block.getBoundingBox().intersects(getLeftBound())) {
-                setXCollisionLeft(block);
-            } else if (block.getBoundingBox().intersects(getRightBound())) {
-                setXCollisionRight(block);
             } else if (block.getType() == BlockType.DEATH_BLOCK) {
                 if (block.getBoundingBox().intersects(getBottomBound())) {
                     die();
