@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable {
     private static final String GAME_NAME = "Super Peach";
     private static final int WINDOW_WIDTH = 480;
     private static final int WINDOW_HEIGHT = 360;
-    private static final int PLAYER_DEFAULT_X = 15;
+    private static final int PLAYER_DEFAULT_X = 240;
     private static final int PLAYER_DEFAULT_Y = 0;
 
     // GAME VARIABLES
@@ -67,7 +67,7 @@ public class Game extends Canvas implements Runnable {
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
         powerupsHandler = new PowerupsHandler();
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler));// TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
 
