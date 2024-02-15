@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class RedMushroom extends PowerUp {
     
-    public RedMushroom (int x, int y, int w, int h) {
-        super(x, y, w, h);
+    public RedMushroom (int x, int y, int w, int h, int s) {
+        super(x, y, w, h, s);
     }
 
     @Override

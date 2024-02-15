@@ -14,17 +14,19 @@ public abstract class PowerUp {
     private int y;
     private int width;
     private int height;
+    private int scale;
     private double movement;
     private boolean isFalling;
     private Textures textures = Game.getPowerupsTextures();
     private BufferedImage[] image = textures.getPowerups();
 
     
-    public PowerUp(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.width = w;
-        this.height = h;
+    public PowerUp(int x, int y, int w, int h, int s) {
+        this.x = x*s;
+        this.y = y*s;
+        this.width = w*s;
+        this.height = h*s;
+        this.scale = s;
         this.isFalling = false;
     }
 
@@ -66,6 +68,10 @@ public abstract class PowerUp {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public int getScale() {
+        return scale;
     }
 
     public void setMovement(double movement) {

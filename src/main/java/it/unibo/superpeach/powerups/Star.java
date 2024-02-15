@@ -4,8 +4,8 @@ import java.awt.Graphics;
 
 public class Star extends PowerUp{
 
-    public Star (int x, int y, int w, int h) {
-        super(x, y, w, h);
+    public Star (int x, int y, int w, int h, int s) {
+        super(x, y, w, h, s);
     }
 
     @Override
