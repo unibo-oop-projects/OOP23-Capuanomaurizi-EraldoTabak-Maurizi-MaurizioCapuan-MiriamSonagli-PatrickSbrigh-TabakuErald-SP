@@ -4,8 +4,10 @@ import java.awt.*;
 
 public class Coin extends PowerUp{
 
-    public Coin (int x, int y, int w, int h, int s) {
-        super(x, y, w, h, s);
+    public Coin (int x, int y, int w, int h, int s, int m) {
+        super(x, y, w, h, s, m);
+        setMovement(0);
+        setIsFalling(false);
     }
 
     @Override
@@ -14,7 +16,6 @@ public class Coin extends PowerUp{
     }
 
     @Override
-    public void tick() {
+    public void tick() {}
 
-    }
 }

@@ -4,8 +4,10 @@ import java.awt.*;
 
 public class RedMushroom extends PowerUp {
     
-    public RedMushroom (int x, int y, int w, int h, int s) {
-        super(x, y, w, h, s);
+    public RedMushroom (int x, int y, int w, int h, int s, int m) {
+        super(x, y, w, h, s, m);
+        setMovement(1);
+        setIsFalling(false);
     }
 
     @Override
@@ -15,7 +17,8 @@ public class RedMushroom extends PowerUp {
 
     @Override
     public void tick() {
-
+        updateCoords();
+        collisions();
     }
 
 }
