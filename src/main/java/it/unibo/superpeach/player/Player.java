@@ -36,6 +36,8 @@ public abstract class Player {
     private int life;
     private boolean addedPointFlag;
     private boolean addedPointWin;
+    private int respawnX;
+    private int respawnY;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
         this.width = width*scale;
@@ -55,6 +57,8 @@ public abstract class Player {
         this.life = LIFE_START;
         this.addedPointFlag= false;
         this.addedPointWin = false;
+        this.respawnX = x;
+        this.respawnY = y;
     }
 
     public int getX(){
@@ -271,8 +275,8 @@ public abstract class Player {
                 System.out.println("GAME OVER");
             }
             else{
-                setX((getX()/getScale())-50);
-                setY(0);
+                setX(respawnX);
+                setY(respawnY);
             }
         }
         System.out.println("LE TUE VITE SONO: "+ this.life);
