@@ -255,7 +255,7 @@ public abstract class Player {
                 dead();
             }else if (killedEnemy(enemy)){
                 changePoint(POINT_KILLED_ENEMY);
-                //Metodo ammazza enemy
+                enemiesHandler.removeEnemy(enemy);
             }
         }
     }
