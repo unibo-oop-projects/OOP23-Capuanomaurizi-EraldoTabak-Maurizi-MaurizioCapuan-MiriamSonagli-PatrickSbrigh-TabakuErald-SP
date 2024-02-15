@@ -13,8 +13,6 @@ public class Peach extends Player{
     private static final int JUMP_HEIGHT = 25;
     private static final int LOOK_RIGHT = 0;
     private static final int LOOK_LEFT = 1;
-    private static final int WALK_LEFT = 2;
-    private static final int WALK_RIGHT=3;
     private static final int JUMP_FALL = 4;
     private int spriteNeeded = 0;
     private PlayerTexture texture;

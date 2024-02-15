@@ -13,6 +13,12 @@ import it.unibo.superpeach.enemies.Enemy;
 
 public abstract class Player {
     private static final int FALL_SPEED = 3;
+    private static final int LIFE_START = 3;
+    private static final int POINT_LUCKY_BRICK = 200;
+    private static final int POINT_WIN = 2000;
+    private static final int POINT_KILLED_ENEMY = 300;
+    private static final int POINT_FLAG_POLE = 500;
+    private static final int POINT_FLAG_TIP = 1000;
     private int width;
     private int height;
     private int x;
@@ -25,6 +31,11 @@ public abstract class Player {
     private int moveX;
     private int moveY;
     private int padding_bound = 5;
+    private boolean hasHealt;
+    private int point;
+    private int life;
+    private boolean addedPointFlag;
+    private boolean addedPointWin;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
         this.width = width*scale;
@@ -38,7 +49,12 @@ public abstract class Player {
         moveX = 0;
         moveY = 0;
         padding_bound *=scale;
-        this.enemiesHandler = enemiesHandler;      
+        this.enemiesHandler = enemiesHandler;   
+        this.hasHealt = false;   
+        this.point = 0;
+        this.life = LIFE_START;
+        this.addedPointFlag= false;
+        this.addedPointWin = false;
     }
 
     public int getX(){
@@ -63,6 +79,14 @@ public abstract class Player {
 
     public int getScale(){
         return this.scale;
+    }
+
+    public int getPoint(){
+        return this.point;
+    }
+
+    public int getLife(){
+        return this.life;
     }
 
     public boolean hasJumped(){
@@ -109,29 +133,20 @@ public abstract class Player {
     }
 
     public Rectangle getTopBound(){
-        //return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, getHeight()/2);
-        //return new Rectangle(getX(), getY(), getWidth(), getHeight()/2);
-        //return new Rectangle(getX(), getY(), getWidth(), padding_bound);
         return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, padding_bound);
     }
 
     public Rectangle getBottomBound(){
-        //return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+(getHeight()/2), getWidth()/2, getHeight()/2);
-        //return new Rectangle(getX(), getY()+(getHeight()/2), getWidth(), getHeight()/2);
-        //return new Rectangle(getX(), getY()+getHeight()-padding_bound, getWidth(), padding_bound);
         return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
     }
 
     public Rectangle getLeftBound(){
         return new Rectangle(getX(), getY()+padding_bound, padding_bound, getHeight()-2*padding_bound);
-        //return new Rectangle(getX(), getY(), getWidth()/2, getHeight());
-        //return new Rectangle(getX(), getY(), padding_bound, getHeight());
+
     }
 
     public Rectangle getRightBound(){
         return new Rectangle(getX()+getWidth()-padding_bound, getY()+padding_bound, padding_bound ,getHeight()-2*padding_bound);
-        //return new Rectangle(getX()+getWidth()/2, getY(), getWidth()/2 ,getHeight());
-        //return new Rectangle(getX()+getWidth()-padding_bound, getY(), padding_bound, getHeight());
     }
 
     public void collision(){
@@ -181,6 +196,7 @@ public abstract class Player {
                 else if(block.getBoundingBox().contains(getTopBound())){
                     setYCollisionTop(block);
                     moveY = FALL_SPEED;
+                    changePoint(POINT_LUCKY_BRICK);
                     //add method
                 }
                 else if(block.getBoundingBox().contains(getLeftBound())){
@@ -198,6 +214,7 @@ public abstract class Player {
                 else if(block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
                     moveY = FALL_SPEED;
+                    changePoint(POINT_LUCKY_BRICK);
                     //addmethod
                 }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
@@ -210,63 +227,77 @@ public abstract class Player {
                 }
             }
             else if(block.getType() == BlockType.DEATH_BLOCK){
-                if(block.getBoundingBox().intersects(getBottomBound())){
+                if(block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())
+                || block.getBoundingBox().intersects(getLeftBound()) || block.getBoundingBox().intersects(getRightBound())){
                     System.out.println("MORTO");
-                    //MUORI o cava power up o vita
-                }
-                else if(block.getBoundingBox().intersects(getTopBound())){
-                    System.out.println("MORTO");
-                    //MUORI
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    System.out.println("MORTO");
-                    //MUORI
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    System.out.println("MORTO");
-                    //MUORI
+                    dead();
                 }
             }
             else if(block.getType() == BlockType.CASTLE_DOOR_BOT || block.getType() == BlockType.CASTLE_DOOR_TOP){
-                if(block.getBoundingBox().intersects(getBottomBound())){
-                    System.out.println("VINTO");
-                    //vinci aggiungi punti
-                }
-                else if(block.getBoundingBox().intersects(getTopBound())){
-                    System.out.println("VINTO");
-                    //vinci aggiungi punti
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    System.out.println("VINTO");
-                    //vinci aggiungi punti
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    System.out.println("VINTO");
-                    //vinci aggiungi punti
+                if(block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())
+                || block.getBoundingBox().intersects(getLeftBound()) || block.getBoundingBox().intersects(getRightBound())){
+                    if(!addedPointWin){
+                        changePoint(POINT_WIN);
+                        addedPointWin = true;
+                    }
+                    //vinci
                 }
             }
             else if(block.getType() == BlockType.FLAG_TIP){
-                if(block.getBoundingBox().intersects(getTopBound())){
-                    System.out.println("1000 Punti");
-                    //vinci aggiungi punti
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    System.out.println("1000 Punti");
-                    //vinci aggiungi punti
+                if(block.getBoundingBox().intersects(getTopBound()) || block.getBoundingBox().intersects(getLeftBound())){
+                    if(!addedPointFlag){
+                        changePoint(POINT_FLAG_TIP);
+                        addedPointFlag = true;
+                    }
                 }
             }
             else if(block.getType() == BlockType.FLAG_RIGHT || block.getType() == BlockType.FLAG_LEFT || block.getType() == BlockType.FLAG_POLE){
                 if(block.getBoundingBox().intersects(getRightBound())){
-                    System.out.println("500 Punti");
-                    //vinci aggiungi punti
+                    if(!addedPointFlag){
+                        changePoint(POINT_FLAG_POLE);
+                        addedPointFlag = true;
+                    }
                     //FIX
                 }
             }
         }
 
         for(Enemy enemy : enemiesHandler.getEnemies()){
-            
+            if(isDeadForEnemy(enemy)){
+                dead();
+            }else if (killedEnemy(enemy)){
+                changePoint(POINT_KILLED_ENEMY);
+                //Metodo ammazza enemy
+            }
         }
+    }
+
+    private void changePoint(int point){
+        this.point += point;
+        System.out.println("I TUOI CAZZO DI PUNTI SONO: "+ this.point);
+    }
+
+    private void dead(){
+        if(hasHealt){
+            hasHealt = !hasHealt;
+        }
+        else{
+            life--;
+            if(life <1){
+                //gameOver
+            }
+            else{
+                //respown
+            }
+        }
+    }
+
+    private boolean isDeadForEnemy(Enemy enemy){
+        return enemy.getBounds().intersects(getTopBound()) || enemy.getBounds().intersects(getLeftBound()) || enemy.getBounds().intersects(getRightBound());
+    }
+
+    private boolean killedEnemy(Enemy enemy){
+        return enemy.getBounds().intersects(getBottomBound());
     }
 
     private void setYCollisionTop(Block block){
