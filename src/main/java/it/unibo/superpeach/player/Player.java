@@ -40,6 +40,8 @@ public abstract class Player {
     private int respawnX;
     private int respawnY;
     private int consecutiveJumps;
+    private boolean hasWon;
+    private boolean hasLost;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
         this.width = width*scale;
@@ -62,6 +64,8 @@ public abstract class Player {
         this.respawnX = x;
         this.respawnY = y;
         this.consecutiveJumps = 0;
+        this.hasWon = false;
+        this.hasLost = false;
     }
 
     public int getX(){
@@ -207,7 +211,39 @@ public abstract class Player {
                     setXCollisionRight(block);
                 }
             }
-            else if(block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK){
+            else if(block.getType() == BlockType.LUCKY){
+                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                    setYCollisionTop(block);
+                    changePoint(POINT_LUCKY_BRICK);
+                    //add method
+                }
+                else if(block.getBoundingBox().contains(getBottomBound())){
+                    setYCollisionBottom(block);
+                    resetCosecutiveJump();
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    setXCollisionLeft(block);
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    setXCollisionRight(block);
+                }
+                else if(block.getBoundingBox().intersects(getTopBound())){
+                    setYCollisionTop(block);
+                    changePoint(POINT_LUCKY_BRICK);
+                    //addmethod
+                }
+                else if(block.getBoundingBox().intersects(getBottomBound())){
+                    setYCollisionBottom(block);
+                    resetCosecutiveJump();
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    setXCollisionLeft(block);
+                }
+                else if(block.getBoundingBox().intersects(getRightBound())){
+                    setXCollisionRight(block);
+                }
+            }
+            else if(block.getType() == BlockType.BRICK){
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
                     changePoint(POINT_LUCKY_BRICK);
@@ -253,7 +289,7 @@ public abstract class Player {
                         changePoint(POINT_WIN);
                         addedPointWin = true;
                     }
-                    //vinci
+                    this.hasWon = true;
                 }
             }
             else if(block.getType() == BlockType.FLAG_TIP){
@@ -300,7 +336,7 @@ public abstract class Player {
         else{
             life--;
             if(life <1){
-                System.out.println("GAME OVER");
+                this.hasLost = true;
             }
             else{
                 setX(respawnX);
@@ -352,6 +388,14 @@ public abstract class Player {
 
     public void fall() {
         moveY = FALL_SPEED;
+    }
+
+    public boolean hasWon(){
+        return this.hasWon;
+    }
+
+    public boolean hadLost(){
+        return this.hasLost;
     }
 
     public abstract void moveLeft();
