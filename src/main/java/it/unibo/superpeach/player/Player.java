@@ -11,6 +11,8 @@ import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.Enemy;
+import it.unibo.superpeach.powerups.PowerUp;
+import it.unibo.superpeach.powerups.PowerupsHandler;
 import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public abstract class Player {
@@ -48,8 +50,9 @@ public abstract class Player {
     private boolean hasLost;
     private PowerUpType typePowerUp;
     private int numTickStar;
+    private PowerupsHandler powerupsHandler;
 
-    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
+    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powersUpHandler){
         this.width = width*scale;
         this.height = height*scale;
         this.x = x*scale;
@@ -73,6 +76,7 @@ public abstract class Player {
         this.hasLost = false;
         this.typePowerUp = null;
         this.numTickStar = 0;
+        this.powerupsHandler = powersUpHandler;
     }
 
     public int getX(){
@@ -391,10 +395,21 @@ public abstract class Player {
                 enemiesHandler.removeEnemy(enemy);
             }
         }
+
+        for(PowerUp power : powerupsHandler.getPowerups()){
+            if(touchPowerUp(power)){
+                //controlla il tipo di power up
+            }
+        }
     }
 
     private void changePoint(int point){
         this.point += point;
+    }
+
+    private boolean touchPowerUp(PowerUp power){
+        return false;
+        //controlla se tocco il power up
     }
 
     private void dead(){

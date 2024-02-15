@@ -65,7 +65,7 @@ public class Game extends Canvas implements Runnable {
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
         powerupsHandler = new PowerupsHandler();
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler));// TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
 
