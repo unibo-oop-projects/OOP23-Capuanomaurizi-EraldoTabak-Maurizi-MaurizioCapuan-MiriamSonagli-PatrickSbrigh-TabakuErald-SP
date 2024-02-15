@@ -14,13 +14,13 @@ public abstract class Enemy {
     private static final int FALL_SPEED = 1;
     private int PADDING_BOUND = 4;
 
-    private int x;
+    protected int x;
     private int y;
     private Dimension dim;
-    private int speed;
+    protected int speed;
     private boolean isFalling;
     private BlocksHandler blocksHandler;
-    private int scale;
+    protected int scale;
 
     private TexturerEnemies texturer = Game.getEnemyTexturer();
     private BufferedImage[] sprites;
@@ -123,7 +123,8 @@ public abstract class Enemy {
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
-                    || block.getType() == BlockType.POPPED_LUCKY) {
+                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.ALT_BLOCK ||
+                    block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
                 if (block.getBoundingBox().contains(getLeftBound())) {
                     setXCollisionLeft(block);
                 } else if (block.getBoundingBox().contains(getRightBound())) {
@@ -137,21 +138,7 @@ public abstract class Enemy {
                 } else if (block.getBoundingBox().intersects(getBottomBound())) {
                     setYCollisionBottom(block);
                 }
-            } else if (block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
-            } else if (block.getBoundingBox().contains(getBottomBound())) {
-                setYCollisionBottom(block);
-            } else if (block.getBoundingBox().contains(getLeftBound())) {
-                setXCollisionLeft(block);
-            } else if (block.getBoundingBox().contains(getRightBound())) {
-                setXCollisionRight(block);
-            } else if (block.getBoundingBox().intersects(getBottomBound())) {
-                setYCollisionBottom(block);
-            } else if (block.getBoundingBox().intersects(getLeftBound())) {
-                setXCollisionLeft(block);
-            } else if (block.getBoundingBox().intersects(getRightBound())) {
-                setXCollisionRight(block);
             }
-
         }
     }
 

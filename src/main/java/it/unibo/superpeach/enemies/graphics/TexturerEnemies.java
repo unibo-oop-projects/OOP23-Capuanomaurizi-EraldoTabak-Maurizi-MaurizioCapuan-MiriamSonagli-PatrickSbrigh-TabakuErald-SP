@@ -6,6 +6,7 @@ public class TexturerEnemies {
 
     private static final int GOOMBA_COUNT = 1;
     private static final int KOOPATROOPA_COUNT = 2;
+    private static final int FLYINGKOOPA_COUNT = 2;
 
     private static final int ENEMY_WIDTH = 16;
     private static final int GOOMBA_HEIGHT = 16;
@@ -15,12 +16,13 @@ public class TexturerEnemies {
 
     private BufferedImage enemySet;
 
-    public BufferedImage[] goomba, koopaTroopa;
+    public BufferedImage[] goomba, koopaTroopa, flyingKoopa;
 
     public TexturerEnemies() {
 
         goomba = new BufferedImage[GOOMBA_COUNT];
         koopaTroopa = new BufferedImage[KOOPATROOPA_COUNT];
+        flyingKoopa = new BufferedImage[FLYINGKOOPA_COUNT];
 
         loader = new BufferedImageLoaderEnemies();
 
@@ -28,6 +30,7 @@ public class TexturerEnemies {
             enemySet = loader.loadImage("it/unibo/superpeach/tiles/enemies.png");
             loadGoomba();
             loadKoopaTroopa();
+            loadFlyingKoopa();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,12 +49,23 @@ public class TexturerEnemies {
 
     }
 
+    private void loadFlyingKoopa() {
+
+        flyingKoopa[0] = enemySet.getSubimage(120, 0, ENEMY_WIDTH, KOOPA_HEIGHT);
+        flyingKoopa[1] = enemySet.getSubimage(271, 0, ENEMY_WIDTH, KOOPA_HEIGHT);
+
+    }
+
     public BufferedImage[] getGoombaImg() {
         return this.goomba;
     }
 
     public BufferedImage[] getKoopaImg() {
         return this.koopaTroopa;
+    }
+
+    public BufferedImage[] getFlyingKoopa() {
+        return this.flyingKoopa;
     }
 
 }
