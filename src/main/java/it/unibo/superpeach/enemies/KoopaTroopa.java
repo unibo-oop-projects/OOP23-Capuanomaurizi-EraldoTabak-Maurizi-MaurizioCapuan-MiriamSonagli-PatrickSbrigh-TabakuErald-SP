@@ -9,7 +9,8 @@ public class KoopaTroopa extends Enemy {
     public KoopaTroopa(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);
         setSprites(getTexturer().getKoopaImg());
-        this.isFalling = true;
+        setSpeed(2 * scale);
+
     }
 
     @Override
@@ -20,7 +21,8 @@ public class KoopaTroopa extends Enemy {
 
     @Override
     public void tick() {
-
+        this.updateCoords();
+        this.collision();
     }
 
 }

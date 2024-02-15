@@ -15,6 +15,9 @@ public class EnemiesHandler {
     public void tickEnemies() {
         for (Enemy enemy : enemies) {
             enemy.tick();
+            if (!enemy.getIsAlive()) {
+                removeEnemy(enemy);
+            }
         }
     }
 
