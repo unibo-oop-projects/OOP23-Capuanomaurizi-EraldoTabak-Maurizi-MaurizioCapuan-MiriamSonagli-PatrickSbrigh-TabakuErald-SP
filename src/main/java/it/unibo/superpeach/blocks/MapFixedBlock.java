@@ -30,6 +30,9 @@ public class MapFixedBlock extends Block{
             case FLAG_POLE:
                 setSprites(getTexturer().getFlag());
                 break;
+            case DEATH_BLOCK:
+            case ALT_BLOCK:
+                break;
             default:
                 //its for sure a castle block, using default to avoid too many code
                 setSprites(getTexturer().getTerrain());

@@ -63,6 +63,8 @@ public class LevelHandler {
                         blocksHandler.addFixedBlock(new LuckyBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.LUCKY, PowerUpType.STAR));
                     } else if (r == 255 && g == 127 && b == 39) {
                         blocksHandler.addFixedBlock(new MapFixedBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.DEATH_BLOCK));
+                    } else if (r == 127 && g == 127 && b == 127) {
+                        blocksHandler.addFixedBlock(new MapFixedBlock(i*16, j*16, 16, 16, GAME_SCALE, BlockType.ALT_BLOCK));
                     }
                     //FIXED BUT NON INTERACTABLE BLOCKS
                     else if (r == 100 && g == 100 && b == 50) {
