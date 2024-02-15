@@ -12,21 +12,15 @@ import it.unibo.superpeach.game.Game;
 public abstract class Enemy {
 
     private static final int FALL_SPEED = 1;
+
     private int PADDING_BOUND = 4;
 
-    protected int x;
-    private int y;
+    protected int x, y, speed, scale;
     private Dimension dim;
-    protected int speed;
-    private boolean isFalling;
+    private boolean isFalling, direction, isAlive;
     private BlocksHandler blocksHandler;
-    protected int scale;
-
     private TexturerEnemies texturer = Game.getEnemyTexturer();
     private BufferedImage[] sprites;
-
-    private boolean direction;
-    private boolean isAlive;
 
     public Enemy(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
         this.x = x * scale;
@@ -55,28 +49,8 @@ public abstract class Enemy {
         return this.isFalling;
     }
 
-    public void setIsFalling(boolean fall) {
-        this.isFalling = fall;
-    }
-
-    public void updateCoords() {
-        if (getDirection()) {
-            this.x -= this.speed;
-        } else {
-            this.x += this.speed;
-        }
-
-        if (this.isFalling) {
-            this.y += FALL_SPEED;
-        }
-    }
-
     public Dimension getDimension() {
         return this.dim;
-    }
-
-    public void setDimension(int width, int height) {
-        this.dim = new Dimension(width, height);
     }
 
     public Rectangle getBounds() {
@@ -101,17 +75,124 @@ public abstract class Enemy {
         return this.sprites;
     }
 
-    public void setSprites(BufferedImage[] sprites) {
-        this.sprites = sprites;
-    }
-
     public TexturerEnemies getTexturer() {
         return texturer;
     }
 
-    public abstract void render(Graphics g);
+    private int getWidth() {
+        return this.getDimension().width;
+    }
 
-    public abstract void tick();
+    private int getHeight() {
+        return this.getDimension().height;
+    }
+
+    public static int getFallSpeed() {
+        return FALL_SPEED;
+    }
+
+    public int getPaddingBound() {
+        return PADDING_BOUND;
+    }
+
+    public BlocksHandler getBlocksHandler() {
+        return blocksHandler;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public boolean getDirection() {
+        return this.direction;
+    }
+
+    public Dimension getDim() {
+        return dim;
+    }
+
+    public boolean getIsAlive() {
+        return this.isAlive;
+    }
+
+    public void setIsFalling(boolean fall) {
+        this.isFalling = fall;
+    }
+
+    public void setDimension(int width, int height) {
+        this.dim = new Dimension(width, height);
+    }
+
+    public void setSprites(BufferedImage[] sprites) {
+        this.sprites = sprites;
+    }
+
+    private void setY(int y) {
+        this.y = y * scale;
+    }
+
+    private void setX(int x) {
+        this.x = x * scale;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setDim(Dimension dim) {
+        this.dim = dim;
+    }
+
+    public void setFalling(boolean isFalling) {
+        this.isFalling = isFalling;
+    }
+
+    public void setBlocksHandler(BlocksHandler blocksHandler) {
+        this.blocksHandler = blocksHandler;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
+
+    public void setTexturer(TexturerEnemies texturer) {
+        this.texturer = texturer;
+    }
+
+    public void changeDirection() {
+        this.direction = !this.direction;
+    }
+
+    public void die() {
+        this.isAlive = false;
+    }
+
+    private void setYCollisionBottom(Block block) {
+        setY(block.getY() / scale - getHeight() / scale);
+        setFalling(false);
+    }
+
+    private void setXCollisionLeft(Block block) {
+        setX((block.getX() + block.getWidth()) / getScale());
+        changeDirection();
+    }
+
+    private void setXCollisionRight(Block block) {
+        setX(block.getX() / block.getScale() - getWidth() / getScale());
+        changeDirection();
+    }
+
+    public void updateCoords() {
+        if (getDirection()) {
+            this.x -= this.speed;
+        } else {
+            this.x += this.speed;
+        }
+
+        if (this.isFalling) {
+            this.y += FALL_SPEED;
+        }
+    }
 
     public void collision() {
         for (Block block : blocksHandler.getBlocks()) {
@@ -142,95 +223,8 @@ public abstract class Enemy {
         }
     }
 
-    private void setY(int y) {
-        this.y = y * scale;
-    }
+    public abstract void render(Graphics g);
 
-    private void setX(int x) {
-        this.x = x * scale;
-    }
-
-    private int getWidth() {
-        return this.getDimension().width;
-    }
-
-    private int getHeight() {
-        return this.getDimension().height;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public static int getFallSpeed() {
-        return FALL_SPEED;
-    }
-
-    public int getPaddingBound() {
-        return PADDING_BOUND;
-    }
-
-    public Dimension getDim() {
-        return dim;
-    }
-
-    public void setDim(Dimension dim) {
-        this.dim = dim;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setFalling(boolean isFalling) {
-        this.isFalling = isFalling;
-    }
-
-    public BlocksHandler getBlocksHandler() {
-        return blocksHandler;
-    }
-
-    public void setBlocksHandler(BlocksHandler blocksHandler) {
-        this.blocksHandler = blocksHandler;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
-    }
-
-    public void setTexturer(TexturerEnemies texturer) {
-        this.texturer = texturer;
-    }
-
-    public boolean getDirection() {
-        return this.direction;
-    }
-
-    public void changeDirection() {
-        this.direction = !this.direction;
-    }
-
-    public boolean getIsAlive() {
-        return this.isAlive;
-    }
-
-    public void die() {
-        this.isAlive = false;
-    }
-
-    private void setYCollisionBottom(Block block) {
-        setY(block.getY() / scale - getHeight() / scale);
-        setFalling(false);
-    }
-
-    private void setXCollisionLeft(Block block) {
-        setX((block.getX() + block.getWidth()) / getScale());
-        changeDirection();
-    }
-
-    private void setXCollisionRight(Block block) {
-        setX(block.getX() / block.getScale() - getWidth() / getScale());
-        changeDirection();
-    }
+    public abstract void tick();
 
 }
