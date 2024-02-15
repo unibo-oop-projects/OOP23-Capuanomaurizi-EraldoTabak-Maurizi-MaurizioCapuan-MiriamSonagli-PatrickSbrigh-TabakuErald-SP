@@ -21,8 +21,10 @@ public class PeachMenu extends JFrame {
 
         size = new Dimension(width*scale, height*scale);
         frame = new JFrame(title);
+        ImageIcon imageicon = new ImageIcon("src/main/resources/it/unibo/superpeach/tiles/PeachIcon.png");
         this.game = game;
 
+        frame.setIconImage(imageicon.getImage());
         frame.setPreferredSize(size);
         frame.setMinimumSize(size);
         frame.setMaximumSize(size);
@@ -32,19 +34,21 @@ public class PeachMenu extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        Color customColor = new Color(149, 69, 169);    //per ocra: 218, 165, 32
-        // Color customColor1 = new Color(101, 67, 33)      //PER LE SCRITTE
+        Color customColor = new Color(218, 165, 32);    //149, 69, 169
+        Color customColor1 = new Color(101, 67, 33);    //PER LE SCRITTE
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.PINK);
 
         JLabel titleLabel = new JLabel("SUPER PEACH");
+        
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setFont(new Font("Monospaced", Font.BOLD, 40*scale));
+        titleLabel.setForeground(customColor1);
         panel.add(titleLabel);
 
-        CustomButton startButton = new CustomButton("START GAME", customColor, scale);
+        CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,7 +61,7 @@ public class PeachMenu extends JFrame {
         panel.add(startButton);
         panel.add(Box.createVerticalStrut(10*scale));
 
-        CustomButton optionsButton = new CustomButton("VOLUME", customColor, scale);
+        CustomButton optionsButton = new CustomButton("VOLUME", customColor, customColor1, scale);
         optionsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,7 +118,7 @@ public class PeachMenu extends JFrame {
         panel.add(optionsButton);
         panel.add(Box.createVerticalStrut(10*scale));
 
-        CustomButton GUIScaleButton = new CustomButton("GUI Scale: " + scale, customColor, scale);
+        CustomButton GUIScaleButton = new CustomButton("GUI Scale: " + scale, customColor, customColor1, scale);
         GUIScaleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,7 +128,7 @@ public class PeachMenu extends JFrame {
         panel.add(GUIScaleButton);
         panel.add(Box.createVerticalStrut(10*scale));
 
-        CustomButton exitButton = new CustomButton("EXIT", customColor, scale);
+        CustomButton exitButton = new CustomButton("EXIT", customColor, customColor1, scale);
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
