@@ -8,8 +8,9 @@ public class Goomba extends Enemy {
 
     public Goomba(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);
-        setSpeed(1);
+        setSpeed(1 * scale);
         setSprites(getTexturer().getGoombaImg());
+        setIsFalling(false);
 
     }
 
@@ -17,13 +18,15 @@ public class Goomba extends Enemy {
     public void render(Graphics g) {
         g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
                 null);
+        showRectangle(g);
+
     }
 
     @Override
     public void tick() {
-        this.updateCoords();
+        setFalling(true);
         this.collision();
-        // System.err.println(getX());
+        this.updateCoords();
     }
 
 }
