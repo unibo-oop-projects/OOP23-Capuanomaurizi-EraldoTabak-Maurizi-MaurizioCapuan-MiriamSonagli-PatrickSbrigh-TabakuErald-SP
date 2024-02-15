@@ -1,6 +1,9 @@
 package it.unibo.superpeach.graphics;
 import it.unibo.superpeach.game.Game;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -9,6 +12,7 @@ import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class PeachMenu extends JFrame {
 
@@ -21,7 +25,7 @@ public class PeachMenu extends JFrame {
 
         size = new Dimension(width*scale, height*scale);
         frame = new JFrame(title);
-        ImageIcon imageicon = new ImageIcon("src/main/resources/it/unibo/superpeach/tiles/PeachIcon.png");
+        ImageIcon imageicon = new ImageIcon("src/main/resources/it/unibo/superpeach/icon/PeachIcon.png");
         this.game = game;
 
         frame.setIconImage(imageicon.getImage());
@@ -100,7 +104,7 @@ public class PeachMenu extends JFrame {
                 volumeSlider.setMinorTickSpacing(1);
                 volumeSlider.setPaintTicks(true);
                 volumeSlider.setPaintLabels(true);
-
+                
                 // Cambiamento del volume
                 volumeSlider.addChangeListener(new ChangeListener() {
                     @Override
@@ -140,6 +144,20 @@ public class PeachMenu extends JFrame {
             }
         });
         panel.add(exitButton);
+
+
+        File audioFile = new File("src/main/resources/it/unibo/superpeach/music/Sound.wav"); // Cambia il percorso con il tuo file audio
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            //clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
         frame.add(panel);
         frame.setVisible(true);
