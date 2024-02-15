@@ -19,6 +19,7 @@ public abstract class Player {
     private static final int POINT_KILLED_ENEMY = 300;
     private static final int POINT_FLAG_POLE = 500;
     private static final int POINT_FLAG_TIP = 1000;
+    private static final int CONSECUTIVE_JUMP = 3;
     private int width;
     private int height;
     private int x;
@@ -38,6 +39,7 @@ public abstract class Player {
     private boolean addedPointWin;
     private int respawnX;
     private int respawnY;
+    private int consecutiveJumps;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler){
         this.width = width*scale;
@@ -59,6 +61,7 @@ public abstract class Player {
         this.addedPointWin = false;
         this.respawnX = x;
         this.respawnY = y;
+        this.consecutiveJumps = 0;
     }
 
     public int getX(){
@@ -93,6 +96,10 @@ public abstract class Player {
         return this.life;
     }
 
+    public int getConsecutiveJump(){
+        return this.consecutiveJumps;
+    }
+
     public boolean hasJumped(){
         return this.jumped;
     }
@@ -115,6 +122,12 @@ public abstract class Player {
 
     public void setWidth(int width){
         this.width = width;
+    }
+
+    public void setConsecutiveJump(int add){
+        if(this.consecutiveJumps+1 <= CONSECUTIVE_JUMP){
+            this.consecutiveJumps++;
+        }
     }
 
     public void setHasJumped(boolean jumped){
@@ -153,6 +166,14 @@ public abstract class Player {
         return new Rectangle(getX()+getWidth()-padding_bound, getY()+padding_bound, padding_bound ,getHeight()-2*padding_bound);
     }
 
+    public void resetCosecutiveJump(){
+        this.consecutiveJumps = 0;
+    }
+
+    public boolean canJump(){
+        return this.consecutiveJumps < CONSECUTIVE_JUMP;
+    }
+
     public void collision(){
         for(Block block : blocksHandler.getBlocks()){
             if(block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT 
@@ -161,6 +182,7 @@ public abstract class Player {
             || block.getType() == BlockType.POPPED_LUCKY){
                 if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
+                    resetCosecutiveJump();
                 }
                 else if(block.getBoundingBox().contains(getTopBound())){
                     setYCollisionTop(block);
@@ -173,6 +195,7 @@ public abstract class Player {
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
+                    resetCosecutiveJump();
                 }
                 else if(block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
@@ -192,6 +215,7 @@ public abstract class Player {
                 }
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
+                    resetCosecutiveJump();
                 }
                 else if(block.getBoundingBox().contains(getLeftBound())){
                     setXCollisionLeft(block);
@@ -206,6 +230,7 @@ public abstract class Player {
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
+                    resetCosecutiveJump();
                 }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
                     setXCollisionLeft(block);
@@ -239,8 +264,11 @@ public abstract class Player {
                     }
                 }
             }
-            else if(block.getType() == BlockType.FLAG_RIGHT || block.getType() == BlockType.FLAG_LEFT || block.getType() == BlockType.FLAG_POLE){
-                if(block.getBoundingBox().intersects(getRightBound())){
+            else if(block.getType() == BlockType.FLAG_POLE){
+                if(block.getBoundingBox().intersects(getRightBound()) || block.getBoundingBox().contains(getRightBound())
+                ||block.getBoundingBox().intersects(getLeftBound()) || block.getBoundingBox().contains(getLeftBound())
+                || block.getBoundingBox().intersects(getTopBound()) || block.getBoundingBox().contains(getTopBound())
+                || block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().contains(getBottomBound())){
                     if(!addedPointFlag){
                         changePoint(POINT_FLAG_POLE);
                         addedPointFlag = true;

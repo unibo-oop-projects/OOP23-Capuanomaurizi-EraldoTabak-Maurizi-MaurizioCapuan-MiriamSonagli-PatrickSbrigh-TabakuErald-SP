@@ -46,10 +46,11 @@ public class Peach extends Player{
 
     @Override
     public void jump() {
-        if(!hasJumped()){
+        if(!hasJumped() && canJump()){
             spriteNeeded = JUMP_FALL;
             setMoveY(-JUMP_HEIGHT);
             setHasJumped(true);
+            setConsecutiveJump(1);
         }
     }
 
