@@ -24,13 +24,14 @@ public abstract class PowerUp {
     private boolean isFalling;
     private boolean isAlive;
     private boolean direction;
+    private PowerUpType powerUpType;
     private BlocksHandler blocksHandler;
 
     private int PADDING_BOUND;
     private Textures textures = Game.getPowerupsTextures();
     private BufferedImage[] image = textures.getPowerups();
     
-    public PowerUp(int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
+    public PowerUp(int x, int y, int w, int h, int s, BlocksHandler blocksHandler, PowerUpType type) {
         this.x = x*s;
         this.y = y*s;
         this.width = w*s;
@@ -39,6 +40,7 @@ public abstract class PowerUp {
         this.isFalling = false;
         this.isAlive = true;
         this.direction = false;
+        this.powerUpType = type;
         this.blocksHandler = blocksHandler;
         this.PADDING_BOUND = 4*scale;
     }
@@ -75,6 +77,10 @@ public abstract class PowerUp {
         this.height = h;
     }
 
+    public PowerUpType getPowerUpType() {
+        return powerUpType;
+    }
+    
     public int getX() {
         return this.x;
     }

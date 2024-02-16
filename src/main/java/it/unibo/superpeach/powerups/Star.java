@@ -7,7 +7,7 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 public class Star extends PowerUp{
 
     public Star (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
-        super(x, y, w, h, s, blocksHandler);
+        super(x, y, w, h, s, blocksHandler, PowerUpType.STAR);
         setMovement(2);
         setIsFalling(false);
     }

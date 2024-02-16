@@ -7,7 +7,7 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 public class Coin extends PowerUp{
 
     public Coin (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
-        super(x, y, w, h, s, blocksHandler);
+        super(x, y, w, h, s, blocksHandler, PowerUpType.COIN);
         setMovement(0);
         setIsFalling(false);
     }
