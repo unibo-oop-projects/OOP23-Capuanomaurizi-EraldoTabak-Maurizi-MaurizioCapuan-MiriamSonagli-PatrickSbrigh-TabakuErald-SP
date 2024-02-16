@@ -39,8 +39,9 @@ public class EnemiesHandler {
         enemies.add(enemy);
     }
 
-    public void removeEnemy(Enemy enemy) { // la cosa del null (?)
-        enemies.remove(enemy);
+    public void removeEnemy(Enemy enemy) {
+
+        this.enemies.remove(enemy);
     }
 
     public List<Enemy> getEnemies() {

@@ -12,7 +12,6 @@ import it.unibo.superpeach.game.Game;
 public abstract class Enemy {
 
     private static final int FALL_SPEED = 1;
-
     private int PADDING_BOUND = 4;
 
     protected int x, y, speed, scale;
@@ -79,11 +78,11 @@ public abstract class Enemy {
         return texturer;
     }
 
-    private int getWidth() {
+    public int getWidth() {
         return this.getDimension().width;
     }
 
-    private int getHeight() {
+    public int getHeight() {
         return this.getDimension().height;
     }
 
@@ -96,7 +95,7 @@ public abstract class Enemy {
     }
 
     public BlocksHandler getBlocksHandler() {
-        return blocksHandler;
+        return this.blocksHandler;
     }
 
     public int getSpeed() {
@@ -168,7 +167,7 @@ public abstract class Enemy {
     }
 
     private void setYCollisionBottom(Block block) {
-        setY(block.getY() / scale - getHeight() / scale);
+        setY((block.getY() - getHeight()) / getScale());
         setFalling(false);
     }
 
@@ -178,11 +177,11 @@ public abstract class Enemy {
     }
 
     private void setXCollisionRight(Block block) {
-        setX(block.getX() / block.getScale() - getWidth() / getScale());
+        setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
 
-    public void updateCoords() {
+    protected void updateCoords() {
         if (getDirection()) {
             this.x -= this.speed;
         } else {
@@ -223,8 +222,8 @@ public abstract class Enemy {
         }
     }
 
-    public abstract void render(Graphics g);
+    protected abstract void render(Graphics g);
 
-    public abstract void tick();
+    protected abstract void tick();
 
 }
