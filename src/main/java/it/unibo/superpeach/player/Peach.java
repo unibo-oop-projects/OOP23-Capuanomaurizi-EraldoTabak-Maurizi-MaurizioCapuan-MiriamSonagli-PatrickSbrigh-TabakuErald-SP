@@ -85,12 +85,10 @@ public class Peach extends Player{
     @Override
     public void render(Graphics g) {
         g.drawImage(getSprites()[spriteNeeded], getX(), getY(), getWidth(), getHeight(), null);
-        showRectangle(g);
     }
 
     @Override
     public void tick() {
-        updateRectangle();
         setY(getY()/getScale()+getMoveY());
         setX(getX()/getScale()+getMoveX());
         fall();
