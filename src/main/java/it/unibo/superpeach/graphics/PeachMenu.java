@@ -60,7 +60,7 @@ public class PeachMenu extends JFrame {
         panel.add(startButton);
         panel.add(Box.createVerticalStrut(10 * scale));
 
-        CustomButton optionsButton = new CustomButton("VOLUME", customColor, customColor1, scale);
+        CustomButton optionsButton = new CustomButton("MUSIC", customColor, customColor1, scale);
         optionsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +68,11 @@ public class PeachMenu extends JFrame {
                 optionsFrame.setSize(300, 200);
                 optionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                JPanel optionsPanel = new JPanel();
+                String imagePath = "src/main/resources/it/unibo/superpeach/tiles/MusicBackground.png";
+                ImagePanel optionsPanel = new ImagePanel(imagePath);
+                //optionsPanel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+                
+                //JPanel optionsPanel = new JPanel();
                 optionsPanel.setLayout(new FlowLayout());
 
                 String[] songList = {
@@ -80,7 +84,7 @@ public class PeachMenu extends JFrame {
                 JComboBox<String> songComboBox = new JComboBox<>(songList);
                 optionsPanel.add(songComboBox);
 
-                JButton selectButton = new JButton("Select");
+                CustomButton selectButton = new CustomButton("Select", customColor, customColor1, scale/2);
                 selectButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
