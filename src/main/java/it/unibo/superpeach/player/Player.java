@@ -432,10 +432,17 @@ public abstract class Player {
     }
 
     private void becomeBig(){
-        if(typePowerUp != PowerUpType.RED_MUSHROOM){
-            setHeight(height*2);
+        if(!(typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
+            if(typePowerUp != PowerUpType.RED_MUSHROOM){
+                setHeight(height*2);
+            }
+            if(typePowerUp != PowerUpType.STAR){
+                typePowerUp = PowerUpType.RED_MUSHROOM;
+            }
+            else{
+                lastPowerUp = PowerUpType.RED_MUSHROOM;
+            }
         }
-        typePowerUp = PowerUpType.RED_MUSHROOM;
     }
 
     private void dead(){
