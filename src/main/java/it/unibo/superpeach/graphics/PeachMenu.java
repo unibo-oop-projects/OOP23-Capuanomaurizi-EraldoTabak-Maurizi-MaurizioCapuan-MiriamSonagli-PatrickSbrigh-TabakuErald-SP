@@ -1,26 +1,30 @@
 package it.unibo.superpeach.graphics;
 
-import javax.swing.*;
-
 import it.unibo.superpeach.game.Game;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class PeachMenu extends JFrame {
 
     private JFrame frame;
     private Dimension size;
-    @SuppressWarnings("unused")
     private final Game game;
+    private Clip clip;
 
     public PeachMenu(String title, int width, int height, int scale, Game game) {
-
-        size = new Dimension(width*scale, height*scale);
-        frame = new JFrame(title);
         this.game = game;
+        size = new Dimension(width * scale, height * scale);
+        frame = new JFrame(title);
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/it/unibo/superpeach/icon/peach_icon.png");
 
+        frame.setIconImage(imageIcon.getImage());
         frame.setPreferredSize(size);
         frame.setMinimumSize(size);
         frame.setMaximumSize(size);
@@ -28,30 +32,26 @@ public class PeachMenu extends JFrame {
         frame.setLocationRelativeTo(null); //centre screen
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         frame.setVisible(true);
 
-        Color customColor = new Color(149, 69, 169);
+        Color customColor = new Color(218, 165, 32);    //149, 69, 169
+        Color customColor1 = new Color(101, 67, 33);    //PER LE SCRITTE
 
-        JPanel panel = new JPanel();
+        String imagePath = "src/main/resources/it/unibo/superpeach/tiles/background.png";
+        ImagePanel panel = new ImagePanel(imagePath);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Color.PINK);
 
         JLabel titleLabel = new JLabel("SUPER PEACH");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setFont(new Font("Monospaced", Font.BOLD, 40*scale));
+        titleLabel.setFont(new Font("Monospaced", Font.BOLD, 40 * scale));
+        titleLabel.setForeground(Color.PINK);
         panel.add(titleLabel);
+        panel.add(Box.createVerticalStrut(20 * scale));
 
-        JButton startButton = new JButton("START GAME");
-        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        startButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        startButton.setBackground(customColor);
-        startButton.setFocusable(false);
-        startButton.setBorderPainted(false);
+        CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Come avvio il gioco??
                 panel.setVisible(false);
                 frame.remove(panel);
                 frame.add(game);
@@ -59,46 +59,84 @@ public class PeachMenu extends JFrame {
             }
         });
         panel.add(startButton);
+        panel.add(Box.createVerticalStrut(10 * scale));
 
-        JButton optionsButton = new JButton("OPTIONS");
-        optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        optionsButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        optionsButton.setBackground(customColor);
-        optionsButton.setFocusable(false);
-        optionsButton.setBorderPainted(false);
+        CustomButton optionsButton = new CustomButton("MUSIC", customColor, customColor1, scale);
         optionsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aprire un menu delle opzioni
-                JOptionPane.showMessageDialog(panel, "Opzioni del gioco");
+                JFrame optionsFrame = new JFrame("Volume Options");
+                optionsFrame.setSize(300, 200);
+                optionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                String imagePath = "src/main/resources/it/unibo/superpeach/tiles/music_background.png";
+                ImagePanel optionsPanel = new ImagePanel(imagePath);
+                //optionsPanel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+                
+                //JPanel optionsPanel = new JPanel();
+                optionsPanel.setLayout(new FlowLayout());
+
+                String[] songList = {
+                        "src/main/resources/it/unibo/superpeach/music/sound1.wav",
+                        "src/main/resources/it/unibo/superpeach/music/sound2.wav",
+                        "src/main/resources/it/unibo/superpeach/music/sound3.wav"
+                };
+
+                JComboBox<String> songComboBox = new JComboBox<>(songList);
+                optionsPanel.add(songComboBox);
+
+                CustomButton selectButton = new CustomButton("Select", customColor, customColor1, scale/2);
+                selectButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String selectedSong = (String) songComboBox.getSelectedItem();
+                        updateSong(selectedSong);
+                        optionsFrame.dispose();
+                    }
+                });
+                optionsPanel.add(selectButton);
+
+                optionsFrame.add(optionsPanel);
+                optionsFrame.setLocationRelativeTo(null);
+                optionsFrame.setVisible(true);
             }
+
+            private void updateSong(String selectedSong) {
+                if (clip != null && clip.isRunning()) {
+                    clip.stop();
+                    clip.close();
+                }
+
+                File audioFile = new File(selectedSong);
+                try {
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                    clip = AudioSystem.getClip();
+                    clip.open(audioStream);
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
         });
         panel.add(optionsButton);
+        panel.add(Box.createVerticalStrut(10 * scale));
 
-        JButton GUIScaleButton = new JButton("GUI Scale: " + scale);
-        GUIScaleButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        GUIScaleButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        GUIScaleButton.setBackground(customColor);
-        GUIScaleButton.setFocusable(false);
-        GUIScaleButton.setBorderPainted(false);
+        CustomButton GUIScaleButton = new CustomButton("GUI Scale: " + scale, customColor, customColor1, scale);
         GUIScaleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                stopBackgroundMusic(); // Ferma la riproduzione della canzone corrente
                 game.changeScale(scale == 1 ? 2 : 1);
             }
         });
         panel.add(GUIScaleButton);
+        panel.add(Box.createVerticalStrut(10 * scale));
 
-        JButton exitButton = new JButton("EXIT");
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        exitButton.setFont(new Font("Monospaced", Font.BOLD, 20*scale));
-        exitButton.setBackground(customColor);
-        exitButton.setFocusable(false);
-        exitButton.setBorderPainted(false);
+        CustomButton exitButton = new CustomButton("EXIT", customColor, customColor1, scale);
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Chiudo l'applicazione
                 System.exit(0);
             }
         });
@@ -108,9 +146,15 @@ public class PeachMenu extends JFrame {
         frame.setVisible(true);
     }
 
-    public void closeWindow(){
-        frame.setVisible(false); //you can't see me!
-        frame.dispose(); //Destroy the JFrame object
+    private void stopBackgroundMusic() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
+        }
     }
 
+    public void closeWindow() {
+        frame.setVisible(false);
+        frame.dispose();
+    }
 }
