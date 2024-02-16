@@ -7,7 +7,7 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 public class RedMushroom extends PowerUp {
     
     public RedMushroom (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
-        super(x, y, w, h, s, blocksHandler, PowerUpType.LIFE_MUSHROOM);
+        super(x, y, w, h, s, blocksHandler, PowerUpType.RED_MUSHROOM);
         setMovement(1);
         setIsFalling(false);
     }
