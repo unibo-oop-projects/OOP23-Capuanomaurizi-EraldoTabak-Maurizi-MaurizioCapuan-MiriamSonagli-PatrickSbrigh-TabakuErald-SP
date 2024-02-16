@@ -9,7 +9,7 @@ public class CustomButton extends JButton {
     public CustomButton(String text, Color customColor, Color customColor1, int scale) {
         super(text);
         setAlignmentX(Component.CENTER_ALIGNMENT);
-        setFont(new Font("Monospaced", Font.BOLD, 20 * scale));
+        setFont(new Font("Monospaced", Font.BOLD, 10 * scale));
         setForeground(customColor1);
         setBackground(customColor);
         setFocusable(false);

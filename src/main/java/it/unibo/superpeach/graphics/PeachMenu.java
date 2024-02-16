@@ -98,6 +98,8 @@ public class PeachMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 stopBackgroundMusic(); // Ferma la riproduzione della canzone corrente
+                GUIComboBox.setPreferredSize(GUIScaleButton.getPreferredSize());
+                GUIComboBox.setMaximumSize(GUIScaleButton.getPreferredSize());
                 String selectedScale = (String) GUIComboBox.getSelectedItem();
                 int scalerange = 1;
                 switch (selectedScale) {
@@ -118,6 +120,8 @@ public class PeachMenu extends JFrame {
                         break;
                     }
                 game.changeScale(scalerange);
+                GUIComboBox.getParent().revalidate();
+                GUIComboBox.getParent().repaint();
             }
         });
         getContentPane().add(GUIComboBox, BorderLayout.CENTER);
@@ -131,7 +135,7 @@ public class PeachMenu extends JFrame {
         String sound1 = new String("src/main/resources/it/unibo/superpeach/music/sound1.wav");
         String sound2 = new String("src/main/resources/it/unibo/superpeach/music/sound2.wav");
         String sound3 = new String("src/main/resources/it/unibo/superpeach/music/sound3.wav");
-        String[] songList = {"Prima", "Seconda", "Terza"};
+        String[] songList = {"n. 1", "n. 2", "n. 3"};
         JComboBox<String> songComboBox = new JComboBox<>(songList);
         songComboBox.setLayout(new FlowLayout());
         songComboBox.setBackground(customColor);
@@ -163,15 +167,15 @@ public class PeachMenu extends JFrame {
                 String selectedSong = (String) songComboBox.getSelectedItem();
                 String path = "";
                 switch (selectedSong) {
-                    case "Prima":
+                    case "n. 1":
                         path = sound1;
                         break;
                 
-                    case "Seconda":
+                    case "n. 2":
                         path = sound2;
                         break;
 
-                    case "Terza":
+                    case "n. 3":
                         path = sound3;
                         break;
                 }
