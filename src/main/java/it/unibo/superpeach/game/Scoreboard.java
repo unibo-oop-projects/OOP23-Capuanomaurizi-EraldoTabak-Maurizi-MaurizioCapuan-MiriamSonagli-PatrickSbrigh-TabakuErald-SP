@@ -28,19 +28,18 @@ public class Scoreboard {
     public void render(Graphics g, int peachX) {
         for (int i = 0; i < hearts.length; i++) {
             if (hearts[i]) {
-                g.drawImage(sprites[0], peachX + (i-1)*16*gameScale + 2*gameScale, 2*gameScale, 16*gameScale, 16*gameScale, null);
+                g.drawImage(sprites[0], peachX + (i-(hearts.length/2))*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale, 16*gameScale, 16*gameScale, null);
             } else {
-                g.drawImage(sprites[1], peachX + (i-1)*16*gameScale + 2*gameScale, 2*gameScale, 16*gameScale, 16*gameScale, null);
+                g.drawImage(sprites[1], peachX + (i-(hearts.length/2))*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale, 16*gameScale, 16*gameScale, null);
             }
         }
         for (int i = 0; i < coins.length; i++) {
             if (coins[i]) {
-                g.drawImage(sprites[2], peachX + (i-1)*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale, 16*gameScale, 16*gameScale, null);
+                g.drawImage(sprites[2], peachX + (i-(coins.length/2))*16*gameScale + 2*gameScale, 2*gameScale, 16*gameScale, 16*gameScale, null);
             } else {
-                g.drawImage(sprites[3], peachX + (i-1)*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale, 16*gameScale, 16*gameScale, null);
+                g.drawImage(sprites[3], peachX + (i-(coins.length/2))*16*gameScale + 2*gameScale, 2*gameScale, 16*gameScale, 16*gameScale, null);
             }
         }
-        
     }
 
     public void removeHeart(){

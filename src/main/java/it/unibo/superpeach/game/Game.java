@@ -66,7 +66,7 @@ public class Game extends Canvas implements Runnable {
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
         powerupsHandler = new PowerupsHandler();
-        scoreboard = new Scoreboard(3, 3, GAME_SCALE);
+        scoreboard = new Scoreboard(3, 7, GAME_SCALE);
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
