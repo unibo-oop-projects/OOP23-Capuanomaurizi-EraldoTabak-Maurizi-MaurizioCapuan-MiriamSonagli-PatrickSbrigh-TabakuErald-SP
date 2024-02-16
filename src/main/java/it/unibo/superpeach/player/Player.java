@@ -1,8 +1,6 @@
 package it.unibo.superpeach.player;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import it.unibo.superpeach.blocks.Block;
@@ -163,30 +161,15 @@ public abstract class Player {
         this.jumped = jumped;
     }
 
-    public void updateRectangle() {
-        this.rectangle = new Rectangle(x, y, width, height);
-    }
-
-    public void showRectangle(Graphics g) {
-        Graphics2D graph = (Graphics2D) g;
-        graph.setColor(Color.BLACK);
-        //graph.draw(getBottomBound());
-        graph.draw(getTopBound());
-        //graph.draw(getLeftBound());
-        //graph.draw(getRightBound());
-        graph.draw(rectangle);
-
-    }
-
     public Rectangle getTopBound(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM){
+        if(typePowerUp == PowerUpType.RED_MUSHROOM || (typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound)*((padding_bound/getScale())));
         }
         return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/getScale())*(padding_bound/2));
     }
 
     public Rectangle getBottomBound(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM){
+        if(typePowerUp == PowerUpType.RED_MUSHROOM || (typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
         }
         return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/2), getWidth()/2, padding_bound/2);
