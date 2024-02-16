@@ -460,8 +460,9 @@ public abstract class Player {
             lastPowerUp = typePowerUp;
             this.height /= 2;
             typePowerUp = null;
+            setY(respawnY);
         }
-        if(typePowerUp == PowerUpType.STAR){
+        else if(typePowerUp == PowerUpType.STAR){
             if(lastPowerUp == PowerUpType.RED_MUSHROOM){
                 lastPowerUp = typePowerUp;
                 typePowerUp = PowerUpType.RED_MUSHROOM;
@@ -470,6 +471,7 @@ public abstract class Player {
                 lastPowerUp = typePowerUp;
                 typePowerUp = null;
             }
+            setY(respawnY);
         }
         else{
             life--;
@@ -477,9 +479,9 @@ public abstract class Player {
             if (life < 0) {
                 this.hasLost = true;
             }
+            setX(respawnX);
+            setY(respawnY);
         }
-        setX(respawnX);
-        setY(respawnY);
     }
 
     public PowerUpType whatPowerUp(){
