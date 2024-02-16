@@ -226,46 +226,22 @@ public abstract class Player {
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
                 }
                 else if(block.getBoundingBox().contains(getLeftBound())){
                     setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
                 }
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
                 }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
                     setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
                 }
                 else if(block.getBoundingBox().intersects(getRightBound())){
                     setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
                 }
             }
             else if(block.getType() == BlockType.POPPED_LUCKY){
@@ -304,46 +280,22 @@ public abstract class Player {
                 else if(block.getBoundingBox().contains(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
                 }
                 else if(block.getBoundingBox().contains(getLeftBound())){
                     setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
                 }
                 else if(block.getBoundingBox().contains(getRightBound())){
                     setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
                 }
                 else if(block.getBoundingBox().intersects(getBottomBound())){
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
                 }
                 else if(block.getBoundingBox().intersects(getLeftBound())){
                     setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
                 }
                 else if(block.getBoundingBox().intersects(getRightBound())){
                     setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
                 }
             }
             else if(block.getType() == BlockType.DEATH_BLOCK){
@@ -432,10 +384,17 @@ public abstract class Player {
     }
 
     private void becomeBig(){
-        if(typePowerUp != PowerUpType.RED_MUSHROOM){
-            setHeight(height*2);
+        if(!(typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
+            if(typePowerUp != PowerUpType.RED_MUSHROOM){
+                setHeight(height*2);
+            }
+            if(typePowerUp != PowerUpType.STAR){
+                typePowerUp = PowerUpType.RED_MUSHROOM;
+            }
+            else{
+                lastPowerUp = PowerUpType.RED_MUSHROOM;
+            }
         }
-        typePowerUp = PowerUpType.RED_MUSHROOM;
     }
 
     private void dead(){
