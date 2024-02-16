@@ -7,11 +7,11 @@ import it.unibo.superpeach.blocks.LuckyBlock;
 import it.unibo.superpeach.blocks.MapBackgroundBlock;
 import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.Block.BlockType;
-import it.unibo.superpeach.blocks.graphics.BufferedImageLoader;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.FlyingKoopa;
 import it.unibo.superpeach.enemies.Goomba;
 import it.unibo.superpeach.enemies.KoopaTroopa;
+import it.unibo.superpeach.graphics.BufferedImageLoader;
 import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public class LevelHandler {

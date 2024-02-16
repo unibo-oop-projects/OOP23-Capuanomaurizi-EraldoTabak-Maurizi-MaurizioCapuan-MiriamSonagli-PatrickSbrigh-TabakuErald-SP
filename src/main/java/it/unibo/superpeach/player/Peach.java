@@ -7,7 +7,7 @@ import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.game.Scoreboard;
-import it.unibo.superpeach.player.graphics.PlayerTexture;
+import it.unibo.superpeach.graphics.Texturer;
 import it.unibo.superpeach.powerups.PowerupsHandler;
 import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
@@ -22,21 +22,21 @@ public class Peach extends Player{
     private static final int LOOK_LEFT_STAR = 4;
     private static final int JUMP_FALL_STAR = 5;
     private int spriteNeeded = 0;
-    private PlayerTexture texture;
+    private Texturer texturer;
     private BufferedImage[] sprite;
 
     public Peach(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powerUpsHandler, Scoreboard scoreboard){
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
-        this.texture = Game.getPlayerTexturer();
-        this.sprite = texture.getPlayerImage();
+        this.texturer = Game.getTexturer();
+        this.sprite = texturer.getPeach();
     }
 
     public BufferedImage[] getSprites(){
         return this.sprite;
     }
 
-    public PlayerTexture getPlayerTexture(){
-        return this.texture;
+    public Texturer getPlayerTexture(){
+        return this.texturer;
     }
 
     @Override
@@ -85,12 +85,12 @@ public class Peach extends Player{
     @Override
     public void render(Graphics g) {
         g.drawImage(getSprites()[spriteNeeded], getX(), getY(), getWidth(), getHeight(), null);
-        showRectangle(g);
+        //showRectangle(g);
     }
 
     @Override
     public void tick() {
-        updateRectangle();
+        //updateRectangle();
         setY(getY()/getScale()+getMoveY());
         setX(getX()/getScale()+getMoveX());
         fall();

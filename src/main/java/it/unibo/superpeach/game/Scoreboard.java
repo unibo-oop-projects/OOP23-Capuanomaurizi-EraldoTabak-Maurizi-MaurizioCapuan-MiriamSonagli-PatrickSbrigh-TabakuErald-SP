@@ -3,7 +3,7 @@ package it.unibo.superpeach.game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import it.unibo.superpeach.blocks.graphics.Texturer;
+import it.unibo.superpeach.graphics.Texturer;
 
 public class Scoreboard {
     

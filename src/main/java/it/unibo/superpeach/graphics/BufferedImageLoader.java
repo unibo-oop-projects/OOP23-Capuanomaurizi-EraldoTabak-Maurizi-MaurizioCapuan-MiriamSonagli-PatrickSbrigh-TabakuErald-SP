@@ -1,11 +1,12 @@
-package it.unibo.superpeach.player.graphics;
+package it.unibo.superpeach.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class ImageLoader {
+public class BufferedImageLoader {
+
     private BufferedImage img;
 
     public BufferedImage loadImage(String imgPath){
@@ -16,5 +17,5 @@ public class ImageLoader {
         }
         return img;
     }
-    
+
 }

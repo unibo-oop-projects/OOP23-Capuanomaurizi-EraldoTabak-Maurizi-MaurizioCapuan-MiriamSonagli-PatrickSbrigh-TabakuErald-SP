@@ -653,7 +653,7 @@ public abstract class Player {
     }
 
     private boolean isFalling(){
-        return moveY>0;
+        return moveY > 0;
     }
 
     public abstract void moveLeft();

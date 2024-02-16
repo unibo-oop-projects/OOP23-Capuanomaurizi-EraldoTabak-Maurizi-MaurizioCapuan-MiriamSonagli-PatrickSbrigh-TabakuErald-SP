@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.graphics.Texturer;
 
 public abstract class Block {
     public enum BlockType {
@@ -28,7 +28,7 @@ public abstract class Block {
     private int height;
     private int scale;
 
-    private Texturer texturer = Game.getBlocksTexturer();
+    private Texturer texturer = Game.getTexturer();
     private BufferedImage[] sprites;
 
     private BlockType type;

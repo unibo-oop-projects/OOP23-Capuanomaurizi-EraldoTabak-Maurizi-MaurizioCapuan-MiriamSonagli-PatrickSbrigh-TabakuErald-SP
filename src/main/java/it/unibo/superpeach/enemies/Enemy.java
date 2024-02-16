@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 import it.unibo.superpeach.blocks.Block;
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.enemies.graphics.TexturerEnemies;
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.graphics.Texturer;
 
 public abstract class Enemy {
 
@@ -18,7 +18,7 @@ public abstract class Enemy {
     private Dimension dim;
     private boolean isFalling, direction, isAlive;
     private BlocksHandler blocksHandler;
-    private TexturerEnemies texturer = Game.getEnemyTexturer();
+    private Texturer texturer = Game.getTexturer();
     private BufferedImage[] sprites;
 
     public Enemy(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
@@ -74,7 +74,7 @@ public abstract class Enemy {
         return this.sprites;
     }
 
-    public TexturerEnemies getTexturer() {
+    public Texturer getTexturer() {
         return texturer;
     }
 
@@ -154,7 +154,7 @@ public abstract class Enemy {
         this.scale = scale;
     }
 
-    public void setTexturer(TexturerEnemies texturer) {
+    public void setTexturer(Texturer texturer) {
         this.texturer = texturer;
     }
 

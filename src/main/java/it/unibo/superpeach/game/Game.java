@@ -7,18 +7,15 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.blocks.graphics.Texturer;
 import it.unibo.superpeach.enemies.EnemiesHandler;
-import it.unibo.superpeach.enemies.graphics.TexturerEnemies;
 import it.unibo.superpeach.graphics.PeachMenu;
+import it.unibo.superpeach.graphics.Texturer;
 import it.unibo.superpeach.keyboard.Keyboard;
 import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
 import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
-import it.unibo.superpeach.player.graphics.PlayerTexture;
 import it.unibo.superpeach.powerups.PowerupsHandler;
-import it.unibo.superpeach.powerups.graphics.Textures;
 
 public class Game extends Canvas implements Runnable {
 
@@ -43,15 +40,12 @@ public class Game extends Canvas implements Runnable {
     // GAME COMPONENTS
     private Thread mainGameLoop;
     private BlocksHandler blocksHandler;
-    private static Texturer blocksTexturer;
+    private static Texturer texturer;
     private LevelHandler levelHandler;
     private Camera camera;
     private static PeachMenu window;
-    private static PlayerTexture playerTexture;
     private PlayerHandler playerHandler;
     private EnemiesHandler enemiesHandler;
-    private static TexturerEnemies enemiesTexture;
-    private static Textures powerupsTexture;
     private PowerupsHandler powerupsHandler;
     private Scoreboard scoreboard;
 
@@ -60,19 +54,16 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void init() {
-        enemiesHandler = new EnemiesHandler();
-        enemiesTexture = new TexturerEnemies();
-        powerupsTexture = new Textures();
-        blocksTexturer = new Texturer();
+        texturer = new Texturer();
         blocksHandler = new BlocksHandler();
+        enemiesHandler = new EnemiesHandler();
+        playerHandler = new PlayerHandler();
+        powerupsHandler = new PowerupsHandler();
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG, PLAYER_DEFAULT_WID_HEIG, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));// TOFIX
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE, enemiesHandler);
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH, GAME_SCALE);
-        playerHandler = new PlayerHandler();
-        playerTexture = new PlayerTexture();
-        powerupsHandler = new PowerupsHandler();
         scoreboard = new Scoreboard(3, 7, GAME_SCALE);
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG, PLAYER_DEFAULT_WID_HEIG, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
     }
@@ -177,20 +168,8 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    public static Texturer getBlocksTexturer() {
-        return blocksTexturer;
-    }
-
-    public static PlayerTexture getPlayerTexturer() {
-        return playerTexture;
-    }
-
-    public static TexturerEnemies getEnemyTexturer() {
-        return enemiesTexture;
-    }
-
-    public static Textures getPowerupsTextures() {
-        return powerupsTexture;
+    public static Texturer getTexturer() {
+        return texturer;
     }
 
 }

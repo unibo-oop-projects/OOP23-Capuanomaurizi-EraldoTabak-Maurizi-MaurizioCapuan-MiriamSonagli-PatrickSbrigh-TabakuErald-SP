@@ -3,11 +3,10 @@ package it.unibo.superpeach.powerups;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.graphics.Texturer;
 import it.unibo.superpeach.blocks.Block;
 import it.unibo.superpeach.blocks.BlocksHandler;
 import it.unibo.superpeach.blocks.Block.BlockType;
-import it.unibo.superpeach.powerups.graphics.Textures;
-
 
 public abstract class PowerUp {
 
@@ -28,8 +27,8 @@ public abstract class PowerUp {
     private BlocksHandler blocksHandler;
 
     private int PADDING_BOUND;
-    private Textures textures = Game.getPowerupsTextures();
-    private BufferedImage[] image = textures.getPowerups();
+    private Texturer texturer = Game.getTexturer();
+    private BufferedImage[] image = texturer.getPowerups();
     
     public PowerUp(int x, int y, int w, int h, int s, BlocksHandler blocksHandler, PowerUpType type) {
         this.x = x*s;
@@ -49,12 +48,12 @@ public abstract class PowerUp {
 
     public abstract void tick();
 
-    public Textures getTextures() {
-        return textures;
+    public Texturer getTexturer() {
+        return texturer;
     }
 
-    public void setTextures(Textures textures) {
-        this.textures = textures;
+    public void setTextures(Texturer texturer) {
+        this.texturer = texturer;
     }
 
     public BufferedImage[] getImage() {
