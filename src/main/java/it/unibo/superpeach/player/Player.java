@@ -170,7 +170,7 @@ public abstract class Player {
     public void showRectangle(Graphics g) {
         Graphics2D graph = (Graphics2D) g;
         graph.setColor(Color.BLACK);
-        graph.draw(getBottomBound());
+        //graph.draw(getBottomBound());
         graph.draw(getTopBound());
         //graph.draw(getLeftBound());
         //graph.draw(getRightBound());
@@ -182,8 +182,7 @@ public abstract class Player {
         if(typePowerUp == PowerUpType.RED_MUSHROOM){
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound)*((padding_bound/getScale())));
         }
-        //return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/2)*((padding_bound)/getScale()));
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/getScale())*(padding_bound/getScale()));
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/getScale())*(padding_bound/2));
     }
 
     public Rectangle getBottomBound(){
@@ -457,28 +456,30 @@ public abstract class Player {
     }
 
     private void dead(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM || typePowerUp == PowerUpType.STAR){
-            if(lastPowerUp != PowerUpType.RED_MUSHROOM){
-                this.height /= 2;
-                typePowerUp = null;
+        if(typePowerUp == PowerUpType.RED_MUSHROOM){
+            lastPowerUp = typePowerUp;
+            this.height /= 2;
+            typePowerUp = null;
+        }
+        if(typePowerUp == PowerUpType.STAR){
+            if(lastPowerUp == PowerUpType.RED_MUSHROOM){
+                lastPowerUp = typePowerUp;
+                typePowerUp = PowerUpType.RED_MUSHROOM;
             }
             else{
-                typePowerUp = PowerUpType.RED_MUSHROOM;
-                setX(respawnX);
-                setY(respawnY);
+                lastPowerUp = typePowerUp;
+                typePowerUp = null;
             }
-            lastPowerUp = typePowerUp;
         }
         else{
             life--;
             scoreboard.removeHeart();
             if (life < 0) {
                 this.hasLost = true;
-            } else {
-                setX(respawnX);
-                setY(respawnY);
             }
         }
+        setX(respawnX);
+        setY(respawnY);
     }
 
     public PowerUpType whatPowerUp(){
