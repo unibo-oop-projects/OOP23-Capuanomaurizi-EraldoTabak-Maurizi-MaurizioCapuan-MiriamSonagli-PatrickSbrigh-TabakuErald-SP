@@ -59,11 +59,11 @@ public class Game extends Canvas implements Runnable {
         enemiesHandler = new EnemiesHandler();
         playerHandler = new PlayerHandler();
         powerupsHandler = new PowerupsHandler();
+        scoreboard = new Scoreboard(3, 7, GAME_SCALE);
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG, PLAYER_DEFAULT_WID_HEIG, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));// TOFIX
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE, enemiesHandler);
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH, GAME_SCALE);
-        scoreboard = new Scoreboard(3, 7, GAME_SCALE);
         this.addKeyListener(new Keyboard(playerHandler));
         start();
     }
