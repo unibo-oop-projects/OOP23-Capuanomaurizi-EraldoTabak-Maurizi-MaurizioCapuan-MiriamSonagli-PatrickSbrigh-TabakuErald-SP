@@ -13,9 +13,7 @@ public class TexturerEnemies {
     private static final int KOOPA_HEIGHT = 23;
 
     private BufferedImageLoaderEnemies loader;
-
     private BufferedImage enemySet;
-
     public BufferedImage[] goomba, koopaTroopa, flyingKoopa;
 
     public TexturerEnemies() {
