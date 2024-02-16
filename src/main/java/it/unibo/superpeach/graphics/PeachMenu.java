@@ -8,21 +8,21 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class PeachMenu extends JFrame {
+public class PeachMenu {
 
     private JFrame frame;
     private Dimension size;
-    private final Game game;
     private Clip clip;
 
     public PeachMenu(String title, int width, int height, int scale, Game game) {
-        this.game = game;
         size = new Dimension(width * scale, height * scale);
         frame = new JFrame(title);
         ImageIcon imageIcon = new ImageIcon("src/main/resources/it/unibo/superpeach/icon/peach_icon.png");
@@ -32,13 +32,12 @@ public class PeachMenu extends JFrame {
         frame.setMinimumSize(size);
         frame.setMaximumSize(size);
         frame.setResizable(false);
-        frame.setLocationRelativeTo(null); //centre screen
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
 
         Color customColor = new Color(218, 165, 32);    //SFONDO BOTTONI
         Color customColor1 = new Color(101, 67, 33);    //PER LE SCRITTE
+        Border border = BorderFactory.createLineBorder(customColor1, 2, true);
 
         String imagePath = "src/main/resources/it/unibo/superpeach/tiles/background.png";
         ImagePanel panel = new ImagePanel(imagePath);
@@ -67,12 +66,14 @@ public class PeachMenu extends JFrame {
 
         
         // GUI SCALE BUTTON
-        String[] GUIScaleList = {"Tiny", "Small", "Medium", "Large"};
+        String[] GUIScaleList = {"GUI SCALE", "Tiny", "Small", "Medium", "Large"};
         JComboBox<String> GUIComboBox = new JComboBox<>(GUIScaleList);
         GUIComboBox.setLayout(new FlowLayout());
         GUIComboBox.setBackground(customColor);
         GUIComboBox.setForeground(customColor1);
         GUIComboBox.setFont(new Font("Monospaced", Font.BOLD, 10*scale));
+        GUIComboBox.setBorder(border);
+        GUIComboBox.setFocusable(false);
 
         GUIComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
@@ -83,65 +84,55 @@ public class PeachMenu extends JFrame {
             }
         });
 
-        CustomButton GUIScaleButton = new CustomButton("GUI SCALE", customColor, customColor1, scale);
-        GUIComboBox.setPreferredSize(GUIScaleButton.getPreferredSize());
-        GUIComboBox.setMaximumSize(GUIScaleButton.getPreferredSize());
-
-        GUIScaleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GUIScaleButton.add(GUIComboBox);
-            }
-        });
-
+        GUIComboBox.setPreferredSize(startButton.getPreferredSize());
+        GUIComboBox.setMaximumSize(startButton.getPreferredSize());
         GUIComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 stopBackgroundMusic(); // Ferma la riproduzione della canzone corrente
-                GUIComboBox.setPreferredSize(GUIScaleButton.getPreferredSize());
-                GUIComboBox.setMaximumSize(GUIScaleButton.getPreferredSize());
+                GUIComboBox.setPreferredSize(startButton.getPreferredSize());
+                GUIComboBox.setMaximumSize(startButton.getPreferredSize());
                 String selectedScale = (String) GUIComboBox.getSelectedItem();
-                int scalerange = 1;
-                switch (selectedScale) {
-                    case "Tiny":
-                        scalerange = 1;
-                        break;
-                
-                    case "Small":
-                        scalerange = 2;
-                        break;
+                if (!selectedScale.equals("GUI SCALE")) {
+                    int scalerange = 2;
+                    switch (selectedScale) {
+                        case "Tiny":
+                            scalerange = 1;
+                            break;
+                    
+                        case "Small":
+                            scalerange = 2;
+                            break;
 
                         case "Medium":
-                        scalerange = 3;
-                        break;
-                        
+                            scalerange = 3;
+                            break;
+                            
                         case "Large":
-                        scalerange = 4;
-                        break;
-                    }
-                game.changeScale(scalerange);
-                GUIComboBox.getParent().revalidate();
-                GUIComboBox.getParent().repaint();
+                            scalerange = 4;
+                            break;
+                        }
+                    game.changeScale(scalerange);
+                }
             }
         });
-        getContentPane().add(GUIComboBox, BorderLayout.CENTER);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        panel.add(GUIScaleButton);
+        frame.getContentPane().add(GUIComboBox, BorderLayout.CENTER);
+        panel.add(GUIComboBox);
         panel.add(Box.createVerticalStrut(10 * scale));
         
         // MUSIC BUTTON
         String sound1 = new String("src/main/resources/it/unibo/superpeach/music/sound1.wav");
         String sound2 = new String("src/main/resources/it/unibo/superpeach/music/sound2.wav");
         String sound3 = new String("src/main/resources/it/unibo/superpeach/music/sound3.wav");
-        String[] songList = {"n. 1", "n. 2", "n. 3"};
+        String[] songList = {"MUSIC", "n. 1", "n. 2", "n. 3", "no music"};
         JComboBox<String> songComboBox = new JComboBox<>(songList);
         songComboBox.setLayout(new FlowLayout());
         songComboBox.setBackground(customColor);
         songComboBox.setForeground(customColor1);
         songComboBox.setFont(new Font("Monospaced", Font.BOLD, 10*scale));
-
+        songComboBox.setBorder(border);
+        songComboBox.setFocusable(false);
+        
         songComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -150,45 +141,39 @@ public class PeachMenu extends JFrame {
                 return label;
             }
         });
-
-        CustomButton optionsButton = new CustomButton("MUSIC", customColor, customColor1, scale);
-        songComboBox.setPreferredSize(optionsButton.getPreferredSize());
-        songComboBox.setMaximumSize(optionsButton.getPreferredSize());
-        optionsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                optionsButton.add(songComboBox);
-            }
-        });
-
+        
+        songComboBox.setPreferredSize(startButton.getPreferredSize());
+        songComboBox.setMaximumSize(startButton.getPreferredSize());
         songComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedSong = (String) songComboBox.getSelectedItem();
-                String path = "";
-                switch (selectedSong) {
-                    case "n. 1":
-                        path = sound1;
-                        break;
-                
-                    case "n. 2":
-                        path = sound2;
-                        break;
+                if (!selectedSong.equals("MUSIC")) {
+                    if (!selectedSong.equals("no music")) {
+                        String path = "";
+                        switch (selectedSong) {
+                            case "n. 1":
+                                path = sound1;
+                                break;
+                        
+                            case "n. 2":
+                                path = sound2;
+                                break;
 
-                    case "n. 3":
-                        path = sound3;
-                        break;
+                            case "n. 3":
+                                path = sound3;
+                                break;
+                        }
+                        playSong(path);
+                    } else {
+                        stopBackgroundMusic();
+                    }
                 }
-
-                playSong(path);
             }
         });
 
-        getContentPane().add(songComboBox, BorderLayout.CENTER);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        panel.add(optionsButton);
+        frame.getContentPane().add(songComboBox, BorderLayout.CENTER);
+        panel.add(songComboBox);
         panel.add(Box.createVerticalStrut(10 * scale));
         
         // EXIT BUTTON
@@ -200,7 +185,8 @@ public class PeachMenu extends JFrame {
             }
         });
         panel.add(exitButton);
-
+        
+        frame.setLocationRelativeTo(null);
         frame.add(panel);
         frame.setVisible(true);
     }
