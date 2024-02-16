@@ -5,11 +5,14 @@ import it.unibo.superpeach.game.Game;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 public class PeachMenu extends JFrame {
 
@@ -61,6 +64,46 @@ public class PeachMenu extends JFrame {
         panel.add(startButton);
         panel.add(Box.createVerticalStrut(10 * scale));
 
+        String sound1 = new String("src/main/resources/it/unibo/superpeach/music/sound1.wav");
+        String sound2 = new String("src/main/resources/it/unibo/superpeach/music/sound2.wav");
+        String sound3 = new String("src/main/resources/it/unibo/superpeach/music/sound3.wav");
+
+        String[] songList = {sound1, sound2, sound3};
+        JComboBox<String> songComboBox = new JComboBox<>(songList);
+        songComboBox.setLayout(new FlowLayout());
+        songComboBox.setBackground(customColor);
+        songComboBox.setForeground(customColor1);
+        songComboBox.setFont(new Font("Monospaced", Font.BOLD, 10*scale));
+
+        CustomButton optionsButton = new CustomButton("MUSIC", customColor, customColor1, scale);
+        songComboBox.setPreferredSize(optionsButton.getPreferredSize());
+        songComboBox.setMaximumSize(optionsButton.getPreferredSize());
+        optionsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                optionsButton.add(songComboBox);
+            }
+        });
+
+        songComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedSong = (String) songComboBox.getSelectedItem();
+                playSong(selectedSong);
+            }
+        });
+
+        getContentPane().add(songComboBox, BorderLayout.CENTER);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        panel.add(optionsButton);
+        panel.add(Box.createVerticalStrut(10 * scale));
+
+
+
+        /*
         CustomButton optionsButton = new CustomButton("MUSIC", customColor, customColor1, scale);
         optionsButton.addActionListener(new ActionListener() {
             @Override
@@ -76,51 +119,12 @@ public class PeachMenu extends JFrame {
                 //JPanel optionsPanel = new JPanel();
                 optionsPanel.setLayout(new FlowLayout());
 
-                String[] songList = {
-                        "src/main/resources/it/unibo/superpeach/music/sound1.wav",
-                        "src/main/resources/it/unibo/superpeach/music/sound2.wav",
-                        "src/main/resources/it/unibo/superpeach/music/sound3.wav"
-                };
-
-                JComboBox<String> songComboBox = new JComboBox<>(songList);
-                optionsPanel.add(songComboBox);
-
-                CustomButton selectButton = new CustomButton("Select", customColor, customColor1, scale/2);
-                selectButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String selectedSong = (String) songComboBox.getSelectedItem();
-                        updateSong(selectedSong);
-                        optionsFrame.dispose();
-                    }
-                });
-                optionsPanel.add(selectButton);
-
-                optionsFrame.add(optionsPanel);
-                optionsFrame.setLocationRelativeTo(null);
-                optionsFrame.setVisible(true);
-            }
-
-            private void updateSong(String selectedSong) {
-                if (clip != null && clip.isRunning()) {
-                    clip.stop();
-                    clip.close();
-                }
-
-                File audioFile = new File(selectedSong);
-                try {
-                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-                    clip = AudioSystem.getClip();
-                    clip.open(audioStream);
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
             }
 
         });
         panel.add(optionsButton);
         panel.add(Box.createVerticalStrut(10 * scale));
+        */
 
         CustomButton GUIScaleButton = new CustomButton("GUI Scale: " + scale, customColor, customColor1, scale);
         GUIScaleButton.addActionListener(new ActionListener() {
@@ -144,6 +148,23 @@ public class PeachMenu extends JFrame {
 
         frame.add(panel);
         frame.setVisible(true);
+    }
+
+    private void playSong(String songFilePath) {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
+        }
+
+        try {
+            File audioFile = new File(songFilePath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void stopBackgroundMusic() {
