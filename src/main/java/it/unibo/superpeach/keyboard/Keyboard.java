@@ -3,6 +3,7 @@ package it.unibo.superpeach.keyboard;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.player.PlayerHandler;
 
 public class Keyboard extends KeyAdapter {
@@ -30,7 +31,7 @@ public class Keyboard extends KeyAdapter {
         }
         
         if(pressed == KeyEvent.VK_ESCAPE){
-
+            Game.restart();
         }
     }
     @Override

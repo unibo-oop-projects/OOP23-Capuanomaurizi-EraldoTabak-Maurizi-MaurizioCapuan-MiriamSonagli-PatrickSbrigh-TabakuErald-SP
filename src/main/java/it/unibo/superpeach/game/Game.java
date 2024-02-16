@@ -80,6 +80,11 @@ public class Game extends Canvas implements Runnable {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
+    public static synchronized void restart() {
+        window.closeWindow();
+        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
+    }
+
     private synchronized void stop() {
         try {
             mainGameLoop.join();
