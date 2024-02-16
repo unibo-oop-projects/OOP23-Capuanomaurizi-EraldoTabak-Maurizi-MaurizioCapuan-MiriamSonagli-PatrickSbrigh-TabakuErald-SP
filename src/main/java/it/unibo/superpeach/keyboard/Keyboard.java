@@ -4,7 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.player.PlayerHandler;
+import it.unibo.superpeach.gameObjects.player.PlayerHandler;
 
 public class Keyboard extends KeyAdapter {
     private PlayerHandler playHand;

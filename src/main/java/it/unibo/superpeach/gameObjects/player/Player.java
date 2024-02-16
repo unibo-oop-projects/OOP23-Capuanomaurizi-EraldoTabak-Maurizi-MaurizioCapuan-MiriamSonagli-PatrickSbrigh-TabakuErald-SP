@@ -1,18 +1,18 @@
-package it.unibo.superpeach.player;
+package it.unibo.superpeach.gameObjects.player;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import it.unibo.superpeach.blocks.Block;
-import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.blocks.MapFixedBlock;
-import it.unibo.superpeach.blocks.Block.BlockType;
-import it.unibo.superpeach.enemies.EnemiesHandler;
-import it.unibo.superpeach.enemies.Enemy;
 import it.unibo.superpeach.game.Scoreboard;
-import it.unibo.superpeach.powerups.PowerUp;
-import it.unibo.superpeach.powerups.PowerupsHandler;
-import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
+import it.unibo.superpeach.gameObjects.blocks.Block;
+import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameObjects.blocks.MapFixedBlock;
+import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
+import it.unibo.superpeach.gameObjects.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameObjects.enemies.Enemy;
+import it.unibo.superpeach.gameObjects.powerups.PowerUp;
+import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 
 public abstract class Player {
     private static final int FALL_SPEED = 3;

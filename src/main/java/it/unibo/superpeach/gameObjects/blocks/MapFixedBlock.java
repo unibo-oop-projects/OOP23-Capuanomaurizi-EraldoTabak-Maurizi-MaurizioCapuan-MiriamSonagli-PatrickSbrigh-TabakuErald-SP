@@ -1,8 +1,8 @@
-package it.unibo.superpeach.blocks;
+package it.unibo.superpeach.gameObjects.blocks;
 
 import java.awt.Graphics;
 
-import it.unibo.superpeach.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 
 public class MapFixedBlock extends Block{
 

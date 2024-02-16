@@ -6,16 +6,16 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameObjects.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameObjects.player.Peach;
+import it.unibo.superpeach.gameObjects.player.PlayerHandler;
+import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 import it.unibo.superpeach.graphics.PeachMenu;
 import it.unibo.superpeach.graphics.Texturer;
 import it.unibo.superpeach.keyboard.Keyboard;
 import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
-import it.unibo.superpeach.player.Peach;
-import it.unibo.superpeach.player.PlayerHandler;
-import it.unibo.superpeach.powerups.PowerupsHandler;
 
 public class Game extends Canvas implements Runnable {
 

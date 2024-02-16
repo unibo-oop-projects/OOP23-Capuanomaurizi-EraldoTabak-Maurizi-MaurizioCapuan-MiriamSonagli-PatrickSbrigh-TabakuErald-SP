@@ -1,8 +1,8 @@
-package it.unibo.superpeach.enemies;
+package it.unibo.superpeach.gameObjects.enemies;
 
 import java.awt.*;
 
-import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
 public class FlyingKoopa extends Enemy {
 

@@ -1,10 +1,9 @@
-package it.unibo.superpeach.blocks;
+package it.unibo.superpeach.gameObjects.blocks;
 
 import java.awt.Graphics;
 
-import it.unibo.superpeach.powerups.*;
-import it.unibo.superpeach.powerups.Star;
-import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
+import it.unibo.superpeach.gameObjects.powerups.*;
+import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 
 public class LuckyBlock extends MapFixedBlock{
 

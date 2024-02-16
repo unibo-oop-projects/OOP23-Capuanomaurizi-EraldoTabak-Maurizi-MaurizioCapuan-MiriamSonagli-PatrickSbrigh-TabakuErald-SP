@@ -1,8 +1,8 @@
-package it.unibo.superpeach.powerups;
+package it.unibo.superpeach.gameObjects.powerups;
 
 import java.awt.*;
 
-import it.unibo.superpeach.blocks.BlocksHandler;
+import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
 public class Coin extends PowerUp{
 

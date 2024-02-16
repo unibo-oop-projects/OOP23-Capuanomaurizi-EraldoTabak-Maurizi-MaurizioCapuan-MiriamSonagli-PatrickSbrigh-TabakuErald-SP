@@ -1,12 +1,12 @@
-package it.unibo.superpeach.powerups;
+package it.unibo.superpeach.gameObjects.powerups;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.gameObjects.blocks.Block;
+import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
 import it.unibo.superpeach.graphics.Texturer;
-import it.unibo.superpeach.blocks.Block;
-import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.blocks.Block.BlockType;
 
 public abstract class PowerUp {
 

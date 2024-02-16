@@ -1,15 +1,15 @@
-package it.unibo.superpeach.player;
+package it.unibo.superpeach.gameObjects.player;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.game.Scoreboard;
+import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameObjects.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.Texturer;
-import it.unibo.superpeach.powerups.PowerupsHandler;
-import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public class Peach extends Player{
     private static final int SPEED_X = 4;
