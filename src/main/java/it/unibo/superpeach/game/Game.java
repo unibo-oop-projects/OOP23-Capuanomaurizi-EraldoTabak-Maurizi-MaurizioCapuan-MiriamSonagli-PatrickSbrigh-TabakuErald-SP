@@ -2,6 +2,7 @@ package it.unibo.superpeach.game;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -24,6 +25,7 @@ public class Game extends Canvas implements Runnable {
     // GAME CONSTANTS
     private static final int MILLS_PER_SECOND = 1000;
     private static final int NANOS_PER_SECOND = 1000000000;
+    private static final int GRAPHICS_BUFFERS = 3;
     private static final double TICKS_PER_SECOND = 60.0;
     private static final String GAME_NAME = "Super Peach";
     private static final int WINDOW_WIDTH = 480;
@@ -35,6 +37,8 @@ public class Game extends Canvas implements Runnable {
     // GAME VARIABLES
     private boolean running;
     private static int GAME_SCALE = 2;
+    private boolean gameOver = false;
+    private int gameOverBuffers = 0;
 
     // GAME COMPONENTS
     private Thread mainGameLoop;
@@ -68,7 +72,7 @@ public class Game extends Canvas implements Runnable {
         playerTexture = new PlayerTexture();
         powerupsHandler = new PowerupsHandler();
         scoreboard = new Scoreboard(3, 7, GAME_SCALE);
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG, PLAYER_DEFAULT_WID_HEIG, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler));// TOFIX
+        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG, PLAYER_DEFAULT_WID_HEIG, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
     }
@@ -114,12 +118,11 @@ public class Game extends Canvas implements Runnable {
             if (running) {
                 render();
             }
+            
             if (System.currentTimeMillis() - timer >= MILLS_PER_SECOND) {
                 timer += MILLS_PER_SECOND;
             }
         }
-
-        stop();
     }
 
     private void tick() {
@@ -127,6 +130,9 @@ public class Game extends Canvas implements Runnable {
         enemiesHandler.tickEnemies();
         powerupsHandler.tickPowerups();
         camera.tick(playerHandler.getPlayer());
+        if(playerHandler.getPlayer().hasLost() || playerHandler.getPlayer().hasWon()){
+            gameOver = true;
+        }
     }
 
     private void render() {
@@ -137,18 +143,38 @@ public class Game extends Canvas implements Runnable {
         }
         Graphics g = buffStrat.getDrawGraphics();
 
-        g.setColor(Color.PINK);
-        g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
-        g.translate(camera.getCameraX(), camera.getCameraY());
-
-        blocksHandler.renderBlocks(g);
-        enemiesHandler.renderEnemies(g);
-        playerHandler.render(g);
-        powerupsHandler.renderPowerups(g);
-        scoreboard.render(g, playerHandler.getPlayer().getX());
-
+        if(!gameOver){
+            g.setColor(Color.PINK);
+            g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
+            g.translate(camera.getCameraX(), 0);
+            blocksHandler.renderBlocks(g);
+            enemiesHandler.renderEnemies(g);
+            playerHandler.render(g);
+            powerupsHandler.renderPowerups(g);
+            scoreboard.render(g, playerHandler.getPlayer().getX());
+        }
+        else{
+            gameOverBuffers++;
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
+            g.translate(0, 0);
+            g.setColor(Color.PINK);
+            g.setFont(new Font("Monospaced", Font.BOLD, 25*GAME_SCALE));
+            if(playerHandler.getPlayer().hasWon()){
+                g.drawString("Game Over", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 40*GAME_SCALE);
+                g.drawString("You WON!", WINDOW_WIDTH*GAME_SCALE/3 + 10*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE/2 - 15*GAME_SCALE);
+                g.drawString("SCORE: " + playerHandler.getPlayer().getPoint(), WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
+            } else {
+                g.drawString("Game Over", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 25*GAME_SCALE);
+                g.drawString("You LOSE", WINDOW_WIDTH*GAME_SCALE/3 + 7*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
+            }
+            if(gameOverBuffers == GRAPHICS_BUFFERS){
+                stop();
+            }
+        }
         g.dispose();
         buffStrat.show();
+
     }
 
     public static Texturer getBlocksTexturer() {

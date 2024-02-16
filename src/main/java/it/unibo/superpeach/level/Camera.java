@@ -6,7 +6,6 @@ public class Camera {
 
     private final int gameWidth;
     private int cameraX;
-    private int cameraY = 0;
 
     public Camera(int width, int scale){
         gameWidth = width*scale;
@@ -20,15 +19,8 @@ public class Camera {
         this.cameraX = x;
     }
 
-    public void setCameraY(int y) {
-        this.cameraY = y;
-    }
-
     public int getCameraX() {
         return cameraX;
     }
 
-    public int getCameraY() {
-        return cameraY;
-    }
 }

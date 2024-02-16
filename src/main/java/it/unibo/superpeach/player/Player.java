@@ -11,6 +11,7 @@ import it.unibo.superpeach.blocks.MapFixedBlock;
 import it.unibo.superpeach.blocks.Block.BlockType;
 import it.unibo.superpeach.enemies.EnemiesHandler;
 import it.unibo.superpeach.enemies.Enemy;
+import it.unibo.superpeach.game.Scoreboard;
 import it.unibo.superpeach.powerups.PowerUp;
 import it.unibo.superpeach.powerups.PowerupsHandler;
 import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
@@ -38,6 +39,7 @@ public abstract class Player {
     private BlocksHandler blocksHandler;
     private EnemiesHandler enemiesHandler;
     private PowerupsHandler powerupsHandler;
+    private Scoreboard scoreboard;
     private int moveX;
     private int moveY;
     private int padding_bound;
@@ -54,7 +56,7 @@ public abstract class Player {
     private int numTickStar;
     private int coins;
 
-    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powersUpHandler){
+    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powersUpHandler, Scoreboard scoreboard){
         this.width = width*scale;
         this.height = height*scale;
         this.x = x*scale;
@@ -67,6 +69,7 @@ public abstract class Player {
         this.moveY = 0;
         this.padding_bound = PADDING*getScale();
         this.enemiesHandler = enemiesHandler;
+        this.scoreboard = scoreboard;
         this.point = 0;
         this.life = LIFE_START;
         this.addedPointFlag = false;
@@ -515,22 +518,20 @@ public abstract class Player {
             if(touchPowerUp(power)){
                 switch (power.getPowerUpType()) {
                     case COIN:
+                        scoreboard.collectCoin();
                         coins++;
-                        power.die();
                         break;
                     case RED_MUSHROOM:
                         becomeBig();
-                        power.die();
                         break;
                     case STAR:
                         typePowerUp = PowerUpType.STAR;
-                        power.die();
                         break;
                     case LIFE_MUSHROOM:
                         life++;
-                        power.die();
                         break;
                 }
+                power.die();
             }
         }
     }
@@ -554,11 +555,12 @@ public abstract class Player {
     private void dead(){
         if(typePowerUp == PowerUpType.RED_MUSHROOM){
            typePowerUp = null;
-           this.height /=2;
+           this.height /= 2;
         }
         else{
             life--;
-            if (life < 1) {
+            scoreboard.removeHeart();
+            if (life < 0) {
                 this.hasLost = true;
             } else {
                 setX(respawnX);
@@ -620,7 +622,7 @@ public abstract class Player {
         return this.hasWon;
     }
 
-    public boolean hadLost() {
+    public boolean hasLost() {
         return this.hasLost;
     }
 
