@@ -76,7 +76,7 @@ public abstract class Player {
         this.consecutiveJumps = 0;
         this.hasWon = false;
         this.hasLost = false;
-        this.typePowerUp = PowerUpType.STAR;
+        this.typePowerUp = null;
         this.numTickStar = 0;
         this.powerupsHandler = powersUpHandler;
         this.coins = 0;
@@ -643,11 +643,24 @@ public abstract class Player {
 
         for(PowerUp power : powerupsHandler.getPowerups()){
             if(touchPowerUp(power)){
-                //controlla il tipo di power up
-                // sevita aggiungi vita
-                //se soldo somma soldo
-                //se fungo chiama become big
-                //se stella rendi stella
+                switch (power.getPowerUpType()) {
+                    case COIN:
+                        coins++;
+                        power.die();
+                        break;
+                    case RED_MUSHROOM:
+                        becomeBig();
+                        power.die();
+                        break;
+                    case STAR:
+                        typePowerUp = PowerUpType.STAR;
+                        power.die();
+                        break;
+                    case LIFE_MUSHROOM:
+                        life++;
+                        power.die();
+                        break;
+                }
             }
         }
     }
@@ -657,8 +670,8 @@ public abstract class Player {
     }
 
     private boolean touchPowerUp(PowerUp power){
-        return false;
-        //controlla se tocco il power up
+        return power.getBounds().intersects(getBottomBound()) || power.getBounds().intersects(getTopBound()) 
+            || power.getBounds().intersects(getLeftBound()) || power.getBounds().intersects(getRightBound());
     }
 
     private void becomeBig(){
