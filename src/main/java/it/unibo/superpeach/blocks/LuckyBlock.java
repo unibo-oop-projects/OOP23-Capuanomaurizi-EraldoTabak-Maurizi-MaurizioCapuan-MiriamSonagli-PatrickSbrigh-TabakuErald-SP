@@ -33,20 +33,16 @@ public class LuckyBlock extends MapFixedBlock{
         if(getType() == BlockType.LUCKY){
             switch (containedPowerUp) {
                 case RED_MUSHROOM:
-                    powerupsHandler.addPowerUp(new Star(getX()/getScale(), getY()/getScale()-16, 16, 16, getScale(), blocksHandler));
-                    //System.out.println(getScale());
+                    powerupsHandler.addPowerUp(new RedMushroom(getX()/getScale(), getY()/getScale()-16, 16, 16, getScale(), blocksHandler));
                     break;
                 case STAR:
-                    powerupsHandler.addPowerUp(new Star(getX(), getY()-16*getScale(), getWidth(), getHeight(), getScale(), blocksHandler));
-                    System.out.println("star creato");
+                    powerupsHandler.addPowerUp(new Star(getX()/getScale(), getY()/getScale()-16, 16, 16, getScale(), blocksHandler));
                     break;
                 case LIFE_MUSHROOM:
-                    powerupsHandler.addPowerUp(new LifeMushroom(getX(), getY()-16*getScale(), getWidth(), getHeight(), getScale(), blocksHandler));
-                    System.out.println("life creato");
+                    powerupsHandler.addPowerUp(new LifeMushroom(getX()/getScale(), getY()/getScale()-16, 16, 16, getScale(), blocksHandler));
                     break;
                 case COIN:
-                    powerupsHandler.addPowerUp(new Coin(getX(), getY()-16*getScale(), getWidth(), getHeight(), getScale(), blocksHandler));
-                    System.out.println("coin creato");
+                    powerupsHandler.addPowerUp(new Coin(getX()/getScale(), getY()/getScale()-16, 16, 16, getScale(), blocksHandler));
                     break;
             }
             setType(BlockType.POPPED_LUCKY);

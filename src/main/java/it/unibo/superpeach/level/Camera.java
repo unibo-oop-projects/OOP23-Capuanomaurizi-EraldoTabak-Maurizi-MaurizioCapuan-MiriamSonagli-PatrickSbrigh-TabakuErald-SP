@@ -5,18 +5,15 @@ import it.unibo.superpeach.player.Player;
 public class Camera {
 
     private final int gameWidth;
-    //private final int gameHeight;
     private int cameraX;
-    private int cameraY;
+    private int cameraY = 0;
 
-    public Camera(int width, int height, int scale){
+    public Camera(int width, int scale){
         gameWidth = width*scale;
-        //gameHeight = height*scale;
     }
 
     public void tick(Player p){
         cameraX = gameWidth/2 - p.getX();
-        cameraY = 0;
     }
 
     public void setCameraX(int x) {

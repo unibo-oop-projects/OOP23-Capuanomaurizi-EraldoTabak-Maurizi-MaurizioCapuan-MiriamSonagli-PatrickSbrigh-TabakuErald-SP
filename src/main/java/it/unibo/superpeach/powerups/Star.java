@@ -10,12 +10,11 @@ public class Star extends PowerUp{
         super(x, y, w, h, s, blocksHandler);
         setMovement(2);
         setIsFalling(false);
-        System.out.println(getX()+" "+getY());
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getImage()[2],getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(getImage()[2], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
@@ -23,7 +22,6 @@ public class Star extends PowerUp{
         setIsFalling(true);
         collisions();
         updateCoords();
-        System.out.println(getX()+" "+getY());
     }
     
 }

@@ -13,6 +13,8 @@ public abstract class PowerUp {
 
     public enum PowerUpType { RED_MUSHROOM, STAR, LIFE_MUSHROOM, COIN};
 
+    private static final int FALL_SPEED = 1;
+
     private int x;
     private int y;
     private int width;
@@ -27,7 +29,6 @@ public abstract class PowerUp {
     private int PADDING_BOUND;
     private Textures textures = Game.getPowerupsTextures();
     private BufferedImage[] image = textures.getPowerups();
-
     
     public PowerUp(int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
         this.x = x*s;
@@ -102,7 +103,7 @@ public abstract class PowerUp {
         this.movement = movement;
     }
 
-    public double getMovement() {
+    public int getMovement() {
         return this.movement;
     }
 
@@ -118,18 +119,6 @@ public abstract class PowerUp {
        return movement;
     }
 
-    public void movesRight(int movement){
-        this.setX(this.getX() + movement);
-    }
-
-    public void movesLeft(int movement) {
-        this.setX(this.getX() - movement);
-    }
-
-    public void fallingDown() {
-        this.y += this.movement;
-    }
-
     public boolean getDirection() {
         return this.direction;
     }
@@ -140,13 +129,13 @@ public abstract class PowerUp {
 
     public void updateCoords() {
         if (getDirection()) {
-            movesLeft(movement);
+            this.x -= this.movement;
         } else {
-            movesRight(movement);
+            this.x += this.movement;
         }
 
         if (this.isFalling) {
-            fallingDown();
+            this.y += FALL_SPEED;
         }
     }
 
@@ -172,8 +161,7 @@ public abstract class PowerUp {
     }
 
     public Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - PADDING_BOUND, getY() + PADDING_BOUND, PADDING_BOUND,
-                getHeight() - 2 * PADDING_BOUND);
+        return new Rectangle(getX() + getWidth() - PADDING_BOUND, getY() + PADDING_BOUND, PADDING_BOUND, getHeight() - 2 * PADDING_BOUND);
     }
 
     public int getPaddingBound() {
@@ -199,12 +187,17 @@ public abstract class PowerUp {
     }
 
     private void setXCollisionRight(Block block) {
-        setX(block.getX() - getWidth() / getScale());
+        setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
 
     public void collisions() {
         for (Block block : blocksHandler.getBlocks()) {
+            if (block.getType() == BlockType.DEATH_BLOCK) {
+                if (block.getBoundingBox().intersects(getBottomBound())) {
+                    die();
+                }
+            }
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
@@ -222,11 +215,7 @@ public abstract class PowerUp {
                 } else if (block.getBoundingBox().intersects(getBottomBound())) {
                     setYCollisionBottom(block);
                 }
-            } else if (block.getType() == BlockType.DEATH_BLOCK) {
-                if (block.getBoundingBox().intersects(getBottomBound())) {
-                    die();
-                }
-            }
+            } 
         }
     }
 

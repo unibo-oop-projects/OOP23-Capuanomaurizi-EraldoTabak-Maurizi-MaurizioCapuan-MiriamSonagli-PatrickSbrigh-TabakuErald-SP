@@ -2,7 +2,9 @@ package it.unibo.superpeach.powerups;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PowerupsHandler {
 
@@ -13,8 +15,16 @@ public class PowerupsHandler {
     }
 
     public void tickPowerups() {
-        for (PowerUp powerup : powerups) {
-            powerup.tick();
+        Set<PowerUp> powerupsToRemove = new HashSet<>();
+        for (PowerUp powerUp : powerups) {
+            powerUp.tick();
+            if (!powerUp.getIsAlive()) {
+                powerupsToRemove.add(powerUp);
+            }
+        }
+
+        for (PowerUp powerUp : powerupsToRemove) {
+            powerups.remove(powerUp);
         }
     }
 
@@ -24,12 +34,12 @@ public class PowerupsHandler {
         }
     }
 
-    public void addPowerUp(PowerUp b) {
-        powerups.add(b);
+    public void addPowerUp(PowerUp p) {
+        powerups.add(p);
     }
 
-    public void removePowerUp(PowerUp b) { // la cosa del null (?)
-        powerups.remove(b);
+    public void removePowerUp(PowerUp p) {
+        powerups.remove(p);
     }
 
     public List<PowerUp> getPowerups() {
