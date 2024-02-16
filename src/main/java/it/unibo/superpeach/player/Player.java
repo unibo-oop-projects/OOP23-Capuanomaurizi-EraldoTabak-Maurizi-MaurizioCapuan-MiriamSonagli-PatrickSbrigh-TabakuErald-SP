@@ -366,7 +366,10 @@ public abstract class Player {
                         typePowerUp = PowerUpType.STAR;
                         break;
                     case LIFE_MUSHROOM:
-                        life++;
+                        if(life < LIFE_START){
+                            life++;
+                            scoreboard.restoreHeart();
+                        }
                         break;
                 }
                 power.die();

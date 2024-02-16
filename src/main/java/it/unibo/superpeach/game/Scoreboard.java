@@ -54,6 +54,15 @@ public class Scoreboard {
         }
     }
 
+    public void restoreHeart(){
+        for (int i = 0; i < hearts.length; i++) {
+            if (hearts[i] == false) {
+                hearts[i] = true;
+                return;
+            }
+        }
+    }
+
     public void collectCoin(){
         for (int i = 0; i < coins.length; i++) {
             if (coins[i] == false) {
