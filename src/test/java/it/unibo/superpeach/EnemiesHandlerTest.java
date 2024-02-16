@@ -29,7 +29,7 @@ public class EnemiesHandlerTest {
     private final BlocksHandler blocksHandler = new BlocksHandler();
 
     @Test
-    void testAddEnemy() {
+    void testEnemyHandler() {
 
         // Check if there's no enemies to manage by the Enemy Handler
         assertNull(enemiesHandler);
