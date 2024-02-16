@@ -41,22 +41,22 @@ public class Peach extends Player{
 
     @Override
     public void moveLeft() {
-        if(whatPowerUp() == null){
-            spriteNeeded = LOOK_LEFT_NORM;
-        }
-        else if(whatPowerUp() == PowerUpType.STAR){
+        if(whatPowerUp() == PowerUpType.STAR){
             spriteNeeded = LOOK_LEFT_STAR;
+        }
+        else{
+            spriteNeeded = LOOK_LEFT_NORM;
         }
         setMoveX(-SPEED_X);
     }
 
     @Override
     public void moveRight() {
-        if(whatPowerUp() == null){
-            spriteNeeded = LOOK_RIGHT_NORM;
-        }
-        else if(whatPowerUp() == PowerUpType.STAR){
+        if(whatPowerUp() == PowerUpType.STAR){
             spriteNeeded = LOOK_RIGHT_STAR;
+        }
+        else{
+            spriteNeeded = LOOK_RIGHT_NORM;
         }
         setMoveX(SPEED_X);
     }
@@ -64,11 +64,11 @@ public class Peach extends Player{
     @Override
     public void jump() {
         if(!hasJumped() && canJump()){
-            if(whatPowerUp() == null){
-                spriteNeeded = JUMP_FALL_NORM;
-            }
-            else if(whatPowerUp() == PowerUpType.STAR){
+            if(whatPowerUp() == PowerUpType.STAR){
                 spriteNeeded = JUMP_FALL_STAR;
+            }
+            else{
+                spriteNeeded = JUMP_FALL_NORM;
             }
 
             if(whatPowerUp() == PowerUpType.RED_MUSHROOM){
