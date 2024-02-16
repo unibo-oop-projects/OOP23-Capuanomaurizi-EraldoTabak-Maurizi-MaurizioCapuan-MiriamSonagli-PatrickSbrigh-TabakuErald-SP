@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.util.HashSet;
-import java.util.Set;
 
 import it.unibo.superpeach.blocks.Block;
 import it.unibo.superpeach.blocks.BlocksHandler;
@@ -221,7 +219,7 @@ public abstract class Player {
                         || block.getBoundingBox().intersects(getTopBound())) {
                     setYCollisionTop(block);
                     changePoint(POINT_LUCKY_BRICK);
-                    block.popLuckyBlock();
+                    block.popLuckyBlock(powerupsHandler, blocksHandler);
                 } else if (block.getBoundingBox().contains(getBottomBound())) {
                     setYCollisionBottom(block);
                     resetCosecutiveJump();
