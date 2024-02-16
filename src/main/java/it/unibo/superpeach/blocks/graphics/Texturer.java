@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 public class Texturer {
 
     private static final int BRICKSCASTLEBLOCKS_COUNT = 16;
-    private static final int LUCKYBLOCKS_COUNT = 3;
+    private static final int LUCKYBLOCKS_COUNT = 2;
+    private static final int SCOREBOARD_COUNT = 4;
     private static final int PIPEBLOCKS_COUNT = 4;
     private static final int CLOUDBLOCKS_COUNT = 6;
     private static final int BUSHBLOCKS_COUNT = 3;
@@ -19,12 +20,13 @@ public class Texturer {
 
     private BufferedImage blocksSet;
 
-    public BufferedImage[] terrain, lucky, pipe, cloud, bush, hill, flag;
+    public BufferedImage[] terrain, lucky, scoreboard, pipe, cloud, bush, hill, flag;
 
     public Texturer() {
 
         terrain = new BufferedImage[BRICKSCASTLEBLOCKS_COUNT];
         lucky = new BufferedImage[LUCKYBLOCKS_COUNT];
+        scoreboard = new BufferedImage[SCOREBOARD_COUNT];
         pipe = new BufferedImage[PIPEBLOCKS_COUNT];
         cloud = new BufferedImage[CLOUDBLOCKS_COUNT];
         bush = new BufferedImage[BUSHBLOCKS_COUNT];
@@ -37,6 +39,7 @@ public class Texturer {
             blocksSet = loader.loadImage("it/unibo/superpeach/tiles/blocks_tile.png");
             loadTerrain();
             loadLucky();
+            loadScoreboard();
             loadPipe();
             loadCloud();
             loadBush();
@@ -64,7 +67,13 @@ public class Texturer {
     private void loadLucky() {
         lucky[0] = blocksSet.getSubimage(298, 78, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
         lucky[1] = blocksSet.getSubimage(349, 78, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
-        lucky[2] = blocksSet.getSubimage(298, 95, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+    }
+
+    private void loadScoreboard(){
+        scoreboard[0] = blocksSet.getSubimage(315, 78, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        scoreboard[1] = blocksSet.getSubimage(315, 95, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        scoreboard[2] = blocksSet.getSubimage(298, 95, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
+        scoreboard[3] = blocksSet.getSubimage(332, 95, TILE_BLOCK_WIDTH, TILE_BLOCK_HEIGHT);
     }
 
     private void loadPipe() {
@@ -121,6 +130,10 @@ public class Texturer {
 
     public BufferedImage[] getLucky() {
         return lucky;
+    }
+
+    public BufferedImage[] getScoreboard() {
+        return scoreboard;
     }
 
     public BufferedImage[] getPipe() {

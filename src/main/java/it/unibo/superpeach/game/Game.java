@@ -17,7 +17,6 @@ import it.unibo.superpeach.player.Peach;
 import it.unibo.superpeach.player.PlayerHandler;
 import it.unibo.superpeach.player.graphics.PlayerTexture;
 import it.unibo.superpeach.powerups.PowerupsHandler;
-import it.unibo.superpeach.powerups.Star;
 import it.unibo.superpeach.powerups.graphics.Textures;
 
 public class Game extends Canvas implements Runnable {
@@ -49,6 +48,7 @@ public class Game extends Canvas implements Runnable {
     private static TexturerEnemies enemiesTexture;
     private static Textures powerupsTexture;
     private PowerupsHandler powerupsHandler;
+    private Scoreboard scoreboard;
 
     public static void main(String[] args) {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
@@ -62,15 +62,14 @@ public class Game extends Canvas implements Runnable {
         blocksHandler = new BlocksHandler();
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE, enemiesHandler);
         levelHandler.drawLevel();
-        camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE);
+        camera = new Camera(WINDOW_WIDTH, GAME_SCALE);
         playerHandler = new PlayerHandler();
         playerTexture = new PlayerTexture();
         powerupsHandler = new PowerupsHandler();
-        powerupsHandler.addPowerUp(new Star(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 16, 2, blocksHandler));
+        scoreboard = new Scoreboard(3, 3, GAME_SCALE);
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, 16, 32, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler));// TOFIX
         this.addKeyListener(new Keyboard(playerHandler));
         start();
-
     }
 
     private synchronized void start() {
@@ -145,6 +144,7 @@ public class Game extends Canvas implements Runnable {
         enemiesHandler.renderEnemies(g);
         playerHandler.render(g);
         powerupsHandler.renderPowerups(g);
+        scoreboard.render(g, playerHandler.getPlayer().getX());
 
         g.dispose();
         buffStrat.show();
