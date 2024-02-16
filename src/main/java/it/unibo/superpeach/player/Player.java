@@ -182,7 +182,7 @@ public abstract class Player {
         if(typePowerUp == PowerUpType.RED_MUSHROOM){
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound)*((padding_bound/getScale())));
         }
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/2)*((padding_bound)/getScale()));
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/2)*((padding_bound/2)/getScale()));
     }
 
     public Rectangle getBottomBound(){
