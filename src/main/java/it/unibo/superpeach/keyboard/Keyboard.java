@@ -8,16 +8,20 @@ import it.unibo.superpeach.player.PlayerHandler;
 
 public class Keyboard extends KeyAdapter {
     private PlayerHandler playHand;
+    private static final long MIN_MILLS = 150;
+    private long current;
 
     public Keyboard(PlayerHandler handler){
         this.playHand = handler;
+        this.current = System.currentTimeMillis();
     }
     @Override
     public void keyPressed(KeyEvent e) {
         int pressed = e.getKeyCode();
     
         if(pressed == KeyEvent.VK_SPACE){
-            if(!playHand.getPlayer().hasJumped()){
+            if(!playHand.getPlayer().hasJumped() && (System.currentTimeMillis() - current)>=MIN_MILLS){
+                current = System.currentTimeMillis();
                 playHand.getPlayer().jump();
             }
         }

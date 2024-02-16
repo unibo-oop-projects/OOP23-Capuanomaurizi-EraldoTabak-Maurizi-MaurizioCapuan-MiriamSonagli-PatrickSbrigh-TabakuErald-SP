@@ -17,7 +17,7 @@ import it.unibo.superpeach.powerups.PowerupsHandler;
 import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public abstract class Player {
-    private static final int FALL_SPEED = 4;
+    private static final int FALL_SPEED = 3;
     private static final int LIFE_START = 3;
     private static final int POINT_LUCKY_BRICK = 200;
     private static final int POINT_WIN = 2000;
@@ -182,16 +182,15 @@ public abstract class Player {
         if(typePowerUp == PowerUpType.RED_MUSHROOM){
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound)*((padding_bound/getScale())));
         }
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/2)*((padding_bound/2)/getScale()));
+        //return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/2)*((padding_bound)/getScale()));
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/getScale())*(padding_bound/getScale()));
     }
 
     public Rectangle getBottomBound(){
         if(typePowerUp == PowerUpType.RED_MUSHROOM){
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
         }
-        else{
-            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/3), getWidth()/2, padding_bound/3);
-        }
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/2), getWidth()/2, padding_bound/2);
     }
 
     public Rectangle getLeftBound(){
@@ -286,47 +285,6 @@ public abstract class Player {
                         changePoint(POINT_LUCKY_BRICK);
                     }
                 }
-                /*if(block.getBoundingBox().contains(getBottomBound()) || block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
-                }
-                else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                    changePoint(POINT_LUCKY_BRICK);
-                    block.popLuckyBlock(powerupsHandler, blocksHandler);
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock(powerupsHandler, blocksHandler);
-                        changePoint(POINT_LUCKY_BRICK);
-                    }
-                }*/
             }
             else if(block.getType() == BlockType.POPPED_LUCKY){
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
@@ -352,23 +310,6 @@ public abstract class Player {
                 else if(block.getBoundingBox().intersects(getRightBound())){
                     setXCollisionRight(block);
                 }
-                /*if(block.getBoundingBox().contains(getBottomBound()) || (block.getBoundingBox().intersects(getBottomBound()))){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().contains(getTopBound()) || (block.getBoundingBox().intersects(getTopBound()))){
-                    setYCollisionTop(block);
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().contains(getRightBound())) {
-                    setXCollisionRight(block);
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().intersects(getRightBound())) {
-                    setXCollisionRight(block);
-                }*/
             }
             else if(block.getType() == BlockType.BRICK){
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
@@ -422,49 +363,6 @@ public abstract class Player {
                         blocksHandler.removeFixedBlock(block);
                     }
                 }
-                /*if(block.getBoundingBox().contains(getBottomBound()) || block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
-                }
-                else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                    if(typePowerUp != null){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
-                }*/
             }
             else if(block.getType() == BlockType.DEATH_BLOCK){
                 if(block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())

@@ -13,7 +13,7 @@ import it.unibo.superpeach.powerups.PowerUp.PowerUpType;
 
 public class Peach extends Player{
     private static final int SPEED_X = 4;
-    private static final int JUMP_HEIGHT_NORM = 45;
+    private static final int JUMP_HEIGHT_NORM = 52 ;
     private static final int JUMP_HEIGHT_BIG = 55;
     private static final int LOOK_RIGHT_NORM = 0;
     private static final int LOOK_LEFT_NORM = 1;
