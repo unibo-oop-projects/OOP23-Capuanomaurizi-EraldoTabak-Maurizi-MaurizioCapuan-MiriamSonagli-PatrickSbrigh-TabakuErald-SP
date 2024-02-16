@@ -44,8 +44,9 @@ public class PeachMenu extends JFrame {
         JLabel titleLabel = new JLabel("SUPER PEACH");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setFont(new Font("Monospaced", Font.BOLD, 40 * scale));
-        titleLabel.setForeground(customColor1);
+        titleLabel.setForeground(Color.PINK);
         panel.add(titleLabel);
+        panel.add(Box.createVerticalStrut(20 * scale));
 
         CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
         startButton.addActionListener(new ActionListener() {
