@@ -11,18 +11,15 @@ public class Goomba extends Enemy {
         setSpeed(1 * scale);
         setSprites(getTexturer().getGoombaImg());
         setIsFalling(false);
-
     }
 
     @Override
-    public void render(Graphics g) {
-        g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
-                null);
-
+    protected void render(Graphics g) {
+        g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
-    public void tick() {
+    protected void tick() {
         setFalling(true);
         this.collision();
         this.updateCoords();

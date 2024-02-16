@@ -14,19 +14,12 @@ public abstract class Enemy {
     private static final int FALL_SPEED = 1;
     private int PADDING_BOUND = 4;
 
-    private int x;
-    private int y;
+    protected int x, y, speed, scale;
     private Dimension dim;
-    private int speed;
-    private boolean isFalling;
+    private boolean isFalling, direction, isAlive;
     private BlocksHandler blocksHandler;
-    private int scale;
-
     private TexturerEnemies texturer = Game.getEnemyTexturer();
     private BufferedImage[] sprites;
-
-    private boolean direction;
-    private boolean isAlive;
 
     public Enemy(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
         this.x = x * scale;
@@ -55,28 +48,8 @@ public abstract class Enemy {
         return this.isFalling;
     }
 
-    public void setIsFalling(boolean fall) {
-        this.isFalling = fall;
-    }
-
-    public void updateCoords() {
-        if (getDirection()) {
-            this.x -= this.speed;
-        } else {
-            this.x += this.speed;
-        }
-
-        if (this.isFalling) {
-            this.y += FALL_SPEED;
-        }
-    }
-
     public Dimension getDimension() {
         return this.dim;
-    }
-
-    public void setDimension(int width, int height) {
-        this.dim = new Dimension(width, height);
     }
 
     public Rectangle getBounds() {
@@ -101,78 +74,16 @@ public abstract class Enemy {
         return this.sprites;
     }
 
-    public void setSprites(BufferedImage[] sprites) {
-        this.sprites = sprites;
-    }
-
     public TexturerEnemies getTexturer() {
         return texturer;
     }
 
-    public abstract void render(Graphics g);
-
-    public abstract void tick();
-
-    public void collision() {
-        for (Block block : blocksHandler.getBlocks()) {
-            if (block.getType() == BlockType.DEATH_BLOCK) {
-                if (block.getBoundingBox().intersects(getBottomBound())) {
-                    die();
-                }
-            }
-            if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
-                    || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
-                    || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
-                    || block.getType() == BlockType.POPPED_LUCKY) {
-                if (block.getBoundingBox().contains(getLeftBound())) {
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().contains(getRightBound())) {
-                    setXCollisionRight(block);
-                } else if (block.getBoundingBox().contains(getBottomBound())) {
-                    setYCollisionBottom(block);
-                } else if (block.getBoundingBox().intersects(getLeftBound())) {
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().intersects(getRightBound())) {
-                    setXCollisionRight(block);
-                } else if (block.getBoundingBox().intersects(getBottomBound())) {
-                    setYCollisionBottom(block);
-                }
-            } else if (block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
-            } else if (block.getBoundingBox().contains(getBottomBound())) {
-                setYCollisionBottom(block);
-            } else if (block.getBoundingBox().contains(getLeftBound())) {
-                setXCollisionLeft(block);
-            } else if (block.getBoundingBox().contains(getRightBound())) {
-                setXCollisionRight(block);
-            } else if (block.getBoundingBox().intersects(getBottomBound())) {
-                setYCollisionBottom(block);
-            } else if (block.getBoundingBox().intersects(getLeftBound())) {
-                setXCollisionLeft(block);
-            } else if (block.getBoundingBox().intersects(getRightBound())) {
-                setXCollisionRight(block);
-            }
-
-        }
-    }
-
-    private void setY(int y) {
-        this.y = y * scale;
-    }
-
-    private void setX(int x) {
-        this.x = x * scale;
-    }
-
-    private int getWidth() {
+    public int getWidth() {
         return this.getDimension().width;
     }
 
-    private int getHeight() {
+    public int getHeight() {
         return this.getDimension().height;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
     }
 
     public static int getFallSpeed() {
@@ -183,24 +94,56 @@ public abstract class Enemy {
         return PADDING_BOUND;
     }
 
-    public Dimension getDim() {
-        return dim;
-    }
-
-    public void setDim(Dimension dim) {
-        this.dim = dim;
+    public BlocksHandler getBlocksHandler() {
+        return this.blocksHandler;
     }
 
     public int getSpeed() {
         return speed;
     }
 
-    public void setFalling(boolean isFalling) {
-        this.isFalling = isFalling;
+    public boolean getDirection() {
+        return this.direction;
     }
 
-    public BlocksHandler getBlocksHandler() {
-        return blocksHandler;
+    public Dimension getDim() {
+        return dim;
+    }
+
+    public boolean getIsAlive() {
+        return this.isAlive;
+    }
+
+    public void setIsFalling(boolean fall) {
+        this.isFalling = fall;
+    }
+
+    public void setDimension(int width, int height) {
+        this.dim = new Dimension(width, height);
+    }
+
+    public void setSprites(BufferedImage[] sprites) {
+        this.sprites = sprites;
+    }
+
+    private void setY(int y) {
+        this.y = y * scale;
+    }
+
+    private void setX(int x) {
+        this.x = x * scale;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setDim(Dimension dim) {
+        this.dim = dim;
+    }
+
+    public void setFalling(boolean isFalling) {
+        this.isFalling = isFalling;
     }
 
     public void setBlocksHandler(BlocksHandler blocksHandler) {
@@ -215,16 +158,8 @@ public abstract class Enemy {
         this.texturer = texturer;
     }
 
-    public boolean getDirection() {
-        return this.direction;
-    }
-
     public void changeDirection() {
         this.direction = !this.direction;
-    }
-
-    public boolean getIsAlive() {
-        return this.isAlive;
     }
 
     public void die() {
@@ -232,7 +167,7 @@ public abstract class Enemy {
     }
 
     private void setYCollisionBottom(Block block) {
-        setY(block.getY() / scale - getHeight() / scale);
+        setY((block.getY() - getHeight()) / getScale());
         setFalling(false);
     }
 
@@ -242,8 +177,53 @@ public abstract class Enemy {
     }
 
     private void setXCollisionRight(Block block) {
-        setX(block.getX() / block.getScale() - getWidth() / getScale());
+        setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
+
+    protected void updateCoords() {
+        if (getDirection()) {
+            this.x -= this.speed;
+        } else {
+            this.x += this.speed;
+        }
+
+        if (this.isFalling) {
+            this.y += FALL_SPEED;
+        }
+    }
+
+    public void collision() {
+        for (Block block : blocksHandler.getBlocks()) {
+            if (block.getType() == BlockType.DEATH_BLOCK) {
+                if (block.getBoundingBox().intersects(getBottomBound())) {
+                    die();
+                }
+            }
+            if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
+                    || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
+                    || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
+                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.ALT_BLOCK ||
+                    block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
+                if (block.getBoundingBox().contains(getLeftBound())) {
+                    setXCollisionLeft(block);
+                } else if (block.getBoundingBox().contains(getRightBound())) {
+                    setXCollisionRight(block);
+                } else if (block.getBoundingBox().contains(getBottomBound())) {
+                    setYCollisionBottom(block);
+                } else if (block.getBoundingBox().intersects(getLeftBound())) {
+                    setXCollisionLeft(block);
+                } else if (block.getBoundingBox().intersects(getRightBound())) {
+                    setXCollisionRight(block);
+                } else if (block.getBoundingBox().intersects(getBottomBound())) {
+                    setYCollisionBottom(block);
+                }
+            }
+        }
+    }
+
+    protected abstract void render(Graphics g);
+
+    protected abstract void tick();
 
 }

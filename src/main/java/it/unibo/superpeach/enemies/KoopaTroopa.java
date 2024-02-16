@@ -11,11 +11,10 @@ public class KoopaTroopa extends Enemy {
         setSprites(getTexturer().getKoopaImg());
         setSpeed(2 * scale);
         setFalling(true);
-
     }
 
     @Override
-    public void render(Graphics g) {
+    protected void render(Graphics g) {
         if (getDirection()) {
             g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
                     null);
@@ -26,7 +25,7 @@ public class KoopaTroopa extends Enemy {
     }
 
     @Override
-    public void tick() {
+    protected void tick() {
         setFalling(true);
         this.collision();
         this.updateCoords();
