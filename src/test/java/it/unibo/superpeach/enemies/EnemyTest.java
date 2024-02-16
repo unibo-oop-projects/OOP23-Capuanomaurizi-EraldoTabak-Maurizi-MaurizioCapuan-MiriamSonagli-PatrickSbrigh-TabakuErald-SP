@@ -1,4 +1,4 @@
-package it.unibo.superpeach;
+package it.unibo.superpeach.enemies;
 
 import it.unibo.superpeach.enemies.FlyingKoopa;
 import it.unibo.superpeach.enemies.Goomba;

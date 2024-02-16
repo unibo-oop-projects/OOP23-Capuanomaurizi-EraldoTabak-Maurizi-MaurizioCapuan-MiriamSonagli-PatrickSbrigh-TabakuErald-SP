@@ -1,5 +1,5 @@
 
-package it.unibo.superpeach;
+package it.unibo.superpeach.enemies;
 
 import org.junit.jupiter.api.Test;
 
