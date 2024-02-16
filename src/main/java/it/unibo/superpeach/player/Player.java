@@ -53,6 +53,7 @@ public abstract class Player {
     private boolean hasWon;
     private boolean hasLost;
     private PowerUpType typePowerUp;
+    private PowerUpType lastPowerUp;
     private int numTickStar;
     private int coins;
 
@@ -83,6 +84,7 @@ public abstract class Player {
         this.numTickStar = 0;
         this.powerupsHandler = powersUpHandler;
         this.coins = 0;
+        this.lastPowerUp = null;
     }
 
     public int getX() {
@@ -522,9 +524,13 @@ public abstract class Player {
                         coins++;
                         break;
                     case RED_MUSHROOM:
+                        if(typePowerUp != PowerUpType.RED_MUSHROOM){
+                            lastPowerUp = typePowerUp;
+                        }
                         becomeBig();
                         break;
                     case STAR:
+                        lastPowerUp = typePowerUp;
                         typePowerUp = PowerUpType.STAR;
                         break;
                     case LIFE_MUSHROOM:
@@ -553,9 +559,17 @@ public abstract class Player {
     }
 
     private void dead(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM){
-           typePowerUp = null;
-           this.height /= 2;
+        if(typePowerUp == PowerUpType.RED_MUSHROOM || typePowerUp == PowerUpType.STAR){
+            if(lastPowerUp != PowerUpType.RED_MUSHROOM){
+                this.height /= 2;
+                typePowerUp = null;
+            }
+            else{
+                typePowerUp = PowerUpType.RED_MUSHROOM;
+                setX(respawnX);
+                setY(respawnY);
+            }
+            lastPowerUp = typePowerUp;
         }
         else{
             life--;
@@ -626,34 +640,17 @@ public abstract class Player {
         return this.hasLost;
     }
 
-    public void deleteStarLittle(){
+    public void deleteStar(){
         if(typePowerUp == PowerUpType.STAR){
             if(numTickStar >= TICK_FOR_STAR){
-                typePowerUp = null;
+                typePowerUp = lastPowerUp;
+                lastPowerUp = PowerUpType.STAR;
                 numTickStar = 0;
-
             }
             else{
                 numTickStar++;
             }
         }
-    }
-
-    public void deleteStarBig(){
-        if(typePowerUp == PowerUpType.STAR){
-            if(numTickStar >= TICK_FOR_STAR){
-                typePowerUp = PowerUpType.RED_MUSHROOM;
-                numTickStar = 0;
-
-            }
-            else{
-                numTickStar++;
-            }
-        }
-    }
-
-    private boolean isFalling(){
-        return moveY > 0;
     }
 
     public abstract void moveLeft();
