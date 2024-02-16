@@ -64,34 +64,30 @@ public class Game extends Canvas implements Runnable {
         levelHandler = new LevelHandler(blocksHandler, GAME_SCALE, enemiesHandler);
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH, GAME_SCALE);
-        this.addKeyListener(new Keyboard(playerHandler));
+        this.addKeyListener(new Keyboard(playerHandler, this));
         start();
     }
 
-    private synchronized void start() {
+    private void start() {
         mainGameLoop = new Thread(this);
         mainGameLoop.start();
         running = true;
     }
 
-    public synchronized void changeScale(int newScale) {
+    public void changeScale(int newScale) {
         GAME_SCALE = newScale;
         window.closeWindow();
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
-    public static synchronized void restart() {
+    public void restart() {
+        stop();
         window.closeWindow();
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
-    private synchronized void stop() {
-        try {
-            mainGameLoop.join();
-            running = false;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    private void stop() {
+        running = false;
     }
 
     @Override
@@ -114,7 +110,6 @@ public class Game extends Canvas implements Runnable {
             if (running) {
                 render();
             }
-            
             if (System.currentTimeMillis() - timer >= MILLS_PER_SECOND) {
                 timer += MILLS_PER_SECOND;
             }
@@ -132,45 +127,44 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void render() {
-        BufferStrategy buffStrat = this.getBufferStrategy();
-        if (buffStrat == null) {
-            this.createBufferStrategy(3);
-            return;
-        }
-        Graphics g = buffStrat.getDrawGraphics();
-
-        if(!gameOver){
-            g.setColor(Color.PINK);
-            g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
-            g.translate(camera.getCameraX(), 0);
-            blocksHandler.renderBlocks(g);
-            enemiesHandler.renderEnemies(g);
-            playerHandler.render(g);
-            powerupsHandler.renderPowerups(g);
-            scoreboard.render(g, playerHandler.getPlayer().getX());
-        }
-        else{
-            gameOverBuffers++;
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
-            g.translate(0, 0);
-            g.setColor(Color.PINK);
-            g.setFont(new Font("Monospaced", Font.BOLD, 25*GAME_SCALE));
-            if(playerHandler.getPlayer().hasWon()){
-                g.drawString("Game Over", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 40*GAME_SCALE);
-                g.drawString("You WON!", WINDOW_WIDTH*GAME_SCALE/3 + 10*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE/2 - 15*GAME_SCALE);
-                g.drawString("SCORE: " + playerHandler.getPlayer().getPoint(), WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
-            } else {
-                g.drawString("Game Over", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 25*GAME_SCALE);
-                g.drawString("You LOSE", WINDOW_WIDTH*GAME_SCALE/3 + 7*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
+        try {
+            BufferStrategy buffStrat = this.getBufferStrategy();
+            if (buffStrat == null) {
+                this.createBufferStrategy(3);
+                return;
             }
-            if(gameOverBuffers == GRAPHICS_BUFFERS){
-                stop();
+            Graphics g = buffStrat.getDrawGraphics();
+            if(!gameOver){
+                g.setColor(Color.PINK);
+                g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
+                g.translate(camera.getCameraX(), 0);
+                blocksHandler.renderBlocks(g);
+                enemiesHandler.renderEnemies(g);
+                playerHandler.render(g);
+                powerupsHandler.renderPowerups(g);
+                scoreboard.render(g, playerHandler.getPlayer().getX());
             }
-        }
-        g.dispose();
-        buffStrat.show();
-
+            else{
+                gameOverBuffers++;
+                g.setColor(Color.BLACK);
+                g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
+                g.translate(0, 0);
+                g.setColor(Color.PINK);
+                g.setFont(new Font("Monospaced", Font.BOLD, 25*GAME_SCALE));
+                if(playerHandler.getPlayer().hasWon()){
+                    g.drawString("You WON!", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 25*GAME_SCALE);
+                    g.drawString("SCORE: " + playerHandler.getPlayer().getPoint(), WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
+                } else {
+                    g.drawString("Game Over", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 25*GAME_SCALE);
+                    g.drawString("You LOSE", WINDOW_WIDTH*GAME_SCALE/3 + 7*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
+                }
+                if(gameOverBuffers == GRAPHICS_BUFFERS){
+                    stop();
+                }
+            }
+            g.dispose();
+            buffStrat.show();
+        } catch (IllegalStateException e) {}
     }
 
     public static Texturer getTexturer() {
