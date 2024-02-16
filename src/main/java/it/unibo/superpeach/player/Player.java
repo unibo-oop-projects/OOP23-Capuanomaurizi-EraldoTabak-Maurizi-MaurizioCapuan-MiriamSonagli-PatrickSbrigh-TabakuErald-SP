@@ -76,7 +76,7 @@ public abstract class Player {
         this.consecutiveJumps = 0;
         this.hasWon = false;
         this.hasLost = false;
-        this.typePowerUp = null;
+        this.typePowerUp = PowerUpType.STAR;
         this.numTickStar = 0;
         this.powerupsHandler = powersUpHandler;
         this.coins = 0;
@@ -239,131 +239,266 @@ public abstract class Player {
                 }
             }
             else if(block.getType() == BlockType.LUCKY){
-                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                    changePoint(POINT_LUCKY_BRICK);
-                    block.popLuckyBlock();
-                }
-                else if(block.getBoundingBox().contains(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock();
+                if(isFalling()){
+                    if(block.getBoundingBox().contains(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
+                    }
+                    else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
                         changePoint(POINT_LUCKY_BRICK);
+                        block.popLuckyBlock();
+                    }
+                    else if(block.getBoundingBox().contains(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
+                    }
+                    else if(block.getBoundingBox().contains(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
                     }
                 }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock();
+                else{
+                    if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
                         changePoint(POINT_LUCKY_BRICK);
+                        block.popLuckyBlock();
                     }
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock();
-                        changePoint(POINT_LUCKY_BRICK);
+                    else if(block.getBoundingBox().contains(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock();
-                        changePoint(POINT_LUCKY_BRICK);
+                    else if(block.getBoundingBox().contains(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock();
-                        changePoint(POINT_LUCKY_BRICK);
+                    else if(block.getBoundingBox().contains(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        block.popLuckyBlock();
-                        changePoint(POINT_LUCKY_BRICK);
+                    else if(block.getBoundingBox().intersects(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            block.popLuckyBlock();
+                            changePoint(POINT_LUCKY_BRICK);
+                        }
                     }
                 }
             }
             else if(block.getType() == BlockType.POPPED_LUCKY){
-                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
+                if(isFalling()){
+                    if(block.getBoundingBox().contains(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                    }
+                    else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
+                    }
+                    else if(block.getBoundingBox().contains(getLeftBound())){
+                        setXCollisionLeft(block);
+                    }
+                    else if(block.getBoundingBox().contains(getRightBound())){
+                        setXCollisionRight(block);
+                    }
+                    else if(block.getBoundingBox().intersects(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                    }
+                    else if(block.getBoundingBox().intersects(getLeftBound())){
+                        setXCollisionLeft(block);
+                    }
+                    else if(block.getBoundingBox().intersects(getRightBound())){
+                        setXCollisionRight(block);
+                    }
                 }
-                else if(block.getBoundingBox().contains(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                }
-                else if(block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
+                else{
+                    if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
+                    }
+                    else if(block.getBoundingBox().contains(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                    }
+                    else if(block.getBoundingBox().contains(getLeftBound())){
+                        setXCollisionLeft(block);
+                    }
+                    else if(block.getBoundingBox().contains(getRightBound())){
+                        setXCollisionRight(block);
+                    }
+                    else if(block.getBoundingBox().intersects(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                    }
+                    else if(block.getBoundingBox().intersects(getLeftBound())){
+                        setXCollisionLeft(block);
+                    }
+                    else if(block.getBoundingBox().intersects(getRightBound())){
+                        setXCollisionRight(block);
+                    }
                 }
             }
             else if(block.getType() == BlockType.BRICK){
-                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                    if(typePowerUp != null){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
+                if(isFalling()){
+                    if(block.getBoundingBox().contains(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
+                    }
+                    else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
+                        if(typePowerUp != null){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
+                    }
+                    else if(block.getBoundingBox().contains(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
+                    }
+                    else if(block.getBoundingBox().contains(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
                     }
                 }
-                else if(block.getBoundingBox().contains(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
+                else{
+                    if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
+                        if(typePowerUp != null){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
+                    else if(block.getBoundingBox().contains(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
+                    else if(block.getBoundingBox().contains(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
+                    else if(block.getBoundingBox().contains(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
+                    else if(block.getBoundingBox().intersects(getBottomBound())){
+                        setYCollisionBottom(block);
+                        resetCosecutiveJump();
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
                     }
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
-                    if(typePowerUp == PowerUpType.STAR){
-                        changePoint(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
+                    else if(block.getBoundingBox().intersects(getLeftBound())){
+                        setXCollisionLeft(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
+                    }
+                    else if(block.getBoundingBox().intersects(getRightBound())){
+                        setXCollisionRight(block);
+                        if(typePowerUp == PowerUpType.STAR){
+                            changePoint(POINT_LUCKY_BRICK);
+                            blocksHandler.removeFixedBlock(block);
+                        }
                     }
                 }
             }
@@ -405,9 +540,9 @@ public abstract class Player {
         }
 
         for(Enemy enemy : enemiesHandler.getEnemies()){
-            if(isDeadForEnemy(enemy)){
+            if(isDeadForEnemy(enemy) && typePowerUp != PowerUpType.STAR){
                 dead();
-            }else if (killedEnemy(enemy)){
+            }else if (killedEnemy(enemy) || (isDeadForEnemy(enemy) && typePowerUp == PowerUpType.STAR)){
                 changePoint(POINT_KILLED_ENEMY);
                 enemiesHandler.removeEnemy(enemy);
             }
