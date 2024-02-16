@@ -166,7 +166,7 @@ public abstract class Player {
         Graphics2D graph = (Graphics2D)g;
         graph.setColor(Color.BLACK);
         graph.draw(getBottomBound());
-        //graph.draw(getTopBound());
+        graph.draw(getTopBound());
         //graph.draw(getLeftBound());
         //graph.draw(getRightBound());
         graph.draw(rectangle);
@@ -185,7 +185,7 @@ public abstract class Player {
             return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
         }
         else{
-            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound*2), getWidth()/2, padding_bound*2);
+            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/3), getWidth()/2, padding_bound/3);
         }
     }
 
@@ -239,8 +239,8 @@ public abstract class Player {
                 }
             }
             else if(block.getType() == BlockType.LUCKY){
-                if(isFalling()){
-                    if(block.getBoundingBox().contains(getBottomBound())){
+                /*if(isFalling()){
+                    if(block.getBoundingBox().contains(getBottomBound()) || block.getBoundingBox().intersects(getBottomBound())){
                         setYCollisionBottom(block);
                         resetCosecutiveJump();
                         if(typePowerUp == PowerUpType.STAR){
@@ -248,7 +248,7 @@ public abstract class Player {
                             changePoint(POINT_LUCKY_BRICK);
                         }
                     }
-                    else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                    else if(block.getBoundingBox().contains(getTopBound())){
                         setYCollisionTop(block);
                         changePoint(POINT_LUCKY_BRICK);
                         block.popLuckyBlock();
@@ -267,13 +267,10 @@ public abstract class Player {
                             changePoint(POINT_LUCKY_BRICK);
                         }
                     }
-                    else if(block.getBoundingBox().intersects(getBottomBound())){
-                        setYCollisionBottom(block);
-                        resetCosecutiveJump();
-                        if(typePowerUp == PowerUpType.STAR){
-                            block.popLuckyBlock();
-                            changePoint(POINT_LUCKY_BRICK);
-                        }
+                    else if(block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
+                        changePoint(POINT_LUCKY_BRICK);
+                        block.popLuckyBlock();
                     }
                     else if(block.getBoundingBox().intersects(getLeftBound())){
                         setXCollisionLeft(block);
@@ -339,16 +336,57 @@ public abstract class Player {
                             block.popLuckyBlock();
                             changePoint(POINT_LUCKY_BRICK);
                         }
+                    }
+                }*/
+                if(block.getBoundingBox().contains(getBottomBound()) || block.getBoundingBox().intersects(getBottomBound())){
+                    setYCollisionBottom(block);
+                    resetCosecutiveJump();
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
+                }
+                else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                    setYCollisionTop(block);
+                    changePoint(POINT_LUCKY_BRICK);
+                    block.popLuckyBlock();
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
+                    }
+                }
+                else if(block.getBoundingBox().intersects(getRightBound())){
+                    setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        block.popLuckyBlock();
+                        changePoint(POINT_LUCKY_BRICK);
                     }
                 }
             }
             else if(block.getType() == BlockType.POPPED_LUCKY){
-                if(isFalling()){
-                    if(block.getBoundingBox().contains(getBottomBound())){
+                /*if(isFalling()){
+                    if(block.getBoundingBox().contains(getBottomBound()) || (block.getBoundingBox().intersects(getBottomBound()))){
                         setYCollisionBottom(block);
                         resetCosecutiveJump();
                     }
-                    else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                    else if(block.getBoundingBox().contains(getTopBound())){
                         setYCollisionTop(block);
                     }
                     else if(block.getBoundingBox().contains(getLeftBound())){
@@ -357,9 +395,8 @@ public abstract class Player {
                     else if(block.getBoundingBox().contains(getRightBound())){
                         setXCollisionRight(block);
                     }
-                    else if(block.getBoundingBox().intersects(getBottomBound())){
-                        setYCollisionBottom(block);
-                        resetCosecutiveJump();
+                    else if(block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
                     }
                     else if(block.getBoundingBox().intersects(getLeftBound())){
                         setXCollisionLeft(block);
@@ -392,11 +429,30 @@ public abstract class Player {
                     else if(block.getBoundingBox().intersects(getRightBound())){
                         setXCollisionRight(block);
                     }
+                }*/
+                if(block.getBoundingBox().contains(getBottomBound()) || (block.getBoundingBox().intersects(getBottomBound()))){
+                    setYCollisionBottom(block);
+                    resetCosecutiveJump();
+                }
+                else if(block.getBoundingBox().contains(getTopBound()) || (block.getBoundingBox().intersects(getTopBound()))){
+                    setYCollisionTop(block);
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    setXCollisionLeft(block);
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    setXCollisionRight(block);
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    setXCollisionLeft(block);
+                }
+                else if(block.getBoundingBox().intersects(getRightBound())){
+                    setXCollisionRight(block);
                 }
             }
             else if(block.getType() == BlockType.BRICK){
-                if(isFalling()){
-                    if(block.getBoundingBox().contains(getBottomBound())){
+                /*if(isFalling()){
+                    if(block.getBoundingBox().contains(getBottomBound()) || block.getBoundingBox().intersects(getBottomBound())){
                         setYCollisionBottom(block);
                         resetCosecutiveJump();
                         if(typePowerUp == PowerUpType.STAR){
@@ -404,7 +460,7 @@ public abstract class Player {
                             blocksHandler.removeFixedBlock(block);
                         }
                     }
-                    else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                    else if(block.getBoundingBox().contains(getTopBound())){
                         setYCollisionTop(block);
                         if(typePowerUp != null){
                             changePoint(POINT_LUCKY_BRICK);
@@ -425,10 +481,9 @@ public abstract class Player {
                             blocksHandler.removeFixedBlock(block);
                         }
                     }
-                    else if(block.getBoundingBox().intersects(getBottomBound())){
-                        setYCollisionBottom(block);
-                        resetCosecutiveJump();
-                        if(typePowerUp == PowerUpType.STAR){
+                    else if(block.getBoundingBox().intersects(getTopBound())){
+                        setYCollisionTop(block);
+                        if(typePowerUp != null){
                             changePoint(POINT_LUCKY_BRICK);
                             blocksHandler.removeFixedBlock(block);
                         }
@@ -499,6 +554,49 @@ public abstract class Player {
                             changePoint(POINT_LUCKY_BRICK);
                             blocksHandler.removeFixedBlock(block);
                         }
+                    }
+                }*/
+                if(block.getBoundingBox().contains(getBottomBound()) || block.getBoundingBox().intersects(getBottomBound())){
+                    setYCollisionBottom(block);
+                    resetCosecutiveJump();
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
+                }
+                else if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+                    setYCollisionTop(block);
+                    if(typePowerUp != null){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
+                }
+                else if(block.getBoundingBox().contains(getLeftBound())){
+                    setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
+                }
+                else if(block.getBoundingBox().contains(getRightBound())){
+                    setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
+                }
+                else if(block.getBoundingBox().intersects(getLeftBound())){
+                    setXCollisionLeft(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
+                    }
+                }
+                else if(block.getBoundingBox().intersects(getRightBound())){
+                    setXCollisionRight(block);
+                    if(typePowerUp == PowerUpType.STAR){
+                        changePoint(POINT_LUCKY_BRICK);
+                        blocksHandler.removeFixedBlock(block);
                     }
                 }
             }
@@ -660,7 +758,7 @@ public abstract class Player {
     }
 
     private boolean isFalling(){
-        return moveY<0;
+        return moveY>0;
     }
 
     public abstract void moveLeft();
