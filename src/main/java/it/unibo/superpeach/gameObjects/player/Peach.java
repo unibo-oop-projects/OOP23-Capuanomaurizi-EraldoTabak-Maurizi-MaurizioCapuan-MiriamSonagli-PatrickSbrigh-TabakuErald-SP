@@ -41,7 +41,7 @@ public class Peach extends Player{
 
     @Override
     public void moveLeft() {
-        if(whatPowerUp() == PowerUpType.STAR){
+        if(getPowerUp() == PowerUpType.STAR){
             spriteNeeded = LOOK_LEFT_STAR;
         }
         else{
@@ -52,7 +52,7 @@ public class Peach extends Player{
 
     @Override
     public void moveRight() {
-        if(whatPowerUp() == PowerUpType.STAR){
+        if(getPowerUp() == PowerUpType.STAR){
             spriteNeeded = LOOK_RIGHT_STAR;
         }
         else{
@@ -64,21 +64,21 @@ public class Peach extends Player{
     @Override
     public void jump() {
         if(!hasJumped() && canJump()){
-            if(whatPowerUp() == PowerUpType.STAR){
+            if(getPowerUp() == PowerUpType.STAR){
                 spriteNeeded = JUMP_FALL_STAR;
             }
             else{
                 spriteNeeded = JUMP_FALL_NORM;
             }
 
-            if(whatPowerUp() == PowerUpType.RED_MUSHROOM){
+            if(getPowerUp() == PowerUpType.RED_MUSHROOM){
                 setMoveY(-JUMP_HEIGHT_BIG);
             }
             else{
                 setMoveY(-JUMP_HEIGHT_NORM);
             }
             setHasJumped(true);
-            setConsecutiveJump(1);
+            incrementConsecutiveJump();
         }
     }
 
@@ -93,6 +93,6 @@ public class Peach extends Player{
         setX(getX()/getScale()+getMoveX());
         fall();
         collision();
-        deleteStar();
+        starTimeOver();
     }
 }

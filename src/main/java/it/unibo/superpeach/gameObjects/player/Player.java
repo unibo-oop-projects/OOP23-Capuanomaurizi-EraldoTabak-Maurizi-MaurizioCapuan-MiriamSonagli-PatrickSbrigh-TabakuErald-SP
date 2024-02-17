@@ -50,7 +50,7 @@ public abstract class Player {
     private int consecutiveJumps;
     private boolean hasWon;
     private boolean hasLost;
-    private PowerUpType typePowerUp;
+    private PowerUpType currentPowerUp;
     private PowerUpType lastPowerUp;
     private int numTickStar;
     private int coins;
@@ -78,7 +78,7 @@ public abstract class Player {
         this.consecutiveJumps = 0;
         this.hasWon = false;
         this.hasLost = false;
-        this.typePowerUp = null;
+        this.currentPowerUp = null;
         this.numTickStar = 0;
         this.powerupsHandler = powersUpHandler;
         this.coins = 0;
@@ -125,8 +125,51 @@ public abstract class Player {
         return this.coins;
     }
 
+    public int getMoveY() {
+        return this.moveY;
+    }
+
+    public int getMoveX() {
+        return this.moveX;
+    }
+
+    public PowerUpType getPowerUp(){
+        return this.currentPowerUp;
+    }
+
+    public Rectangle getTopBound(){
+        if(currentPowerUp == PowerUpType.RED_MUSHROOM || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
+            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound)*((padding_bound/getScale())));
+        }
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/getScale())*(padding_bound/2));
+    }
+
+    public Rectangle getBottomBound(){
+        if(currentPowerUp == PowerUpType.RED_MUSHROOM || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
+            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
+        }
+        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/2), getWidth()/2, padding_bound/2);
+    }
+
+    public Rectangle getLeftBound(){
+        return new Rectangle(getX(), getY()+(padding_bound), (padding_bound), getHeight()-2*(padding_bound));
+
+    }
+
+    public Rectangle getRightBound(){
+        return new Rectangle(getX()+getWidth()-(padding_bound), getY()+(padding_bound), (padding_bound) ,getHeight()-2*(padding_bound));
+    }
+    
     public boolean hasJumped(){
         return this.jumped;
+    }
+
+    public boolean hasWon() {
+        return this.hasWon;
+    }
+
+    public boolean hasLost() {
+        return this.hasLost;
     }
 
     public void setX(int x) {
@@ -151,45 +194,43 @@ public abstract class Player {
         this.width = width;
     }
 
-    public void setConsecutiveJump(int add) {
-        if (this.consecutiveJumps + 1 <= CONSECUTIVE_JUMP) {
-            this.consecutiveJumps++;
-        }
+    public void setMoveY(int moveY) {
+        this.moveY = moveY;
+    }
+
+    public void setMoveX(int moveX) {
+        this.moveX = moveX;
     }
 
     public void setHasJumped(boolean jumped) {
         this.jumped = jumped;
     }
 
-    public Rectangle getTopBound(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM || (typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
-            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound)*((padding_bound/getScale())));
+    public void incrementConsecutiveJump() {
+        if (this.consecutiveJumps + 1 <= CONSECUTIVE_JUMP) {
+            this.consecutiveJumps++;
         }
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY(), getWidth()/2, (padding_bound/getScale())*(padding_bound/2));
-    }
-
-    public Rectangle getBottomBound(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM || (typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
-            return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-padding_bound, getWidth()/2, padding_bound);
-        }
-        return new Rectangle(getX()+getWidth()/2-getWidth()/4, getY()+getHeight()-(padding_bound/2), getWidth()/2, padding_bound/2);
-    }
-
-    public Rectangle getLeftBound(){
-        return new Rectangle(getX(), getY()+(padding_bound), (padding_bound), getHeight()-2*(padding_bound));
-
-    }
-
-    public Rectangle getRightBound(){
-        return new Rectangle(getX()+getWidth()-(padding_bound), getY()+(padding_bound), (padding_bound) ,getHeight()-2*(padding_bound));
-    }
-
-    public void resetCosecutiveJump() {
-        this.consecutiveJumps = 0;
     }
 
     public boolean canJump() {
         return this.consecutiveJumps < CONSECUTIVE_JUMP;
+    }
+
+    public void fall() {
+        moveY = FALL_SPEED;
+    }
+
+    public void starTimeOver(){
+        if(currentPowerUp == PowerUpType.STAR){
+            if(numTickStar >= TICK_FOR_STAR){
+                currentPowerUp = lastPowerUp;
+                lastPowerUp = PowerUpType.STAR;
+                numTickStar = 0;
+            }
+            else{
+                numTickStar++;
+            }
+        }
     }
 
     public void collision() {
@@ -220,7 +261,7 @@ public abstract class Player {
             else if(block.getType() == BlockType.LUCKY){
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
-                    changePoint(POINT_LUCKY_BRICK);
+                    addPoints(POINT_LUCKY_BRICK);
                     block.popLuckyBlock(powerupsHandler, blocksHandler);
                 }
                 else if(block.getBoundingBox().contains(getBottomBound())){
@@ -272,8 +313,8 @@ public abstract class Player {
             else if(block.getType() == BlockType.BRICK){
                 if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
                     setYCollisionTop(block);
-                    if(typePowerUp != null){
-                        changePoint(POINT_LUCKY_BRICK);
+                    if(currentPowerUp != null){
+                        addPoints(POINT_LUCKY_BRICK);
                         blocksHandler.removeFixedBlock(block);
                     }
                 }
@@ -301,7 +342,7 @@ public abstract class Player {
             else if(block.getType() == BlockType.DEATH_BLOCK){
                 if(block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())
                 || block.getBoundingBox().intersects(getLeftBound()) || block.getBoundingBox().intersects(getRightBound())){
-                    dead();
+                    loseLifeOrPowerUp();
                 }
             } else if (block.getType() == BlockType.CASTLE_DOOR_BOT || block.getType() == BlockType.CASTLE_DOOR_TOP) {
                 if (block.getBoundingBox().intersects(getBottomBound())
@@ -309,7 +350,7 @@ public abstract class Player {
                         || block.getBoundingBox().intersects(getLeftBound())
                         || block.getBoundingBox().intersects(getRightBound())) {
                     if (!addedPointWin) {
-                        changePoint(POINT_WIN);
+                        addPoints(POINT_WIN);
                         addedPointWin = true;
                     }
                     this.hasWon = true;
@@ -318,7 +359,7 @@ public abstract class Player {
                 if (block.getBoundingBox().intersects(getTopBound())
                         || block.getBoundingBox().intersects(getLeftBound())) {
                     if (!addedPointFlag) {
-                        changePoint(POINT_FLAG_TIP);
+                        addPoints(POINT_FLAG_TIP);
                         addedPointFlag = true;
                     }
                 }
@@ -332,7 +373,7 @@ public abstract class Player {
                         || block.getBoundingBox().intersects(getBottomBound())
                         || block.getBoundingBox().contains(getBottomBound())) {
                     if (!addedPointFlag) {
-                        changePoint(POINT_FLAG_POLE);
+                        addPoints(POINT_FLAG_POLE);
                         addedPointFlag = true;
                     }
                 }
@@ -340,30 +381,30 @@ public abstract class Player {
         }
 
         for(Enemy enemy : enemiesHandler.getEnemies()){
-            if(isDeadForEnemy(enemy) && typePowerUp != PowerUpType.STAR){
-                dead();
-            }else if (killedEnemy(enemy) || (isDeadForEnemy(enemy) && typePowerUp == PowerUpType.STAR)){
-                changePoint(POINT_KILLED_ENEMY);
+            if(touchedEnemy(enemy) && currentPowerUp != PowerUpType.STAR){
+                loseLifeOrPowerUp();
+            }else if (killedEnemy(enemy) || (touchedEnemy(enemy) && currentPowerUp == PowerUpType.STAR)){
+                addPoints(POINT_KILLED_ENEMY);
                 enemiesHandler.removeEnemy(enemy);
             }
         }
 
         for(PowerUp power : powerupsHandler.getPowerups()){
-            if(touchPowerUp(power)){
+            if(touchedPowerUp(power)){
                 switch (power.getPowerUpType()) {
                     case COIN:
                         scoreboard.collectCoin();
                         coins++;
                         break;
                     case RED_MUSHROOM:
-                        if(typePowerUp != PowerUpType.RED_MUSHROOM && !(typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
-                            lastPowerUp = typePowerUp;
+                        if(currentPowerUp != PowerUpType.RED_MUSHROOM && !(currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
+                            lastPowerUp = currentPowerUp;
                         }
-                        becomeBig();
+                        redMushroomTrasformation();
                         break;
                     case STAR:
-                        lastPowerUp = typePowerUp;
-                        typePowerUp = PowerUpType.STAR;
+                        lastPowerUp = currentPowerUp;
+                        currentPowerUp = PowerUpType.STAR;
                         break;
                     case LIFE_MUSHROOM:
                         if(life < LIFE_START){
@@ -377,22 +418,26 @@ public abstract class Player {
         }
     }
 
-    private void changePoint(int point) {
+    private void resetCosecutiveJump() {
+        this.consecutiveJumps = 0;
+    }
+
+    private void addPoints(int point) {
         this.point += point;
     }
 
-    private boolean touchPowerUp(PowerUp power){
+    private boolean touchedPowerUp(PowerUp power){
         return power.getBoundingBox().intersects(getBottomBound()) || power.getBoundingBox().intersects(getTopBound()) 
             || power.getBoundingBox().intersects(getLeftBound()) || power.getBoundingBox().intersects(getRightBound());
     }
 
-    private void becomeBig(){
-        if(!(typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
-            if(typePowerUp != PowerUpType.RED_MUSHROOM){
+    private void redMushroomTrasformation(){
+        if(!(currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
+            if(currentPowerUp != PowerUpType.RED_MUSHROOM){
                 setHeight(height*2);
             }
-            if(typePowerUp != PowerUpType.STAR){
-                typePowerUp = PowerUpType.RED_MUSHROOM;
+            if(currentPowerUp != PowerUpType.STAR){
+                currentPowerUp = PowerUpType.RED_MUSHROOM;
             }
             else{
                 lastPowerUp = PowerUpType.RED_MUSHROOM;
@@ -400,21 +445,21 @@ public abstract class Player {
         }
     }
 
-    private void dead(){
-        if(typePowerUp == PowerUpType.RED_MUSHROOM){
-            lastPowerUp = typePowerUp;
+    private void loseLifeOrPowerUp(){
+        if(currentPowerUp == PowerUpType.RED_MUSHROOM){
+            lastPowerUp = currentPowerUp;
             this.height /= 2;
-            typePowerUp = null;
+            currentPowerUp = null;
             setY(respawnY);
         }
-        else if(typePowerUp == PowerUpType.STAR){
+        else if(currentPowerUp == PowerUpType.STAR){
             if(lastPowerUp == PowerUpType.RED_MUSHROOM){
-                lastPowerUp = typePowerUp;
-                typePowerUp = PowerUpType.RED_MUSHROOM;
+                lastPowerUp = currentPowerUp;
+                currentPowerUp = PowerUpType.RED_MUSHROOM;
             }
             else{
-                lastPowerUp = typePowerUp;
-                typePowerUp = null;
+                lastPowerUp = currentPowerUp;
+                currentPowerUp = null;
             }
             setY(respawnY);
         }
@@ -429,11 +474,8 @@ public abstract class Player {
         }
     }
 
-    public PowerUpType whatPowerUp(){
-        return this.typePowerUp;
-    }
 
-    private boolean isDeadForEnemy(Enemy enemy) {
+    private boolean touchedEnemy(Enemy enemy) {
         return enemy.getBounds().intersects(getTopBound()) || enemy.getBounds().intersects(getLeftBound())
                 || enemy.getBounds().intersects(getRightBound());
     }
@@ -456,47 +498,6 @@ public abstract class Player {
 
     private void setXCollisionRight(Block block) {
         setX(block.getX() / block.getScale() - getWidth() / getScale());
-    }
-
-    public void setMoveY(int moveY) {
-        this.moveY = moveY;
-    }
-
-    public void setMoveX(int moveX) {
-        this.moveX = moveX;
-    }
-
-    public int getMoveY() {
-        return this.moveY;
-    }
-
-    public int getMoveX() {
-        return this.moveX;
-    }
-
-    public void fall() {
-        moveY = FALL_SPEED;
-    }
-
-    public boolean hasWon() {
-        return this.hasWon;
-    }
-
-    public boolean hasLost() {
-        return this.hasLost;
-    }
-
-    public void deleteStar(){
-        if(typePowerUp == PowerUpType.STAR){
-            if(numTickStar >= TICK_FOR_STAR){
-                typePowerUp = lastPowerUp;
-                lastPowerUp = PowerUpType.STAR;
-                numTickStar = 0;
-            }
-            else{
-                numTickStar++;
-            }
-        }
     }
 
     public abstract void moveLeft();
