@@ -8,7 +8,7 @@ import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.gameObjects.blocks.Block;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
+import it.unibo.superpeach.gameObjects.blocks.BlockType;
 import it.unibo.superpeach.gameObjects.enemies.EnemiesHandler;
 import it.unibo.superpeach.gameObjects.enemies.Enemy;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp;

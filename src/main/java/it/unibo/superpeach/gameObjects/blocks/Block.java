@@ -7,22 +7,11 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.graphics.Texturer;
 
+/**
+ * World block.
+ * @author  Maurizio Capuano
+ */
 public abstract class Block implements GameObject {
-
-    public enum BlockType {
-        BRICK,
-        TERRAIN,
-        LUCKY, POPPED_LUCKY,
-        PIPE_LEFT, PIPE_RIGHT, PIPE_TOP_LEFT, PIPE_TOP_RIGHT,
-        STONE,
-        BUSH_LEFT, BUSH_MIDDLE, BUSH_RIGHT,
-        CLOUD_TOP_LEFT, CLOUD_TOP_MIDDLE, CLOUD_TOP_RIGHT, CLOUD_BOT_LEFT, CLOUD_BOT_MIDDLE, CLOUD_BOT_RIGHT,
-        HILL_UP, HILL_BLANK, HILL_SPOTS1, HILL_SPOTS2, HILL_TOP, HILL_DOWN,
-        FLAG_TIP, FLAG_POLE, FLAG_LEFT, FLAG_RIGHT,
-        CASTLE_BRICK, CASTLE_BALCONY1, CASTLE_BALCONY2, CASTLE_WINDOW_LEFT, CASTLE_WINDOW_RIGHT, CASTLE_DOOR_BOT,
-        CASTLE_DOOR_TOP,
-        DEATH_BLOCK, ALT_BLOCK
-    };
 
     private int x;
     private int y;
@@ -35,6 +24,15 @@ public abstract class Block implements GameObject {
 
     private BlockType type;
 
+    /**
+     * Constructor method for a Block object.
+     * 
+     * @param x x position of the block on the tile
+     * @param y y position of the block on the tile
+     * @param w block width
+     * @param h block height
+     * @param s game scale for enlarging the item if needed
+     */
     public Block(final int x, final int y, final int w, final int h, final int s) {
         this.x = x * s;
         this.y = y * s;

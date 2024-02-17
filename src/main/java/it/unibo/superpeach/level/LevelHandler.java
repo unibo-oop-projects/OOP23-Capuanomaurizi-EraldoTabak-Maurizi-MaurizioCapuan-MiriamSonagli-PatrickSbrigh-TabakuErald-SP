@@ -2,11 +2,11 @@ package it.unibo.superpeach.level;
 
 import java.awt.image.BufferedImage;
 
+import it.unibo.superpeach.gameObjects.blocks.BlockType;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.LuckyBlock;
 import it.unibo.superpeach.gameObjects.blocks.MapBackgroundBlock;
 import it.unibo.superpeach.gameObjects.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
 import it.unibo.superpeach.gameObjects.enemies.EnemiesHandler;
 import it.unibo.superpeach.gameObjects.enemies.FlyingKoopa;
 import it.unibo.superpeach.gameObjects.enemies.Goomba;

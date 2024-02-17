@@ -9,7 +9,7 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.gameObjects.blocks.Block;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
+import it.unibo.superpeach.gameObjects.blocks.BlockType;
 import it.unibo.superpeach.graphics.Texturer;
 
 /**
