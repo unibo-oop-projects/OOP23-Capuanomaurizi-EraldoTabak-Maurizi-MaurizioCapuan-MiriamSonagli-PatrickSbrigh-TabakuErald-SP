@@ -12,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Testing the EnemyHandler class.
+ * 
+ * @author Eraldo Tabaku
+ */
 public class EnemiesHandlerTest {
 
     private static final int X = 12;
@@ -26,6 +31,9 @@ public class EnemiesHandlerTest {
 
     private final static BlocksHandler blocksHandler = new BlocksHandler();
 
+    /**
+     * testing the method addEnemy.
+     */
     @Test
     void testEnemyHandlerAddEnemy() {
 
@@ -58,8 +66,11 @@ public class EnemiesHandlerTest {
 
     }
 
+    /**
+     * Testing the removeEnemy method.
+     */
     @Test
-    public void testenemiesHandler1RemoveEnemy() {
+    public void testenemiesHandlerRemoveEnemy() {
 
         new Game().init();
 
@@ -92,6 +103,9 @@ public class EnemiesHandlerTest {
         assertEquals(blocksHandler, enemiesHandler2.getEnemies().get(0).getBlocksHandler());
     }
 
+    /**
+     * Testing the enemiesTick method.
+     */
     @Test
     public void testTickEnemies() {
 
@@ -112,6 +126,9 @@ public class EnemiesHandlerTest {
 
     }
 
+    /**
+     * Testing if the enemies correctly die.
+     */
     @Test
     public void testDeadEnemies() {
 
