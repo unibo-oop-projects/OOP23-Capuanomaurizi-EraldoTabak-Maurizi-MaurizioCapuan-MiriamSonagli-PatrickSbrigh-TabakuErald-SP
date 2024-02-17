@@ -32,7 +32,6 @@ public abstract class Player {
     private int x;
     private int y;
     private int scale;
-    private Rectangle rectangle;
     private boolean jumped;
     private BlocksHandler blocksHandler;
     private EnemiesHandler enemiesHandler;
@@ -62,7 +61,6 @@ public abstract class Player {
         this.y = y*scale;
         this.scale = scale;
         this.jumped = false;
-        this.rectangle = new Rectangle(this.x, this.y, this.width, this.height);
         this.blocksHandler = blocksHandler;
         this.moveX = 0;
         this.moveY = 0;
@@ -101,10 +99,6 @@ public abstract class Player {
         return this.height;
     }
 
-    public Rectangle getRectangle() {
-        return this.rectangle;
-    }
-
     public int getScale() {
         return this.scale;
     }
@@ -115,10 +109,6 @@ public abstract class Player {
 
     public int getLife() {
         return this.life;
-    }
-
-    public int getConsecutiveJump() {
-        return this.consecutiveJumps;
     }
 
     public int getCoins(){
@@ -180,10 +170,6 @@ public abstract class Player {
 
     public void setY(int y) {
         this.y = y * this.scale;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
     }
 
     public void setHeight(int height) {
@@ -473,7 +459,6 @@ public abstract class Player {
             setY(respawnY);
         }
     }
-
 
     private boolean touchedEnemy(Enemy enemy) {
         return enemy.getBounds().intersects(getTopBound()) || enemy.getBounds().intersects(getLeftBound())
