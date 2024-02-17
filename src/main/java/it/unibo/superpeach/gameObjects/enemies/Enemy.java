@@ -74,7 +74,7 @@ public abstract class Enemy implements GameObject {
     /**
      * @return a boolean for the enemy falling or not status
      */
-    public boolean getIsFalling() {
+    public boolean IsFalling() {
         return this.isFalling;
     }
 
