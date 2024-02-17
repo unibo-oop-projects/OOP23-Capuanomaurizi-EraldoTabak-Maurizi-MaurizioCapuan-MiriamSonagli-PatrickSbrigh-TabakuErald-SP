@@ -29,17 +29,17 @@ public class EnemiesHandler {
         }
     }
 
-    public void renderEnemies(Graphics g) {
+    public void renderEnemies(final Graphics g) {
         for (Enemy enemy : enemies) {
             enemy.render(g);
         }
     }
 
-    public void addEnemy(Enemy enemy) {
+    public void addEnemy(final Enemy enemy) {
         enemies.add(enemy);
     }
 
-    public void removeEnemy(Enemy enemy) {
+    public void removeEnemy(final Enemy enemy) {
 
         this.enemies.remove(enemy);
     }

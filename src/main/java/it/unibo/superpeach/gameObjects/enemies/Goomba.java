@@ -1,12 +1,13 @@
 package it.unibo.superpeach.gameObjects.enemies;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
 public class Goomba extends Enemy {
 
-    public Goomba(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
+    public Goomba(final int x, final int y, final int width, final int height, final int scale,
+            final BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);
         setSpeed(1 * scale);
         setSprites(getTexturer().getGoombaImg());
@@ -14,7 +15,7 @@ public class Goomba extends Enemy {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(final Graphics g) {
         g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
     }
 
