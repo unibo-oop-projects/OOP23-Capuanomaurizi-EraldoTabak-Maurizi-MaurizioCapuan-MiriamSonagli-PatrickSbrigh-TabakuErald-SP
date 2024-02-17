@@ -15,8 +15,24 @@ import it.unibo.superpeach.graphics.Texturer;
  * @author  Miriam Sonaglia
  */
 public abstract class PowerUp implements GameObject {
-
-    public enum PowerUpType { RED_MUSHROOM, STAR, LIFE_MUSHROOM, COIN };
+    
+    public enum PowerUpType { 
+        /** 
+         * Power up RED MUSHROOM
+        */
+        RED_MUSHROOM, 
+        /**
+         * Power up STAR
+         */
+        STAR, 
+        /**
+         * Power up LIFE MUSHROOM
+         */
+        LIFE_MUSHROOM, 
+        /**
+         * Power up COIN
+         */
+        COIN };
 
     private static final int FALL_SPEED = 1;
 
@@ -167,7 +183,7 @@ public abstract class PowerUp implements GameObject {
     }
 
     /**
-     * @return if the power up is falling or not
+     * @return if the power up is falling or not.
      */
     public boolean getIsFalling() {
         return this.isFalling;
