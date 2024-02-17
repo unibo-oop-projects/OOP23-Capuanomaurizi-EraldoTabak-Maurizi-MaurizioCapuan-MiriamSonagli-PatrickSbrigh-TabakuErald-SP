@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
+import it.unibo.superpeach.gameObjects.blocks.BlockType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
