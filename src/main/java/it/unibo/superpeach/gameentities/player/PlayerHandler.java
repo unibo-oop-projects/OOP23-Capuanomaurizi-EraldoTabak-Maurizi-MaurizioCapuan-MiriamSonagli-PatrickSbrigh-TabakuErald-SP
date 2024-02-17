@@ -6,7 +6,7 @@ import java.awt.Graphics;
  * This class manages the player.
  * @author Patrick Sbrighi
  */
-public class PlayerHandler {
+public final class PlayerHandler {
     private Player player;
 
     /**

@@ -15,24 +15,28 @@ import it.unibo.superpeach.gameentities.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.BufferedImageLoader;
 
 /**
- * Level generation class that matches each color of a pixel matrix with a particular map block or enemy.
+ * Level generation class that matches each color of a pixel matrix with a
+ * particular map block or enemy.
+ * 
  * @author Maurizio Capuano
  */
 public final class LevelHandler {
 
-    private BufferedImageLoader loader;
+    private final BufferedImageLoader loader;
     private BufferedImage levelImage;
-    private BlocksHandler blocksHandler;
-    private int gameScale;
+    private final BlocksHandler blocksHandler;
+    private final int gameScale;
 
-    private EnemiesHandler enemiesHandler;
+    private final EnemiesHandler enemiesHandler;
 
     /**
      * Level handler constructor.
      * 
-     * @param blocksHandler handler of game blocks which contains every block and can create them 
-     * @param scale game scale
-     * @param enemiesHandler handler of enemies entities which contains every enemy and can create them 
+     * @param blocksHandler  handler of game blocks which contains every block and
+     *                       can create them
+     * @param scale          game scale
+     * @param enemiesHandler handler of enemies entities which contains every enemy
+     *                       and can create them
      */
     public LevelHandler(final BlocksHandler blocksHandler, final int scale, final EnemiesHandler enemiesHandler) {
         this.blocksHandler = blocksHandler;
@@ -42,7 +46,8 @@ public final class LevelHandler {
     }
 
     /**
-     * Methods that adds all blocks and enemies to their handlers which will then render them.
+     * Methods that adds all blocks and enemies to their handlers which will then
+     * render them.
      */
     public void drawLevel() {
         parseLevel("it/unibo/superpeach/level/level_blocks.png");
@@ -50,15 +55,15 @@ public final class LevelHandler {
 
     private void parseLevel(final String lvlImagePath) {
         levelImage = loader.loadImage(lvlImagePath);
-        int width = levelImage.getWidth();
-        int height = levelImage.getHeight();
+        final int width = levelImage.getWidth();
+        final int height = levelImage.getHeight();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
 
-                int pixel = levelImage.getRGB(i, j);
-                int r = (pixel >> 16) & 0xff;
-                int g = (pixel >> 8) & 0xff;
-                int b = (pixel) & 0xff;
+                final int pixel = levelImage.getRGB(i, j);
+                final int r = (pixel >> 16) & 0xff;
+                final int g = (pixel >> 8) & 0xff;
+                final int b = (pixel) & 0xff;
 
                 if (!(r == 255 && g == 255 && b == 255)) {
                     if (r == 185 && g == 122 && b == 87) {

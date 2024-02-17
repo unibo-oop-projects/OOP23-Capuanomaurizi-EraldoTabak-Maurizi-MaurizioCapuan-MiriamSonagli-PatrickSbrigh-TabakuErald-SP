@@ -57,17 +57,17 @@ public abstract class Enemy implements GameObject {
     }
 
     @Override
-    public int getX() {
+    public final int getX() {
         return this.x;
     }
 
     @Override
-    public int getY() {
+    public final int getY() {
         return this.y;
     }
 
     @Override
-    public int getScale() {
+    public final int getScale() {
         return scale;
     }
 
@@ -108,22 +108,22 @@ public abstract class Enemy implements GameObject {
     }
 
     @Override
-    public BufferedImage[] getSprites() {
+    public final BufferedImage[] getSprites() {
         return this.sprites;
     }
 
     @Override
-    public Texturer getTexturer() {
+    public final Texturer getTexturer() {
         return texturer;
     }
 
     @Override
-    public int getWidth() {
+    public final int getWidth() {
         return this.width;
     }
 
     @Override
-    public int getHeight() {
+    public final int getHeight() {
         return this.height;
     }
 
@@ -149,7 +149,7 @@ public abstract class Enemy implements GameObject {
     }
 
     @Override
-    public Rectangle getBoundingBox() {
+    public final Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
@@ -168,27 +168,27 @@ public abstract class Enemy implements GameObject {
     }
 
     @Override
-    public void setSprites(final BufferedImage[] sprites) {
+    public final void setSprites(final BufferedImage[] sprites) {
         this.sprites = sprites;
     }
 
     @Override
-    public void setY(final int y) {
+    public final void setY(final int y) {
         this.y = y * scale;
     }
 
     @Override
-    public void setX(final int x) {
+    public final void setX(final int x) {
         this.x = x * scale;
     }
 
     @Override
-    public void setWidth(final int width) {
+    public final void setWidth(final int width) {
         this.width = width;
     }
 
     @Override
-    public void setHeight(final int height) {
+    public final void setHeight(final int height) {
         this.height = height;
     }
 
@@ -219,7 +219,7 @@ public abstract class Enemy implements GameObject {
      * @param scale used by the game.
      */
     @Override
-    public void setScale(final int scale) {
+    public final void setScale(final int scale) {
         this.scale = scale;
     }
 

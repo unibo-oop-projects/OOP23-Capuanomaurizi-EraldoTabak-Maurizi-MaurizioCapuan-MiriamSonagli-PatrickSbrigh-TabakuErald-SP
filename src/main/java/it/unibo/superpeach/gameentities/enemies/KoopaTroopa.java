@@ -9,7 +9,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * 
  * @author Eraldo Tabaku
  */
-public class KoopaTroopa extends Enemy {
+public final class KoopaTroopa extends Enemy {
 
     /**
      * Constructor method for KoopaTroopa class.

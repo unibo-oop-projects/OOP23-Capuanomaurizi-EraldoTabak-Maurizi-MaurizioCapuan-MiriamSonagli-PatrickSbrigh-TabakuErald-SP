@@ -15,7 +15,7 @@ import it.unibo.superpeach.graphics.Texturer;
  * This class implements the main character Peach.
  * @author Patrick Sbrighi
  */
-public class Peach extends Player {
+public final class Peach extends Player {
     private static final int SPEED_X = 4;
     private static final int JUMP_HEIGHT_NORM = 52;
     private static final int JUMP_HEIGHT_BIG = 55;
@@ -50,22 +50,22 @@ public class Peach extends Player {
     }
 
     @Override
-    public BufferedImage[] getSprites() {
+    public final BufferedImage[] getSprites() {
         return this.sprite.clone();
     }
 
     @Override
-    public Texturer getTexturer() {
+    public final Texturer getTexturer() {
         return this.texturer;
     }
 
     @Override
-    public void setSprites(final BufferedImage[] sprites) {
+    public final void setSprites(final BufferedImage[] sprites) {
         this.sprite = sprites.clone();
     }
 
     @Override
-    public void moveLeft() {
+    public final void moveLeft() {
         if (getPowerUp() == PowerUpType.STAR) {
             spriteNeeded = LOOK_LEFT_STAR;
         } else {
@@ -75,7 +75,7 @@ public class Peach extends Player {
     }
 
     @Override
-    public void moveRight() {
+    public final void moveRight() {
         if (getPowerUp() == PowerUpType.STAR) {
             spriteNeeded = LOOK_RIGHT_STAR;
         } else {
@@ -85,7 +85,7 @@ public class Peach extends Player {
     }
 
     @Override
-    public void jump() {
+    public final void jump() {
         if (!hasJumped() && canJump()) {
             if (getPowerUp() == PowerUpType.STAR) {
                 spriteNeeded = JUMP_FALL_STAR;
@@ -104,12 +104,12 @@ public class Peach extends Player {
     }
 
     @Override
-    public void render(final Graphics g) {
+    public final void render(final Graphics g) {
         g.drawImage(getSprites()[spriteNeeded], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
-    public void tick() {
+    public final void tick() {
         setY(getY() / getScale() + getMoveY());
         setX(getX() / getScale() + getMoveX());
         fall();

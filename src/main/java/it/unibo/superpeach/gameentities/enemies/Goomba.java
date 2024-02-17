@@ -9,7 +9,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * 
  * @author Eraldo Tabaku
  */
-public class Goomba extends Enemy {
+public final class Goomba extends Enemy {
 
     /**
      * Constructor method for Goomba class.
