@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameobjects.powerups;
+package it.unibo.superpeach.gameentities.powerups;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-package it.unibo.superpeach.gameobjects.blocks;
+package it.unibo.superpeach.gameentities.blocks;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameobjects.GameObject;
+import it.unibo.superpeach.gameentities.GameObject;
 import it.unibo.superpeach.graphics.Texturer;
 
 /**

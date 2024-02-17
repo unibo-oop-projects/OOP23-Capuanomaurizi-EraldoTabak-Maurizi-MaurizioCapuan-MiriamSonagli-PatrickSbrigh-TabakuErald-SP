@@ -1,8 +1,8 @@
-package it.unibo.superpeach.gameobjects.blocks;
+package it.unibo.superpeach.gameentities.blocks;
 
 import java.awt.Graphics;
 
-import it.unibo.superpeach.gameobjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
 
 /**
  * Blocks class that inherits from Block class and represents a fixed block

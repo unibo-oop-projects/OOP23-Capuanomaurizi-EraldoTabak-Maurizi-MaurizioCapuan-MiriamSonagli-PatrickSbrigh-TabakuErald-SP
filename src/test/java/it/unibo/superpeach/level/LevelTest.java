@@ -4,9 +4,9 @@ package it.unibo.superpeach.level;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameobjects.blocks.BlockType;
-import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameobjects.blocks.MapFixedBlock;
+import it.unibo.superpeach.gameentities.blocks.BlockType;
+import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
+import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

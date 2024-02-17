@@ -1,8 +1,8 @@
-package it.unibo.superpeach.gameobjects.powerups;
+package it.unibo.superpeach.gameentities.powerups;
 
 import java.awt.Graphics;
 
-import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 
 /**
  * Implementation of the COIN power up.

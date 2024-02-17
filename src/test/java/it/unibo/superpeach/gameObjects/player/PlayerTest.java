@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.game.Scoreboard;
-import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameobjects.enemies.EnemiesHandler;
-import it.unibo.superpeach.gameobjects.player.Peach;
-import it.unibo.superpeach.gameobjects.player.Player;
-import it.unibo.superpeach.gameobjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
+import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameentities.player.Peach;
+import it.unibo.superpeach.gameentities.player.Player;
+import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
 
 public class PlayerTest{
     private static final int SPEED_X = 4;

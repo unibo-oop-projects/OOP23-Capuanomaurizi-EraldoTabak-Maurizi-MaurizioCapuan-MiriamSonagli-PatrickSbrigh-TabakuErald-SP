@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameobjects;
+package it.unibo.superpeach.gameentities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;

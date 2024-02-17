@@ -4,7 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameobjects.player.PlayerHandler;
+import it.unibo.superpeach.gameentities.player.PlayerHandler;
 
 /**
  * This class allows to interact with the user via keyboard.

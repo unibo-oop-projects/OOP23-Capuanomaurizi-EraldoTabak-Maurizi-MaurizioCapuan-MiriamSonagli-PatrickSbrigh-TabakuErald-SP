@@ -3,13 +3,13 @@ package it.unibo.superpeach.gameObjects.enemies;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameobjects.blocks.BlockType;
-import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameobjects.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameobjects.enemies.Enemy;
-import it.unibo.superpeach.gameobjects.enemies.FlyingKoopa;
-import it.unibo.superpeach.gameobjects.enemies.Goomba;
-import it.unibo.superpeach.gameobjects.enemies.KoopaTroopa;
+import it.unibo.superpeach.gameentities.blocks.BlockType;
+import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
+import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
+import it.unibo.superpeach.gameentities.enemies.Enemy;
+import it.unibo.superpeach.gameentities.enemies.FlyingKoopa;
+import it.unibo.superpeach.gameentities.enemies.Goomba;
+import it.unibo.superpeach.gameentities.enemies.KoopaTroopa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

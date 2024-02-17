@@ -1,8 +1,8 @@
-package it.unibo.superpeach.gameobjects.enemies;
+package it.unibo.superpeach.gameentities.enemies;
 
 import java.awt.Graphics;
 
-import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 
 /**
  * Enemy Koopa Class.

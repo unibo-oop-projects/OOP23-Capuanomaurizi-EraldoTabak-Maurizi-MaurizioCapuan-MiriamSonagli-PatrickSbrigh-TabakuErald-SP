@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameobjects.player.PlayerHandler;
+import it.unibo.superpeach.gameentities.player.PlayerHandler;
 
 public class KeyboardTest{
     Keyboard kb;

@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameobjects.player.Peach;
-import it.unibo.superpeach.gameobjects.player.Player;
-import it.unibo.superpeach.gameobjects.player.PlayerHandler;
+import it.unibo.superpeach.gameentities.player.Peach;
+import it.unibo.superpeach.gameentities.player.Player;
+import it.unibo.superpeach.gameentities.player.PlayerHandler;
 
 public class PlayerHandlerTest {
     private PlayerHandler pHandler;

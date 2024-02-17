@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameobjects.enemies;
+package it.unibo.superpeach.gameentities.enemies;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

@@ -1,19 +1,19 @@
-package it.unibo.superpeach.gameobjects.player;
+package it.unibo.superpeach.gameentities.player;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import it.unibo.superpeach.game.Scoreboard;
-import it.unibo.superpeach.gameobjects.GameObject;
-import it.unibo.superpeach.gameobjects.blocks.Block;
-import it.unibo.superpeach.gameobjects.blocks.BlockType;
-import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameobjects.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameobjects.enemies.EnemiesHandler;
-import it.unibo.superpeach.gameobjects.enemies.Enemy;
-import it.unibo.superpeach.gameobjects.powerups.PowerUp;
-import it.unibo.superpeach.gameobjects.powerups.PowerupsHandler;
-import it.unibo.superpeach.gameobjects.powerups.PowerUp.PowerUpType;
+import it.unibo.superpeach.gameentities.GameObject;
+import it.unibo.superpeach.gameentities.blocks.Block;
+import it.unibo.superpeach.gameentities.blocks.BlockType;
+import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
+import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
+import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameentities.enemies.Enemy;
+import it.unibo.superpeach.gameentities.powerups.PowerUp;
+import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameentities.powerups.PowerUp.PowerUpType;
 
 /**
  * This class implementes the player.
