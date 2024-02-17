@@ -61,10 +61,13 @@ public abstract class PowerUp implements GameObject {
         this.paddingBound = 4 * scale;
     }
 
+    @Override
     public abstract void render(Graphics g);
 
+    @Override
     public abstract void tick();
 
+    @Override
     public Texturer getTexturer() {
         return texturer;
     }
@@ -73,26 +76,32 @@ public abstract class PowerUp implements GameObject {
         this.texturer = texturer;
     }
 
+    @Override
     public BufferedImage[] getSprites() {
         return image;
     }
 
+    @Override
     public void setSprites(final BufferedImage[] image) {
         this.image = image;
     }
 
+    @Override
     public void setX(final int x) {
         this.x = x * scale;
     }
 
+    @Override
     public void setY(final int y) {
         this.y = y * scale;
     }
 
+    @Override
     public void setWidth(final int w) {
         this.width = w;
     }
 
+    @Override
     public void setHeight(final int h) {
         this.height = h;
     }
@@ -104,26 +113,32 @@ public abstract class PowerUp implements GameObject {
         return powerUpType;
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
     }
 
+    @Override
     public int getWidth() {
         return this.width;
     }
 
+    @Override
     public int getHeight() {
         return this.height;
     }
 
+    @Override
     public int getScale() {
         return this.scale;
     }
 
+    @Override
     public void setScale(final int scale) {
         this.scale = scale;
     }
