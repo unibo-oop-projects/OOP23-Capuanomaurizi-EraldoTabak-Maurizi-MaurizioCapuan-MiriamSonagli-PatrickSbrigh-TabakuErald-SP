@@ -17,7 +17,7 @@ public abstract class Enemy implements GameObject {
     private static final int FALL_SPEED = 1;
     private int paddingBOUND = 4;
 
-    public int x;
+    private int x;
     private int y;
     private int speed;
     private int scale;
