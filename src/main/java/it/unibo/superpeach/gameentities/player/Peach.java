@@ -50,22 +50,22 @@ public final class Peach extends Player {
     }
 
     @Override
-    public final BufferedImage[] getSprites() {
+    public BufferedImage[] getSprites() {
         return this.sprite.clone();
     }
 
     @Override
-    public final Texturer getTexturer() {
+    public Texturer getTexturer() {
         return this.texturer;
     }
 
     @Override
-    public final void setSprites(final BufferedImage[] sprites) {
+    public void setSprites(final BufferedImage[] sprites) {
         this.sprite = sprites.clone();
     }
 
     @Override
-    public final void moveLeft() {
+    public void moveLeft() {
         if (getPowerUp() == PowerUpType.STAR) {
             spriteNeeded = LOOK_LEFT_STAR;
         } else {
@@ -75,7 +75,7 @@ public final class Peach extends Player {
     }
 
     @Override
-    public final void moveRight() {
+    public void moveRight() {
         if (getPowerUp() == PowerUpType.STAR) {
             spriteNeeded = LOOK_RIGHT_STAR;
         } else {
@@ -85,7 +85,7 @@ public final class Peach extends Player {
     }
 
     @Override
-    public final void jump() {
+    public void jump() {
         if (!hasJumped() && canJump()) {
             if (getPowerUp() == PowerUpType.STAR) {
                 spriteNeeded = JUMP_FALL_STAR;
@@ -104,12 +104,12 @@ public final class Peach extends Player {
     }
 
     @Override
-    public final void render(final Graphics g) {
+    public void render(final Graphics g) {
         g.drawImage(getSprites()[spriteNeeded], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
-    public final void tick() {
+    public void tick() {
         setY(getY() / getScale() + getMoveY());
         setX(getX() / getScale() + getMoveX());
         fall();

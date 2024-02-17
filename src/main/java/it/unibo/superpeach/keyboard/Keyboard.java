@@ -35,7 +35,7 @@ public final class Keyboard extends KeyAdapter {
      * @param e key pressed
      */
     @Override
-    public final void keyPressed(final KeyEvent e) {
+    public void keyPressed(final KeyEvent e) {
         final int pressed = e.getKeyCode();
 
         if (pressed == KeyEvent.VK_SPACE && !playHand.getPlayer().hasJumped()
@@ -63,7 +63,7 @@ public final class Keyboard extends KeyAdapter {
      * @param e key relased
      */
     @Override
-    public final void keyReleased(final KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         final int pressed = e.getKeyCode();
 
         if (pressed == KeyEvent.VK_SPACE) {
