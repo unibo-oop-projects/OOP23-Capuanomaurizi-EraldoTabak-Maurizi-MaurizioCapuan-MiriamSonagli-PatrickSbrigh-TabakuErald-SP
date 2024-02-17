@@ -23,7 +23,6 @@ import it.unibo.superpeach.graphics.BufferedImageLoader;
 public final class LevelHandler {
 
     private final BufferedImageLoader loader;
-    private BufferedImage levelImage;
     private final BlocksHandler blocksHandler;
     private final int gameScale;
 
@@ -54,7 +53,7 @@ public final class LevelHandler {
     }
 
     private void parseLevel(final String lvlImagePath) {
-        levelImage = loader.loadImage(lvlImagePath);
+        BufferedImage levelImage = loader.loadImage(lvlImagePath);
         final int width = levelImage.getWidth();
         final int height = levelImage.getHeight();
         for (int i = 0; i < width; i++) {

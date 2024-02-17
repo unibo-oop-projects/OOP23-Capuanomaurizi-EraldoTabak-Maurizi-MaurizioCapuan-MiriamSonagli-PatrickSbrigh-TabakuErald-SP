@@ -42,13 +42,11 @@ public final class Game extends Canvas implements Runnable {
     private static final int GAMEOVER_Y_PADDING = 25;
 
     private boolean running;
-    private boolean gameOver = false;
-    private int gameOverBuffers = 0;
+    private boolean gameOver;
+    private int gameOverBuffers;
 
-    private Thread mainGameLoop;
     private BlocksHandler blocksHandler;
     private static Texturer texturer;
-    private LevelHandler levelHandler;
     private Camera camera;
     private static PeachMenu window;
     private PlayerHandler playerHandler;
@@ -76,6 +74,7 @@ public final class Game extends Canvas implements Runnable {
         scoreboard = new Scoreboard(GAME_LIVES, GAME_COINS, gameScale);
         playerHandler.takePlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG,
                 PLAYER_DEFAULT_WID_HEIG, gameScale, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));
+        LevelHandler levelHandler;
         levelHandler = new LevelHandler(blocksHandler, gameScale, enemiesHandler);
         levelHandler.drawLevel();
         camera = new Camera(WINDOW_WIDTH, gameScale);
@@ -87,7 +86,7 @@ public final class Game extends Canvas implements Runnable {
      * Game loop thread creation and thread starting method.
      */
     private void start() {
-        mainGameLoop = new Thread(this);
+        Thread mainGameLoop = new Thread(this);
         mainGameLoop.start();
         running = true;
     }
@@ -122,14 +121,14 @@ public final class Game extends Canvas implements Runnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime();
-        double ticksAmount = TICKS_PER_SECOND;
-        double ns = NANOS_PER_SECOND / ticksAmount;
+        final double ticksAmount = TICKS_PER_SECOND;
+        final double ns = NANOS_PER_SECOND / ticksAmount;
         double delta = 0;
         long timer = System.currentTimeMillis();
 
         // GAMELOOP
         while (running) {
-            long now = System.nanoTime();
+            final long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
@@ -157,12 +156,12 @@ public final class Game extends Canvas implements Runnable {
 
     private void render() {
         try {
-            BufferStrategy buffStrat = this.getBufferStrategy();
+            final BufferStrategy buffStrat = this.getBufferStrategy();
             if (buffStrat == null) {
                 this.createBufferStrategy(3);
                 return;
             }
-            Graphics g = buffStrat.getDrawGraphics();
+            final Graphics g = buffStrat.getDrawGraphics();
             if (!gameOver) {
                 g.setColor(Color.PINK);
                 g.fillRect(0, 0, WINDOW_WIDTH * gameScale, WINDOW_HEIGHT * gameScale);

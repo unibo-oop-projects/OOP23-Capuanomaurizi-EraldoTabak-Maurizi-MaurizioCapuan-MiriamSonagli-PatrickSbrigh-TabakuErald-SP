@@ -14,9 +14,9 @@ public final class Scoreboard {
 
     private boolean[] hearts;
     private boolean[] coins;
-    private int gameScale;
-    private Texturer texturer = new Texturer();
-    private BufferedImage[] sprites = texturer.getScoreboard();
+    private final int gameScale;
+    private final Texturer texturer = new Texturer();
+    private final BufferedImage[] sprites = texturer.getScoreboard();
 
     /**
      * @param lives total number of players' lives

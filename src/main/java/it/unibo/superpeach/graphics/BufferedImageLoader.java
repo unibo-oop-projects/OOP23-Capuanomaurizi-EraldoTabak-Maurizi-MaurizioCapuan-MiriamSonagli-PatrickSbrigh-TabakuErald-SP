@@ -12,13 +12,12 @@ import javax.imageio.ImageIO;
  */
 public final class BufferedImageLoader {
 
-    private BufferedImage img;
-
     /**
      * @param imgPath ClassLoader resource path
      * @return BufferedImage containing the retrieved image or null if method fails
      */
     public BufferedImage loadImage(final String imgPath) {
+        BufferedImage img = null;
         try {
             img = ImageIO.read(ClassLoader.getSystemResource(imgPath));
         } catch (IOException e) {
