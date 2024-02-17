@@ -28,9 +28,9 @@ public class Scoreboard {
     public void render(Graphics g, int peachX) {
         for (int i = 0; i < hearts.length; i++) {
             if (hearts[i]) {
-                g.drawImage(sprites[0], peachX + (i-(hearts.length/2))*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale, 16*gameScale, 16*gameScale, null);
+                g.drawImage(sprites[0], peachX + (i-(hearts.length/2))*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale + gameScale, 16*gameScale, 16*gameScale, null);
             } else {
-                g.drawImage(sprites[1], peachX + (i-(hearts.length/2))*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale, 16*gameScale, 16*gameScale, null);
+                g.drawImage(sprites[1], peachX + (i-(hearts.length/2))*16*gameScale + 2*gameScale, 2*gameScale + 16*gameScale + gameScale, 16*gameScale, 16*gameScale, null);
             }
         }
         for (int i = 0; i < coins.length; i++) {
@@ -51,6 +51,15 @@ public class Scoreboard {
                 i++;
             }
             hearts[i] = false;
+        }
+    }
+
+    public void restoreHeart(){
+        for (int i = 0; i < hearts.length; i++) {
+            if (hearts[i] == false) {
+                hearts[i] = true;
+                return;
+            }
         }
     }
 

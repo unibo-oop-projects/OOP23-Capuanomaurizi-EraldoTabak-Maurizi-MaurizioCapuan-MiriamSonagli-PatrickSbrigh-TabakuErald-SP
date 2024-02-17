@@ -4,17 +4,20 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.player.PlayerHandler;
+import it.unibo.superpeach.gameObjects.player.PlayerHandler;
 
 public class Keyboard extends KeyAdapter {
     private PlayerHandler playHand;
     private static final long MIN_MILLS = 150;
     private long current;
+    private final Game game;
 
-    public Keyboard(PlayerHandler handler){
+    public Keyboard(PlayerHandler handler, Game game){
         this.playHand = handler;
         this.current = System.currentTimeMillis();
+        this.game = game;
     }
+    
     @Override
     public void keyPressed(KeyEvent e) {
         int pressed = e.getKeyCode();
@@ -35,7 +38,7 @@ public class Keyboard extends KeyAdapter {
         }
         
         if(pressed == KeyEvent.VK_ESCAPE){
-            Game.restart();
+            game.restart();
         }
     }
     @Override

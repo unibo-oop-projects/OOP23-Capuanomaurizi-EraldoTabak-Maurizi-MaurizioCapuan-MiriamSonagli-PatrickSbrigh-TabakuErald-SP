@@ -1,6 +1,6 @@
 package it.unibo.superpeach.level;
 
-import it.unibo.superpeach.player.Player;
+import it.unibo.superpeach.gameObjects.player.Player;
 
 public class Camera {
 
