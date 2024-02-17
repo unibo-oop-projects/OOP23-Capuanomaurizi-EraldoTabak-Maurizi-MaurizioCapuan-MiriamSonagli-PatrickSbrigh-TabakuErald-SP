@@ -9,6 +9,7 @@ import it.unibo.superpeach.graphics.Texturer;
 
 /**
  * World block.
+ * 
  * @author  Maurizio Capuano
  */
 public abstract class Block implements GameObject {
@@ -41,66 +42,86 @@ public abstract class Block implements GameObject {
         this.scale = s;
     }
 
+    @Override
     public Texturer getTexturer() {
         return texturer;
     }
 
+    @Override
     public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
 
+    @Override
     public int getHeight() {
         return height;
     }
 
+    @Override
     public int getWidth() {
         return width;
     }
 
+    @Override
     public int getScale() {
         return scale;
     }
 
+    @Override
     public BufferedImage[] getSprites() {
         return sprites;
     }
 
+    /**
+     * @return block type
+     */
     public BlockType getType() {
         return type;
     }
 
+    @Override
     public void setX(final int x) {
         this.x = x;
     }
 
+    @Override
     public void setY(final int y) {
         this.y = y;
     }
 
+    @Override
     public void setHeight(final int height) {
         this.height = height;
     }
 
+    @Override
     public void setWidth(final int width) {
         this.width = width;
     }
 
+    @Override
     public void setScale(final int scale) {
         this.scale = scale;
     }
 
+    @Override
     public void setSprites(final BufferedImage[] sprites) {
         this.sprites = sprites;
     }
 
+    /**
+     * @param type new block type
+     */
     public void setType(final BlockType type) {
         this.type = type;
     }

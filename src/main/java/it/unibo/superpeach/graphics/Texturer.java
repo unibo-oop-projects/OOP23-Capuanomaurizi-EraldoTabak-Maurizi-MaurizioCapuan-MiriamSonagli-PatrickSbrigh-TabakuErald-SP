@@ -2,7 +2,12 @@ package it.unibo.superpeach.graphics;
 
 import java.awt.image.BufferedImage;
 
-public class Texturer {
+/**
+ * Sprites manager class, loads from resource files sprites to draw.
+ * 
+ * @author  Maurizio Capuano
+ */
+public final class Texturer {
 
     private static final int BRICKSCASTLEBLOCKS_COUNT = 16;
     private static final int LUCKYBLOCKS_COUNT = 2;
@@ -31,6 +36,9 @@ public class Texturer {
     private BufferedImage[] peach;
     private BufferedImage[] powerups;
 
+    /**
+     * Texturer construtctor which initializes images arrays and loads sprites inside of them.
+     */
     public Texturer() {
 
         terrain = new BufferedImage[BRICKSCASTLEBLOCKS_COUNT];
@@ -177,54 +185,93 @@ public class Texturer {
         powerups[3] = tileSet.getSubimage(64, 16, TILE_WIDTH, TILE_HEIGHT);
     }
 
+    /**
+     * @return peach sprites
+     */
     public BufferedImage[] getPeach() {
-        return peach;
+        return peach.clone();
     }
 
+    /**
+     * @return bricks and ground sprites
+     */
     public BufferedImage[] getTerrain() {
-        return terrain;
+        return terrain.clone();
     }
 
+    /**
+     * @return lucky blocks sprites
+     */
     public BufferedImage[] getLucky() {
-        return lucky;
+        return lucky.clone();
     }
 
+    /**
+     * @return coins and hearts sprites
+     */
     public BufferedImage[] getScoreboard() {
-        return scoreboard;
+        return scoreboard.clone();
     }
 
+    /**
+     * @return pipes sprites
+     */
     public BufferedImage[] getPipe() {
-        return pipe;
+        return pipe.clone();
     }
 
+    /**
+     * @return cloud blocks sprites
+     */
     public BufferedImage[] getCloud() {
-        return cloud;
+        return cloud.clone();
     }
 
+    /**
+     * @return bush blocks sprites
+     */
     public BufferedImage[] getBush() {
-        return bush;
+        return bush.clone();
     }
 
+    /**
+     * @return hills blocks sprites
+     */
     public BufferedImage[] getHill() {
-        return hill;
+        return hill.clone();
     }
 
+    /**
+     * @return flag, flag pole and flag tip sprites
+     */
     public BufferedImage[] getFlag() {
-        return flag;
+        return flag.clone();
     }
 
+    /**
+     * @return goomba (enemy mushroom) sprites
+     */
     public BufferedImage[] getGoombaImg() {
-        return this.goomba;
+        return goomba.clone();
     }
 
+    /**
+     * @return koopa (turtle) sprites
+     */
     public BufferedImage[] getKoopaImg() {
-        return this.koopaTroopa;
+        return koopaTroopa.clone();
     }
 
+    /**
+     * @return flying koopa  (turtle) sprites
+     */
     public BufferedImage[] getFlyingKoopa() {
-        return this.flyingKoopa;
+        return flyingKoopa.clone();
     }
 
+    /**
+     * @return powerups sprites
+     */
     public BufferedImage[] getPowerups() {
         return powerups;
     }

@@ -5,7 +5,12 @@ import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.graphics.Texturer;
 
-public class Scoreboard {
+/**
+ * Graphic class which renders lives and coins count on screen.
+ * 
+ * @author  Maurizio Capuano
+ */
+public final class Scoreboard {
 
     private boolean[] hearts;
     private boolean[] coins;
@@ -13,6 +18,11 @@ public class Scoreboard {
     private Texturer texturer = new Texturer();
     private BufferedImage[] sprites = texturer.getScoreboard();
 
+    /**
+     * @param lives total number of players' lives
+     * @param totalCoins total number of collectable coins
+     * @param scale game scale
+     */
     public Scoreboard(final int lives, final int totalCoins, final int scale) {
         hearts = new boolean[lives];
         coins = new boolean[totalCoins];
@@ -25,6 +35,10 @@ public class Scoreboard {
         gameScale = scale;
     }
 
+    /**
+     * @param g graphic component
+     * @param peachX player's x position to make the scoreboard match the player movement
+     */
     public void render(final Graphics g, final int peachX) {
         for (int i = 0; i < hearts.length; i++) {
             if (hearts[i]) {
@@ -46,6 +60,9 @@ public class Scoreboard {
         }
     }
 
+    /**
+     *  Removes a heart from visualization.
+     */
     public void removeHeart() {
         if (hearts[hearts.length - 1]) {
             hearts[hearts.length - 1] = false;
@@ -58,6 +75,9 @@ public class Scoreboard {
         }
     }
 
+    /**
+     * Restores a heart when collecting life powerup.
+     */
     public void restoreHeart() {
         for (int i = 0; i < hearts.length; i++) {
             if (!hearts[i]) {
@@ -67,6 +87,9 @@ public class Scoreboard {
         }
     }
 
+    /**
+     * Collection of a coin with sprite modification.
+     */
     public void collectCoin() {
         for (int i = 0; i < coins.length; i++) {
             if (!coins[i]) {
