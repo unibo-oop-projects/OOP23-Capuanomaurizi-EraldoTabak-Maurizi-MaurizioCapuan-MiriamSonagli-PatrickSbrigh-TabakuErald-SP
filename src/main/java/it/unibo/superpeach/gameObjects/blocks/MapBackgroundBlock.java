@@ -4,7 +4,8 @@ import java.awt.Graphics;
 
 public class MapBackgroundBlock extends Block {
 
-    public MapBackgroundBlock(final int x, final int y, final int width, final int height, final int scale, final BlockType type) {
+    public MapBackgroundBlock(final int x, final int y, final int width, final int height, final int scale,
+            final BlockType type) {
         super(x, y, width, height, scale);
         setType(type);
         switch (type) {

@@ -13,7 +13,8 @@ public class LuckyBlock extends MapFixedBlock {
 
     private PowerUpType containedPowerUp;
 
-    public LuckyBlock(final int x, final int y, final int width, final int height, final int scale, final BlockType type, final PowerUpType powerUp) {
+    public LuckyBlock(final int x, final int y, final int width, final int height, final int scale,
+            final BlockType type, final PowerUpType powerUp) {
         super(x, y, width, height, scale, type);
         containedPowerUp = powerUp;
     }

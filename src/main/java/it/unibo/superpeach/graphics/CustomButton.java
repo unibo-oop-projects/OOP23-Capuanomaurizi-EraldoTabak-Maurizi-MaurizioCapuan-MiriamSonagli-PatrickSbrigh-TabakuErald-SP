@@ -15,12 +15,11 @@ public class CustomButton extends JButton {
         setForeground(customColor1);
         setBackground(customColor);
         setFocusable(false);
-        // Creazione di un bordo
         Border border = BorderFactory.createLineBorder(customColor1, 2, true);
         setBorder(border);
         setBorder(BorderFactory.createCompoundBorder(
                 border,
-                BorderFactory.createEmptyBorder(10, 20, 10, 20)
+                BorderFactory.createEmptyBorder(10, 10*2, 10, 10*2)
         ));
     }
 }

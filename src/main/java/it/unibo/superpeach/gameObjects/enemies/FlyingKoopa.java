@@ -1,9 +1,14 @@
 package it.unibo.superpeach.gameObjects.enemies;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
+/**
+ * Flying Koopa class.
+ * 
+ * @author Eraldo Tabaku
+ */
 public class FlyingKoopa extends Enemy {
 
     private static final int NUMBER_OF_MOVES = 50;
@@ -19,6 +24,9 @@ public class FlyingKoopa extends Enemy {
         this.nMoves = 0;
     }
 
+    /**
+     * this method updates the flying koopa coordinates.
+     */
     @Override
     protected void updateCoords() {
         if (this.nMoves < NUMBER_OF_MOVES) {

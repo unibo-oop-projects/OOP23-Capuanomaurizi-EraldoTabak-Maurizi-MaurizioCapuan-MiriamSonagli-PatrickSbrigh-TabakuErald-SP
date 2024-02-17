@@ -11,6 +11,10 @@ import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.Texturer;
 
+/**
+ * This class implements the main character Peach.
+ * @author Patrick Sbrighi
+ */
 public class Peach extends Player {
     private static final int SPEED_X = 4;
     private static final int JUMP_HEIGHT_NORM = 52;
@@ -25,6 +29,18 @@ public class Peach extends Player {
     private Texturer texturer;
     private BufferedImage[] sprite;
 
+    /**
+     * Class constructor.
+     * @param x X
+     * @param y Y
+     * @param width Width
+     * @param height Height
+     * @param scale Scale of dimension
+     * @param blocksHandler Blocks handler
+     * @param enemiesHandler Enemies handler
+     * @param powerUpsHandler Power up handler
+     * @param scoreboard Scoreboard
+     */
     public Peach(final int x, final int y, final int width, final int height, final int scale, final BlocksHandler blocksHandler,
             final EnemiesHandler enemiesHandler, final PowerupsHandler powerUpsHandler, final Scoreboard scoreboard) {
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
@@ -32,12 +48,19 @@ public class Peach extends Player {
         this.sprite = texturer.getPeach();
     }
 
+    @Override
     public BufferedImage[] getSprites() {
         return this.sprite;
     }
 
-    public Texturer getPlayerTexture() {
+    @Override
+    public Texturer getTexturer() {
         return this.texturer;
+    }
+
+    @Override
+    public void setSprites(final BufferedImage[] sprites) {
+        this.sprite = sprites;
     }
 
     @Override
