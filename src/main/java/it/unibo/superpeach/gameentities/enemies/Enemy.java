@@ -278,7 +278,7 @@ public abstract class Enemy implements GameObject {
      */
     public void collision() {
         for (final Block block : blocksHandler.getBlocks()) {
-            if (block.getType() == BlockType.DEATH_BLOCK && block.getBoundingBox().intersects(getBottomBound())) {
+            if (block.getBoundingBox().intersects(getBottomBound()) && block.getType() == BlockType.DEATH_BLOCK) {
                 die();
             }
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
@@ -289,16 +289,15 @@ public abstract class Enemy implements GameObject {
                 if (block.getBoundingBox().contains(getLeftBound())
                         || block.getBoundingBox().intersects(getLeftBound())) {
                     setXCollisionLeft(block);
-                } else if (block.getBoundingBox().contains(getRightBound())
-                        || block.getBoundingBox().intersects(getRightBound())) {
-                    setXCollisionRight(block);
                 } else if (block.getBoundingBox().contains(getBottomBound())
                         || block.getBoundingBox().intersects(getBottomBound())) {
                     setYCollisionBottom(block);
+                } else if (block.getBoundingBox().contains(getRightBound())
+                        || block.getBoundingBox().intersects(getRightBound())) {
+                    setXCollisionRight(block);
                 }
             }
         }
-
     }
 
     /**
