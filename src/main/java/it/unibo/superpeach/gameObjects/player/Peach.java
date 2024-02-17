@@ -25,8 +25,8 @@ public class Peach extends Player {
     private static final int LOOK_RIGHT_STAR = 3;
     private static final int LOOK_LEFT_STAR = 4;
     private static final int JUMP_FALL_STAR = 5;
-    private int spriteNeeded = 0;
-    private Texturer texturer;
+    private int spriteNeeded;
+    private final Texturer texturer;
     private BufferedImage[] sprite;
 
     /**
@@ -46,11 +46,12 @@ public class Peach extends Player {
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
         this.texturer = Game.getTexturer();
         this.sprite = texturer.getPeach();
+        this.spriteNeeded = 0;
     }
 
     @Override
     public BufferedImage[] getSprites() {
-        return this.sprite;
+        return this.sprite.clone();
     }
 
     @Override
@@ -60,7 +61,9 @@ public class Peach extends Player {
 
     @Override
     public void setSprites(final BufferedImage[] sprites) {
-        this.sprite = sprites;
+        if (sprites.length != 0) {
+            this.sprite = sprites;
+        }
     }
 
     @Override

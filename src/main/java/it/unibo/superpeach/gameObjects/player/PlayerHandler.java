@@ -14,7 +14,7 @@ public class PlayerHandler {
      * @param p The player to set
      * @return Return 0 if the operation was successful -1 otherwise
      */
-    public int setPlayer(final Player p) {
+    public int takePlayer(final Player p) {
         if (this.player == null) {
             this.player = p;
             return 0;
