@@ -356,7 +356,7 @@ public abstract class Player {
                         coins++;
                         break;
                     case RED_MUSHROOM:
-                        if(typePowerUp != PowerUpType.RED_MUSHROOM){
+                        if(typePowerUp != PowerUpType.RED_MUSHROOM && !(typePowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){
                             lastPowerUp = typePowerUp;
                         }
                         becomeBig();
