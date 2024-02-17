@@ -31,9 +31,6 @@ public class EnemiesHandlerTest {
     @Test
     void testEnemyHandler() {
 
-        // Check if there's no enemies to manage by the Enemy Handler
-        assertNull(enemiesHandler);
-
         // Adding a new goomba to the Enemies Handler
         enemiesHandler.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, blocksHandler));
         assertNotNull(blocksHandler);
