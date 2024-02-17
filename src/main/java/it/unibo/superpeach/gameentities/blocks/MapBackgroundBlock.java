@@ -56,6 +56,9 @@ public final class MapBackgroundBlock extends Block {
 
     @Override
     public void render(final Graphics g) {
+        final int castleWindowLeftSprite = 11;
+        final int castleWindowRightSprite = 13;
+        final int fifthDownSprite = 5;
         switch (getType()) {
             case CLOUD_TOP_LEFT:
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
@@ -73,7 +76,7 @@ public final class MapBackgroundBlock extends Block {
                 g.drawImage(getSprites()[4], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case CLOUD_BOT_RIGHT:
-                g.drawImage(getSprites()[5], getX(), getY(), getWidth(), getHeight(), null);
+                g.drawImage(getSprites()[fifthDownSprite], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case BUSH_LEFT:
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
@@ -100,7 +103,7 @@ public final class MapBackgroundBlock extends Block {
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case HILL_DOWN:
-                g.drawImage(getSprites()[5], getX(), getY(), getWidth(), getHeight(), null);
+                g.drawImage(getSprites()[fifthDownSprite], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case FLAG_LEFT:
                 g.drawImage(getSprites()[2], getX(), getY(), getWidth(), getHeight(), null);
@@ -115,13 +118,13 @@ public final class MapBackgroundBlock extends Block {
                 g.drawImage(getSprites()[4], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case CASTLE_BALCONY2:
-                g.drawImage(getSprites()[5], getX(), getY(), getWidth(), getHeight(), null);
+                g.drawImage(getSprites()[fifthDownSprite], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case CASTLE_WINDOW_LEFT:
-                g.drawImage(getSprites()[11], getX(), getY(), getWidth(), getHeight(), null);
+                g.drawImage(getSprites()[castleWindowLeftSprite], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case CASTLE_WINDOW_RIGHT:
-                g.drawImage(getSprites()[13], getX(), getY(), getWidth(), getHeight(), null);
+                g.drawImage(getSprites()[castleWindowRightSprite], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             default:
                 break;

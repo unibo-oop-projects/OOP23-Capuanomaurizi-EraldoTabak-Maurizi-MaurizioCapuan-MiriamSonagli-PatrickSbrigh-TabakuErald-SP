@@ -68,12 +68,14 @@ public final class PeachMenu {
         final ImagePanel panel = new ImagePanel(imagePath);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        final int fontSize = 40;
+        final int labelHeight = 20;
         final JLabel titleLabel = new JLabel("SUPER PEACH");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setFont(new Font("Monospaced", Font.BOLD, 40 * scale));
+        titleLabel.setFont(new Font("Monospaced", Font.BOLD, fontSize * scale));
         titleLabel.setForeground(Color.PINK);
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(20 * scale));
+        panel.add(Box.createVerticalStrut(labelHeight * scale));
 
         /**
          * Creation of the START button.

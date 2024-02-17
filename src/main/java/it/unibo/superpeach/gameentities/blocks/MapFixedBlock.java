@@ -53,6 +53,8 @@ public class MapFixedBlock extends Block {
 
     @Override
     public final void render(final Graphics g) {
+        final int castleDoorTopSprite = 6;
+        final int castleDoorBotSprite = 14;
         switch (getType()) {
             case TERRAIN:
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
@@ -88,10 +90,10 @@ public class MapFixedBlock extends Block {
                 g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case CASTLE_DOOR_TOP:
-                g.drawImage(getSprites()[6], getX(), getY(), getWidth(), getHeight(), null);
+                g.drawImage(getSprites()[castleDoorTopSprite], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case CASTLE_DOOR_BOT:
-                g.drawImage(getSprites()[14], getX(), getY(), getWidth(), getHeight(), null);
+                g.drawImage(getSprites()[castleDoorBotSprite], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             default:
                 break;
