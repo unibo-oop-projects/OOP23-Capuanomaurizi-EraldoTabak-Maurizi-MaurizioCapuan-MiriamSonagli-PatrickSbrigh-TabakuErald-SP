@@ -18,7 +18,7 @@ public final class ImagePanel extends JPanel {
 
     private static final long serialVersionUID = 10L;
 
-    private BufferedImage backgroundImage;
+    private transient BufferedImage backgroundImage;
 
     /**
      * reads the path of the image, if it doesn't exist it throws an exception.
