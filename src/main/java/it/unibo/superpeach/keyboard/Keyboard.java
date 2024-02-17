@@ -8,19 +8,20 @@ import it.unibo.superpeach.gameObjects.player.PlayerHandler;
 
 /**
  * This class allows to interact with the user via keyboard.
+ * 
  * @author Patrick Sbrighi
  */
 public class Keyboard extends KeyAdapter {
-    private PlayerHandler playHand;
+    private final PlayerHandler playHand;
     private static final long MIN_MILLS = 150;
     private long current;
     private final Game game;
 
-
     /**
      * Class constructor.
+     * 
      * @param handler Player handler
-     * @param game  Game
+     * @param game    Game
      */
     public Keyboard(final PlayerHandler handler, final Game game) {
         this.playHand = handler;
@@ -30,17 +31,17 @@ public class Keyboard extends KeyAdapter {
 
     /**
      * This method recognizes if a key is clicked on the keyboard.
+     * 
      * @param e key pressed
      */
     @Override
     public void keyPressed(final KeyEvent e) {
-        int pressed = e.getKeyCode();
+        final int pressed = e.getKeyCode();
 
-        if (pressed == KeyEvent.VK_SPACE) {
-            if (!playHand.getPlayer().hasJumped() && (System.currentTimeMillis() - current) >= MIN_MILLS) {
-                current = System.currentTimeMillis();
-                playHand.getPlayer().jump();
-            }
+        if (pressed == KeyEvent.VK_SPACE && !playHand.getPlayer().hasJumped()
+                && (System.currentTimeMillis() - current) >= MIN_MILLS) {
+            current = System.currentTimeMillis();
+            playHand.getPlayer().jump();
         }
 
         if (pressed == KeyEvent.VK_A) {
@@ -58,11 +59,12 @@ public class Keyboard extends KeyAdapter {
 
     /**
      * This method recognizes if a keyboard key is released.
+     * 
      * @param e key relased
      */
     @Override
     public void keyReleased(final KeyEvent e) {
-        int pressed = e.getKeyCode();
+        final int pressed = e.getKeyCode();
 
         if (pressed == KeyEvent.VK_SPACE) {
             playHand.getPlayer().setHasJumped(false);

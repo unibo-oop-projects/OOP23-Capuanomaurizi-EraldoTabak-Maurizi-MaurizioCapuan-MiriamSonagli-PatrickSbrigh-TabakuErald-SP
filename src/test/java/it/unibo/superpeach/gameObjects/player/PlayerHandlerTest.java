@@ -25,7 +25,7 @@ public class PlayerHandlerTest {
         game.init();
         pHandler = new PlayerHandler();
         peach = new Peach(0, 0, 0, 0, 0, null, null, null, null);
-        assertEquals(0, pHandler.setPlayer(peach));
+        assertEquals(0, pHandler.takePlayer(peach));
         assertNotNull(pHandler.getPlayer());
     }
 
@@ -34,7 +34,7 @@ public class PlayerHandlerTest {
         game.init();
         pHandler = new PlayerHandler();
         peach = new Peach(0, 0, 0, 0, 0, null, null, null, null);
-        pHandler.setPlayer(peach);
+        pHandler.takePlayer(peach);
         assertEquals(0, pHandler.removePlayer());
         assertEquals(null, pHandler.getPlayer());
     }
