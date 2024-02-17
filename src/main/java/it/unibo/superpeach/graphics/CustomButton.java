@@ -7,7 +7,18 @@ import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
+/**
+ * Implementation of a customed button.
+ * @author  Miriam Sonaglia
+ */
 public class CustomButton extends JButton {
+    /**
+     * This method create a button with a text, abackground color and a border.
+     * @param text
+     * @param customColor
+     * @param customColor1
+     * @param scale
+     */
     public CustomButton(final String text, final Color customColor, final Color customColor1, final int scale) {
         super(text);
         setAlignmentX(Component.CENTER_ALIGNMENT);
