@@ -11,9 +11,9 @@ import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.Texturer;
 
-public class Peach extends Player{
+public class Peach extends Player {
     private static final int SPEED_X = 4;
-    private static final int JUMP_HEIGHT_NORM = 52 ;
+    private static final int JUMP_HEIGHT_NORM = 52;
     private static final int JUMP_HEIGHT_BIG = 55;
     private static final int LOOK_RIGHT_NORM = 0;
     private static final int LOOK_LEFT_NORM = 1;
@@ -25,26 +25,26 @@ public class Peach extends Player{
     private Texturer texturer;
     private BufferedImage[] sprite;
 
-    public Peach(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powerUpsHandler, Scoreboard scoreboard){
+    public Peach(final int x, final int y, final int width, final int height, final int scale, final BlocksHandler blocksHandler,
+            final EnemiesHandler enemiesHandler, final PowerupsHandler powerUpsHandler, Scoreboard scoreboard) {
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
         this.texturer = Game.getTexturer();
         this.sprite = texturer.getPeach();
     }
 
-    public BufferedImage[] getSprites(){
+    public BufferedImage[] getSprites() {
         return this.sprite;
     }
 
-    public Texturer getPlayerTexture(){
+    public Texturer getPlayerTexture() {
         return this.texturer;
     }
 
     @Override
     public void moveLeft() {
-        if(getPowerUp() == PowerUpType.STAR){
+        if (getPowerUp() == PowerUpType.STAR) {
             spriteNeeded = LOOK_LEFT_STAR;
-        }
-        else{
+        } else {
             spriteNeeded = LOOK_LEFT_NORM;
         }
         setMoveX(-SPEED_X);
@@ -52,10 +52,9 @@ public class Peach extends Player{
 
     @Override
     public void moveRight() {
-        if(getPowerUp() == PowerUpType.STAR){
+        if (getPowerUp() == PowerUpType.STAR) {
             spriteNeeded = LOOK_RIGHT_STAR;
-        }
-        else{
+        } else {
             spriteNeeded = LOOK_RIGHT_NORM;
         }
         setMoveX(SPEED_X);
@@ -63,18 +62,16 @@ public class Peach extends Player{
 
     @Override
     public void jump() {
-        if(!hasJumped() && canJump()){
-            if(getPowerUp() == PowerUpType.STAR){
+        if (!hasJumped() && canJump()) {
+            if (getPowerUp() == PowerUpType.STAR) {
                 spriteNeeded = JUMP_FALL_STAR;
-            }
-            else{
+            } else {
                 spriteNeeded = JUMP_FALL_NORM;
             }
 
-            if(getPowerUp() == PowerUpType.RED_MUSHROOM){
+            if (getPowerUp() == PowerUpType.RED_MUSHROOM) {
                 setMoveY(-JUMP_HEIGHT_BIG);
-            }
-            else{
+            } else {
                 setMoveY(-JUMP_HEIGHT_NORM);
             }
             setHasJumped(true);
@@ -83,14 +80,14 @@ public class Peach extends Player{
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(final Graphics g) {
         g.drawImage(getSprites()[spriteNeeded], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
     public void tick() {
-        setY(getY()/getScale()+getMoveY());
-        setX(getX()/getScale()+getMoveX());
+        setY(getY() / getScale() + getMoveY());
+        setX(getX() / getScale() + getMoveX());
         fall();
         collision();
         starTimeOver();
