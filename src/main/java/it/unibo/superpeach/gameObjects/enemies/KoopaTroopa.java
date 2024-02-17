@@ -11,6 +11,14 @@ import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
  */
 public class KoopaTroopa extends Enemy {
 
+    /**
+     * @param x             coordinate of the enemy.
+     * @param y             coordinate of the enemy.
+     * @param width         sprite with of the enemy.
+     * @param height        sprite height of the enemy.
+     * @param scale         used in the game.
+     * @param blocksHandler used by the enemy.
+     */
     public KoopaTroopa(final int x, final int y, final int width, final int height, final int scale,
             final BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);
