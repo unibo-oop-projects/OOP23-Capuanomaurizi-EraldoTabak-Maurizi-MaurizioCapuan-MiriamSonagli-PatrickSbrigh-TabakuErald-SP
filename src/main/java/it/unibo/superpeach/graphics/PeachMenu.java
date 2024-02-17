@@ -22,7 +22,7 @@ public class PeachMenu {
     private Dimension size;
     private Clip clip;
 
-    public PeachMenu(String title, int width, int height, int scale, Game game) {
+    public PeachMenu(final String title, final int width, final int height, final int scale, final Game game) {
         size = new Dimension(width * scale, height * scale);
         frame = new JFrame(title);
         ImageIcon imageIcon = new ImageIcon("src/main/resources/it/unibo/superpeach/icon/peach_icon.png");
@@ -54,7 +54,7 @@ public class PeachMenu {
         CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
         startButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 panel.setVisible(false);
                 frame.remove(panel);
                 frame.add(game);
@@ -63,36 +63,37 @@ public class PeachMenu {
         });
         panel.add(startButton);
         panel.add(Box.createVerticalStrut(10 * scale));
-
+        
         
         // GUI SCALE BUTTON
-        String[] GUIScaleList = {"GUI SCALE", "Tiny", "Small", "Medium", "Large"};
-        JComboBox<String> GUIComboBox = new JComboBox<>(GUIScaleList);
-        GUIComboBox.setLayout(new FlowLayout());
-        GUIComboBox.setBackground(customColor);
-        GUIComboBox.setForeground(customColor1);
-        GUIComboBox.setFont(new Font("Monospaced", Font.BOLD, 10*scale));
-        GUIComboBox.setBorder(border);
-        GUIComboBox.setFocusable(false);
+        String[] guiScaleList = {"GUI SCALE", "Tiny", "Small", "Medium", "Large"};
+        JComboBox<String> guiComboBox = new JComboBox<>(guiScaleList);
+        guiComboBox.setLayout(new FlowLayout());
+        guiComboBox.setBackground(customColor);
+        guiComboBox.setForeground(customColor1);
+        guiComboBox.setFont(new Font("Monospaced", Font.BOLD, 10 * scale));
+        guiComboBox.setBorder(border);
+        guiComboBox.setFocusable(false);
 
-        GUIComboBox.setRenderer(new DefaultListCellRenderer() {
+        guiComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            public Component getListCellRendererComponent(final JList<?> list, final Object value, 
+                                                final int index, final boolean isSelected, final boolean cellHasFocus) {
                 JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 return label;
             }
         });
 
-        GUIComboBox.setPreferredSize(startButton.getPreferredSize());
-        GUIComboBox.setMaximumSize(startButton.getPreferredSize());
-        GUIComboBox.addActionListener(new ActionListener() {
+        guiComboBox.setPreferredSize(startButton.getPreferredSize());
+        guiComboBox.setMaximumSize(startButton.getPreferredSize());
+        guiComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 stopBackgroundMusic(); // Ferma la riproduzione della canzone corrente
-                GUIComboBox.setPreferredSize(startButton.getPreferredSize());
-                GUIComboBox.setMaximumSize(startButton.getPreferredSize());
-                String selectedScale = (String) GUIComboBox.getSelectedItem();
+                guiComboBox.setPreferredSize(startButton.getPreferredSize());
+                guiComboBox.setMaximumSize(startButton.getPreferredSize());
+                String selectedScale = (String) guiComboBox.getSelectedItem();
                 if (!selectedScale.equals("GUI SCALE")) {
                     int scalerange = 2;
                     switch (selectedScale) {
@@ -111,13 +112,15 @@ public class PeachMenu {
                         case "Large":
                             scalerange = 4;
                             break;
+                        default:
+                            break;
                         }
                     game.changeScale(scalerange);
                 }
             }
         });
-        frame.getContentPane().add(GUIComboBox, BorderLayout.CENTER);
-        panel.add(GUIComboBox);
+        frame.getContentPane().add(guiComboBox, BorderLayout.CENTER);
+        panel.add(guiComboBox);
         panel.add(Box.createVerticalStrut(10 * scale));
         
         // MUSIC BUTTON
@@ -129,13 +132,14 @@ public class PeachMenu {
         songComboBox.setLayout(new FlowLayout());
         songComboBox.setBackground(customColor);
         songComboBox.setForeground(customColor1);
-        songComboBox.setFont(new Font("Monospaced", Font.BOLD, 10*scale));
+        songComboBox.setFont(new Font("Monospaced", Font.BOLD, 10 * scale));
         songComboBox.setBorder(border);
         songComboBox.setFocusable(false);
         
         songComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            public Component getListCellRendererComponent(final JList<?> list, final Object value, 
+                                                final int index, final boolean isSelected, final boolean cellHasFocus) {
                 JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 return label;
