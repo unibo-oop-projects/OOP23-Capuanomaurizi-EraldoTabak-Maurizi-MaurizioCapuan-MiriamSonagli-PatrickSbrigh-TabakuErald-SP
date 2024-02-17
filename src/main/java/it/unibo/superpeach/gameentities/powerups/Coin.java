@@ -8,7 +8,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * Implementation of the COIN power up.
  * @author  Miriam Sonaglia
  */
-public class Coin extends PowerUp {
+public final class Coin extends PowerUp {
 
     /**
      * Powerup COIN.

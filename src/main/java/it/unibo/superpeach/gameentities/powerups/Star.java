@@ -8,7 +8,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * Implementation of the STAR power up.
  * @author  Miriam Sonaglia
  */
-public class Star extends PowerUp {
+public final class Star extends PowerUp {
 
     /**
      * Powerup STAR.

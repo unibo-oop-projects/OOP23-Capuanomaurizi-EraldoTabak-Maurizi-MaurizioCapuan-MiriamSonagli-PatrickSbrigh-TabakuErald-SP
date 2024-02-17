@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  * Implementation of a panel with an image on the background.
  * @author  Miriam Sonaglia
  */
-public class ImagePanel extends JPanel {
+public final class ImagePanel extends JPanel {
     private BufferedImage backgroundImage;
 
     /**
