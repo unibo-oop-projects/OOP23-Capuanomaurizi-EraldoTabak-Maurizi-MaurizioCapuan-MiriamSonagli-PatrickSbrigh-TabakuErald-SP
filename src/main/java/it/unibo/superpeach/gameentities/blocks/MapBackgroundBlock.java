@@ -128,8 +128,4 @@ public final class MapBackgroundBlock extends Block {
         }
     }
 
-    @Override
-    public void tick() {
-    }
-
 }

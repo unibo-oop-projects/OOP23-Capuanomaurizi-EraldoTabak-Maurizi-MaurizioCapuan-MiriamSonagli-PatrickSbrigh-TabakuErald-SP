@@ -22,7 +22,7 @@ import it.unibo.superpeach.level.LevelHandler;
  * 
  * @author  Maurizio Capuano
  */
-public class Game extends Canvas implements Runnable {
+public final class Game extends Canvas implements Runnable {
 
     private static int gameScale = 2;
 

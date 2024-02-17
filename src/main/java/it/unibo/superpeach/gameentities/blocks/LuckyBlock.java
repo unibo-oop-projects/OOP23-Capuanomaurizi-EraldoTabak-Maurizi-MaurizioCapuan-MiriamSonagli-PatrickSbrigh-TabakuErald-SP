@@ -1,7 +1,5 @@
 package it.unibo.superpeach.gameentities.blocks;
 
-import java.awt.Graphics;
-
 import it.unibo.superpeach.gameentities.powerups.Coin;
 import it.unibo.superpeach.gameentities.powerups.LifeMushroom;
 import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
@@ -32,15 +30,6 @@ public final class LuckyBlock extends MapFixedBlock {
             final BlockType type, final PowerUpType powerUp) {
         super(x, y, width, height, scale, type);
         containedPowerUp = powerUp;
-    }
-
-    @Override
-    public void render(final Graphics g) {
-        if (getType() == BlockType.POPPED_LUCKY) {
-            g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null);
-        } else {
-            g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
-        }
     }
 
     /**

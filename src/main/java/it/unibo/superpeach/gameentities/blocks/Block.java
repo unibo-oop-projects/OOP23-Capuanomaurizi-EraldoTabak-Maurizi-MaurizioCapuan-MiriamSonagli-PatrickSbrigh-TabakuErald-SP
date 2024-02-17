@@ -43,87 +43,92 @@ public abstract class Block implements GameObject {
     }
 
     @Override
-    public Texturer getTexturer() {
+    public final Texturer getTexturer() {
         return texturer;
     }
 
     @Override
-    public Rectangle getBoundingBox() {
+    public final Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
     @Override
-    public int getX() {
+    public final int getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public final int getY() {
         return y;
     }
 
     @Override
-    public int getHeight() {
+    public final int getHeight() {
         return height;
     }
 
     @Override
-    public int getWidth() {
+    public final int getWidth() {
         return width;
     }
 
     @Override
-    public int getScale() {
+    public final int getScale() {
         return scale;
     }
 
     @Override
-    public BufferedImage[] getSprites() {
+    public final BufferedImage[] getSprites() {
         return sprites;
     }
 
     /**
      * @return block type
      */
-    public BlockType getType() {
+    public final BlockType getType() {
         return type;
     }
 
     @Override
-    public void setX(final int x) {
+    public final void setX(final int x) {
         this.x = x;
     }
 
     @Override
-    public void setY(final int y) {
+    public final void setY(final int y) {
         this.y = y;
     }
 
     @Override
-    public void setHeight(final int height) {
+    public final void setHeight(final int height) {
         this.height = height;
     }
 
     @Override
-    public void setWidth(final int width) {
+    public final void setWidth(final int width) {
         this.width = width;
     }
 
     @Override
-    public void setScale(final int scale) {
+    public final void setScale(final int scale) {
         this.scale = scale;
     }
 
     @Override
-    public void setSprites(final BufferedImage[] sprites) {
+    public final void setSprites(final BufferedImage[] sprites) {
         this.sprites = sprites;
     }
 
     /**
      * @param type new block type
      */
-    public void setType(final BlockType type) {
+    public final void setType(final BlockType type) {
         this.type = type;
+    }
+
+    @Override
+    public final void tick() {
+
     }
 
 }

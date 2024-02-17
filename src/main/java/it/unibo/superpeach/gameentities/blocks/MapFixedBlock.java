@@ -56,10 +56,16 @@ public class MapFixedBlock extends Block {
     }
 
     @Override
-    public void render(final Graphics g) {
+    public final void render(final Graphics g) {
         switch (getType()) {
             case TERRAIN:
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case LUCKY:
+                g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case POPPED_LUCKY:
+                g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null);
                 break;
             case BRICK:
                 g.drawImage(getSprites()[2], getX(), getY(), getWidth(), getHeight(), null);
@@ -101,10 +107,6 @@ public class MapFixedBlock extends Block {
      * @param blocksHandler
      */
     public void popLuckyBlock(final PowerupsHandler powerupsHandler, final BlocksHandler blocksHandler) {
-    }
-
-    @Override
-    public void tick() {
     }
 
 }
