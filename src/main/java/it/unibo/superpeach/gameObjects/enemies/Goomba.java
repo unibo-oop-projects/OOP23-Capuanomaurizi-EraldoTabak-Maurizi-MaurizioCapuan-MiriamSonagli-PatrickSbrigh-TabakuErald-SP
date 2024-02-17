@@ -14,12 +14,12 @@ public class Goomba extends Enemy {
     }
 
     @Override
-    protected void render(Graphics g) {
+    public void render(Graphics g) {
         g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
-    protected void tick() {
+    public void tick() {
         setFalling(true);
         this.collision();
         this.updateCoords();

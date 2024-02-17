@@ -1,13 +1,13 @@
 package it.unibo.superpeach.gameObjects.blocks;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.graphics.Texturer;
 
-public abstract class Block {
+public abstract class Block implements GameObject{
     public enum BlockType {
         BRICK,
         TERRAIN,
@@ -41,34 +41,20 @@ public abstract class Block {
         this.scale = s;
     }
 
-    public abstract void render(Graphics g);
-
     public Texturer getTexturer() {
         return texturer;
     }
 
-    public BlockType getType() {
-        return type;
-    }
-
-    public Rectangle getTopBound(){
-        return new Rectangle(x, y, width, 5*scale);
-    }
-
-    public Rectangle getBotBound(){
-        return new Rectangle(x, y+height, width, 5*scale);
-    }
-
-    public Rectangle getLeftBound(){
-        return new Rectangle(x, y, 5*scale, height);
-    }
-
-    public Rectangle getRightBound(){
-        return new Rectangle(x+width, y, 5*scale, height);
-    }
-    
     public Rectangle getBoundingBox(){
         return new Rectangle(x, y, width, height);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getHeight() {
@@ -83,24 +69,20 @@ public abstract class Block {
         return scale;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public BufferedImage[] getSprites() {
         return sprites;
     }
 
-    public void setSprites(BufferedImage[] sprites) {
-        this.sprites = sprites;
+    public BlockType getType() {
+        return type;
     }
 
-    public void setType(BlockType type) {
-        this.type = type;
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setHeight(int height) {
@@ -115,12 +97,12 @@ public abstract class Block {
         this.scale = scale;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setSprites(BufferedImage[] sprites) {
+        this.sprites = sprites;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setType(BlockType type) {
+        this.type = type;
     }
     
 }   

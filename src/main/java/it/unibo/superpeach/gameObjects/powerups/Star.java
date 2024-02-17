@@ -14,7 +14,7 @@ public class Star extends PowerUp{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getImage()[2], getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[2], getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override

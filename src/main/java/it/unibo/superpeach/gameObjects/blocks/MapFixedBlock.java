@@ -86,4 +86,8 @@ public class MapFixedBlock extends Block{
     public void popLuckyBlock(PowerupsHandler powerupsHandler, BlocksHandler blocksHandler){
     }
 
+    @Override
+    public void tick() {
+    }
+
 }
