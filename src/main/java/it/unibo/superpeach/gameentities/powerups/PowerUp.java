@@ -91,6 +91,10 @@ public abstract class PowerUp implements GameObject {
         return texturer;
     }
 
+    /**
+     * sets the texture.
+     * @param texturer
+     */
     public final void setTextures(final Texturer texturer) {
         this.texturer = texturer;
     }
@@ -244,14 +248,14 @@ public abstract class PowerUp implements GameObject {
     }
 
     /**
-     * @return the coordinates and the dimentions of the power up
+     * @return the coordinates and the dimentions of the power up.
      */
     public final Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
     /**
-     * @return the botton bound of the power up
+     * @return the botton bound of the power up.
      */
     public final Rectangle getBottomBound() {
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, 
@@ -275,14 +279,14 @@ public abstract class PowerUp implements GameObject {
     }
 
     /**
-     * @return the padding bound of the power up
+     * @return the padding bound of the power up.
      */
     public final int getPaddingBound() {
         return paddingBound;
     }
 
     /**
-     * @return the blocks handler
+     * @return the blocks handler.
      */
     public final BlocksHandler getBlocksHandler() {
         return blocksHandler;
@@ -298,10 +302,10 @@ public abstract class PowerUp implements GameObject {
 
     /**
      * When the power ups collides with something on the bottom bound,
-     * it doesn't fall
+     * it doesn't fall.
      * @param block
      */
-    private final void setYCollisionBottom(final Block block) {
+    private void setYCollisionBottom(final Block block) {
         setY(block.getY() / scale - getHeight() / scale);
         setIsFalling(false);
     }
@@ -311,7 +315,7 @@ public abstract class PowerUp implements GameObject {
      * it changes direction.
      * @param block
      */
-    private final void setXCollisionLeft(final Block block) {
+    private void setXCollisionLeft(final Block block) {
         setX((block.getX() + block.getWidth()) / getScale());
         changeDirection();
     }
@@ -321,7 +325,7 @@ public abstract class PowerUp implements GameObject {
      * it changes direction.
      * @param block
      */
-    private final void setXCollisionRight(final Block block) {
+    private void setXCollisionRight(final Block block) {
         setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
