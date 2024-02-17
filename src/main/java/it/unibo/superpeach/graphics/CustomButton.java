@@ -26,7 +26,7 @@ public final class CustomButton extends JButton {
         setForeground(customColor1);
         setBackground(customColor);
         setFocusable(false);
-        Border border = BorderFactory.createLineBorder(customColor1, 2, true);
+        final Border border = BorderFactory.createLineBorder(customColor1, 2, true);
         setBorder(border);
         setBorder(BorderFactory.createCompoundBorder(
                 border,

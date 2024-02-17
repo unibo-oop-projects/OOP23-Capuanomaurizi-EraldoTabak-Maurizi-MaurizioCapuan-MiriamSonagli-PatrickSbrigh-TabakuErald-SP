@@ -35,7 +35,7 @@ public abstract class PowerUp implements GameObject {
         /**
          * Power up COIN.
          */
-        COIN };
+        COIN }
 
     private static final int FALL_SPEED = 1;
 
@@ -48,10 +48,10 @@ public abstract class PowerUp implements GameObject {
     private boolean isFalling;
     private boolean isAlive;
     private boolean direction;
-    private PowerUpType powerUpType;
+    private final PowerUpType powerUpType;
     private BlocksHandler blocksHandler;
 
-    private int paddingBound;
+    private final int paddingBound;
     private Texturer texturer = Game.getTexturer();
     private BufferedImage[] image = texturer.getPowerups();
 
@@ -101,12 +101,12 @@ public abstract class PowerUp implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        return image;
+        return image.clone();
     }
 
     @Override
     public final void setSprites(final BufferedImage[] image) {
-        this.image = image;
+        this.image = image.clone();
     }
 
     @Override
@@ -247,9 +247,7 @@ public abstract class PowerUp implements GameObject {
         this.isAlive = false;
     }
 
-    /**
-     * @return the coordinates and the dimentions of the power up.
-     */
+    @Override
     public final Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
@@ -334,7 +332,7 @@ public abstract class PowerUp implements GameObject {
      * It handles the collisions between the power up and the blocks.
      */
     public final void collisions() {
-        for (Block block : blocksHandler.getBlocks()) {
+        for (final Block block : blocksHandler.getBlocks()) {
             if (block.getType() == BlockType.DEATH_BLOCK) {
                 if (block.getBoundingBox().intersects(getBottomBound())) {
                     die();
