@@ -48,14 +48,14 @@ public final class Game extends Canvas implements Runnable {
     private boolean gameOver;
     private int gameOverBuffers;
 
-    private BlocksHandler blocksHandler;
+    private transient BlocksHandler blocksHandler;
     private static Texturer texturer;
-    private Camera camera;
+    private transient Camera camera;
     private static PeachMenu window;
-    private PlayerHandler playerHandler;
-    private EnemiesHandler enemiesHandler;
-    private PowerupsHandler powerupsHandler;
-    private Scoreboard scoreboard;
+    private transient PlayerHandler playerHandler;
+    private transient EnemiesHandler enemiesHandler;
+    private transient PowerupsHandler powerupsHandler;
+    private transient Scoreboard scoreboard;
 
     /**
      * Creation of the window frame with the constructor call of a Game object within parameters.
