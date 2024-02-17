@@ -26,7 +26,7 @@ public class Peach extends Player {
     private BufferedImage[] sprite;
 
     public Peach(final int x, final int y, final int width, final int height, final int scale, final BlocksHandler blocksHandler,
-            final EnemiesHandler enemiesHandler, final PowerupsHandler powerUpsHandler, Scoreboard scoreboard) {
+            final EnemiesHandler enemiesHandler, final PowerupsHandler powerUpsHandler, final Scoreboard scoreboard) {
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
         this.texturer = Game.getTexturer();
         this.sprite = texturer.getPeach();

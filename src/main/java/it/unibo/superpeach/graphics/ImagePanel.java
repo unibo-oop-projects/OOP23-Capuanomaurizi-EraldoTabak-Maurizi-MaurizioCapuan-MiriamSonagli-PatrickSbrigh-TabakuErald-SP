@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 public class ImagePanel extends JPanel {
     private BufferedImage backgroundImage;
 
-    public ImagePanel(String imagePath) {
+    public ImagePanel(final String imagePath) {
         try {
             backgroundImage = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
@@ -19,7 +19,7 @@ public class ImagePanel extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);

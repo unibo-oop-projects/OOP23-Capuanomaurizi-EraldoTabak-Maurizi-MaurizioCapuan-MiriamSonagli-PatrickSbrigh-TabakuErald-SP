@@ -1,6 +1,8 @@
 package it.unibo.superpeach.gameObjects.enemies;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.game.Game;
@@ -10,29 +12,30 @@ import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
 import it.unibo.superpeach.graphics.Texturer;
 
-public abstract class Enemy implements GameObject{
+public abstract class Enemy implements GameObject {
 
     private static final int FALL_SPEED = 1;
-    private int PADDING_BOUND = 4;
+    private int paddingBOUND = 4;
 
-    protected int x, y, speed, scale, width, height;
+    private int x, y, speed, scale, width, height;
     private Dimension dim;
     private boolean isFalling, direction, isAlive;
     private BlocksHandler blocksHandler;
     private Texturer texturer = Game.getTexturer();
     private BufferedImage[] sprites;
 
-    public Enemy(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
+    public Enemy(final int x, final int y, final int width, final int height, final int scale,
+            final BlocksHandler blocksHandler) {
         this.x = x * scale;
         this.y = y * scale;
-        this.width = width*scale;
-        this.height = height*scale;
+        this.width = width * scale;
+        this.height = height * scale;
         this.scale = scale;
         setDimension(width * scale, height * scale);
         this.blocksHandler = blocksHandler;
         this.direction = false;
         this.isAlive = true;
-        this.PADDING_BOUND *= scale;
+        this.paddingBOUND *= scale;
     }
 
     public int getX() {
@@ -60,17 +63,17 @@ public abstract class Enemy implements GameObject{
     }
 
     public Rectangle getBottomBound() {
-        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + (getHeight() - PADDING_BOUND),
-                getWidth() / 2, PADDING_BOUND);
+        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + (getHeight() - paddingBOUND),
+                getWidth() / 2, paddingBOUND);
     }
 
     public Rectangle getLeftBound() {
-        return new Rectangle(getX(), getY() + PADDING_BOUND, PADDING_BOUND, getHeight() - 2 * PADDING_BOUND);
+        return new Rectangle(getX(), getY() + paddingBOUND, paddingBOUND, getHeight() - 2 * paddingBOUND);
     }
 
     public Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - PADDING_BOUND, getY() + PADDING_BOUND, PADDING_BOUND,
-                getHeight() - 2 * PADDING_BOUND);
+        return new Rectangle(getX() + getWidth() - paddingBOUND, getY() + paddingBOUND, paddingBOUND,
+                getHeight() - 2 * paddingBOUND);
     }
 
     public BufferedImage[] getSprites() {
@@ -105,7 +108,7 @@ public abstract class Enemy implements GameObject{
         return dim;
     }
 
-    public Rectangle getBoundingBox(){
+    public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
@@ -113,55 +116,55 @@ public abstract class Enemy implements GameObject{
         return this.isAlive;
     }
 
-    public void setIsFalling(boolean fall) {
+    public void setIsFalling(final boolean fall) {
         this.isFalling = fall;
     }
 
-    public void setDimension(int width, int height) {
+    public void setDimension(final int width, final int height) {
         this.dim = new Dimension(width, height);
     }
 
-    public void setSprites(BufferedImage[] sprites) {
+    public void setSprites(final BufferedImage[] sprites) {
         this.sprites = sprites;
     }
 
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y * scale;
     }
 
-    public void setX(int x) {
+    public void setX(final int x) {
         this.x = x * scale;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(final int width) {
         this.width = width;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(final int speed) {
         this.speed = speed;
     }
 
-    public void setDim(Dimension dim) {
+    public void setDim(final Dimension dim) {
         this.dim = dim;
     }
 
-    public void setFalling(boolean isFalling) {
+    public void setFalling(final boolean isFalling) {
         this.isFalling = isFalling;
     }
 
-    public void setBlocksHandler(BlocksHandler blocksHandler) {
+    public void setBlocksHandler(final BlocksHandler blocksHandler) {
         this.blocksHandler = blocksHandler;
     }
 
-    public void setScale(int scale) {
+    public void setScale(final int scale) {
         this.scale = scale;
     }
 
-    public void setTexturer(Texturer texturer) {
+    public void setTexturer(final Texturer texturer) {
         this.texturer = texturer;
     }
 
@@ -173,17 +176,17 @@ public abstract class Enemy implements GameObject{
         this.isAlive = false;
     }
 
-    private void setYCollisionBottom(Block block) {
+    private void setYCollisionBottom(final Block block) {
         setY((block.getY() - getHeight()) / getScale());
         setFalling(false);
     }
 
-    private void setXCollisionLeft(Block block) {
+    private void setXCollisionLeft(final Block block) {
         setX((block.getX() + block.getWidth()) / getScale());
         changeDirection();
     }
 
-    private void setXCollisionRight(Block block) {
+    private void setXCollisionRight(final Block block) {
         setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
@@ -229,7 +232,7 @@ public abstract class Enemy implements GameObject{
         }
     }
 
-    public abstract void render(Graphics g);
+    public abstract void render(final Graphics g);
 
     public abstract void tick();
 
