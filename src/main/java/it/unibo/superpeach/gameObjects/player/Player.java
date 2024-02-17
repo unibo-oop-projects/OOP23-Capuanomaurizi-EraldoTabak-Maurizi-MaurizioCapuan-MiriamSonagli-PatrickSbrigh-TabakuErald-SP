@@ -39,7 +39,7 @@ public abstract class Player {
     private Scoreboard scoreboard;
     private int moveX;
     private int moveY;
-    private int padding_bound;
+    private int paddingBound;
     private int point;
     private int life;
     private boolean addedPointFlag;
@@ -53,8 +53,8 @@ public abstract class Player {
     private PowerUpType lastPowerUp;
     private int numTickStar;
 
-    public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler,
-            EnemiesHandler enemiesHandler, PowerupsHandler powersUpHandler, Scoreboard scoreboard) {
+    public Player(final int x, final int y, final int width, final int height, final int scale, final BlocksHandler blocksHandler,
+            final EnemiesHandler enemiesHandler, final PowerupsHandler powersUpHandler, final Scoreboard scoreboard) {
         this.width = width * scale;
         this.height = height * scale;
         this.x = x * scale;
@@ -64,7 +64,7 @@ public abstract class Player {
         this.blocksHandler = blocksHandler;
         this.moveX = 0;
         this.moveY = 0;
-        this.padding_bound = PADDING * getScale();
+        this.paddingBound = PADDING * getScale();
         this.enemiesHandler = enemiesHandler;
         this.scoreboard = scoreboard;
         this.point = 0;
@@ -122,30 +122,30 @@ public abstract class Player {
         if (currentPowerUp == PowerUpType.RED_MUSHROOM
                 || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
             return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2,
-                    (padding_bound) * ((padding_bound / getScale())));
+                    (paddingBound) * ((paddingBound / getScale())));
         }
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2,
-                (padding_bound / getScale()) * (padding_bound / 2));
+                (paddingBound / getScale()) * (paddingBound / 2));
     }
 
     public Rectangle getBottomBound() {
         if (currentPowerUp == PowerUpType.RED_MUSHROOM
                 || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
-            return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - padding_bound,
-                    getWidth() / 2, padding_bound);
+            return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - paddingBound,
+                    getWidth() / 2, paddingBound);
         }
-        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - (padding_bound / 2),
-                getWidth() / 2, padding_bound / 2);
+        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - (paddingBound / 2),
+                getWidth() / 2, paddingBound / 2);
     }
 
     public Rectangle getLeftBound() {
-        return new Rectangle(getX(), getY() + (padding_bound), (padding_bound), getHeight() - 2 * (padding_bound));
+        return new Rectangle(getX(), getY() + (paddingBound), (paddingBound), getHeight() - 2 * (paddingBound));
 
     }
 
     public Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - (padding_bound), getY() + (padding_bound), (padding_bound),
-                getHeight() - 2 * (padding_bound));
+        return new Rectangle(getX() + getWidth() - (paddingBound), getY() + (paddingBound), (paddingBound),
+                getHeight() - 2 * (paddingBound));
     }
 
     public boolean hasJumped() {
@@ -160,33 +160,33 @@ public abstract class Player {
         return this.hasLost;
     }
 
-    public void setX(int x) {
+    public void setX(final int x) {
         if (x >= MIN_X && x <= MAX_X) {
             this.x = x * this.scale;
         }
     }
 
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y * this.scale;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(final int width) {
         this.width = width;
     }
 
-    public void setMoveY(int moveY) {
+    public void setMoveY(final int moveY) {
         this.moveY = moveY;
     }
 
-    public void setMoveX(int moveX) {
+    public void setMoveX(final int moveX) {
         this.moveX = moveX;
     }
 
-    public void setHasJumped(boolean jumped) {
+    public void setHasJumped(final boolean jumped) {
         this.jumped = jumped;
     }
 
@@ -246,7 +246,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithFlagPole(MapFixedBlock block) {
+    private void collisionsWithFlagPole(final MapFixedBlock block) {
         if (block.getBoundingBox().intersects(getRightBound())
                 || block.getBoundingBox().contains(getRightBound())
                 || block.getBoundingBox().intersects(getLeftBound())
@@ -262,7 +262,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithFlagTip(MapFixedBlock block) {
+    private void collisionsWithFlagTip(final MapFixedBlock block) {
         if (block.getBoundingBox().intersects(getTopBound())
                 || block.getBoundingBox().intersects(getLeftBound())) {
             if (!addedPointFlag) {
@@ -272,7 +272,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithCastle(MapFixedBlock block) {
+    private void collisionsWithCastle(final MapFixedBlock block) {
         if (block.getBoundingBox().intersects(getBottomBound())
                 || block.getBoundingBox().intersects(getTopBound())
                 || block.getBoundingBox().intersects(getLeftBound())
@@ -285,7 +285,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithDeathBlock(MapFixedBlock block) {
+    private void collisionsWithDeathBlock(final MapFixedBlock block) {
         if (block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())
                 || block.getBoundingBox().intersects(getLeftBound())
                 || block.getBoundingBox().intersects(getRightBound())) {
@@ -293,7 +293,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithBrick(MapFixedBlock block) {
+    private void collisionsWithBrick(final MapFixedBlock block) {
         if (block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())) {
             setYCollisionTop(block);
             if (currentPowerUp != null) {
@@ -317,7 +317,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithPopped(MapFixedBlock block) {
+    private void collisionsWithPopped(final MapFixedBlock block) {
         if (block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())) {
             setYCollisionTop(block);
         } else if (block.getBoundingBox().contains(getBottomBound())) {
@@ -337,7 +337,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithLucky(MapFixedBlock block) {
+    private void collisionsWithLucky(final MapFixedBlock block) {
         if (block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())) {
             setYCollisionTop(block);
             addPoints(POINT_LUCKY_BRICK);
@@ -359,7 +359,7 @@ public abstract class Player {
         }
     }
 
-    private void collisionsWithStaticBlocks(MapFixedBlock block) {
+    private void collisionsWithStaticBlocks(final MapFixedBlock block) {
         if (block.getBoundingBox().contains(getBottomBound())) {
             setYCollisionBottom(block);
             resetCosecutiveJump();
@@ -416,6 +416,8 @@ public abstract class Player {
                             scoreboard.restoreHeart();
                         }
                         break;
+                    default:
+                        break;
                 }
                 power.die();
             }
@@ -426,11 +428,11 @@ public abstract class Player {
         this.consecutiveJumps = 0;
     }
 
-    private void addPoints(int point) {
+    private void addPoints(final int point) {
         this.point += point;
     }
 
-    private boolean touchedPowerUp(PowerUp power) {
+    private boolean touchedPowerUp(final PowerUp power) {
         return power.getBoundingBox().intersects(getBottomBound()) || power.getBoundingBox().intersects(getTopBound())
                 || power.getBoundingBox().intersects(getLeftBound())
                 || power.getBoundingBox().intersects(getRightBound());
@@ -475,28 +477,28 @@ public abstract class Player {
         }
     }
 
-    private boolean touchedEnemy(Enemy enemy) {
+    private boolean touchedEnemy(final Enemy enemy) {
         return enemy.getBounds().intersects(getTopBound()) || enemy.getBounds().intersects(getLeftBound())
                 || enemy.getBounds().intersects(getRightBound());
     }
 
-    private boolean killedEnemy(Enemy enemy) {
+    private boolean killedEnemy(final Enemy enemy) {
         return enemy.getBounds().intersects(getBottomBound());
     }
 
-    private void setYCollisionTop(Block block) {
+    private void setYCollisionTop(final Block block) {
         setY(block.getY() / block.getScale() + block.getHeight() / block.getScale());
     }
 
-    private void setYCollisionBottom(Block block) {
+    private void setYCollisionBottom(final Block block) {
         setY(block.getY() / block.getScale() - getHeight() / getScale());
     }
 
-    private void setXCollisionLeft(Block block) {
+    private void setXCollisionLeft(final Block block) {
         setX((block.getX() + block.getWidth()) / getScale());
     }
 
-    private void setXCollisionRight(Block block) {
+    private void setXCollisionRight(final Block block) {
         setX(block.getX() / block.getScale() - getWidth() / getScale());
     }
 
