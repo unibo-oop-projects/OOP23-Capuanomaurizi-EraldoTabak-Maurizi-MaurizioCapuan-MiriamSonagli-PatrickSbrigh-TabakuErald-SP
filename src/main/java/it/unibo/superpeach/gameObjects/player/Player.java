@@ -220,137 +220,41 @@ public abstract class Player {
     }
 
     public void collision() {
+        collisionsWithBlocks();
+        collisionsWithEnemies();
+        collisionsWithPowersUp();
+    }
+
+    private void collisionsWithBlocks(){
         for (MapFixedBlock block : blocksHandler.getBlocks()) {
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN) {
-                if (block.getBoundingBox().contains(getBottomBound())) {
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                } else if (block.getBoundingBox().contains(getTopBound())) {
-                    setYCollisionTop(block);
-                } else if (block.getBoundingBox().contains(getLeftBound())) {
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().contains(getRightBound())) {
-                    setXCollisionRight(block);
-                } else if (block.getBoundingBox().intersects(getBottomBound())) {
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                } else if (block.getBoundingBox().intersects(getTopBound())) {
-                    setYCollisionTop(block);
-                } else if (block.getBoundingBox().intersects(getLeftBound())) {
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().intersects(getRightBound())) {
-                    setXCollisionRight(block);
-                }
+                collisionsWithStaticBlocks(block);
             }
             else if(block.getType() == BlockType.LUCKY){
-                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                    addPoints(POINT_LUCKY_BRICK);
-                    block.popLuckyBlock(powerupsHandler, blocksHandler);
-                }
-                else if(block.getBoundingBox().contains(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                }
-                else if(block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
-                }
+                collisionsWithLucky(block);
             }
             else if(block.getType() == BlockType.POPPED_LUCKY){
-                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                }
-                else if(block.getBoundingBox().contains(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                }
-                else if(block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
-                }
+                collisionsWithPopped(block);
             }
             else if(block.getType() == BlockType.BRICK){
-                if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
-                    setYCollisionTop(block);
-                    if(currentPowerUp != null){
-                        addPoints(POINT_LUCKY_BRICK);
-                        blocksHandler.removeFixedBlock(block);
-                    }
-                }
-                else if(block.getBoundingBox().contains(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().contains(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().contains(getRightBound())){
-                    setXCollisionRight(block);
-                }
-                else if(block.getBoundingBox().intersects(getBottomBound())){
-                    setYCollisionBottom(block);
-                    resetCosecutiveJump();
-                }
-                else if(block.getBoundingBox().intersects(getLeftBound())){
-                    setXCollisionLeft(block);
-                }
-                else if(block.getBoundingBox().intersects(getRightBound())){
-                    setXCollisionRight(block);
-                }
+                collisionsWithBrick(block);
             }
             else if(block.getType() == BlockType.DEATH_BLOCK){
-                if(block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())
-                || block.getBoundingBox().intersects(getLeftBound()) || block.getBoundingBox().intersects(getRightBound())){
-                    loseLifeOrPowerUp();
-                }
+                collisionsWithDeathBlock(block);
             } else if (block.getType() == BlockType.CASTLE_DOOR_BOT || block.getType() == BlockType.CASTLE_DOOR_TOP) {
-                if (block.getBoundingBox().intersects(getBottomBound())
-                        || block.getBoundingBox().intersects(getTopBound())
-                        || block.getBoundingBox().intersects(getLeftBound())
-                        || block.getBoundingBox().intersects(getRightBound())) {
-                    if (!addedPointWin) {
-                        addPoints(POINT_WIN);
-                        addedPointWin = true;
-                    }
-                    this.hasWon = true;
-                }
+                collisionsWithCastle(block);
             } else if (block.getType() == BlockType.FLAG_TIP) {
-                if (block.getBoundingBox().intersects(getTopBound())
-                        || block.getBoundingBox().intersects(getLeftBound())) {
-                    if (!addedPointFlag) {
-                        addPoints(POINT_FLAG_TIP);
-                        addedPointFlag = true;
-                    }
-                }
+                collisionsWithFlagTip(block);
             } else if (block.getType() == BlockType.FLAG_POLE) {
-                if (block.getBoundingBox().intersects(getRightBound())
+                collisionsWithFlagPole(block);
+            }
+        }
+    }
+
+    private void collisionsWithFlagPole(MapFixedBlock block){
+        if (block.getBoundingBox().intersects(getRightBound())
                         || block.getBoundingBox().contains(getRightBound())
                         || block.getBoundingBox().intersects(getLeftBound())
                         || block.getBoundingBox().contains(getLeftBound())
@@ -362,10 +266,146 @@ public abstract class Player {
                         addPoints(POINT_FLAG_POLE);
                         addedPointFlag = true;
                     }
-                }
+        }
+    }
+
+    private void collisionsWithFlagTip(MapFixedBlock block){
+        if (block.getBoundingBox().intersects(getTopBound())
+                        || block.getBoundingBox().intersects(getLeftBound())) {
+                    if (!addedPointFlag) {
+                        addPoints(POINT_FLAG_TIP);
+                        addedPointFlag = true;
+                    }
+        }
+    }
+
+    private void collisionsWithCastle(MapFixedBlock block){
+        if (block.getBoundingBox().intersects(getBottomBound())
+                        || block.getBoundingBox().intersects(getTopBound())
+                        || block.getBoundingBox().intersects(getLeftBound())
+                        || block.getBoundingBox().intersects(getRightBound())) {
+                    if (!addedPointWin) {
+                        addPoints(POINT_WIN);
+                        addedPointWin = true;
+                    }
+                    this.hasWon = true;
+        }
+    }
+
+    private void collisionsWithDeathBlock(MapFixedBlock block){
+        if(block.getBoundingBox().intersects(getBottomBound()) || block.getBoundingBox().intersects(getTopBound())
+                || block.getBoundingBox().intersects(getLeftBound()) || block.getBoundingBox().intersects(getRightBound())){
+                    loseLifeOrPowerUp();
+        }
+    }
+
+    private void collisionsWithBrick(MapFixedBlock block){
+        if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+            setYCollisionTop(block);
+            if(currentPowerUp != null){
+                addPoints(POINT_LUCKY_BRICK);
+                blocksHandler.removeFixedBlock(block);
             }
         }
+        else if(block.getBoundingBox().contains(getBottomBound())){
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        }
+        else if(block.getBoundingBox().contains(getLeftBound())){
+            setXCollisionLeft(block);
+        }
+        else if(block.getBoundingBox().contains(getRightBound())){
+            setXCollisionRight(block);
+        }
+        else if(block.getBoundingBox().intersects(getBottomBound())){
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        }
+        else if(block.getBoundingBox().intersects(getLeftBound())){
+            setXCollisionLeft(block);
+        }
+        else if(block.getBoundingBox().intersects(getRightBound())){
+            setXCollisionRight(block);
+        }
+    }
 
+    private void collisionsWithPopped(MapFixedBlock block){
+        if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+            setYCollisionTop(block);
+        }
+        else if(block.getBoundingBox().contains(getBottomBound())){
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        }
+        else if(block.getBoundingBox().contains(getLeftBound())){
+            setXCollisionLeft(block);
+        }
+        else if(block.getBoundingBox().contains(getRightBound())){
+            setXCollisionRight(block);
+        }
+        else if(block.getBoundingBox().intersects(getBottomBound())){
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        }
+        else if(block.getBoundingBox().intersects(getLeftBound())){
+            setXCollisionLeft(block);
+        }
+        else if(block.getBoundingBox().intersects(getRightBound())){
+            setXCollisionRight(block);
+        }
+    }
+
+    private void collisionsWithLucky(MapFixedBlock block){
+        if(block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())){
+            setYCollisionTop(block);
+            addPoints(POINT_LUCKY_BRICK);
+            block.popLuckyBlock(powerupsHandler, blocksHandler);
+        }
+        else if(block.getBoundingBox().contains(getBottomBound())){
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        }
+        else if(block.getBoundingBox().contains(getLeftBound())){
+            setXCollisionLeft(block);
+        }
+        else if(block.getBoundingBox().contains(getRightBound())){
+            setXCollisionRight(block);
+        }
+        else if(block.getBoundingBox().intersects(getBottomBound())){
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        }
+        else if(block.getBoundingBox().intersects(getLeftBound())){
+            setXCollisionLeft(block);
+        }
+        else if(block.getBoundingBox().intersects(getRightBound())){
+            setXCollisionRight(block);
+        }
+    }
+
+    private void collisionsWithStaticBlocks(MapFixedBlock block){
+        if (block.getBoundingBox().contains(getBottomBound())) {
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        } else if (block.getBoundingBox().contains(getTopBound())) {
+            setYCollisionTop(block);
+        } else if (block.getBoundingBox().contains(getLeftBound())) {
+            setXCollisionLeft(block);
+        } else if (block.getBoundingBox().contains(getRightBound())) {
+            setXCollisionRight(block);
+        } else if (block.getBoundingBox().intersects(getBottomBound())) {
+            setYCollisionBottom(block);
+            resetCosecutiveJump();
+        } else if (block.getBoundingBox().intersects(getTopBound())) {
+            setYCollisionTop(block);
+        } else if (block.getBoundingBox().intersects(getLeftBound())) {
+            setXCollisionLeft(block);
+        } else if (block.getBoundingBox().intersects(getRightBound())) {
+            setXCollisionRight(block);
+        }
+    }
+
+    private void collisionsWithEnemies(){
         for(Enemy enemy : enemiesHandler.getEnemies()){
             if(touchedEnemy(enemy) && currentPowerUp != PowerUpType.STAR){
                 loseLifeOrPowerUp();
@@ -374,7 +414,9 @@ public abstract class Player {
                 enemiesHandler.removeEnemy(enemy);
             }
         }
+    }
 
+    private void collisionsWithPowersUp(){
         for(PowerUp power : powerupsHandler.getPowerups()){
             if(touchedPowerUp(power)){
                 switch (power.getPowerUpType()) {
