@@ -15,7 +15,7 @@ import it.unibo.superpeach.gameObjects.powerups.PowerUp;
 import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 
-public abstract class Player implements GameObject{
+public abstract class Player implements GameObject {
     private static final int FALL_SPEED = 3;
     private static final int LIFE_START = 3;
     private static final int POINT_LUCKY_BRICK = 200;
@@ -54,7 +54,8 @@ public abstract class Player implements GameObject{
     private PowerUpType lastPowerUp;
     private int numTickStar;
 
-    public Player(final int x, final int y, final int width, final int height, final int scale, final BlocksHandler blocksHandler,
+    public Player(final int x, final int y, final int width, final int height, final int scale,
+            final BlocksHandler blocksHandler,
             final EnemiesHandler enemiesHandler, final PowerupsHandler powersUpHandler, final Scoreboard scoreboard) {
         this.width = width * scale;
         this.height = height * scale;
@@ -126,7 +127,7 @@ public abstract class Player implements GameObject{
 
     @Override
     public Rectangle getBoundingBox() {
-        return new Rectangle(getX(),getY(),getWidth(),getHeight());
+        return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 
     public Rectangle getTopBound() {
@@ -187,7 +188,7 @@ public abstract class Player implements GameObject{
     public void setHeight(final int height) {
         this.height = height;
     }
- 
+
     @Override
     public void setWidth(final int width) {
         this.width = width;

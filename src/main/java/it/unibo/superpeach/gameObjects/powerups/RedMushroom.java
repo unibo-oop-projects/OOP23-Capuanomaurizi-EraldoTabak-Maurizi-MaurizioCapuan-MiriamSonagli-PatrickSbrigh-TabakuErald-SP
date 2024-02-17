@@ -3,8 +3,21 @@ package it.unibo.superpeach.gameObjects.powerups;
 import java.awt.Graphics;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
+/**
+ * Implementation of the RED MUSHROOM power up.
+ * @author  Miriam Sonaglia
+ */
 public class RedMushroom extends PowerUp {
-
+    
+    /**
+     * Powerup RED MUSHROOM
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param s
+     * @param blocksHandler
+     */
     public RedMushroom(final int x, final int y, final int w, final int h, final int s, final BlocksHandler blocksHandler) {
         super(x, y, w, h, s, blocksHandler, PowerUpType.RED_MUSHROOM);
         setMovement(1);
