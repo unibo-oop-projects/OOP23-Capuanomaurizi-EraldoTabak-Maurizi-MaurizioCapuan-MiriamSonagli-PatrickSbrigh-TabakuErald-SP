@@ -18,7 +18,7 @@ import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
 
 /**
- * Implementazione di una partita in corso.
+ * Implementation of the runnable game.
  * @author  Maurizio Capuano
  */
 public class Game extends Canvas implements Runnable {
@@ -55,10 +55,17 @@ public class Game extends Canvas implements Runnable {
     private PowerupsHandler powerupsHandler;
     private Scoreboard scoreboard;
 
+    /**
+     * Creation of the window frame with the constructor call of a Game object within parameters.
+     * @param args possible command line arguments
+     */
     public static void main(final String[] args) {
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, gameScale, new Game());
     }
 
+    /**
+     * Initialization of game variables and call of the game start method.
+     */
     public void init() {
         texturer = new Texturer();
         blocksHandler = new BlocksHandler();
@@ -75,18 +82,28 @@ public class Game extends Canvas implements Runnable {
         start();
     }
 
+    /**
+     * Game loop thread creation and thread starting method.
+     */
     private void start() {
         mainGameLoop = new Thread(this);
         mainGameLoop.start();
         running = true;
     }
 
+    /**
+     * Restarting the whole game with a new scale for the window and every internal graphic component.
+     * @param newScale new scale of the game to restart from
+     */
     public void changeScale(final int newScale) {
         gameScale = newScale;
         window.closeWindow();
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, gameScale, new Game());
     }
 
+    /**
+     * Game restarting method either called while playing or after game over.
+     */
     public void restart() {
         stop();
         window.closeWindow();
@@ -98,6 +115,9 @@ public class Game extends Canvas implements Runnable {
         running = false;
     }
 
+    /**
+     * Override of Thread run() method, implementing the actual game loop with framerate and tickrate.
+     */
     @Override
     public void run() {
         long lastTime = System.nanoTime();
@@ -179,6 +199,9 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
+    /**
+     * @return the object that contains every sprite of all game objects
+     */
     public static Texturer getTexturer() {
         return texturer;
     }
