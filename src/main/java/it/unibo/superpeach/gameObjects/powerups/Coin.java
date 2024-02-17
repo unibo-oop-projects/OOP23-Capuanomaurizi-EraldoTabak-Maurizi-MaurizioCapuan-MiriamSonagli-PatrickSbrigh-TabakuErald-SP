@@ -3,8 +3,21 @@ package it.unibo.superpeach.gameObjects.powerups;
 import java.awt.Graphics;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
+/**
+ * Implementation of the COIN power up.
+ * @author  Miriam Sonaglia
+ */
 public class Coin extends PowerUp {
 
+    /**
+     * Powerup COIN.
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param s
+     * @param blocksHandler
+     */
     public Coin(final int x, final int y, final int w, final int h, final int s, final BlocksHandler blocksHandler) {
         super(x, y, w, h, s, blocksHandler, PowerUpType.COIN);
         setMovement(0);

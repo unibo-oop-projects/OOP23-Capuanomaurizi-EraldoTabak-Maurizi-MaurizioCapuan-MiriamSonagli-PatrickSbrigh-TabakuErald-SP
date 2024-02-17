@@ -3,8 +3,22 @@ package it.unibo.superpeach.gameObjects.powerups;
 import java.awt.Graphics;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
+/**
+ * Implementation of the LIFE MUSHROOM power up.
+ * @author  Miriam Sonaglia
+ */
 public class LifeMushroom extends PowerUp {
 
+    /**
+     * Powerup LIFE MUSHROOM, it gives the player 1 more life.
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param s
+     * @param blocksHandler
+     * @author Miriam Sonaglia
+     */
     public LifeMushroom(final int x, final int y, final int w, final int h, final int s, final BlocksHandler blocksHandler) {
         super(x, y, w, h, s, blocksHandler, PowerUpType.LIFE_MUSHROOM);
         setMovement(2);

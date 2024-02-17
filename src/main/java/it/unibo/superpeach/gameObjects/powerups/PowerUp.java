@@ -10,6 +10,10 @@ import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
 import it.unibo.superpeach.graphics.Texturer;
 
+/**
+ * Power up class implementation.
+ * @author  Miriam Sonaglia
+ */
 public abstract class PowerUp implements GameObject {
 
     public enum PowerUpType { RED_MUSHROOM, STAR, LIFE_MUSHROOM, COIN };
@@ -31,6 +35,17 @@ public abstract class PowerUp implements GameObject {
     private int paddingBound;
     private Texturer texturer = Game.getTexturer();
     private BufferedImage[] image = texturer.getPowerups();
+
+    /**
+     * Power ups constructor.
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param s
+     * @param blocksHandler
+     * @param type
+     */
     public PowerUp(final int x, final int y, final int w, final int h, final int s, 
                     final BlocksHandler blocksHandler, final PowerUpType type) {
         this.x = x * s;
@@ -82,6 +97,9 @@ public abstract class PowerUp implements GameObject {
         this.height = h;
     }
 
+    /**
+     * @return power up type between:RED MUSHROOM, LIFE MUSHROOM, STAR and COIN.
+     */
     public PowerUpType getPowerUpType() {
         return powerUpType;
     }
@@ -110,34 +128,61 @@ public abstract class PowerUp implements GameObject {
         this.scale = scale;
     }
 
+    /**
+     * Sets the speed according to the GUI scale selected.
+     * @param movement
+     */
     public void setMovement(final int movement) {
         this.movement = movement * scale;
     }
 
+    /**
+     * @return speed of the power up
+     */
     public int getMovement() {
         return this.movement;
     }
 
+    /**
+     * Sets if the power up is falling off a block or not.
+     * @param fall
+     */
     public void setIsFalling(final boolean fall) {
         this.isFalling = fall;
     }
 
+    /**
+     * @return if the power up is falling or not
+     */
     public boolean getIsFalling() {
         return this.isFalling;
     }
 
+    /**
+     * @return speed of the falling speed of the power up
+     */
     public int getFallSpeed() {
        return movement;
     }
 
+    /**
+     * @return the direction in which the power up is moving
+     */
     public boolean getDirection() {
         return this.direction;
     }
 
+    /**
+     * Changes the direction of the power up.
+     */
     public void changeDirection() {
         this.direction = !this.direction;
     }
 
+    /**
+     * Updates the coordinates of the power up 
+     * according to the direction and the state.
+     */
     public void updateCoords() {
         if (getDirection()) {
             this.x -= this.movement;
@@ -150,60 +195,106 @@ public abstract class PowerUp implements GameObject {
         }
     }
 
+    /**
+     * @return if the power up is alive or not
+     */
     public boolean getIsAlive() {
         return this.isAlive;
     }
 
+    /**
+     * the power up dies.
+     */
     public void die() {
         this.isAlive = false;
     }
 
+    /**
+     * @return the coordinates and the dimentions of the power up
+     */
     public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
+    /**
+     * @return the botton bound of the power up
+     */
     public Rectangle getBottomBound() {
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, 
                 getY() + (getHeight() - paddingBound),
                 getWidth() / 2, paddingBound);
     }
 
+    /**
+     * @return the left bound of the power up
+     */
     public Rectangle getLeftBound() {
         return new Rectangle(getX(), getY() + paddingBound, paddingBound, getHeight() - 2 * paddingBound);
     }
 
+    /**
+     * @return the right bound of the power up
+     */
     public Rectangle getRightBound() {
         return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound, 
                     getHeight() - 2 * paddingBound);
     }
 
+    /**
+     * @return the padding bound of the power up
+     */
     public int getPaddingBound() {
         return paddingBound;
     }
 
+    /**
+     * @return the blocks handler
+     */
     public BlocksHandler getBlocksHandler() {
         return blocksHandler;
     }
 
+    /**
+     * sets the blocks handler.
+     * @param blocksHandler
+     */
     public void setBlocksHandler(final BlocksHandler blocksHandler) {
         this.blocksHandler = blocksHandler;
     }
 
+    /**
+     * When the power ups collides with something on the bottom bound,
+     * it doesn't fall
+     * @param block
+     */
     private void setYCollisionBottom(final Block block) {
         setY(block.getY() / scale - getHeight() / scale);
         setIsFalling(false);
     }
 
+    /**
+     * When the power ups collides with something on the left bound,
+     * it changes direction.
+     * @param block
+     */
     private void setXCollisionLeft(final Block block) {
         setX((block.getX() + block.getWidth()) / getScale());
         changeDirection();
     }
 
+    /**
+     * When the power ups collides with something on the right bound,
+     * it changes direction.
+     * @param block
+     */
     private void setXCollisionRight(final Block block) {
         setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
 
+    /**
+     * It handles the collisions between the power up and the blocks.
+     */
     public void collisions() {
         for (Block block : blocksHandler.getBlocks()) {
             if (block.getType() == BlockType.DEATH_BLOCK) {
