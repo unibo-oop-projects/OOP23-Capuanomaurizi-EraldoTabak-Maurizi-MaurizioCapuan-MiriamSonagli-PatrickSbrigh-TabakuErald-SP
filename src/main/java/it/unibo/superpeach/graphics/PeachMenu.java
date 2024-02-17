@@ -219,7 +219,7 @@ public final class PeachMenu {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.exit(0);
+                closeWindow();
             }
         });
         panel.add(exitButton);
