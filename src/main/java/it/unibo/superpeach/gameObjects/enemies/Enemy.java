@@ -218,8 +218,8 @@ public abstract class Enemy implements GameObject {
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
-                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.ALT_BLOCK ||
-                    block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
+                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.ALT_BLOCK
+                    || block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
                 if (block.getBoundingBox().contains(getLeftBound())) {
                     setXCollisionLeft(block);
                 } else if (block.getBoundingBox().contains(getRightBound())) {
@@ -237,7 +237,7 @@ public abstract class Enemy implements GameObject {
         }
     }
 
-    public abstract void render(final Graphics g);
+    public abstract void render(Graphics g);
 
     public abstract void tick();
 

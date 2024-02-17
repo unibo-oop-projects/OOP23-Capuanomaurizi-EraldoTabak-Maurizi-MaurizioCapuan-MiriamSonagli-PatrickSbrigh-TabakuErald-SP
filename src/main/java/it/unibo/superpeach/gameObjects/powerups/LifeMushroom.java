@@ -21,5 +21,5 @@ public class LifeMushroom extends PowerUp {
         setIsFalling(true);
         collisions();
         updateCoords();
-    }   
+    }
 }

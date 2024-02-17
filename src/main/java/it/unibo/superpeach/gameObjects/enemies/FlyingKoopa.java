@@ -1,6 +1,6 @@
 package it.unibo.superpeach.gameObjects.enemies;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 

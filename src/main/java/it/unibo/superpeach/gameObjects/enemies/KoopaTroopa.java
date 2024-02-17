@@ -15,7 +15,7 @@ public class KoopaTroopa extends Enemy {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(final Graphics g) {
         if (getDirection()) {
             g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
                     null);
