@@ -541,12 +541,12 @@ public abstract class Player implements GameObject {
     }
 
     private boolean touchedEnemy(final Enemy enemy) {
-        return enemy.getBounds().intersects(getTopBound()) || enemy.getBounds().intersects(getLeftBound())
-                || enemy.getBounds().intersects(getRightBound());
+        return enemy.getBoundingBox().intersects(getTopBound()) || enemy.getBoundingBox().intersects(getLeftBound())
+                || enemy.getBoundingBox().intersects(getRightBound());
     }
 
     private boolean killedEnemy(final Enemy enemy) {
-        return enemy.getBounds().intersects(getBottomBound());
+        return enemy.getBoundingBox().intersects(getBottomBound());
     }
 
     private void setYCollisionTop(final Block block) {
