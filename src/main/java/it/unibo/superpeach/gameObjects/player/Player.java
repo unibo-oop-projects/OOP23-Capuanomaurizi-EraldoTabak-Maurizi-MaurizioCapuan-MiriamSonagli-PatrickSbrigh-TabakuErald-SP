@@ -382,8 +382,8 @@ public abstract class Player {
     }
 
     private boolean touchPowerUp(PowerUp power){
-        return power.getBounds().intersects(getBottomBound()) || power.getBounds().intersects(getTopBound()) 
-            || power.getBounds().intersects(getLeftBound()) || power.getBounds().intersects(getRightBound());
+        return power.getBoundingBox().intersects(getBottomBound()) || power.getBoundingBox().intersects(getTopBound()) 
+            || power.getBoundingBox().intersects(getLeftBound()) || power.getBoundingBox().intersects(getRightBound());
     }
 
     private void becomeBig(){
