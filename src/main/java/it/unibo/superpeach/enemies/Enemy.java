@@ -86,14 +86,6 @@ public abstract class Enemy {
         return this.getDimension().height;
     }
 
-    public static int getFallSpeed() {
-        return FALL_SPEED;
-    }
-
-    public int getPaddingBound() {
-        return PADDING_BOUND;
-    }
-
     public BlocksHandler getBlocksHandler() {
         return this.blocksHandler;
     }

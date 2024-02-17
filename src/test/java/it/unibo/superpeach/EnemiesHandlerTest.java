@@ -77,5 +77,7 @@ public class EnemiesHandlerTest {
         enemiesHandler.removeEnemy(enemiesHandler.getEnemies().get(1));
         assertEquals(4, enemiesHandler.getEnemies().size());
 
+        enemiesHandler.tickEnemies();
+
     }
 }
