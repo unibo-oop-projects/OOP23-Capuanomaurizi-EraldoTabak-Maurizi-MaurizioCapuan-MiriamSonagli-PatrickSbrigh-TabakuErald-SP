@@ -4,8 +4,22 @@ import java.awt.Graphics;
 
 import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 
+/**
+ * Blocks class that inherits from Block class and represents a fixed block
+ * which interacts with other entities.
+ * 
+ * @author  Maurizio Capuano
+ */
 public class MapFixedBlock extends Block {
 
+    /**
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param scale
+     * @param type block type
+     */
     public MapFixedBlock(final int x, final int y, final int width, final int height, final int scale, final BlockType type) {
         super(x, y, width, height, scale);
         setType(type);
@@ -82,6 +96,10 @@ public class MapFixedBlock extends Block {
         }
     }
 
+    /**
+     * @param powerupsHandler
+     * @param blocksHandler
+     */
     public void popLuckyBlock(final PowerupsHandler powerupsHandler, final BlocksHandler blocksHandler) {
     }
 

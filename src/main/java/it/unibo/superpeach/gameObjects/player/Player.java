@@ -452,7 +452,7 @@ public abstract class Player implements GameObject {
     }
 
     private void collisionsWithPowersUp() {
-        for (PowerUp power : powerupsHandler.getPowerups()) {
+        for (final PowerUp power : powerupsHandler.getPowerups()) {
             if (touchedPowerUp(power)) {
                 switch (power.getPowerUpType()) {
                     case COIN:

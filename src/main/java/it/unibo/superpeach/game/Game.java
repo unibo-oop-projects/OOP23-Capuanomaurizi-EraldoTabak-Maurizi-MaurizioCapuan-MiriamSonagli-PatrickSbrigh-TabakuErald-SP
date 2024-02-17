@@ -19,6 +19,7 @@ import it.unibo.superpeach.level.LevelHandler;
 
 /**
  * Implementation of the runnable game.
+ * 
  * @author  Maurizio Capuano
  */
 public class Game extends Canvas implements Runnable {
