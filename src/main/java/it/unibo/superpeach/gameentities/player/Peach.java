@@ -61,9 +61,7 @@ public class Peach extends Player {
 
     @Override
     public void setSprites(final BufferedImage[] sprites) {
-        if (sprites.length != 0) {
-            this.sprite = sprites;
-        }
+        this.sprite = sprites.clone();
     }
 
     @Override
