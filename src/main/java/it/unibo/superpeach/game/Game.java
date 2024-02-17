@@ -19,6 +19,8 @@ import it.unibo.superpeach.level.LevelHandler;
 
 public class Game extends Canvas implements Runnable {
 
+    private static int GAME_SCALE = 2;
+
     // GAME CONSTANTS
     private static final int MILLS_PER_SECOND = 1000;
     private static final int NANOS_PER_SECOND = 1000000000;
@@ -28,12 +30,11 @@ public class Game extends Canvas implements Runnable {
     private static final int WINDOW_WIDTH = 480;
     private static final int WINDOW_HEIGHT = 360;
     private static final int PLAYER_DEFAULT_X = 240;
-    private static final int PLAYER_DEFAULT_Y = 0;
-    private static final int PLAYER_DEFAULT_WID_HEIG = 16;
+    private static final int PLAYER_DEFAULT_Y = WINDOW_HEIGHT/2;
+    private static final int PLAYER_DEFAULT_WID_HEIG = 16;    
 
     // GAME VARIABLES
     private boolean running;
-    private static int GAME_SCALE = 2;
     private boolean gameOver = false;
     private int gameOverBuffers = 0;
 
