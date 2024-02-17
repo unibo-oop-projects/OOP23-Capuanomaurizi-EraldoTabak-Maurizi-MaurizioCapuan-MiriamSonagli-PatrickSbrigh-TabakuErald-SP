@@ -3,11 +3,8 @@ package it.unibo.superpeach.gameObjects.enemies;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameObjects.enemies.Enemy;
-import it.unibo.superpeach.gameObjects.enemies.FlyingKoopa;
-import it.unibo.superpeach.gameObjects.enemies.Goomba;
-import it.unibo.superpeach.gameObjects.enemies.KoopaTroopa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -30,9 +27,12 @@ public class EnemyTest {
     private static final int SCALE2 = 2;
 
     private static final BlocksHandler BLOCKS_HANDLER = new BlocksHandler();
+    private Game game = new Game();
 
     @Test
     void testEnemy() {
+
+        game.init();
 
         // Creating an enemy for each type
         Enemy koopa = new KoopaTroopa(X1, Y1, WIDTH, KOOPA_HEIGHT, SCALE1, BLOCKS_HANDLER);
@@ -67,6 +67,13 @@ public class EnemyTest {
         assertTrue(goomba.getIsAlive());
         goomba.die();
         assertFalse(goomba.getIsAlive());
+
+    }
+
+    @Test
+    void testQualcosa() {
+        game.init();
+        Enemy koopa = new KoopaTroopa(X1, Y1, WIDTH, KOOPA_HEIGHT, SCALE1, BLOCKS_HANDLER);
 
     }
 }

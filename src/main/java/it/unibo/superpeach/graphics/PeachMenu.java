@@ -208,7 +208,7 @@ public class PeachMenu {
         }
     }
 
-    private void stopBackgroundMusic() {
+    public void stopBackgroundMusic() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
             clip.close();
