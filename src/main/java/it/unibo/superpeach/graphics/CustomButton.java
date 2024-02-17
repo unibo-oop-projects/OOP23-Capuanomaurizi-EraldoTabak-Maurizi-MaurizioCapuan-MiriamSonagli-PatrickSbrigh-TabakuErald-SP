@@ -30,7 +30,7 @@ public class CustomButton extends JButton {
         setBorder(border);
         setBorder(BorderFactory.createCompoundBorder(
                 border,
-                BorderFactory.createEmptyBorder(10, 10*2, 10, 10*2)
+                BorderFactory.createEmptyBorder(10, 10 * 2, 10, 10 * 2)
         ));
     }
 }

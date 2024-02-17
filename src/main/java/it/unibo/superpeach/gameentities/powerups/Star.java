@@ -11,7 +11,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 public class Star extends PowerUp {
 
     /**
-     * Powerup STAR
+     * Powerup STAR.
      * @param x
      * @param y
      * @param w

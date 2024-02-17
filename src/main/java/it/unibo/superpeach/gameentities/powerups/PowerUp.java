@@ -15,22 +15,25 @@ import it.unibo.superpeach.graphics.Texturer;
  * @author  Miriam Sonaglia
  */
 public abstract class PowerUp implements GameObject {
-    
+
+    /**
+     * eunum relative with all the power up types.
+     */
     public enum PowerUpType { 
         /** 
-         * Power up RED MUSHROOM
+         * Power up RED MUSHROOM.
          */
         RED_MUSHROOM, 
         /**
-         * Power up STAR
+         * Power up STAR.
          */
         STAR, 
         /**
-         * Power up LIFE MUSHROOM
+         * Power up LIFE MUSHROOM.
          */
         LIFE_MUSHROOM, 
         /**
-         * Power up COIN
+         * Power up COIN.
          */
         COIN };
 
