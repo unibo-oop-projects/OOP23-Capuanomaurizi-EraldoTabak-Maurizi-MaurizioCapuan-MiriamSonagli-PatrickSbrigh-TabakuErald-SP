@@ -2,6 +2,7 @@ package it.unibo.superpeach.gameentities.player;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.game.Scoreboard;
@@ -27,7 +28,7 @@ public final class Peach extends Player {
     private static final int JUMP_FALL_STAR = 5;
     private int spriteNeeded;
     private final Texturer texturer;
-    private BufferedImage[] sprite;
+    private Optional<BufferedImage[]> sprite;
 
     /**
      * Class constructor.
@@ -45,13 +46,13 @@ public final class Peach extends Player {
             final EnemiesHandler enemiesHandler, final PowerupsHandler powerUpsHandler, final Scoreboard scoreboard) {
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
         this.texturer = Game.getTexturer();
-        this.sprite = texturer.getPeach();
+        this.sprite = Optional.of(texturer.getPeach());
         this.spriteNeeded = 0;
     }
 
     @Override
     public BufferedImage[] getSprites() {
-        return this.sprite.clone();
+        return this.sprite.get().clone();
     }
 
     @Override
@@ -61,7 +62,7 @@ public final class Peach extends Player {
 
     @Override
     public void setSprites(final BufferedImage[] sprites) {
-        this.sprite = sprites.clone();
+        this.sprite = Optional.of(sprites.clone());
     }
 
     @Override
