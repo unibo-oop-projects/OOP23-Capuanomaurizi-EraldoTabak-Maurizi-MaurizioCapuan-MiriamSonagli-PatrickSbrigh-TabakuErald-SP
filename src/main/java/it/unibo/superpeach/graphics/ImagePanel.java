@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
  */
 public final class ImagePanel extends JPanel {
 
-    private static final long serialVersionUID = 10l;
+    private static final long serialVersionUID = 10L;
 
     private BufferedImage backgroundImage;
 

@@ -13,7 +13,7 @@ import javax.swing.border.Border;
  */
 public final class CustomButton extends JButton {
 
-    private static final long serialVersionUID = 10l;
+    private static final long serialVersionUID = 10L;
 
     /**
      * This method create a button with a text, abackground color and a border.

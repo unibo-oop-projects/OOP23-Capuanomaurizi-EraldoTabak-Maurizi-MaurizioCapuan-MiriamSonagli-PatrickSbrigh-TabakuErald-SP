@@ -27,7 +27,10 @@ public final class Texturer {
     private static final int TILE_HEIGHT = 16;
     private static final int KOOPA_HEIGHT = 23;
 
-    private BufferedImage tileSet;
+    private final BufferedImage blocksTileSet;
+    private final BufferedImage enemiesTileSet;
+    private final BufferedImage playerTileSet;
+    private final BufferedImage powerupsTileSet;
 
     private BufferedImage[] terrain, lucky, scoreboard, pipe, cloud, bush, hill, flag;
     private BufferedImage[] goomba, koopaTroopa, flyingKoopa;
@@ -59,7 +62,10 @@ public final class Texturer {
 
         powerups = new BufferedImage[POWERUPS_COUNT];
 
-        tileSet = loader.loadImage("it/unibo/superpeach/tiles/blocks_tile.png");
+        blocksTileSet = loader.loadImage("it/unibo/superpeach/tiles/blocks_tile.png");
+        enemiesTileSet = loader.loadImage("it/unibo/superpeach/tiles/enemies.png");
+        playerTileSet = loader.loadImage("it/unibo/superpeach/tiles/player_tile.png");
+        powerupsTileSet = loader.loadImage("it/unibo/superpeach/tiles/powerups_tiles.png");
         loadTerrain();
         loadLucky();
         loadScoreboard();
@@ -68,20 +74,17 @@ public final class Texturer {
         loadBush();
         loadHill();
         loadFlag();
-        tileSet = loader.loadImage("it/unibo/superpeach/tiles/enemies.png");
         loadGoomba();
         loadKoopaTroopa();
         loadFlyingKoopa();
-        tileSet = loader.loadImage("it/unibo/superpeach/tiles/player_tile.png");
         loadPeach();
-        tileSet = loader.loadImage("it/unibo/superpeach/tiles/powerups_tiles.png");
         loadPowerups();
 
     }
 
     private void loadPeach() {
         for (int i = 0; i < PEACH_COUNT; i++) {
-            peach[i] = tileSet.getSubimage((TILE_WIDTH + 1) * i, 0, TILE_WIDTH, TILE_HEIGHT * 2);
+            peach[i] = playerTileSet.getSubimage((TILE_WIDTH + 1) * i, 0, TILE_WIDTH, TILE_HEIGHT * 2);
         }
 
     }
@@ -93,7 +96,7 @@ public final class Texturer {
 
         for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT / 8; i++) {
             for (int j = 0; j < BRICKSCASTLEBLOCKS_COUNT / 2; j++) {
-                terrain[index] = tileSet.getSubimage(x + j * (TILE_WIDTH + 1), y + i * (TILE_HEIGHT + 1),
+                terrain[index] = blocksTileSet.getSubimage(x + j * (TILE_WIDTH + 1), y + i * (TILE_HEIGHT + 1),
                         TILE_WIDTH, TILE_HEIGHT);
                 index++;
             }
@@ -101,22 +104,22 @@ public final class Texturer {
     }
 
     private void loadLucky() {
-        lucky[0] = tileSet.getSubimage(298, 78, TILE_WIDTH, TILE_HEIGHT);
-        lucky[1] = tileSet.getSubimage(349, 78, TILE_WIDTH, TILE_HEIGHT);
+        lucky[0] = blocksTileSet.getSubimage(298, 78, TILE_WIDTH, TILE_HEIGHT);
+        lucky[1] = blocksTileSet.getSubimage(349, 78, TILE_WIDTH, TILE_HEIGHT);
     }
 
     private void loadScoreboard() {
-        scoreboard[0] = tileSet.getSubimage(315, 78, TILE_WIDTH, TILE_HEIGHT);
-        scoreboard[1] = tileSet.getSubimage(315, 95, TILE_WIDTH, TILE_HEIGHT);
-        scoreboard[2] = tileSet.getSubimage(298, 95, TILE_WIDTH, TILE_HEIGHT);
-        scoreboard[3] = tileSet.getSubimage(332, 95, TILE_WIDTH, TILE_HEIGHT);
+        scoreboard[0] = blocksTileSet.getSubimage(315, 78, TILE_WIDTH, TILE_HEIGHT);
+        scoreboard[1] = blocksTileSet.getSubimage(315, 95, TILE_WIDTH, TILE_HEIGHT);
+        scoreboard[2] = blocksTileSet.getSubimage(298, 95, TILE_WIDTH, TILE_HEIGHT);
+        scoreboard[3] = blocksTileSet.getSubimage(332, 95, TILE_WIDTH, TILE_HEIGHT);
     }
 
     private void loadPipe() {
-        pipe[0] = tileSet.getSubimage(119, 196, TILE_WIDTH, TILE_HEIGHT);
-        pipe[1] = tileSet.getSubimage(136, 196, TILE_WIDTH, TILE_HEIGHT);
-        pipe[2] = tileSet.getSubimage(119, 213, TILE_WIDTH, TILE_HEIGHT);
-        pipe[3] = tileSet.getSubimage(136, 213, TILE_WIDTH, TILE_HEIGHT);
+        pipe[0] = blocksTileSet.getSubimage(119, 196, TILE_WIDTH, TILE_HEIGHT);
+        pipe[1] = blocksTileSet.getSubimage(136, 196, TILE_WIDTH, TILE_HEIGHT);
+        pipe[2] = blocksTileSet.getSubimage(119, 213, TILE_WIDTH, TILE_HEIGHT);
+        pipe[3] = blocksTileSet.getSubimage(136, 213, TILE_WIDTH, TILE_HEIGHT);
     }
 
     private void loadCloud() {
@@ -126,7 +129,7 @@ public final class Texturer {
 
         for (int i = 0; i < CLOUDBLOCKS_COUNT / 3; i++) {
             for (int j = 0; j < CLOUDBLOCKS_COUNT / 2; j++) {
-                cloud[index] = tileSet.getSubimage(x + j * (TILE_WIDTH + 1), y + i * (TILE_HEIGHT + 1),
+                cloud[index] = blocksTileSet.getSubimage(x + j * (TILE_WIDTH + 1), y + i * (TILE_HEIGHT + 1),
                         TILE_WIDTH, TILE_HEIGHT);
                 index++;
             }
@@ -138,47 +141,47 @@ public final class Texturer {
         final int y = 213;
 
         for (int i = 0; i < BUSHBLOCKS_COUNT; i++) {
-            bush[i] = tileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
+            bush[i] = blocksTileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
         }
     }
 
     private void loadHill() {
-        hill[0] = tileSet.getSubimage(34, 230, TILE_WIDTH, TILE_HEIGHT);
+        hill[0] = blocksTileSet.getSubimage(34, 230, TILE_WIDTH, TILE_HEIGHT);
 
         final int x = 0;
         final int y = 247;
 
         for (int i = 0; i < HILLBLOCKS_COUNT - 1; i++) {
-            hill[i + 1] = tileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
+            hill[i + 1] = blocksTileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
         }
     }
 
     private void loadFlag() {
-        flag[0] = tileSet.getSubimage(136, 230, TILE_WIDTH, TILE_HEIGHT);
-        flag[1] = tileSet.getSubimage(136, 247, TILE_WIDTH, TILE_HEIGHT);
-        flag[2] = tileSet.getSubimage(119, 230, TILE_WIDTH, TILE_HEIGHT);
-        flag[3] = tileSet.getSubimage(119, 247, TILE_WIDTH, TILE_HEIGHT);
+        flag[0] = blocksTileSet.getSubimage(136, 230, TILE_WIDTH, TILE_HEIGHT);
+        flag[1] = blocksTileSet.getSubimage(136, 247, TILE_WIDTH, TILE_HEIGHT);
+        flag[2] = blocksTileSet.getSubimage(119, 230, TILE_WIDTH, TILE_HEIGHT);
+        flag[3] = blocksTileSet.getSubimage(119, 247, TILE_WIDTH, TILE_HEIGHT);
     }
 
     private void loadGoomba() {
-        goomba[0] = tileSet.getSubimage(0, 4, TILE_WIDTH, TILE_HEIGHT);
+        goomba[0] = enemiesTileSet.getSubimage(0, 4, TILE_WIDTH, TILE_HEIGHT);
     }
 
     private void loadKoopaTroopa() {
-        koopaTroopa[0] = tileSet.getSubimage(180, 0, TILE_WIDTH, KOOPA_HEIGHT);
-        koopaTroopa[1] = tileSet.getSubimage(211, 0, TILE_WIDTH, KOOPA_HEIGHT);
+        koopaTroopa[0] = enemiesTileSet.getSubimage(180, 0, TILE_WIDTH, KOOPA_HEIGHT);
+        koopaTroopa[1] = enemiesTileSet.getSubimage(211, 0, TILE_WIDTH, KOOPA_HEIGHT);
     }
 
     private void loadFlyingKoopa() {
-        flyingKoopa[0] = tileSet.getSubimage(120, 0, TILE_WIDTH, KOOPA_HEIGHT);
-        flyingKoopa[1] = tileSet.getSubimage(271, 0, TILE_WIDTH, KOOPA_HEIGHT);
+        flyingKoopa[0] = enemiesTileSet.getSubimage(120, 0, TILE_WIDTH, KOOPA_HEIGHT);
+        flyingKoopa[1] = enemiesTileSet.getSubimage(271, 0, TILE_WIDTH, KOOPA_HEIGHT);
     }
 
     private void loadPowerups() {
-        powerups[0] = tileSet.getSubimage(16, 32, TILE_WIDTH, TILE_HEIGHT);
-        powerups[1] = tileSet.getSubimage(96, 96, TILE_WIDTH, TILE_HEIGHT);
-        powerups[2] = tileSet.getSubimage(256, 32, TILE_WIDTH, TILE_HEIGHT);
-        powerups[3] = tileSet.getSubimage(64, 16, TILE_WIDTH, TILE_HEIGHT);
+        powerups[0] = powerupsTileSet.getSubimage(16, 32, TILE_WIDTH, TILE_HEIGHT);
+        powerups[1] = powerupsTileSet.getSubimage(96, 96, TILE_WIDTH, TILE_HEIGHT);
+        powerups[2] = powerupsTileSet.getSubimage(256, 32, TILE_WIDTH, TILE_HEIGHT);
+        powerups[3] = powerupsTileSet.getSubimage(64, 16, TILE_WIDTH, TILE_HEIGHT);
     }
 
     /**

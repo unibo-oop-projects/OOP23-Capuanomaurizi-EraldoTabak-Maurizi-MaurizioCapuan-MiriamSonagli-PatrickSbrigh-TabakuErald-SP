@@ -25,7 +25,7 @@ import it.unibo.superpeach.level.LevelHandler;
  */
 public final class Game extends Canvas implements Runnable {
 
-    private static final long serialVersionUID = 10l;
+    private static final long serialVersionUID = 10L;
 
     private static int gameScale = 2;
 
