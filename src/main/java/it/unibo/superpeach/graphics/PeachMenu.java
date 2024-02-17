@@ -34,8 +34,8 @@ import java.io.IOException;
  */
 public final class PeachMenu {
 
-    private JFrame frame;
-    private Dimension size;
+    private final JFrame frame;
+    private final Dimension size;
     private Clip clip;
 
     /**
@@ -49,7 +49,7 @@ public final class PeachMenu {
     public PeachMenu(final String title, final int width, final int height, final int scale, final Game game) {
         size = new Dimension(width * scale, height * scale);
         frame = new JFrame(title);
-        ImageIcon imageIcon = new ImageIcon("src/main/resources/it/unibo/superpeach/icon/peach_icon.png");
+        final ImageIcon imageIcon = new ImageIcon("src/main/resources/it/unibo/superpeach/icon/peach_icon.png");
 
         frame.setIconImage(imageIcon.getImage());
         frame.setPreferredSize(size);
@@ -59,15 +59,15 @@ public final class PeachMenu {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Color customColor = new Color(218, 165, 32);    //SFONDO BOTTONI
-        Color customColor1 = new Color(101, 67, 33);    //PER LE SCRITTE
-        Border border = BorderFactory.createLineBorder(customColor1, 2, true);
+        final Color customColor = new Color(218, 165, 32);    //SFONDO BOTTONI
+        final Color customColor1 = new Color(101, 67, 33);    //PER LE SCRITTE
+        final Border border = BorderFactory.createLineBorder(customColor1, 2, true);
 
-        String imagePath = "src/main/resources/it/unibo/superpeach/tiles/background.png";
-        ImagePanel panel = new ImagePanel(imagePath);
+        final String imagePath = "src/main/resources/it/unibo/superpeach/tiles/background.png";
+        final ImagePanel panel = new ImagePanel(imagePath);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel titleLabel = new JLabel("SUPER PEACH");
+        final JLabel titleLabel = new JLabel("SUPER PEACH");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setFont(new Font("Monospaced", Font.BOLD, 40 * scale));
         titleLabel.setForeground(Color.PINK);
@@ -78,7 +78,7 @@ public final class PeachMenu {
          * Creation of the START button.
          * If clicked it starts the game.
          */
-        CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
+        final CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -92,8 +92,8 @@ public final class PeachMenu {
         panel.add(Box.createVerticalStrut(10 * scale));
 
 
-        String[] guiScaleList = {"GUI SCALE", "Tiny", "Small", "Medium", "Large"};
-        JComboBox<String> guiComboBox = new JComboBox<>(guiScaleList);
+        final String[] guiScaleList = {"GUI SCALE", "Tiny", "Small", "Medium", "Large"};
+        final JComboBox<String> guiComboBox = new JComboBox<>(guiScaleList);
         guiComboBox.setLayout(new FlowLayout());
         guiComboBox.setBackground(customColor);
         guiComboBox.setForeground(customColor1);
@@ -105,7 +105,7 @@ public final class PeachMenu {
             @Override
             public Component getListCellRendererComponent(final JList<?> list, final Object value, 
                                                 final int index, final boolean isSelected, final boolean cellHasFocus) {
-                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 return label;
             }
@@ -122,8 +122,8 @@ public final class PeachMenu {
                 stopBackgroundMusic();
                 guiComboBox.setPreferredSize(startButton.getPreferredSize());
                 guiComboBox.setMaximumSize(startButton.getPreferredSize());
-                String selectedScale = (String) guiComboBox.getSelectedItem();
-                if (!selectedScale.equals("GUI SCALE")) {
+                final String selectedScale = (String) guiComboBox.getSelectedItem();
+                if (!"GUI SCALE".equals(selectedScale)) {
                     int scalerange = 2;
                     switch (selectedScale) {
                         case "Tiny":
@@ -152,11 +152,11 @@ public final class PeachMenu {
         /**
          * Creation of the combo box that permits to choose between 3 songs to be played.
         */
-        String sound1 = new String("src/main/resources/it/unibo/superpeach/music/sound1.wav");
-        String sound2 = new String("src/main/resources/it/unibo/superpeach/music/sound2.wav");
-        String sound3 = new String("src/main/resources/it/unibo/superpeach/music/sound3.wav");
-        String[] songList = {"MUSIC", "n. 1", "n. 2", "n. 3", "no music"};
-        JComboBox<String> songComboBox = new JComboBox<>(songList);
+        final String sound1 = "src/main/resources/it/unibo/superpeach/music/sound1.wav";
+        final String sound2 = "src/main/resources/it/unibo/superpeach/music/sound2.wav";
+        final String sound3 = "src/main/resources/it/unibo/superpeach/music/sound3.wav";
+        final String[] songList = {"MUSIC", "n. 1", "n. 2", "n. 3", "no music"};
+        final JComboBox<String> songComboBox = new JComboBox<>(songList);
         songComboBox.setLayout(new FlowLayout());
         songComboBox.setBackground(customColor);
         songComboBox.setForeground(customColor1);
@@ -168,7 +168,7 @@ public final class PeachMenu {
             @Override
             public Component getListCellRendererComponent(final JList<?> list, final Object value, 
                                                 final int index, final boolean isSelected, final boolean cellHasFocus) {
-                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 return label;
             }
@@ -179,9 +179,9 @@ public final class PeachMenu {
         songComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                String selectedSong = (String) songComboBox.getSelectedItem();
-                if (!selectedSong.equals("MUSIC")) {
-                    if (!selectedSong.equals("no music")) {
+                final String selectedSong = (String) songComboBox.getSelectedItem();
+                if (!"MUSIC".equals(selectedSong)) {
+                    if (!"no music".equals(selectedSong)) {
                         String path = "";
                         switch (selectedSong) {
                             case "n. 1":
@@ -212,7 +212,7 @@ public final class PeachMenu {
          * Creation of the START button.
          * If clicked it closes the menu.
          */
-        CustomButton exitButton = new CustomButton("EXIT", customColor, customColor1, scale);
+        final CustomButton exitButton = new CustomButton("EXIT", customColor, customColor1, scale);
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -234,8 +234,8 @@ public final class PeachMenu {
     private void playSong(final String songFilePath) {
         stopBackgroundMusic();
         try {
-            File audioFile = new File(songFilePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            final File audioFile = new File(songFilePath);
+            final AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
             clip.start();
