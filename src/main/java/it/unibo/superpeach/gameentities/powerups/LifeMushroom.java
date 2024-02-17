@@ -8,7 +8,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * Implementation of the LIFE MUSHROOM power up.
  * @author  Miriam Sonaglia
  */
-public class LifeMushroom extends PowerUp {
+public final class LifeMushroom extends PowerUp {
 
     /**
      * Powerup LIFE MUSHROOM, it gives the player 1 more life.

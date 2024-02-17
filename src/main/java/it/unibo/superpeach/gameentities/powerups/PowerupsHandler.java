@@ -25,7 +25,7 @@ public class PowerupsHandler {
      * iterates through all the powerups alive,
      * if they die they are removed.
      */
-    public void tickPowerups() {
+    public final void tickPowerups() {
         Set<PowerUp> powerupsToRemove = new HashSet<>();
         for (PowerUp powerUp : powerups) {
             powerUp.tick();
@@ -43,7 +43,7 @@ public class PowerupsHandler {
      * Method that draws all the power ups in the list.
      * @param g
      */
-    public void renderPowerups(final Graphics g) {
+    public final void renderPowerups(final Graphics g) {
         for (PowerUp powerup : powerups) {
             powerup.render(g);
         }
@@ -53,7 +53,7 @@ public class PowerupsHandler {
      * adds a power up to the power ups handler.
      * @param p
      */
-    public void addPowerUp(final PowerUp p) {
+    public final void addPowerUp(final PowerUp p) {
         powerups.add(p);
     }
 
@@ -61,14 +61,14 @@ public class PowerupsHandler {
      * removes a power up from the power ups handler.
      * @param p
      */
-    public void removePowerUp(final PowerUp p) {
+    public final void removePowerUp(final PowerUp p) {
         powerups.remove(p);
     }
 
     /**
      * @return a copy of the power up list.
      */
-    public List<PowerUp> getPowerups() {
+    public final List<PowerUp> getPowerups() {
         return List.copyOf(powerups);
     }
 

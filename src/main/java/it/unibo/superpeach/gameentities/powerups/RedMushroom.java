@@ -8,10 +8,10 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * Implementation of the RED MUSHROOM power up.
  * @author  Miriam Sonaglia
  */
-public class RedMushroom extends PowerUp {
-    
+public final class RedMushroom extends PowerUp {
+   
     /**
-     * Powerup RED MUSHROOM
+     * Powerup RED MUSHROOM.
      * @param x
      * @param y
      * @param w

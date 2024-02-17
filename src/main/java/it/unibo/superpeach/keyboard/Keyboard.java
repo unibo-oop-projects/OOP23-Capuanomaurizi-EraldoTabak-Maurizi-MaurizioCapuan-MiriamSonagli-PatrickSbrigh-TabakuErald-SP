@@ -11,7 +11,7 @@ import it.unibo.superpeach.gameentities.player.PlayerHandler;
  * 
  * @author Patrick Sbrighi
  */
-public class Keyboard extends KeyAdapter {
+public final class Keyboard extends KeyAdapter {
     private final PlayerHandler playHand;
     private static final long MIN_MILLS = 150;
     private long current;
@@ -35,7 +35,7 @@ public class Keyboard extends KeyAdapter {
      * @param e key pressed
      */
     @Override
-    public void keyPressed(final KeyEvent e) {
+    public final void keyPressed(final KeyEvent e) {
         final int pressed = e.getKeyCode();
 
         if (pressed == KeyEvent.VK_SPACE && !playHand.getPlayer().hasJumped()
@@ -63,7 +63,7 @@ public class Keyboard extends KeyAdapter {
      * @param e key relased
      */
     @Override
-    public void keyReleased(final KeyEvent e) {
+    public final void keyReleased(final KeyEvent e) {
         final int pressed = e.getKeyCode();
 
         if (pressed == KeyEvent.VK_SPACE) {

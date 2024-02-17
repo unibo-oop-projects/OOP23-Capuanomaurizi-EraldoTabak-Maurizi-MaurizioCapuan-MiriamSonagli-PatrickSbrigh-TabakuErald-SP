@@ -101,27 +101,27 @@ public abstract class Player implements GameObject {
     }
 
     @Override
-    public int getX() {
+    public final int getX() {
         return this.x;
     }
 
     @Override
-    public int getY() {
+    public final int getY() {
         return this.y;
     }
 
     @Override
-    public int getWidth() {
+    public final int getWidth() {
         return this.width;
     }
 
     @Override
-    public int getHeight() {
+    public final int getHeight() {
         return this.height;
     }
 
     @Override
-    public int getScale() {
+    public final int getScale() {
         return this.scale;
     }
 
@@ -129,7 +129,7 @@ public abstract class Player implements GameObject {
      * This method returns the actual score.
      * @return Return the actual score
      */
-    public int getScore() {
+    public final int getScore() {
         return this.point;
     }
 
@@ -137,7 +137,7 @@ public abstract class Player implements GameObject {
      * This method returns the value of vertical movement.
      * @return Return 0 if player doesn't move, num < 0 if player is jumping, num > 0 if player is falling
      */
-    public int getMoveY() {
+    public final int getMoveY() {
         return this.moveY;
     }
 
@@ -145,7 +145,7 @@ public abstract class Player implements GameObject {
      * This method returns the valure of orizzontal movement.
      * @return Return 0 if player doesn't move, num<0 if player is moveing to the left, num>0 if player is moveing to the right
      */
-    public int getMoveX() {
+    public final int getMoveX() {
         return this.moveX;
     }
 
@@ -153,12 +153,12 @@ public abstract class Player implements GameObject {
      * This method returns the actual power up.
      * @return Return null is there's no actual power up or a power up
      */
-    public PowerUpType getPowerUp() {
+    public final PowerUpType getPowerUp() {
         return this.currentPowerUp;
     }
 
     @Override
-    public Rectangle getBoundingBox() {
+    public final Rectangle getBoundingBox() {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 
@@ -166,7 +166,7 @@ public abstract class Player implements GameObject {
      * This method returns if the player is jumping.
      * @return Return if player is jumping
      */
-    public boolean hasJumped() {
+    public final boolean hasJumped() {
         return this.jumped;
     }
 
@@ -174,7 +174,7 @@ public abstract class Player implements GameObject {
      * This method returns if the player won.
      * @return Return if the player won
      */
-    public boolean hasWon() {
+    public final boolean hasWon() {
         return this.hasWon;
     }
 
@@ -182,29 +182,29 @@ public abstract class Player implements GameObject {
      * This method returns if the player lost.
      * @return Return if the player lost
      */
-    public boolean hasLost() {
+    public final boolean hasLost() {
         return this.hasLost;
     }
 
     @Override
-    public void setX(final int x) {
+    public final void setX(final int x) {
         if (x >= MIN_X && x <= MAX_X) {
             this.x = x * this.scale;
         }
     }
 
     @Override
-    public void setY(final int y) {
+    public final void setY(final int y) {
         this.y = y * this.scale;
     }
 
     @Override
-    public void setHeight(final int height) {
+    public final void setHeight(final int height) {
         this.height = height;
     }
 
     @Override
-    public void setWidth(final int width) {
+    public final void setWidth(final int width) {
         this.width = width;
     }
 
@@ -212,7 +212,7 @@ public abstract class Player implements GameObject {
      * This method allows to set the vertical movement.
      * @param moveY The new value of vertical movement
      */
-    public void setMoveY(final int moveY) {
+    public final void setMoveY(final int moveY) {
         this.moveY = moveY;
     }
 
@@ -220,12 +220,12 @@ public abstract class Player implements GameObject {
      * This method allows to set the horizontal movement.
      * @param moveX The new value of horizonatl movement
      */
-    public void setMoveX(final int moveX) {
+    public final void setMoveX(final int moveX) {
         this.moveX = moveX;
     }
 
     @Override
-    public void setScale(final int scale) {
+    public final void setScale(final int scale) {
         this.scale = scale;
     }
 
@@ -233,14 +233,14 @@ public abstract class Player implements GameObject {
      * This method allows to set if the player is jumping.
      * @param jumped Is player jumping
      */
-    public void setHasJumped(final boolean jumped) {
+    public final void setHasJumped(final boolean jumped) {
         this.jumped = jumped;
     }
 
     /**
      * This method controls if player if the player has not yet finished the available jumps.
      */
-    public void incrementConsecutiveJump() {
+    public final void incrementConsecutiveJump() {
         if (this.consecutiveJumps + 1 <= CONSECUTIVE_JUMP) {
             this.consecutiveJumps++;
         }
@@ -250,21 +250,21 @@ public abstract class Player implements GameObject {
      * This method returns if player can jump.
      * @return Return if player can jump
      */
-    public boolean canJump() {
+    public final boolean canJump() {
         return this.consecutiveJumps < CONSECUTIVE_JUMP;
     }
 
     /**
      * This method makes the player falling.
      */
-    public void fall() {
+    public final void fall() {
         moveY = FALL_SPEED;
     }
 
     /**
      * This method removes star power up when time runs out.
      */
-    public void starTimeOver() {
+    public final void starTimeOver() {
         if (currentPowerUp == PowerUpType.STAR) {
             if (numTickStar >= TICK_FOR_STAR) {
                 currentPowerUp = lastPowerUp;
@@ -279,7 +279,7 @@ public abstract class Player implements GameObject {
     /**
      * This method controls the collisions with the other object.
      */
-    public void collision() {
+    public final void collision() {
         collisionsWithBlocks();
         collisionsWithEnemies();
         collisionsWithPowersUp();

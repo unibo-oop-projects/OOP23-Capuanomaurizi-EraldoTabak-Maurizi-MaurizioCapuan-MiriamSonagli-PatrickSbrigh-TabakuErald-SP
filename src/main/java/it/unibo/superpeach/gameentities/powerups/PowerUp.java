@@ -15,22 +15,25 @@ import it.unibo.superpeach.graphics.Texturer;
  * @author  Miriam Sonaglia
  */
 public abstract class PowerUp implements GameObject {
-    
+
+    /**
+     * eunum relative with all the power up types.
+     */
     public enum PowerUpType { 
         /** 
-         * Power up RED MUSHROOM
+         * Power up RED MUSHROOM.
          */
         RED_MUSHROOM, 
         /**
-         * Power up STAR
+         * Power up STAR.
          */
         STAR, 
         /**
-         * Power up LIFE MUSHROOM
+         * Power up LIFE MUSHROOM.
          */
         LIFE_MUSHROOM, 
         /**
-         * Power up COIN
+         * Power up COIN.
          */
         COIN };
 
@@ -84,78 +87,78 @@ public abstract class PowerUp implements GameObject {
     public abstract void tick();
 
     @Override
-    public Texturer getTexturer() {
+    public final Texturer getTexturer() {
         return texturer;
     }
 
-    public void setTextures(final Texturer texturer) {
+    public final void setTextures(final Texturer texturer) {
         this.texturer = texturer;
     }
 
     @Override
-    public BufferedImage[] getSprites() {
+    public final BufferedImage[] getSprites() {
         return image;
     }
 
     @Override
-    public void setSprites(final BufferedImage[] image) {
+    public final void setSprites(final BufferedImage[] image) {
         this.image = image;
     }
 
     @Override
-    public void setX(final int x) {
+    public final void setX(final int x) {
         this.x = x * scale;
     }
 
     @Override
-    public void setY(final int y) {
+    public final void setY(final int y) {
         this.y = y * scale;
     }
 
     @Override
-    public void setWidth(final int w) {
+    public final void setWidth(final int w) {
         this.width = w;
     }
 
     @Override
-    public void setHeight(final int h) {
+    public final void setHeight(final int h) {
         this.height = h;
     }
 
     /**
      * @return power up type between:RED MUSHROOM, LIFE MUSHROOM, STAR and COIN.
      */
-    public PowerUpType getPowerUpType() {
+    public final PowerUpType getPowerUpType() {
         return powerUpType;
     }
 
     @Override
-    public int getX() {
+    public final int getX() {
         return this.x;
     }
 
     @Override
-    public int getY() {
+    public final int getY() {
         return this.y;
     }
 
     @Override
-    public int getWidth() {
+    public final int getWidth() {
         return this.width;
     }
 
     @Override
-    public int getHeight() {
+    public final int getHeight() {
         return this.height;
     }
 
     @Override
-    public int getScale() {
+    public final int getScale() {
         return this.scale;
     }
 
     @Override
-    public void setScale(final int scale) {
+    public final void setScale(final int scale) {
         this.scale = scale;
     }
 
@@ -163,14 +166,14 @@ public abstract class PowerUp implements GameObject {
      * Sets the speed according to the GUI scale selected.
      * @param movement
      */
-    public void setMovement(final int movement) {
+    public final void setMovement(final int movement) {
         this.movement = movement * scale;
     }
 
     /**
      * @return speed of the power up
      */
-    public int getMovement() {
+    public final int getMovement() {
         return this.movement;
     }
 
@@ -178,35 +181,35 @@ public abstract class PowerUp implements GameObject {
      * Sets if the power up is falling off a block or not.
      * @param fall
      */
-    public void setIsFalling(final boolean fall) {
+    public final void setIsFalling(final boolean fall) {
         this.isFalling = fall;
     }
 
     /**
      * @return if the power up is falling or not.
      */
-    public boolean getIsFalling() {
+    public final boolean getIsFalling() {
         return this.isFalling;
     }
 
     /**
      * @return speed of the falling speed of the power up
      */
-    public int getFallSpeed() {
+    public final int getFallSpeed() {
        return movement;
     }
 
     /**
      * @return the direction in which the power up is moving
      */
-    public boolean getDirection() {
+    public final boolean getDirection() {
         return this.direction;
     }
 
     /**
      * Changes the direction of the power up.
      */
-    public void changeDirection() {
+    public final void changeDirection() {
         this.direction = !this.direction;
     }
 
@@ -214,7 +217,7 @@ public abstract class PowerUp implements GameObject {
      * Updates the coordinates of the power up 
      * according to the direction and the state.
      */
-    public void updateCoords() {
+    public final void updateCoords() {
         if (getDirection()) {
             this.x -= this.movement;
         } else {
@@ -229,28 +232,28 @@ public abstract class PowerUp implements GameObject {
     /**
      * @return if the power up is alive or not
      */
-    public boolean getIsAlive() {
+    public final boolean getIsAlive() {
         return this.isAlive;
     }
 
     /**
      * the power up dies.
      */
-    public void die() {
+    public final void die() {
         this.isAlive = false;
     }
 
     /**
      * @return the coordinates and the dimentions of the power up
      */
-    public Rectangle getBoundingBox() {
+    public final Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
     /**
      * @return the botton bound of the power up
      */
-    public Rectangle getBottomBound() {
+    public final Rectangle getBottomBound() {
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, 
                 getY() + (getHeight() - paddingBound),
                 getWidth() / 2, paddingBound);
@@ -259,14 +262,14 @@ public abstract class PowerUp implements GameObject {
     /**
      * @return the left bound of the power up
      */
-    public Rectangle getLeftBound() {
+    public final Rectangle getLeftBound() {
         return new Rectangle(getX(), getY() + paddingBound, paddingBound, getHeight() - 2 * paddingBound);
     }
 
     /**
      * @return the right bound of the power up
      */
-    public Rectangle getRightBound() {
+    public final Rectangle getRightBound() {
         return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound, 
                     getHeight() - 2 * paddingBound);
     }
@@ -274,14 +277,14 @@ public abstract class PowerUp implements GameObject {
     /**
      * @return the padding bound of the power up
      */
-    public int getPaddingBound() {
+    public final int getPaddingBound() {
         return paddingBound;
     }
 
     /**
      * @return the blocks handler
      */
-    public BlocksHandler getBlocksHandler() {
+    public final BlocksHandler getBlocksHandler() {
         return blocksHandler;
     }
 
@@ -289,7 +292,7 @@ public abstract class PowerUp implements GameObject {
      * sets the blocks handler.
      * @param blocksHandler
      */
-    public void setBlocksHandler(final BlocksHandler blocksHandler) {
+    public final void setBlocksHandler(final BlocksHandler blocksHandler) {
         this.blocksHandler = blocksHandler;
     }
 
@@ -298,7 +301,7 @@ public abstract class PowerUp implements GameObject {
      * it doesn't fall
      * @param block
      */
-    private void setYCollisionBottom(final Block block) {
+    private final void setYCollisionBottom(final Block block) {
         setY(block.getY() / scale - getHeight() / scale);
         setIsFalling(false);
     }
@@ -308,7 +311,7 @@ public abstract class PowerUp implements GameObject {
      * it changes direction.
      * @param block
      */
-    private void setXCollisionLeft(final Block block) {
+    private final void setXCollisionLeft(final Block block) {
         setX((block.getX() + block.getWidth()) / getScale());
         changeDirection();
     }
@@ -318,7 +321,7 @@ public abstract class PowerUp implements GameObject {
      * it changes direction.
      * @param block
      */
-    private void setXCollisionRight(final Block block) {
+    private final void setXCollisionRight(final Block block) {
         setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
@@ -326,7 +329,7 @@ public abstract class PowerUp implements GameObject {
     /**
      * It handles the collisions between the power up and the blocks.
      */
-    public void collisions() {
+    public final void collisions() {
         for (Block block : blocksHandler.getBlocks()) {
             if (block.getType() == BlockType.DEATH_BLOCK) {
                 if (block.getBoundingBox().intersects(getBottomBound())) {

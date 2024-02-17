@@ -81,7 +81,7 @@ public class PeachMenu {
         CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
         startButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public final void actionPerformed(final ActionEvent e) {
                 panel.setVisible(false);
                 frame.remove(panel);
                 frame.add(game);
@@ -103,7 +103,7 @@ public class PeachMenu {
 
         guiComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(final JList<?> list, final Object value, 
+            public final Component getListCellRendererComponent(final JList<?> list, final Object value, 
                                                 final int index, final boolean isSelected, final boolean cellHasFocus) {
                 JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -118,7 +118,7 @@ public class PeachMenu {
         guiComboBox.setMaximumSize(startButton.getPreferredSize());
         guiComboBox.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public final void actionPerformed(final ActionEvent e) {
                 stopBackgroundMusic();
                 guiComboBox.setPreferredSize(startButton.getPreferredSize());
                 guiComboBox.setMaximumSize(startButton.getPreferredSize());
@@ -166,7 +166,7 @@ public class PeachMenu {
 
         songComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(final JList<?> list, final Object value, 
+            public final Component getListCellRendererComponent(final JList<?> list, final Object value, 
                                                 final int index, final boolean isSelected, final boolean cellHasFocus) {
                 JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -178,7 +178,7 @@ public class PeachMenu {
         songComboBox.setMaximumSize(startButton.getPreferredSize());
         songComboBox.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public final void actionPerformed(final ActionEvent e) {
                 String selectedSong = (String) songComboBox.getSelectedItem();
                 if (!selectedSong.equals("MUSIC")) {
                     if (!selectedSong.equals("no music")) {
@@ -215,7 +215,7 @@ public class PeachMenu {
         CustomButton exitButton = new CustomButton("EXIT", customColor, customColor1, scale);
         exitButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public final void actionPerformed(final ActionEvent e) {
                 System.exit(0);
             }
         });
@@ -231,7 +231,7 @@ public class PeachMenu {
      * If there's one playing it stops it.
      * @param songFilePath
      */
-    private void playSong(final String songFilePath) {
+    private final void playSong(final String songFilePath) {
         stopBackgroundMusic();
         try {
             File audioFile = new File(songFilePath);
@@ -247,7 +247,7 @@ public class PeachMenu {
     /**
      * It stops the music already playing in background.
      */
-    public void stopBackgroundMusic() {
+    public final void stopBackgroundMusic() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
             clip.close();
@@ -257,7 +257,7 @@ public class PeachMenu {
     /**
      * It closes the window.
      */
-    public void closeWindow() {
+    public final void closeWindow() {
         frame.setVisible(false);
         frame.dispose();
     }

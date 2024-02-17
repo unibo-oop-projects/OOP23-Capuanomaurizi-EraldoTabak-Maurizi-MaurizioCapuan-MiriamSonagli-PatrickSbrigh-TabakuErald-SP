@@ -11,7 +11,7 @@ import javax.swing.border.Border;
  * Implementation of a customed button.
  * @author  Miriam Sonaglia
  */
-public class CustomButton extends JButton {
+public final class CustomButton extends JButton {
     /**
      * This method create a button with a text, abackground color and a border.
      * @param text
@@ -30,7 +30,7 @@ public class CustomButton extends JButton {
         setBorder(border);
         setBorder(BorderFactory.createCompoundBorder(
                 border,
-                BorderFactory.createEmptyBorder(10, 10*2, 10, 10*2)
+                BorderFactory.createEmptyBorder(10, 10 * 2, 10, 10 * 2)
         ));
     }
 }
