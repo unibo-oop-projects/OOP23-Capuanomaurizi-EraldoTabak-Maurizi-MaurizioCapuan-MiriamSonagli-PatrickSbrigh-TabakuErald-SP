@@ -9,7 +9,7 @@ public class BufferedImageLoader {
 
     private BufferedImage img;
 
-    public BufferedImage loadImage(String imgPath){
+    public BufferedImage loadImage(String imgPath) {
         try {
             img = ImageIO.read(ClassLoader.getSystemResource(imgPath));
         } catch (IOException e) {

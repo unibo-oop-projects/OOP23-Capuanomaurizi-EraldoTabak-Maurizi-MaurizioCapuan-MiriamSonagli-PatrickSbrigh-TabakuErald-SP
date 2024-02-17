@@ -75,9 +75,9 @@ public class Texturer {
         }
     }
 
-    private void loadPeach(){
-        for(int i = 0; i < PEACH_COUNT; i++){
-            peach[i] = tileSet.getSubimage((TILE_WIDTH+1)*i, 0, TILE_WIDTH, TILE_HEIGHT*2);
+    private void loadPeach() {
+        for (int i = 0; i < PEACH_COUNT; i++) {
+            peach[i] = tileSet.getSubimage((TILE_WIDTH + 1) * i, 0, TILE_WIDTH, TILE_HEIGHT * 2);
         }
 
     }
@@ -89,7 +89,7 @@ public class Texturer {
 
         for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT / 8; i++) {
             for (int j = 0; j < BRICKSCASTLEBLOCKS_COUNT / 2; j++) {
-                terrain[index] = tileSet.getSubimage(x+j*(TILE_WIDTH+1), y+i*(TILE_HEIGHT+1),
+                terrain[index] = tileSet.getSubimage(x + j * (TILE_WIDTH + 1), y + i * (TILE_HEIGHT + 1),
                         TILE_WIDTH, TILE_HEIGHT);
                 index++;
             }
@@ -101,7 +101,7 @@ public class Texturer {
         lucky[1] = tileSet.getSubimage(349, 78, TILE_WIDTH, TILE_HEIGHT);
     }
 
-    private void loadScoreboard(){
+    private void loadScoreboard() {
         scoreboard[0] = tileSet.getSubimage(315, 78, TILE_WIDTH, TILE_HEIGHT);
         scoreboard[1] = tileSet.getSubimage(315, 95, TILE_WIDTH, TILE_HEIGHT);
         scoreboard[2] = tileSet.getSubimage(298, 95, TILE_WIDTH, TILE_HEIGHT);
@@ -122,7 +122,7 @@ public class Texturer {
 
         for (int i = 0; i < CLOUDBLOCKS_COUNT / 3; i++) {
             for (int j = 0; j < CLOUDBLOCKS_COUNT / 2; j++) {
-                cloud[index] = tileSet.getSubimage(x+j*(TILE_WIDTH+1), y+i*(TILE_HEIGHT+1),
+                cloud[index] = tileSet.getSubimage(x + j * (TILE_WIDTH + 1), y + i * (TILE_HEIGHT + 1),
                         TILE_WIDTH, TILE_HEIGHT);
                 index++;
             }
@@ -134,7 +134,7 @@ public class Texturer {
         int y = 213;
 
         for (int i = 0; i < BUSHBLOCKS_COUNT; i++) {
-            bush[i] = tileSet.getSubimage(x+i*(TILE_WIDTH+1), y, TILE_WIDTH, TILE_HEIGHT);
+            bush[i] = tileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
         }
     }
 
@@ -145,7 +145,7 @@ public class Texturer {
         int y = 247;
 
         for (int i = 0; i < HILLBLOCKS_COUNT - 1; i++) {
-            hill[i+1] = tileSet.getSubimage(x+i*(TILE_WIDTH+1), y, TILE_WIDTH, TILE_HEIGHT);
+            hill[i + 1] = tileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
         }
     }
 
@@ -159,24 +159,23 @@ public class Texturer {
     private void loadGoomba() {
         goomba[0] = tileSet.getSubimage(0, 4, TILE_WIDTH, TILE_HEIGHT);
     }
-    
+
     private void loadKoopaTroopa() {
         koopaTroopa[0] = tileSet.getSubimage(180, 0, TILE_WIDTH, KOOPA_HEIGHT);
         koopaTroopa[1] = tileSet.getSubimage(211, 0, TILE_WIDTH, KOOPA_HEIGHT);
     }
-    
+
     private void loadFlyingKoopa() {
         flyingKoopa[0] = tileSet.getSubimage(120, 0, TILE_WIDTH, KOOPA_HEIGHT);
         flyingKoopa[1] = tileSet.getSubimage(271, 0, TILE_WIDTH, KOOPA_HEIGHT);
     }
 
-    private void loadPowerups(){
+    private void loadPowerups() {
         powerups[0] = tileSet.getSubimage(16, 32, TILE_WIDTH, TILE_HEIGHT);
         powerups[1] = tileSet.getSubimage(96, 96, TILE_WIDTH, TILE_HEIGHT);
         powerups[2] = tileSet.getSubimage(256, 32, TILE_WIDTH, TILE_HEIGHT);
         powerups[3] = tileSet.getSubimage(64, 16, TILE_WIDTH, TILE_HEIGHT);
     }
-
 
     public BufferedImage[] getPeach() {
         return peach;
@@ -217,11 +216,11 @@ public class Texturer {
     public BufferedImage[] getGoombaImg() {
         return this.goomba;
     }
-    
+
     public BufferedImage[] getKoopaImg() {
-         return this.koopaTroopa;
+        return this.koopaTroopa;
     }
-    
+
     public BufferedImage[] getFlyingKoopa() {
         return this.flyingKoopa;
     }

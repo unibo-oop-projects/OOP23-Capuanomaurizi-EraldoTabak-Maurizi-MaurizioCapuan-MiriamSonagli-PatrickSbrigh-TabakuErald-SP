@@ -2,9 +2,9 @@ package it.unibo.superpeach.gameObjects.blocks;
 
 import java.awt.Graphics;
 
-public class MapBackgroundBlock extends Block{
+public class MapBackgroundBlock extends Block {
 
-    public MapBackgroundBlock(int x, int y, int width, int height, int scale, BlockType type){
+    public MapBackgroundBlock(int x, int y, int width, int height, int scale, BlockType type) {
         super(x, y, width, height, scale);
         setType(type);
         switch (type) {
@@ -34,7 +34,7 @@ public class MapBackgroundBlock extends Block{
                 setSprites(getTexturer().getFlag());
                 break;
             default:
-                //its for sure a castle block, using default to avoid too many code
+                // its for sure a castle block, using default to avoid too many code
                 setSprites(getTexturer().getTerrain());
                 break;
         }

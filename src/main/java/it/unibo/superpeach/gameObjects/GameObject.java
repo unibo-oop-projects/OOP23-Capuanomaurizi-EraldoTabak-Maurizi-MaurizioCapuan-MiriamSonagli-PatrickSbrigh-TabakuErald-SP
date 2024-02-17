@@ -21,7 +21,7 @@ public interface GameObject {
     public int getY();
 
     public int getHeight();
-    
+
     public int getWidth();
 
     public int getScale();

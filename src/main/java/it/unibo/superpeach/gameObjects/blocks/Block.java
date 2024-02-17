@@ -7,7 +7,8 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.graphics.Texturer;
 
-public abstract class Block implements GameObject{
+public abstract class Block implements GameObject {
+
     public enum BlockType {
         BRICK,
         TERRAIN,
@@ -18,7 +19,8 @@ public abstract class Block implements GameObject{
         CLOUD_TOP_LEFT, CLOUD_TOP_MIDDLE, CLOUD_TOP_RIGHT, CLOUD_BOT_LEFT, CLOUD_BOT_MIDDLE, CLOUD_BOT_RIGHT,
         HILL_UP, HILL_BLANK, HILL_SPOTS1, HILL_SPOTS2, HILL_TOP, HILL_DOWN,
         FLAG_TIP, FLAG_POLE, FLAG_LEFT, FLAG_RIGHT,
-        CASTLE_BRICK, CASTLE_BALCONY1, CASTLE_BALCONY2, CASTLE_WINDOW_LEFT, CASTLE_WINDOW_RIGHT, CASTLE_DOOR_BOT, CASTLE_DOOR_TOP,
+        CASTLE_BRICK, CASTLE_BALCONY1, CASTLE_BALCONY2, CASTLE_WINDOW_LEFT, CASTLE_WINDOW_RIGHT, CASTLE_DOOR_BOT,
+        CASTLE_DOOR_TOP,
         DEATH_BLOCK, ALT_BLOCK
     };
 
@@ -33,11 +35,11 @@ public abstract class Block implements GameObject{
 
     private BlockType type;
 
-    public Block(int x, int y, int w, int h, int s){
-        this.x = x*s;
-        this.y = y*s;
-        this.width = w*s;
-        this.height = h*s;
+    public Block(int x, int y, int w, int h, int s) {
+        this.x = x * s;
+        this.y = y * s;
+        this.width = w * s;
+        this.height = h * s;
         this.scale = s;
     }
 
@@ -45,7 +47,7 @@ public abstract class Block implements GameObject{
         return texturer;
     }
 
-    public Rectangle getBoundingBox(){
+    public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 
@@ -60,7 +62,7 @@ public abstract class Block implements GameObject{
     public int getHeight() {
         return height;
     }
-    
+
     public int getWidth() {
         return width;
     }
@@ -104,5 +106,5 @@ public abstract class Block implements GameObject{
     public void setType(BlockType type) {
         this.type = type;
     }
-    
-}   
+
+}
