@@ -1,16 +1,28 @@
 package it.unibo.superpeach.graphics;
 
 import it.unibo.superpeach.game.Game;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -100,15 +112,12 @@ public class PeachMenu {
                         case "Tiny":
                             scalerange = 1;
                             break;
-                    
                         case "Small":
                             scalerange = 2;
                             break;
-
                         case "Medium":
                             scalerange = 3;
-                            break;
-                            
+                            break; 
                         case "Large":
                             scalerange = 4;
                             break;
@@ -159,11 +168,9 @@ public class PeachMenu {
                             case "n. 1":
                                 path = sound1;
                                 break;
-                        
                             case "n. 2":
                                 path = sound2;
                                 break;
-
                             case "n. 3":
                                 path = sound3;
                                 break;
@@ -195,7 +202,7 @@ public class PeachMenu {
         frame.setVisible(true);
     }
 
-    private void playSong(String songFilePath) {
+    private void playSong(final String songFilePath) {
         if (clip != null && clip.isRunning()) {
             clip.stop();
             clip.close();

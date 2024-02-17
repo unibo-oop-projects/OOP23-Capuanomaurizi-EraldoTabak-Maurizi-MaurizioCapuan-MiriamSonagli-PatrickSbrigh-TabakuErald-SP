@@ -1,9 +1,11 @@
 package it.unibo.superpeach.graphics;
 
-import javax.swing.*;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-
-import java.awt.*;
 
 public class CustomButton extends JButton {
     public CustomButton(final String text, final Color customColor, final Color customColor1, final int scale) {

@@ -1,7 +1,6 @@
 package it.unibo.superpeach.gameObjects.powerups;
 
-import java.awt.*;
-
+import java.awt.Graphics;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
 public class RedMushroom extends PowerUp {

@@ -1,6 +1,7 @@
 package it.unibo.superpeach.gameObjects.powerups;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameObjects.GameObject;
@@ -30,7 +31,8 @@ public abstract class PowerUp implements GameObject {
     private int paddingBound;
     private Texturer texturer = Game.getTexturer();
     private BufferedImage[] image = texturer.getPowerups();
-    public PowerUp(final int x, final int y, final int w, final int h, final int s, final BlocksHandler blocksHandler, final PowerUpType type) {
+    public PowerUp(final int x, final int y, final int w, final int h, final int s, 
+                    final BlocksHandler blocksHandler, final PowerUpType type) {
         this.x = x * s;
         this.y = y * s;
         this.width = w * s;
@@ -59,7 +61,7 @@ public abstract class PowerUp implements GameObject {
     public BufferedImage[] getSprites() {
         return image;
     }
-    
+
     public void setSprites(final BufferedImage[] image) {
         this.image = image;
     }
@@ -83,7 +85,7 @@ public abstract class PowerUp implements GameObject {
     public PowerUpType getPowerUpType() {
         return powerUpType;
     }
-    
+
     public int getX() {
         return this.x;
     }
@@ -109,7 +111,7 @@ public abstract class PowerUp implements GameObject {
     }
 
     public void setMovement(final int movement) {
-        this.movement = movement;
+        this.movement = movement * scale;
     }
 
     public int getMovement() {
@@ -119,7 +121,7 @@ public abstract class PowerUp implements GameObject {
     public void setIsFalling(final boolean fall) {
         this.isFalling = fall;
     }
-    
+
     public boolean getIsFalling() {
         return this.isFalling;
     }
@@ -144,7 +146,7 @@ public abstract class PowerUp implements GameObject {
         }
 
         if (this.isFalling) {
-            this.y += FALL_SPEED;
+            this.y += FALL_SPEED * scale;
         }
     }
 
@@ -171,7 +173,8 @@ public abstract class PowerUp implements GameObject {
     }
 
     public Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound, getHeight() - 2 * paddingBound);
+        return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound, 
+                    getHeight() - 2 * paddingBound);
     }
 
     public int getPaddingBound() {
