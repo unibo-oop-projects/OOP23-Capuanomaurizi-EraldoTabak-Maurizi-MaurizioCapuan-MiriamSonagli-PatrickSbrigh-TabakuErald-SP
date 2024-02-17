@@ -2,6 +2,7 @@ package it.unibo.superpeach.gameentities.player;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Optional;
 
 import it.unibo.superpeach.game.Scoreboard;
 import it.unibo.superpeach.gameentities.GameObject;
@@ -39,10 +40,10 @@ public abstract class Player implements GameObject {
     private int y;
     private int scale;
     private boolean jumped;
-    private final BlocksHandler blocksHandler;
-    private final EnemiesHandler enemiesHandler;
-    private final PowerupsHandler powerupsHandler;
-    private final Scoreboard scoreboard;
+    private final Optional<BlocksHandler> blocksHandler;
+    private final Optional<EnemiesHandler> enemiesHandler;
+    private final Optional<PowerupsHandler> powerupsHandler;
+    private final Optional<Scoreboard> scoreboard;
     private int moveX;
     private int moveY;
     private final int paddingBound;
@@ -81,12 +82,12 @@ public abstract class Player implements GameObject {
         this.y = y * scale;
         this.scale = scale;
         this.jumped = false;
-        this.blocksHandler = blocksHandler;
+        this.blocksHandler = Optional.of(blocksHandler);
         this.moveX = 0;
         this.moveY = 0;
         this.paddingBound = PADDING * this.scale;
-        this.enemiesHandler = enemiesHandler;
-        this.scoreboard = scoreboard;
+        this.enemiesHandler = Optional.of(enemiesHandler);
+        this.scoreboard = Optional.of(scoreboard);
         this.point = 0;
         this.life = LIFE_START;
         this.addedPointFlag = false;
@@ -98,7 +99,7 @@ public abstract class Player implements GameObject {
         this.hasLost = false;
         this.currentPowerUp = null;
         this.numTickStar = 0;
-        this.powerupsHandler = powersUpHandler;
+        this.powerupsHandler = Optional.of(powersUpHandler);
         this.lastPowerUp = null;
     }
 
@@ -302,7 +303,7 @@ public abstract class Player implements GameObject {
     }
 
     private void collisionsWithBlocks() {
-        for (final MapFixedBlock block : blocksHandler.getBlocks()) {
+        for (final MapFixedBlock block : blocksHandler.get().getBlocks()) {
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN) {
@@ -370,10 +371,10 @@ public abstract class Player implements GameObject {
             setYCollisionTop(block);
             if (currentPowerUp != null && block.getType() == BlockType.BRICK) {
                 addPoints(POINT_LUCKY_BRICK);
-                blocksHandler.removeFixedBlock(block);
+                blocksHandler.get().removeFixedBlock(block);
             } else if (block.getType() == BlockType.LUCKY) {
                 addPoints(POINT_LUCKY_BRICK);
-                block.popLuckyBlock(powerupsHandler, blocksHandler);
+                block.popLuckyBlock(powerupsHandler.get(), blocksHandler.get());
             }
         } else if (block.getBoundingBox().contains(getBottomBound())) {
             setYCollisionBottom(block);
@@ -415,22 +416,22 @@ public abstract class Player implements GameObject {
     }
 
     private void collisionsWithEnemies() {
-        for (final Enemy enemy : enemiesHandler.getEnemies()) {
+        for (final Enemy enemy : enemiesHandler.get().getEnemies()) {
             if (touchedEnemy(enemy) && currentPowerUp != PowerUpType.STAR) {
                 loseLifeOrPowerUp();
             } else if (killedEnemy(enemy) || touchedEnemy(enemy) && currentPowerUp == PowerUpType.STAR) {
                 addPoints(POINT_KILLED_ENEMY);
-                enemiesHandler.removeEnemy(enemy);
+                enemiesHandler.get().removeEnemy(enemy);
             }
         }
     }
 
     private void collisionsWithPowersUp() {
-        for (final PowerUp power : powerupsHandler.getPowerups()) {
+        for (final PowerUp power : powerupsHandler.get().getPowerups()) {
             if (touchedPowerUp(power)) {
                 switch (power.getPowerUpType()) {
                     case COIN:
-                        scoreboard.collectCoin();
+                        scoreboard.get().collectCoin();
                         break;
                     case RED_MUSHROOM:
                         if (currentPowerUp != PowerUpType.RED_MUSHROOM
@@ -446,7 +447,7 @@ public abstract class Player implements GameObject {
                     case LIFE_MUSHROOM:
                         if (life < LIFE_START) {
                             life++;
-                            scoreboard.restoreHeart();
+                            scoreboard.get().restoreHeart();
                         }
                         break;
                     default:
@@ -501,7 +502,7 @@ public abstract class Player implements GameObject {
             setY(respawnY);
         } else {
             life--;
-            scoreboard.removeHeart();
+            scoreboard.get().removeHeart();
             if (life < 0) {
                 this.hasLost = true;
             }
