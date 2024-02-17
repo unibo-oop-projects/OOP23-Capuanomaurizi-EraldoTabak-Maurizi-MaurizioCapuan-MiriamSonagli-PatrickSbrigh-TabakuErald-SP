@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.logging.Logger;
 
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
@@ -23,6 +24,8 @@ import it.unibo.superpeach.level.LevelHandler;
  * @author  Maurizio Capuano
  */
 public final class Game extends Canvas implements Runnable {
+
+    private static final long serialVersionUID = 10l;
 
     private static int gameScale = 2;
 
@@ -86,7 +89,7 @@ public final class Game extends Canvas implements Runnable {
      * Game loop thread creation and thread starting method.
      */
     private void start() {
-        Thread mainGameLoop = new Thread(this);
+        final Thread mainGameLoop = new Thread(this);
         mainGameLoop.start();
         running = true;
     }
@@ -196,6 +199,7 @@ public final class Game extends Canvas implements Runnable {
             g.dispose();
             buffStrat.show();
         } catch (IllegalStateException e) {
+            Logger.getLogger("IllegalStateException in Game.render()");
         }
     }
 

@@ -2,6 +2,7 @@ package it.unibo.superpeach.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -21,7 +22,7 @@ public final class BufferedImageLoader {
         try {
             img = ImageIO.read(ClassLoader.getSystemResource(imgPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger("IOException in loadImage()");
         }
         return img;
     }

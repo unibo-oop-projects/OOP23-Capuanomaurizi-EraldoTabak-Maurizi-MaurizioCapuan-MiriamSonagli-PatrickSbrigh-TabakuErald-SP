@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Implementation of the starting menu of the game.
@@ -243,7 +244,7 @@ public final class PeachMenu {
             clip.open(audioStream);
             clip.start();
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger("Exception in PeachMenu.playSong()");
         }
     }
 

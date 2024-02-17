@@ -27,8 +27,6 @@ public final class Texturer {
     private static final int TILE_HEIGHT = 16;
     private static final int KOOPA_HEIGHT = 23;
 
-    private final BufferedImageLoader loader;
-
     private BufferedImage tileSet;
 
     private BufferedImage[] terrain, lucky, scoreboard, pipe, cloud, bush, hill, flag;
@@ -41,6 +39,8 @@ public final class Texturer {
      * inside of them.
      */
     public Texturer() {
+
+        final BufferedImageLoader loader = new BufferedImageLoader();
 
         terrain = new BufferedImage[BRICKSCASTLEBLOCKS_COUNT];
         lucky = new BufferedImage[LUCKYBLOCKS_COUNT];
@@ -59,29 +59,24 @@ public final class Texturer {
 
         powerups = new BufferedImage[POWERUPS_COUNT];
 
-        loader = new BufferedImageLoader();
+        tileSet = loader.loadImage("it/unibo/superpeach/tiles/blocks_tile.png");
+        loadTerrain();
+        loadLucky();
+        loadScoreboard();
+        loadPipe();
+        loadCloud();
+        loadBush();
+        loadHill();
+        loadFlag();
+        tileSet = loader.loadImage("it/unibo/superpeach/tiles/enemies.png");
+        loadGoomba();
+        loadKoopaTroopa();
+        loadFlyingKoopa();
+        tileSet = loader.loadImage("it/unibo/superpeach/tiles/player_tile.png");
+        loadPeach();
+        tileSet = loader.loadImage("it/unibo/superpeach/tiles/powerups_tiles.png");
+        loadPowerups();
 
-        try {
-            tileSet = loader.loadImage("it/unibo/superpeach/tiles/blocks_tile.png");
-            loadTerrain();
-            loadLucky();
-            loadScoreboard();
-            loadPipe();
-            loadCloud();
-            loadBush();
-            loadHill();
-            loadFlag();
-            tileSet = loader.loadImage("it/unibo/superpeach/tiles/enemies.png");
-            loadGoomba();
-            loadKoopaTroopa();
-            loadFlyingKoopa();
-            tileSet = loader.loadImage("it/unibo/superpeach/tiles/player_tile.png");
-            loadPeach();
-            tileSet = loader.loadImage("it/unibo/superpeach/tiles/powerups_tiles.png");
-            loadPowerups();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void loadPeach() {
