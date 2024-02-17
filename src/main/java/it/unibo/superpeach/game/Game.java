@@ -19,6 +19,7 @@ import it.unibo.superpeach.level.LevelHandler;
 
 /**
  * Implementation of the runnable game.
+ * 
  * @author  Maurizio Capuano
  */
 public class Game extends Canvas implements Runnable {
@@ -73,7 +74,7 @@ public class Game extends Canvas implements Runnable {
         playerHandler = new PlayerHandler();
         powerupsHandler = new PowerupsHandler();
         scoreboard = new Scoreboard(GAME_LIVES, GAME_COINS, gameScale);
-        playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG,
+        playerHandler.takePlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG,
                 PLAYER_DEFAULT_WID_HEIG, gameScale, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));
         levelHandler = new LevelHandler(blocksHandler, gameScale, enemiesHandler);
         levelHandler.drawLevel();

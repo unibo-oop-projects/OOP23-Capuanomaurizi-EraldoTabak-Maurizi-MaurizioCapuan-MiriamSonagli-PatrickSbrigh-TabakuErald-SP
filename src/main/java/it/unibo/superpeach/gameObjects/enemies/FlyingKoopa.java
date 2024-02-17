@@ -15,6 +15,14 @@ public class FlyingKoopa extends Enemy {
 
     private int nMoves;
 
+    /**
+     * @param x             coordinate of the flying koopa.
+     * @param y             coordinate of the flying koopa.
+     * @param width         of the flying koopa sprite.
+     * @param height        of the flying koopa sprite.
+     * @param scale         of the game.
+     * @param blocksHandler used by the flying koopa.
+     */
     public FlyingKoopa(final int x, final int y, final int width, final int height, final int scale,
             final BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);

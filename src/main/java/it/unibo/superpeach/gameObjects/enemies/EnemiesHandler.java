@@ -13,28 +13,28 @@ import java.util.Set;
  */
 public class EnemiesHandler {
 
-    private List<Enemy> enemies;
+    private final List<Enemy> enemies;
 
     /**
      * EnemiesHandler costructor method that creates a new array of enemies.
      */
     public EnemiesHandler() {
-        enemies = new ArrayList<Enemy>();
+        enemies = new ArrayList<>();
     }
 
     /**
      * this method calls the tick() method of all the enemies.
      */
     public void tickEnemies() {
-        Set<Enemy> enemiesToRemove = new HashSet<>();
-        for (Enemy enemy : enemies) {
+        final Set<Enemy> enemiesToRemove = new HashSet<>();
+        for (final Enemy enemy : enemies) {
             enemy.tick();
             if (!enemy.getIsAlive()) {
                 enemiesToRemove.add(enemy);
             }
         }
 
-        for (Enemy enemy : enemiesToRemove) {
+        for (final Enemy enemy : enemiesToRemove) {
             enemies.remove(enemy);
 
         }
@@ -47,7 +47,7 @@ public class EnemiesHandler {
      * @param g for the graphics.
      */
     public void renderEnemies(final Graphics g) {
-        for (Enemy enemy : enemies) {
+        for (final Enemy enemy : enemies) {
             enemy.render(g);
         }
     }

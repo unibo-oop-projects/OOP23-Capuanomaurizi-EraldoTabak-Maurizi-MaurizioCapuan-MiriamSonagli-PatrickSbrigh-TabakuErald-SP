@@ -14,7 +14,11 @@ import it.unibo.superpeach.gameObjects.enemies.KoopaTroopa;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.BufferedImageLoader;
 
-public class LevelHandler {
+/**
+ * Level generation class that matches each color of a pixel matrix with a particular map block or enemy.
+ * @author Maurizio Capuano
+ */
+public final class LevelHandler {
 
     private BufferedImageLoader loader;
     private BufferedImage levelImage;
@@ -23,6 +27,13 @@ public class LevelHandler {
 
     private EnemiesHandler enemiesHandler;
 
+    /**
+     * Level handler constructor.
+     * 
+     * @param blocksHandler handler of game blocks which contains every block and can create them 
+     * @param scale game scale
+     * @param enemiesHandler handler of enemies entities which contains every enemy and can create them 
+     */
     public LevelHandler(final BlocksHandler blocksHandler, final int scale, final EnemiesHandler enemiesHandler) {
         this.blocksHandler = blocksHandler;
         this.enemiesHandler = enemiesHandler;
@@ -30,6 +41,9 @@ public class LevelHandler {
         loader = new BufferedImageLoader();
     }
 
+    /**
+     * Methods that adds all blocks and enemies to their handlers which will then render them.
+     */
     public void drawLevel() {
         parseLevel("it/unibo/superpeach/level/level_blocks.png");
     }
@@ -181,9 +195,7 @@ public class LevelHandler {
                                 .addEnemy(new FlyingKoopa(i * 16, (j - 1) * 16, 16, 23, gameScale, blocksHandler));
                     }
                 }
-
             }
         }
     }
-
 }

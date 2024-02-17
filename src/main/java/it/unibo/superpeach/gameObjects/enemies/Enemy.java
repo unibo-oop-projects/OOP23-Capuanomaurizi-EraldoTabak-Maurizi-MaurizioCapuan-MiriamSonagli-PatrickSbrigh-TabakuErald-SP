@@ -1,6 +1,5 @@
 package it.unibo.superpeach.gameObjects.enemies;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -29,7 +28,6 @@ public abstract class Enemy implements GameObject {
     private int scale;
     private int width;
     private int height;
-    private Dimension dim;
     private boolean isFalling, direction, isAlive;
     private BlocksHandler blocksHandler;
     private Texturer texturer = Game.getTexturer();
@@ -58,30 +56,32 @@ public abstract class Enemy implements GameObject {
         this.paddingBOUND *= scale;
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
     }
 
+    @Override
     public int getScale() {
         return scale;
     }
 
-    public boolean getIsFalling() {
+    /**
+     * @return a boolean for the enemy falling or not status
+     */
+    public boolean IsFalling() {
         return this.isFalling;
-    }
-
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, this.width, this.height);
     }
 
     /**
      * this method returns the bottom bound rectangle of the enemy.
      * 
-     * @return
+     * @return a Rectangle of the Bottom bound of the the enemy.
      */
     public Rectangle getBottomBound() {
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + (getHeight() - paddingBOUND),
@@ -91,7 +91,7 @@ public abstract class Enemy implements GameObject {
     /**
      * this method returns the left bound rectangle of the enemy.
      * 
-     * @return
+     * @return a rectangle of the left bound of the enemy.
      */
     public Rectangle getLeftBound() {
         return new Rectangle(getX(), getY() + paddingBOUND, paddingBOUND, getHeight() - 2 * paddingBOUND);
@@ -100,25 +100,29 @@ public abstract class Enemy implements GameObject {
     /**
      * this method returns the right bound of the enemy.
      * 
-     * @return
+     * @return a rectangle of the right bound of the enemy.
      */
     public Rectangle getRightBound() {
         return new Rectangle(getX() + getWidth() - paddingBOUND, getY() + paddingBOUND, paddingBOUND,
                 getHeight() - 2 * paddingBOUND);
     }
 
+    @Override
     public BufferedImage[] getSprites() {
         return this.sprites;
     }
 
+    @Override
     public Texturer getTexturer() {
         return texturer;
     }
 
+    @Override
     public int getWidth() {
         return this.width;
     }
 
+    @Override
     public int getHeight() {
         return this.height;
     }
@@ -144,6 +148,7 @@ public abstract class Enemy implements GameObject {
         return this.direction;
     }
 
+    @Override
     public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
@@ -162,22 +167,27 @@ public abstract class Enemy implements GameObject {
         this.isFalling = fall;
     }
 
+    @Override
     public void setSprites(final BufferedImage[] sprites) {
         this.sprites = sprites;
     }
 
+    @Override
     public void setY(final int y) {
         this.y = y * scale;
     }
 
+    @Override
     public void setX(final int x) {
         this.x = x * scale;
     }
 
+    @Override
     public void setWidth(final int width) {
         this.width = width;
     }
 
+    @Override
     public void setHeight(final int height) {
         this.height = height;
     }
