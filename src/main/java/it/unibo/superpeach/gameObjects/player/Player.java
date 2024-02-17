@@ -15,6 +15,10 @@ import it.unibo.superpeach.gameObjects.powerups.PowerUp;
 import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 
+/**
+ * This class implementes the player.
+ * @author Patrick Sbrighi
+ */
 public abstract class Player implements GameObject {
     private static final int FALL_SPEED = 3;
     private static final int LIFE_START = 3;
@@ -54,6 +58,18 @@ public abstract class Player implements GameObject {
     private PowerUpType lastPowerUp;
     private int numTickStar;
 
+    /**
+     * Class constructor.
+     * @param x X
+     * @param y Y
+     * @param width Widht
+     * @param height Height
+     * @param scale Scale dimension
+     * @param blocksHandler Blocks handler
+     * @param enemiesHandler Enemies handler
+     * @param powersUpHandler PowerUps handler
+     * @param scoreboard Scoreboard
+     */
     public Player(final int x, final int y, final int width, final int height, final int scale,
             final BlocksHandler blocksHandler,
             final EnemiesHandler enemiesHandler, final PowerupsHandler powersUpHandler, final Scoreboard scoreboard) {
@@ -109,18 +125,36 @@ public abstract class Player implements GameObject {
         return this.scale;
     }
 
+    /**
+     * This method returns the actual score.
+     * @return Return the actual score
+     */
     public int getScore() {
         return this.point;
     }
 
+    /**
+     * This method returns the value of vertical movement.
+     * @return Return 0 if player doesn't move, num < 0 if player is jumping, num > 0 if player is falling
+     */
     public int getMoveY() {
         return this.moveY;
     }
 
+    
+    /**
+     * This method returns the valure of orizzontal movement.
+     * @return Return 0 if player doesn't move, num < 0 if player is moveing to the left, num > 0 if player is moveing to the right
+     */
     public int getMoveX() {
         return this.moveX;
     }
 
+
+    /**
+     * This method returns the actual power up.
+     * @return Return null is there's no actual power up or a power up
+     */
     public PowerUpType getPowerUp() {
         return this.currentPowerUp;
     }
@@ -130,44 +164,26 @@ public abstract class Player implements GameObject {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 
-    public Rectangle getTopBound() {
-        if (currentPowerUp == PowerUpType.RED_MUSHROOM
-                || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
-            return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2,
-                    (paddingBound) * ((paddingBound / getScale())));
-        }
-        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2,
-                (paddingBound / getScale()) * (paddingBound / 2));
-    }
-
-    public Rectangle getBottomBound() {
-        if (currentPowerUp == PowerUpType.RED_MUSHROOM
-                || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
-            return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - paddingBound,
-                    getWidth() / 2, paddingBound);
-        }
-        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - (paddingBound / 2),
-                getWidth() / 2, paddingBound / 2);
-    }
-
-    public Rectangle getLeftBound() {
-        return new Rectangle(getX(), getY() + (paddingBound), (paddingBound), getHeight() - 2 * (paddingBound));
-
-    }
-
-    public Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - (paddingBound), getY() + (paddingBound), (paddingBound),
-                getHeight() - 2 * (paddingBound));
-    }
-
+    /**
+     * This method returns if the player is jumping.
+     * @return Return if player is jumping
+     */
     public boolean hasJumped() {
         return this.jumped;
     }
 
+    /**
+     * This method returns if the player won.
+     * @return Return if the player won
+     */
     public boolean hasWon() {
         return this.hasWon;
     }
 
+    /**
+     * This method returns if the player lost.
+     * @return Return if the player lost
+     */
     public boolean hasLost() {
         return this.hasLost;
     }
@@ -194,10 +210,18 @@ public abstract class Player implements GameObject {
         this.width = width;
     }
 
+    /**
+     * This method allows to set the vertical movement.
+     * @param moveY The new value of vertical movement
+     */
     public void setMoveY(final int moveY) {
         this.moveY = moveY;
     }
 
+    /**
+     * This method allows to set the horizontal movement.
+     * @param moveX The new value of horizonatl movement
+     */
     public void setMoveX(final int moveX) {
         this.moveX = moveX;
     }
@@ -207,24 +231,41 @@ public abstract class Player implements GameObject {
         this.scale = scale;
     }
 
+    /**
+     * This method allows to set if the player is jumping.
+     * @param jumped Is player jumping
+     */
     public void setHasJumped(final boolean jumped) {
         this.jumped = jumped;
     }
 
+    /**
+     * This method controls if player if the player has not yet finished the available jumps.
+     */
     public void incrementConsecutiveJump() {
         if (this.consecutiveJumps + 1 <= CONSECUTIVE_JUMP) {
             this.consecutiveJumps++;
         }
     }
 
+    /**
+     * This method returns if player can jump.
+     * @return Return if player can jump
+     */
     public boolean canJump() {
         return this.consecutiveJumps < CONSECUTIVE_JUMP;
     }
 
+    /**
+     * This method makes the player falling.
+     */
     public void fall() {
         moveY = FALL_SPEED;
     }
 
+    /**
+     * This method removes star power up when time runs out.
+     */
     public void starTimeOver() {
         if (currentPowerUp == PowerUpType.STAR) {
             if (numTickStar >= TICK_FOR_STAR) {
@@ -237,6 +278,9 @@ public abstract class Player implements GameObject {
         }
     }
 
+    /**
+     * This method controls the collisions with the other object.
+     */
     public void collision() {
         collisionsWithBlocks();
         collisionsWithEnemies();
@@ -523,10 +567,49 @@ public abstract class Player implements GameObject {
         setX(block.getX() / block.getScale() - getWidth() / getScale());
     }
 
+    private Rectangle getTopBound() {
+        if (currentPowerUp == PowerUpType.RED_MUSHROOM
+                || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
+            return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2,
+                    (paddingBound) * ((paddingBound / getScale())));
+        }
+        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2,
+                (paddingBound / getScale()) * (paddingBound / 2));
+    }
+
+    private Rectangle getBottomBound() {
+        if (currentPowerUp == PowerUpType.RED_MUSHROOM
+                || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
+            return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - paddingBound,
+                    getWidth() / 2, paddingBound);
+        }
+        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - (paddingBound / 2),
+                getWidth() / 2, paddingBound / 2);
+    }
+
+    private Rectangle getLeftBound() {
+        return new Rectangle(getX(), getY() + (paddingBound), (paddingBound), getHeight() - 2 * (paddingBound));
+
+    }
+
+    private Rectangle getRightBound() {
+        return new Rectangle(getX() + getWidth() - (paddingBound), getY() + (paddingBound), (paddingBound),
+                getHeight() - 2 * (paddingBound));
+    }
+
+    /**
+     * This method implements the movement to the left.
+     */
     public abstract void moveLeft();
 
+    /**
+     * This method implements the movement to the right.
+     */
     public abstract void moveRight();
 
+    /**
+     * This method implements the jump. 
+     */
     public abstract void jump();
 
     @Override

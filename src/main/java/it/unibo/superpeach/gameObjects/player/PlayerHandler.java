@@ -23,7 +23,7 @@ public class PlayerHandler {
     }
 
     /**
-     * This method return the player.
+     * This method returns the player.
      * @return Return the player
      */
     public Player getPlayer() {
@@ -31,7 +31,7 @@ public class PlayerHandler {
     }
 
     /**
-     * This method remove the player.
+     * This method removes the player.
      * @return Return 0 if the operation was successful -1 otherwise
      */
     public int removePlayer() {
