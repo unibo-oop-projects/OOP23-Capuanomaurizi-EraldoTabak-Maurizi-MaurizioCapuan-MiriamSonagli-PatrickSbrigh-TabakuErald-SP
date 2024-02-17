@@ -4,6 +4,11 @@ import java.awt.Graphics;
 
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
+/**
+ * Enemy Koopa Class.
+ * 
+ * @author Eraldo Tabaku
+ */
 public class KoopaTroopa extends Enemy {
 
     public KoopaTroopa(final int x, final int y, final int width, final int height, final int scale,

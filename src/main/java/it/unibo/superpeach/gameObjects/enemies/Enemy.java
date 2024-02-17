@@ -12,6 +12,12 @@ import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
 import it.unibo.superpeach.graphics.Texturer;
 
+/**
+ * Enemies abstract class.
+ * 
+ * @author Eraldo Tabaku
+ */
+
 public abstract class Enemy implements GameObject {
 
     private static final int FALL_SPEED = 1;
@@ -67,15 +73,30 @@ public abstract class Enemy implements GameObject {
         return new Rectangle(x, y, dim.width, dim.height);
     }
 
+    /**
+     * this method returns the bottom bound rectangle of the enemy.
+     * 
+     * @return
+     */
     public Rectangle getBottomBound() {
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + (getHeight() - paddingBOUND),
                 getWidth() / 2, paddingBOUND);
     }
 
+    /**
+     * this method returns the left bound rectangle of the enemy.
+     * 
+     * @return
+     */
     public Rectangle getLeftBound() {
         return new Rectangle(getX(), getY() + paddingBOUND, paddingBOUND, getHeight() - 2 * paddingBOUND);
     }
 
+    /**
+     * this method returns the right bound of the enemy.
+     * 
+     * @return
+     */
     public Rectangle getRightBound() {
         return new Rectangle(getX() + getWidth() - paddingBOUND, getY() + paddingBOUND, paddingBOUND,
                 getHeight() - 2 * paddingBOUND);
@@ -97,18 +118,30 @@ public abstract class Enemy implements GameObject {
         return this.getDimension().height;
     }
 
+    /**
+     * @return BlockHandler used by the enemy.
+     */
     public BlocksHandler getBlocksHandler() {
         return this.blocksHandler;
     }
 
+    /**
+     * @return enemy's speed.
+     */
     public int getSpeed() {
         return speed;
     }
 
+    /**
+     * @return enemy's direction.
+     */
     public boolean getDirection() {
         return this.direction;
     }
 
+    /**
+     * @return enemy's Dimension.
+     */
     public Dimension getDim() {
         return dim;
     }
@@ -117,14 +150,24 @@ public abstract class Enemy implements GameObject {
         return new Rectangle(x, y, width, height);
     }
 
+    /**
+     * @return boolean indicating enemies isAlive status.
+     */
     public boolean getIsAlive() {
         return this.isAlive;
     }
 
+    /**
+     * @param fall to change enemy's status from falling to not falling.
+     */
     public void setIsFalling(final boolean fall) {
         this.isFalling = fall;
     }
 
+    /**
+     * @param width  of the Dimension to set.
+     * @param height of the Dimension to set.
+     */
     public void setDimension(final int width, final int height) {
         this.dim = new Dimension(width, height);
     }
@@ -149,18 +192,23 @@ public abstract class Enemy implements GameObject {
         this.height = height;
     }
 
+    /**
+     * @param speed the speed to give to the enemy.
+     */
     public void setSpeed(final int speed) {
         this.speed = speed;
     }
 
-    public void setDim(final Dimension dim) {
-        this.dim = dim;
-    }
-
+    /**
+     * @param isFalling to change enemy's falling status.
+     */
     public void setFalling(final boolean isFalling) {
         this.isFalling = isFalling;
     }
 
+    /**
+     * @param blocksHandler to set the BlockHandler used by the enemy.
+     */
     public void setBlocksHandler(final BlocksHandler blocksHandler) {
         this.blocksHandler = blocksHandler;
     }
@@ -173,10 +221,16 @@ public abstract class Enemy implements GameObject {
         this.texturer = texturer;
     }
 
+    /**
+     * method used to change enemy's direction.
+     */
     public void changeDirection() {
         this.direction = !this.direction;
     }
 
+    /**
+     * this method puts the enemy in the dead status.
+     */
     public void die() {
         this.isAlive = false;
     }
@@ -196,6 +250,9 @@ public abstract class Enemy implements GameObject {
         changeDirection();
     }
 
+    /**
+     * this method changes the enemy coordinates.
+     */
     protected void updateCoords() {
         if (getDirection()) {
             this.x -= this.speed;
@@ -208,6 +265,10 @@ public abstract class Enemy implements GameObject {
         }
     }
 
+    /**
+     * The collision method checks what type of block has contact with the enemies
+     * in order to define their behavior.
+     */
     public void collision() {
         for (Block block : blocksHandler.getBlocks()) {
             if (block.getType() == BlockType.DEATH_BLOCK) {

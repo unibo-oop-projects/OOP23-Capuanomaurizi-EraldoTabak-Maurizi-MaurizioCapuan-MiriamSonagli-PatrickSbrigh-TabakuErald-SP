@@ -4,6 +4,11 @@ import java.awt.Graphics;
 
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
+/**
+ * Enemy Goomba class.
+ * 
+ * @author Eraldo Tabaku
+ */
 public class Goomba extends Enemy {
 
     public Goomba(final int x, final int y, final int width, final int height, final int scale,
