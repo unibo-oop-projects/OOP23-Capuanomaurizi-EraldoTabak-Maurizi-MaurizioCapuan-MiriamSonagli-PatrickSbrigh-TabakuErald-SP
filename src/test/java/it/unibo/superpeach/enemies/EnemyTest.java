@@ -1,28 +1,19 @@
-<<<<<<< HEAD:src/test/java/it/unibo/superpeach/EnemyTest.java
-package it.unibo.superpeach;
 
-import it.unibo.superpeach.blocks.BlocksHandler;
-import it.unibo.superpeach.enemies.Enemy;
-import it.unibo.superpeach.enemies.FlyingKoopa;
-import it.unibo.superpeach.enemies.Goomba;
-import it.unibo.superpeach.enemies.KoopaTroopa;
-=======
 package it.unibo.superpeach.enemies;
->>>>>>> 4db6bd9997b88e95a6b29d632e3b0faa86c33aaf:src/test/java/it/unibo/superpeach/enemies/EnemyTest.java
+
+import org.junit.jupiter.api.Test;
+
+import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameObjects.enemies.Enemy;
+import it.unibo.superpeach.gameObjects.enemies.FlyingKoopa;
+import it.unibo.superpeach.gameObjects.enemies.Goomba;
+import it.unibo.superpeach.gameObjects.enemies.KoopaTroopa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-<<<<<<< HEAD:src/test/java/it/unibo/superpeach/EnemyTest.java
-import org.junit.jupiter.api.Test;
-=======
-import it.unibo.superpeach.gameObjects.enemies.FlyingKoopa;
-import it.unibo.superpeach.gameObjects.enemies.Goomba;
-import it.unibo.superpeach.gameObjects.enemies.KoopaTroopa;
->>>>>>> 4db6bd9997b88e95a6b29d632e3b0faa86c33aaf:src/test/java/it/unibo/superpeach/enemies/EnemyTest.java
 
 public class EnemyTest {
 
