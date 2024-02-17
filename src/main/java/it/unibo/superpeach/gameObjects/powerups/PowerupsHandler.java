@@ -28,17 +28,17 @@ public class PowerupsHandler {
         }
     }
 
-    public void renderPowerups(Graphics g) {
+    public void renderPowerups(final Graphics g) {
         for (PowerUp powerup : powerups) {
             powerup.render(g);
         }
     }
 
-    public void addPowerUp(PowerUp p) {
+    public void addPowerUp(final PowerUp p) {
         powerups.add(p);
     }
 
-    public void removePowerUp(PowerUp p) {
+    public void removePowerUp(final PowerUp p) {
         powerups.remove(p);
     }
 
