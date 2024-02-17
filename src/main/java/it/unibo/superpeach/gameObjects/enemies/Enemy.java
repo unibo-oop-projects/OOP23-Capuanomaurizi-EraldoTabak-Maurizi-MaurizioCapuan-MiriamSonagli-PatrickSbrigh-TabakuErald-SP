@@ -74,7 +74,7 @@ public abstract class Enemy implements GameObject {
     /**
      * @return a boolean for the enemy falling or not status
      */
-    public boolean IsFalling() {
+    public boolean isFalling() {
         return this.isFalling;
     }
 
@@ -218,6 +218,7 @@ public abstract class Enemy implements GameObject {
      * 
      * @param scale used by the game.
      */
+    @Override
     public void setScale(final int scale) {
         this.scale = scale;
     }
@@ -278,32 +279,28 @@ public abstract class Enemy implements GameObject {
      * in order to define their behavior.
      */
     public void collision() {
-        for (Block block : blocksHandler.getBlocks()) {
-            if (block.getType() == BlockType.DEATH_BLOCK) {
-                if (block.getBoundingBox().intersects(getBottomBound())) {
-                    die();
-                }
+        for (final Block block : blocksHandler.getBlocks()) {
+            if (block.getType() == BlockType.DEATH_BLOCK && block.getBoundingBox().intersects(getBottomBound())) {
+                die();
             }
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
                     || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.ALT_BLOCK
                     || block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
-                if (block.getBoundingBox().contains(getLeftBound())) {
+                if (block.getBoundingBox().contains(getLeftBound())
+                        || block.getBoundingBox().intersects(getLeftBound())) {
                     setXCollisionLeft(block);
-                } else if (block.getBoundingBox().contains(getRightBound())) {
+                } else if (block.getBoundingBox().contains(getRightBound())
+                        || block.getBoundingBox().intersects(getRightBound())) {
                     setXCollisionRight(block);
-                } else if (block.getBoundingBox().contains(getBottomBound())) {
-                    setYCollisionBottom(block);
-                } else if (block.getBoundingBox().intersects(getLeftBound())) {
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().intersects(getRightBound())) {
-                    setXCollisionRight(block);
-                } else if (block.getBoundingBox().intersects(getBottomBound())) {
+                } else if (block.getBoundingBox().contains(getBottomBound())
+                        || block.getBoundingBox().intersects(getBottomBound())) {
                     setYCollisionBottom(block);
                 }
             }
         }
+
     }
 
     /**
@@ -311,11 +308,13 @@ public abstract class Enemy implements GameObject {
      * 
      * @param g Graphics object used for the rendering.
      */
+    @Override
     public abstract void render(Graphics g);
 
     /**
      * abstract method for the enemy tick.
      */
+    @Override
     public abstract void tick();
 
 }
