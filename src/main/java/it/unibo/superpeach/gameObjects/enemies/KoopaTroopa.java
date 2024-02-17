@@ -1,12 +1,13 @@
 package it.unibo.superpeach.gameObjects.enemies;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
 public class KoopaTroopa extends Enemy {
 
-    public KoopaTroopa(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
+    public KoopaTroopa(final int x, final int y, final int width, final int height, final int scale,
+            final BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);
         setSprites(getTexturer().getKoopaImg());
         setSpeed(2 * scale);
