@@ -35,6 +35,14 @@ public abstract class Enemy implements GameObject {
     private Texturer texturer = Game.getTexturer();
     private BufferedImage[] sprites;
 
+    /**
+     * @param x             coordinate of the enemy.
+     * @param y             coordinate of the enemy.
+     * @param width         of the enemy in game.
+     * @param height        of the enemy in game.
+     * @param scale         of the game.
+     * @param blocksHandler the blockHandler used by the enemy.
+     */
     public Enemy(final int x, final int y, final int width, final int height, final int scale,
             final BlocksHandler blocksHandler) {
         this.x = x * scale;
@@ -213,10 +221,18 @@ public abstract class Enemy implements GameObject {
         this.blocksHandler = blocksHandler;
     }
 
+    /**
+     * sets the scale of the enemy based on the game scale.
+     * 
+     * @param scale used by the game.
+     */
     public void setScale(final int scale) {
         this.scale = scale;
     }
 
+    /**
+     * @param texturer used by the enemy for the sprite creation.
+     */
     public void setTexturer(final Texturer texturer) {
         this.texturer = texturer;
     }
@@ -298,8 +314,16 @@ public abstract class Enemy implements GameObject {
         }
     }
 
+    /**
+     * abstract method for image rendering.
+     * 
+     * @param g Graphics object used for the rendering.
+     */
     public abstract void render(Graphics g);
 
+    /**
+     * abstract method for the enemy tick.
+     */
     public abstract void tick();
 
 }

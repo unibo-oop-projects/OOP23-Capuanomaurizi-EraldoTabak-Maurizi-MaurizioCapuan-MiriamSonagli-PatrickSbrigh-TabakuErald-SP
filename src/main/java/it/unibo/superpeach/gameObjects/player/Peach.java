@@ -12,7 +12,7 @@ import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.Texturer;
 
 /**
- * 
+ * This class implements the main character Peach.
  * @author Patrick Sbrighi
  */
 public class Peach extends Player {
@@ -29,6 +29,18 @@ public class Peach extends Player {
     private Texturer texturer;
     private BufferedImage[] sprite;
 
+    /**
+     * Class constructor.
+     * @param x X
+     * @param y Y
+     * @param width Width
+     * @param height Height
+     * @param scale Scale of dimension
+     * @param blocksHandler Blocks handler
+     * @param enemiesHandler Enemies handler
+     * @param powerUpsHandler Power up handler
+     * @param scoreboard Scoreboard
+     */
     public Peach(final int x, final int y, final int width, final int height, final int scale, final BlocksHandler blocksHandler,
             final EnemiesHandler enemiesHandler, final PowerupsHandler powerUpsHandler, final Scoreboard scoreboard) {
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
@@ -47,7 +59,7 @@ public class Peach extends Player {
     }
 
     @Override
-    public void setSprites(BufferedImage[] sprites) {
+    public void setSprites(final BufferedImage[] sprites) {
         this.sprite = sprites;
     }
 
