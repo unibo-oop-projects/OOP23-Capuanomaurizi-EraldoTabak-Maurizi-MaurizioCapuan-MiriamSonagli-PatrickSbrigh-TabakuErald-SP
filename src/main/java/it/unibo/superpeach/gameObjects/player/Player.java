@@ -141,15 +141,13 @@ public abstract class Player implements GameObject {
         return this.moveY;
     }
 
-    
     /**
      * This method returns the valure of orizzontal movement.
-     * @return Return 0 if player doesn't move, num < 0 if player is moveing to the left, num > 0 if player is moveing to the right
+     * @return Return 0 if player doesn't move, num<0 if player is moveing to the left, num>0 if player is moveing to the right
      */
     public int getMoveX() {
         return this.moveX;
     }
-
 
     /**
      * This method returns the actual power up.
@@ -227,7 +225,7 @@ public abstract class Player implements GameObject {
     }
 
     @Override
-    public void setScale(int scale) {
+    public void setScale(final int scale) {
         this.scale = scale;
     }
 
