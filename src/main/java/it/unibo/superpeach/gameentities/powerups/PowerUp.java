@@ -192,7 +192,7 @@ public abstract class PowerUp implements GameObject {
     /**
      * @return if the power up is falling or not.
      */
-    public final boolean getIsFalling() {
+    public final boolean isFalling() {
         return this.isFalling;
     }
 
@@ -206,7 +206,7 @@ public abstract class PowerUp implements GameObject {
     /**
      * @return the direction in which the power up is moving
      */
-    public final boolean getDirection() {
+    public final boolean isDirectionLeft() {
         return this.direction;
     }
 
@@ -222,7 +222,7 @@ public abstract class PowerUp implements GameObject {
      * according to the direction and the state.
      */
     public final void updateCoords() {
-        if (getDirection()) {
+        if (isDirectionLeft()) {
             this.x -= this.movement;
         } else {
             this.x += this.movement;
@@ -236,7 +236,7 @@ public abstract class PowerUp implements GameObject {
     /**
      * @return if the power up is alive or not
      */
-    public final boolean getIsAlive() {
+    public final boolean isAlive() {
         return this.isAlive;
     }
 

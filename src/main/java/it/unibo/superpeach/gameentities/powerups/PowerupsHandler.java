@@ -29,7 +29,7 @@ public class PowerupsHandler {
         Set<PowerUp> powerupsToRemove = new HashSet<>();
         for (PowerUp powerUp : powerups) {
             powerUp.tick();
-            if (!powerUp.getIsAlive()) {
+            if (!powerUp.isAlive()) {
                 powerupsToRemove.add(powerUp);
             }
         }

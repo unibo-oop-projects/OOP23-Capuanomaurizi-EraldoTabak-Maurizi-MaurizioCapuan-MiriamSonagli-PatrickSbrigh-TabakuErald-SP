@@ -48,9 +48,9 @@ public class PowerupsHandlerTest {
         assertEquals(3, powerupsHandler.getPowerups().size());
 
         // VERIFICO CORRETTA RIMOZIONE DEL POWERUP QUANDO MORTO
-        assertTrue(powerupsHandler.getPowerups().get(0).getIsAlive());
+        assertTrue(powerupsHandler.getPowerups().get(0).isAlive());
         powerupsHandler.getPowerups().get(0).die();
-        assertFalse(powerupsHandler.getPowerups().get(0).getIsAlive());
+        assertFalse(powerupsHandler.getPowerups().get(0).isAlive());
         powerupsHandler.removePowerUp(powerupsHandler.getPowerups().get(0));
         assertEquals(2, powerupsHandler.getPowerups().size());
 

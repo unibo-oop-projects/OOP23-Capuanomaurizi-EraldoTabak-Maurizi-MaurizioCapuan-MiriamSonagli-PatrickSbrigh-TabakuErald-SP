@@ -80,26 +80,26 @@ public class PowerupsTest {
         assertEquals(SCALE4, coin.getScale());
 
         // VERIFICO SE IL CAMBIO DIREZIONE VIENE GESTITO CORRETTAMENTE
-        assertFalse(redMushroom.getDirection());
+        assertFalse(redMushroom.isDirectionLeft());
         redMushroom.changeDirection();
-        assertTrue(redMushroom.getDirection());
-        assertFalse(lifeMushroom.getDirection());
+        assertTrue(redMushroom.isDirectionLeft());
+        assertFalse(lifeMushroom.isDirectionLeft());
         lifeMushroom.changeDirection();
-        assertTrue(lifeMushroom.getDirection());
-        assertFalse(star.getDirection());
+        assertTrue(lifeMushroom.isDirectionLeft());
+        assertFalse(star.isDirectionLeft());
         star.changeDirection();
-        assertTrue(star.getDirection());
+        assertTrue(star.isDirectionLeft());
         
         // VERIFICO CHE IL POWERUP MUOIA CORRETTAMENTE
-        assertTrue(redMushroom.getIsAlive());
+        assertTrue(redMushroom.isAlive());
         redMushroom.die();
-        assertFalse(redMushroom.getIsAlive());
-        assertTrue(lifeMushroom.getIsAlive());
+        assertFalse(redMushroom.isAlive());
+        assertTrue(lifeMushroom.isAlive());
         lifeMushroom.die();
-        assertFalse(lifeMushroom.getIsAlive());
-        assertTrue(star.getIsAlive());
+        assertFalse(lifeMushroom.isAlive());
+        assertTrue(star.isAlive());
         star.die();
-        assertFalse(star.getIsAlive());
+        assertFalse(star.isAlive());
 
         // VERIFICO SE LE COLLISIONI VENGONO GESTITE CORRETTAMENTE
 
