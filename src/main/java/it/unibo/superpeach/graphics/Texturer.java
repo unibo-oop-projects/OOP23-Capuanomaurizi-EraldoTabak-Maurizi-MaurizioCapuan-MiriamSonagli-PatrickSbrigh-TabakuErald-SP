@@ -26,10 +26,10 @@ public class Texturer {
 
     private BufferedImage tileSet;
 
-    public BufferedImage[] terrain, lucky, scoreboard, pipe, cloud, bush, hill, flag;
-    public BufferedImage[] goomba, koopaTroopa, flyingKoopa;
-    public BufferedImage[] peach;
-    public BufferedImage[] powerups;
+    private BufferedImage[] terrain, lucky, scoreboard, pipe, cloud, bush, hill, flag;
+    private BufferedImage[] goomba, koopaTroopa, flyingKoopa;
+    private BufferedImage[] peach;
+    private BufferedImage[] powerups;
 
     public Texturer() {
 

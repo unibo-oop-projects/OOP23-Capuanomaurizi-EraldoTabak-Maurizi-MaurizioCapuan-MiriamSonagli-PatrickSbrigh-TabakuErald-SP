@@ -7,15 +7,15 @@ public class Camera {
     private final int gameWidth;
     private int cameraX;
 
-    public Camera(int width, int scale) {
+    public Camera(final int width, final int scale) {
         gameWidth = width * scale;
     }
 
-    public void tick(Player p) {
+    public void tick(final Player p) {
         cameraX = gameWidth / 2 - p.getX();
     }
 
-    public void setCameraX(int x) {
+    public void setCameraX(final int x) {
         this.cameraX = x;
     }
 

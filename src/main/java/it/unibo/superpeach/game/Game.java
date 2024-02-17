@@ -17,11 +17,14 @@ import it.unibo.superpeach.keyboard.Keyboard;
 import it.unibo.superpeach.level.Camera;
 import it.unibo.superpeach.level.LevelHandler;
 
+/**
+ * Implementazione di una partita in corso.
+ * @author  Maurizio Capuano
+ */
 public class Game extends Canvas implements Runnable {
 
-    private static int GAME_SCALE = 2;
+    private static int gameScale = 2;
 
-    // GAME CONSTANTS
     private static final int MILLS_PER_SECOND = 1000;
     private static final int NANOS_PER_SECOND = 1000000000;
     private static final int GRAPHICS_BUFFERS = 3;
@@ -32,13 +35,15 @@ public class Game extends Canvas implements Runnable {
     private static final int PLAYER_DEFAULT_X = 240;
     private static final int PLAYER_DEFAULT_Y = WINDOW_HEIGHT / 2;
     private static final int PLAYER_DEFAULT_WID_HEIG = 16;
+    private static final int GAME_LIVES = 3;
+    private static final int GAME_COINS = 7;
+    private static final int GAMEOVER_X_PADDING = 7;
+    private static final int GAMEOVER_Y_PADDING = 25;
 
-    // GAME VARIABLES
     private boolean running;
     private boolean gameOver = false;
     private int gameOverBuffers = 0;
 
-    // GAME COMPONENTS
     private Thread mainGameLoop;
     private BlocksHandler blocksHandler;
     private static Texturer texturer;
@@ -50,8 +55,8 @@ public class Game extends Canvas implements Runnable {
     private PowerupsHandler powerupsHandler;
     private Scoreboard scoreboard;
 
-    public static void main(String[] args) {
-        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
+    public static void main(final String[] args) {
+        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, gameScale, new Game());
     }
 
     public void init() {
@@ -60,12 +65,12 @@ public class Game extends Canvas implements Runnable {
         enemiesHandler = new EnemiesHandler();
         playerHandler = new PlayerHandler();
         powerupsHandler = new PowerupsHandler();
-        scoreboard = new Scoreboard(3, 7, GAME_SCALE);
+        scoreboard = new Scoreboard(GAME_LIVES, GAME_COINS, gameScale);
         playerHandler.setPlayer(new Peach(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y, PLAYER_DEFAULT_WID_HEIG,
-                PLAYER_DEFAULT_WID_HEIG, GAME_SCALE, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));// TOFIX
-        levelHandler = new LevelHandler(blocksHandler, GAME_SCALE, enemiesHandler);
+                PLAYER_DEFAULT_WID_HEIG, gameScale, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));
+        levelHandler = new LevelHandler(blocksHandler, gameScale, enemiesHandler);
         levelHandler.drawLevel();
-        camera = new Camera(WINDOW_WIDTH, GAME_SCALE);
+        camera = new Camera(WINDOW_WIDTH, gameScale);
         this.addKeyListener(new Keyboard(playerHandler, this));
         start();
     }
@@ -76,17 +81,17 @@ public class Game extends Canvas implements Runnable {
         running = true;
     }
 
-    public void changeScale(int newScale) {
-        GAME_SCALE = newScale;
+    public void changeScale(final int newScale) {
+        gameScale = newScale;
         window.closeWindow();
-        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
+        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, gameScale, new Game());
     }
 
     public void restart() {
         stop();
         window.closeWindow();
         window.stopBackgroundMusic();
-        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
+        window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, gameScale, new Game());
     }
 
     private void stop() {
@@ -139,7 +144,7 @@ public class Game extends Canvas implements Runnable {
             Graphics g = buffStrat.getDrawGraphics();
             if (!gameOver) {
                 g.setColor(Color.PINK);
-                g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
+                g.fillRect(0, 0, WINDOW_WIDTH * gameScale, WINDOW_HEIGHT * gameScale);
                 g.translate(camera.getCameraX(), 0);
                 blocksHandler.renderBlocks(g);
                 enemiesHandler.renderEnemies(g);
@@ -149,20 +154,20 @@ public class Game extends Canvas implements Runnable {
             } else {
                 gameOverBuffers++;
                 g.setColor(Color.BLACK);
-                g.fillRect(0, 0, WINDOW_WIDTH * GAME_SCALE, WINDOW_HEIGHT * GAME_SCALE);
+                g.fillRect(0, 0, WINDOW_WIDTH * gameScale, WINDOW_HEIGHT * gameScale);
                 g.translate(0, 0);
                 g.setColor(Color.PINK);
-                g.setFont(new Font("Monospaced", Font.BOLD, 25 * GAME_SCALE));
+                g.setFont(new Font("Monospaced", Font.BOLD, GAMEOVER_Y_PADDING * gameScale));
                 if (playerHandler.getPlayer().hasWon()) {
-                    g.drawString("You WON!", WINDOW_WIDTH * GAME_SCALE / 3,
-                            WINDOW_HEIGHT * GAME_SCALE / 2 - 25 * GAME_SCALE);
-                    g.drawString("SCORE: " + playerHandler.getPlayer().getScore(), WINDOW_WIDTH * GAME_SCALE / 3,
-                            WINDOW_HEIGHT * GAME_SCALE / 2 + 10 * GAME_SCALE);
+                    g.drawString("You WON!", WINDOW_WIDTH * gameScale / 3,
+                            WINDOW_HEIGHT * gameScale / 2 - GAMEOVER_Y_PADDING * gameScale);
+                    g.drawString("SCORE: " + playerHandler.getPlayer().getScore(), WINDOW_WIDTH * gameScale / 3,
+                            WINDOW_HEIGHT * gameScale / 2 + 10 * gameScale);
                 } else {
-                    g.drawString("Game Over", WINDOW_WIDTH * GAME_SCALE / 3,
-                            WINDOW_HEIGHT * GAME_SCALE / 2 - 25 * GAME_SCALE);
-                    g.drawString("You LOSE", WINDOW_WIDTH * GAME_SCALE / 3 + 7 * GAME_SCALE,
-                            WINDOW_HEIGHT * GAME_SCALE / 2 + 10 * GAME_SCALE);
+                    g.drawString("Game Over", WINDOW_WIDTH * gameScale / 3,
+                            WINDOW_HEIGHT * gameScale / 2 - GAMEOVER_Y_PADDING * gameScale);
+                    g.drawString("You LOSE", WINDOW_WIDTH * gameScale / 3 + GAMEOVER_X_PADDING * gameScale,
+                            WINDOW_HEIGHT * gameScale / 2 + 10 * gameScale);
                 }
                 if (gameOverBuffers == GRAPHICS_BUFFERS) {
                     stop();

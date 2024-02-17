@@ -2,20 +2,24 @@ package it.unibo.superpeach.gameObjects.blocks;
 
 import java.awt.Graphics;
 
-import it.unibo.superpeach.gameObjects.powerups.*;
+import it.unibo.superpeach.gameObjects.powerups.Coin;
+import it.unibo.superpeach.gameObjects.powerups.LifeMushroom;
+import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameObjects.powerups.RedMushroom;
+import it.unibo.superpeach.gameObjects.powerups.Star;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 
 public class LuckyBlock extends MapFixedBlock {
 
     private PowerUpType containedPowerUp;
 
-    public LuckyBlock(int x, int y, int width, int height, int scale, BlockType type, PowerUpType powerUp) {
+    public LuckyBlock(final int x, final int y, final int width, final int height, final int scale, final BlockType type, final PowerUpType powerUp) {
         super(x, y, width, height, scale, type);
         containedPowerUp = powerUp;
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(final Graphics g) {
         if (getType() == BlockType.POPPED_LUCKY) {
             g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null);
         } else {
@@ -28,7 +32,7 @@ public class LuckyBlock extends MapFixedBlock {
     }
 
     @Override
-    public void popLuckyBlock(PowerupsHandler powerupsHandler, BlocksHandler blocksHandler) {
+    public void popLuckyBlock(final PowerupsHandler powerupsHandler, final BlocksHandler blocksHandler) {
         if (getType() == BlockType.LUCKY) {
             switch (containedPowerUp) {
                 case RED_MUSHROOM:
@@ -46,6 +50,8 @@ public class LuckyBlock extends MapFixedBlock {
                 case COIN:
                     powerupsHandler.addPowerUp(
                             new Coin(getX() / getScale(), getY() / getScale() - 16, 16, 16, getScale(), blocksHandler));
+                    break;
+                default:
                     break;
             }
             setType(BlockType.POPPED_LUCKY);

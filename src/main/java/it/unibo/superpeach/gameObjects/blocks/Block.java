@@ -35,7 +35,7 @@ public abstract class Block implements GameObject {
 
     private BlockType type;
 
-    public Block(int x, int y, int w, int h, int s) {
+    public Block(final int x, final int y, final int w, final int h, final int s) {
         this.x = x * s;
         this.y = y * s;
         this.width = w * s;
@@ -79,31 +79,31 @@ public abstract class Block implements GameObject {
         return type;
     }
 
-    public void setX(int x) {
+    public void setX(final int x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(final int width) {
         this.width = width;
     }
 
-    public void setScale(int scale) {
+    public void setScale(final int scale) {
         this.scale = scale;
     }
 
-    public void setSprites(BufferedImage[] sprites) {
+    public void setSprites(final BufferedImage[] sprites) {
         this.sprites = sprites;
     }
 
-    public void setType(BlockType type) {
+    public void setType(final BlockType type) {
         this.type = type;
     }
 

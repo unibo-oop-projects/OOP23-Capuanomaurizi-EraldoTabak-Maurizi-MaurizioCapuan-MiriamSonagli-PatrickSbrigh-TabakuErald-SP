@@ -8,35 +8,35 @@ import it.unibo.superpeach.graphics.Texturer;
 
 public interface GameObject {
 
-    public abstract void render(Graphics g);
+    void render(Graphics g);
 
-    public abstract void tick();
+    void tick();
 
-    public Texturer getTexturer();
+    Texturer getTexturer();
 
-    public Rectangle getBoundingBox();
+    Rectangle getBoundingBox();
 
-    public int getX();
+    int getX();
 
-    public int getY();
+    int getY();
 
-    public int getHeight();
+    int getHeight();
 
-    public int getWidth();
+    int getWidth();
 
-    public int getScale();
+    int getScale();
 
-    public BufferedImage[] getSprites();
+    BufferedImage[] getSprites();
 
-    public void setX(int x);
+    void setX(int x);
 
-    public void setY(int y);
+    void setY(int y);
 
-    public void setHeight(int height);
+    void setHeight(int height);
 
-    public void setWidth(int width);
+    void setWidth(int width);
 
-    public void setScale(int scale);
+    void setScale(int scale);
 
-    public void setSprites(BufferedImage[] sprites);
+    void setSprites(BufferedImage[] sprites);
 }

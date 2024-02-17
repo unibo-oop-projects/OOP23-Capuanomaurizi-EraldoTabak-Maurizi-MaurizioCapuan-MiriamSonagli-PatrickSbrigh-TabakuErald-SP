@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public class MapBackgroundBlock extends Block {
 
-    public MapBackgroundBlock(int x, int y, int width, int height, int scale, BlockType type) {
+    public MapBackgroundBlock(final int x, final int y, final int width, final int height, final int scale, final BlockType type) {
         super(x, y, width, height, scale);
         setType(type);
         switch (type) {
@@ -34,14 +34,13 @@ public class MapBackgroundBlock extends Block {
                 setSprites(getTexturer().getFlag());
                 break;
             default:
-                // its for sure a castle block, using default to avoid too many code
                 setSprites(getTexturer().getTerrain());
                 break;
         }
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(final Graphics g) {
         switch (getType()) {
             case CLOUD_TOP_LEFT:
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);

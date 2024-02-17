@@ -6,7 +6,7 @@ import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 
 public class MapFixedBlock extends Block {
 
-    public MapFixedBlock(int x, int y, int width, int height, int scale, BlockType type) {
+    public MapFixedBlock(final int x, final int y, final int width, final int height, final int scale, final BlockType type) {
         super(x, y, width, height, scale);
         setType(type);
         switch (type) {
@@ -36,14 +36,13 @@ public class MapFixedBlock extends Block {
             case ALT_BLOCK:
                 break;
             default:
-                // its for sure a castle block, using default to avoid too many code
                 setSprites(getTexturer().getTerrain());
                 break;
         }
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(final Graphics g) {
         switch (getType()) {
             case TERRAIN:
                 g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(), null);
@@ -83,7 +82,7 @@ public class MapFixedBlock extends Block {
         }
     }
 
-    public void popLuckyBlock(PowerupsHandler powerupsHandler, BlocksHandler blocksHandler) {
+    public void popLuckyBlock(final PowerupsHandler powerupsHandler, final BlocksHandler blocksHandler) {
     }
 
     @Override

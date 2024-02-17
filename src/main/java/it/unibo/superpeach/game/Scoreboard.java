@@ -13,7 +13,7 @@ public class Scoreboard {
     private Texturer texturer = new Texturer();
     private BufferedImage[] sprites = texturer.getScoreboard();
 
-    public Scoreboard(int lives, int totalCoins, int scale) {
+    public Scoreboard(final int lives, final int totalCoins, final int scale) {
         hearts = new boolean[lives];
         coins = new boolean[totalCoins];
         for (int i = 0; i < lives; i++) {
@@ -25,7 +25,7 @@ public class Scoreboard {
         gameScale = scale;
     }
 
-    public void render(Graphics g, int peachX) {
+    public void render(final Graphics g, final int peachX) {
         for (int i = 0; i < hearts.length; i++) {
             if (hearts[i]) {
                 g.drawImage(sprites[0], peachX + (i - (hearts.length / 2)) * 16 * gameScale + 2 * gameScale,
@@ -60,7 +60,7 @@ public class Scoreboard {
 
     public void restoreHeart() {
         for (int i = 0; i < hearts.length; i++) {
-            if (hearts[i] == false) {
+            if (!hearts[i]) {
                 hearts[i] = true;
                 return;
             }
@@ -69,7 +69,7 @@ public class Scoreboard {
 
     public void collectCoin() {
         for (int i = 0; i < coins.length; i++) {
-            if (coins[i] == false) {
+            if (!coins[i]) {
                 coins[i] = true;
                 return;
             }

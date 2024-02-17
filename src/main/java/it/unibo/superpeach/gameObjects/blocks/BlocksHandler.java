@@ -14,7 +14,7 @@ public class BlocksHandler {
         backgroundBlocks = new ArrayList<Block>();
     }
 
-    public void renderBlocks(Graphics g) {
+    public void renderBlocks(final Graphics g) {
         for (MapFixedBlock block : fixedBlocks) {
             block.render(g);
         }
@@ -23,15 +23,15 @@ public class BlocksHandler {
         }
     }
 
-    public void addFixedBlock(MapFixedBlock b) {
+    public void addFixedBlock(final MapFixedBlock b) {
         fixedBlocks.add(b);
     }
 
-    public void addBackgroundBlock(Block b) {
+    public void addBackgroundBlock(final Block b) {
         backgroundBlocks.add(b);
     }
 
-    public void removeFixedBlock(Block b) {
+    public void removeFixedBlock(final Block b) {
         fixedBlocks.remove(b);
     }
 
