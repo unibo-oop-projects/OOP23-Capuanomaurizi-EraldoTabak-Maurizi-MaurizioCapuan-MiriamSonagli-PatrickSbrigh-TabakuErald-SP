@@ -12,6 +12,8 @@ import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 public class KoopaTroopa extends Enemy {
 
     /**
+     * Constructor method for KoopaTroopa class.
+     * 
      * @param x             coordinate of the enemy.
      * @param y             coordinate of the enemy.
      * @param width         sprite with of the enemy.
@@ -30,10 +32,10 @@ public class KoopaTroopa extends Enemy {
     @Override
     public void render(final Graphics g) {
         if (getDirection()) {
-            g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
+            g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(),
                     null);
         } else {
-            g.drawImage(getSprites()[1], getX(), getY(), getDimension().width, getDimension().height,
+            g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(),
                     null);
         }
     }
