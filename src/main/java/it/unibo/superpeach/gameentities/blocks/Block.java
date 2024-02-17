@@ -10,7 +10,7 @@ import it.unibo.superpeach.graphics.Texturer;
 /**
  * World block.
  * 
- * @author  Maurizio Capuano
+ * @author Maurizio Capuano
  */
 public abstract class Block implements GameObject {
 
@@ -20,7 +20,7 @@ public abstract class Block implements GameObject {
     private int height;
     private int scale;
 
-    private Texturer texturer = Game.getTexturer();
+    private final Texturer texturer = Game.getTexturer();
     private BufferedImage[] sprites;
 
     private BlockType type;
@@ -79,7 +79,7 @@ public abstract class Block implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        return sprites;
+        return sprites.clone();
     }
 
     /**
@@ -116,7 +116,7 @@ public abstract class Block implements GameObject {
 
     @Override
     public final void setSprites(final BufferedImage[] sprites) {
-        this.sprites = sprites;
+        this.sprites = sprites.clone();
     }
 
     /**

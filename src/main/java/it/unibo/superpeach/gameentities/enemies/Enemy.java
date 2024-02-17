@@ -45,8 +45,6 @@ public abstract class Enemy implements GameObject {
             final BlocksHandler blocksHandler) {
         this.x = x * scale;
         this.y = y * scale;
-        this.width = width * scale;
-        this.height = height * scale;
         this.scale = scale;
         this.width = width * scale;
         this.height = height * scale;
@@ -109,7 +107,7 @@ public abstract class Enemy implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        return this.sprites;
+        return this.sprites.clone();
     }
 
     @Override
@@ -169,7 +167,7 @@ public abstract class Enemy implements GameObject {
 
     @Override
     public final void setSprites(final BufferedImage[] sprites) {
-        this.sprites = sprites;
+        this.sprites = sprites.clone();
     }
 
     @Override

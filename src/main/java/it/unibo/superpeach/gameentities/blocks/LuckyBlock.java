@@ -11,11 +11,11 @@ import it.unibo.superpeach.gameentities.powerups.PowerUp.PowerUpType;
  * Blocks class that inherits from FixedBlock and represents lucky blocks
  * containing code to identify which powerup is inside.
  * 
- * @author  Maurizio Capuano
+ * @author Maurizio Capuano
  */
 public final class LuckyBlock extends MapFixedBlock {
 
-    private PowerUpType containedPowerUp;
+    private final PowerUpType containedPowerUp;
 
     /**
      * @param x
