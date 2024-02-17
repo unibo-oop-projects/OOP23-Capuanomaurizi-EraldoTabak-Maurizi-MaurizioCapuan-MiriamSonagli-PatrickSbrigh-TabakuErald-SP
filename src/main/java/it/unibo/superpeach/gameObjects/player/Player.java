@@ -52,7 +52,6 @@ public abstract class Player {
     private PowerUpType currentPowerUp;
     private PowerUpType lastPowerUp;
     private int numTickStar;
-    private int coins;
 
     public Player(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler, EnemiesHandler enemiesHandler, PowerupsHandler powersUpHandler, Scoreboard scoreboard){
         this.width = width*scale;
@@ -79,7 +78,6 @@ public abstract class Player {
         this.currentPowerUp = null;
         this.numTickStar = 0;
         this.powerupsHandler = powersUpHandler;
-        this.coins = 0;
         this.lastPowerUp = null;
     }
 
@@ -103,18 +101,10 @@ public abstract class Player {
         return this.scale;
     }
 
-    public int getPoint() {
+    public int getScore() {
         return this.point;
     }
-
-    public int getLife() {
-        return this.life;
-    }
-
-    public int getCoins(){
-        return this.coins;
-    }
-
+    
     public int getMoveY() {
         return this.moveY;
     }
@@ -422,7 +412,6 @@ public abstract class Player {
                 switch (power.getPowerUpType()) {
                     case COIN:
                         scoreboard.collectCoin();
-                        coins++;
                         break;
                     case RED_MUSHROOM:
                         if(currentPowerUp != PowerUpType.RED_MUSHROOM && !(currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)){

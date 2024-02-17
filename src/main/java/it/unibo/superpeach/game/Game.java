@@ -153,7 +153,7 @@ public class Game extends Canvas implements Runnable {
                 g.setFont(new Font("Monospaced", Font.BOLD, 25*GAME_SCALE));
                 if(playerHandler.getPlayer().hasWon()){
                     g.drawString("You WON!", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 25*GAME_SCALE);
-                    g.drawString("SCORE: " + playerHandler.getPlayer().getPoint(), WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
+                    g.drawString("SCORE: " + playerHandler.getPlayer().getScore(), WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
                 } else {
                     g.drawString("Game Over", WINDOW_WIDTH*GAME_SCALE/3, WINDOW_HEIGHT*GAME_SCALE/2 - 25*GAME_SCALE);
                     g.drawString("You LOSE", WINDOW_WIDTH*GAME_SCALE/3 + 7*GAME_SCALE, WINDOW_HEIGHT*GAME_SCALE/2 + 10*GAME_SCALE);
