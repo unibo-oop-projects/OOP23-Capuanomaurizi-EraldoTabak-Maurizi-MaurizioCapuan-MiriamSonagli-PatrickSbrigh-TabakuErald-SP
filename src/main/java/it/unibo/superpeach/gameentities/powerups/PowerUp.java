@@ -12,30 +12,32 @@ import it.unibo.superpeach.graphics.Texturer;
 
 /**
  * Power up class implementation.
- * @author  Miriam Sonaglia
+ * 
+ * @author Miriam Sonaglia
  */
 public abstract class PowerUp implements GameObject {
 
     /**
      * eunum relative with all the power up types.
      */
-    public enum PowerUpType { 
-        /** 
+    public enum PowerUpType {
+        /**
          * Power up RED MUSHROOM.
          */
-        RED_MUSHROOM, 
+        RED_MUSHROOM,
         /**
          * Power up STAR.
          */
-        STAR, 
+        STAR,
         /**
          * Power up LIFE MUSHROOM.
          */
-        LIFE_MUSHROOM, 
+        LIFE_MUSHROOM,
         /**
          * Power up COIN.
          */
-        COIN }
+        COIN
+    }
 
     private static final int FALL_SPEED = 1;
 
@@ -57,6 +59,7 @@ public abstract class PowerUp implements GameObject {
 
     /**
      * Power ups constructor.
+     * 
      * @param x
      * @param y
      * @param w
@@ -65,8 +68,8 @@ public abstract class PowerUp implements GameObject {
      * @param blocksHandler
      * @param type
      */
-    public PowerUp(final int x, final int y, final int w, final int h, final int s, 
-                    final BlocksHandler blocksHandler, final PowerUpType type) {
+    public PowerUp(final int x, final int y, final int w, final int h, final int s,
+            final BlocksHandler blocksHandler, final PowerUpType type) {
         this.x = x * s;
         this.y = y * s;
         this.width = w * s;
@@ -93,6 +96,7 @@ public abstract class PowerUp implements GameObject {
 
     /**
      * sets the texture.
+     * 
      * @param texturer
      */
     public final void setTextures(final Texturer texturer) {
@@ -168,6 +172,7 @@ public abstract class PowerUp implements GameObject {
 
     /**
      * Sets the speed according to the GUI scale selected.
+     * 
      * @param movement
      */
     public final void setMovement(final int movement) {
@@ -183,6 +188,7 @@ public abstract class PowerUp implements GameObject {
 
     /**
      * Sets if the power up is falling off a block or not.
+     * 
      * @param fall
      */
     public final void setIsFalling(final boolean fall) {
@@ -200,7 +206,7 @@ public abstract class PowerUp implements GameObject {
      * @return speed of the falling speed of the power up
      */
     public final int getFallSpeed() {
-       return movement;
+        return movement;
     }
 
     /**
@@ -218,7 +224,7 @@ public abstract class PowerUp implements GameObject {
     }
 
     /**
-     * Updates the coordinates of the power up 
+     * Updates the coordinates of the power up
      * according to the direction and the state.
      */
     public final void updateCoords() {
@@ -256,7 +262,7 @@ public abstract class PowerUp implements GameObject {
      * @return the botton bound of the power up.
      */
     public final Rectangle getBottomBound() {
-        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, 
+        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4,
                 getY() + (getHeight() - paddingBound),
                 getWidth() / 2, paddingBound);
     }
@@ -272,8 +278,8 @@ public abstract class PowerUp implements GameObject {
      * @return the right bound of the power up
      */
     public final Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound, 
-                    getHeight() - 2 * paddingBound);
+        return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound,
+                getHeight() - 2 * paddingBound);
     }
 
     /**
@@ -292,6 +298,7 @@ public abstract class PowerUp implements GameObject {
 
     /**
      * sets the blocks handler.
+     * 
      * @param blocksHandler
      */
     public final void setBlocksHandler(final BlocksHandler blocksHandler) {
@@ -301,6 +308,7 @@ public abstract class PowerUp implements GameObject {
     /**
      * When the power ups collides with something on the bottom bound,
      * it doesn't fall.
+     * 
      * @param block
      */
     private void setYCollisionBottom(final Block block) {
@@ -311,6 +319,7 @@ public abstract class PowerUp implements GameObject {
     /**
      * When the power ups collides with something on the left bound,
      * it changes direction.
+     * 
      * @param block
      */
     private void setXCollisionLeft(final Block block) {
@@ -321,6 +330,7 @@ public abstract class PowerUp implements GameObject {
     /**
      * When the power ups collides with something on the right bound,
      * it changes direction.
+     * 
      * @param block
      */
     private void setXCollisionRight(final Block block) {
@@ -333,30 +343,25 @@ public abstract class PowerUp implements GameObject {
      */
     public final void collisions() {
         for (final Block block : blocksHandler.getBlocks()) {
-            if (block.getType() == BlockType.DEATH_BLOCK) {
-                if (block.getBoundingBox().intersects(getBottomBound())) {
-                    die();
-                }
+            if (block.getType() == BlockType.DEATH_BLOCK && block.getBoundingBox().intersects(getBottomBound())) {
+                die();
             }
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
-                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.LUCKY 
+                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.LUCKY
                     || block.getType() == BlockType.BRICK) {
-                if (block.getBoundingBox().contains(getLeftBound())) {
+                if (block.getBoundingBox().contains(getLeftBound())
+                        || block.getBoundingBox().intersects(getLeftBound())) {
                     setXCollisionLeft(block);
-                } else if (block.getBoundingBox().contains(getRightBound())) {
+                } else if (block.getBoundingBox().contains(getRightBound())
+                        || block.getBoundingBox().intersects(getRightBound())) {
                     setXCollisionRight(block);
-                } else if (block.getBoundingBox().contains(getBottomBound())) {
-                    setYCollisionBottom(block);
-                } else if (block.getBoundingBox().intersects(getLeftBound())) {
-                    setXCollisionLeft(block);
-                } else if (block.getBoundingBox().intersects(getRightBound())) {
-                    setXCollisionRight(block);
-                } else if (block.getBoundingBox().intersects(getBottomBound())) {
+                } else if (block.getBoundingBox().contains(getBottomBound())
+                        || block.getBoundingBox().intersects(getBottomBound())) {
                     setYCollisionBottom(block);
                 }
-            } 
+            }
         }
     }
 

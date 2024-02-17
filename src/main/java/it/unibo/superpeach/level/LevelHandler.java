@@ -53,7 +53,7 @@ public final class LevelHandler {
     }
 
     private void parseLevel(final String lvlImagePath) {
-        BufferedImage levelImage = loader.loadImage(lvlImagePath);
+        final BufferedImage levelImage = loader.loadImage(lvlImagePath);
         final int width = levelImage.getWidth();
         final int height = levelImage.getHeight();
         for (int i = 0; i < width; i++) {

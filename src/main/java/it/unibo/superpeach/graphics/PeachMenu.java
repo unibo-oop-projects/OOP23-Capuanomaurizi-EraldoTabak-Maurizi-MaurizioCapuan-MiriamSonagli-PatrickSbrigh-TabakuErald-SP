@@ -30,16 +30,17 @@ import java.io.IOException;
 
 /**
  * Implementation of the starting menu of the game.
- * @author  Miriam Sonaglia
+ * 
+ * @author Miriam Sonaglia
  */
 public final class PeachMenu {
 
     private final JFrame frame;
-    private final Dimension size;
     private Clip clip;
 
     /**
      * It creates a new menu with a title and a dimention that can be resized.
+     * 
      * @param title
      * @param width
      * @param height
@@ -47,10 +48,9 @@ public final class PeachMenu {
      * @param game
      */
     public PeachMenu(final String title, final int width, final int height, final int scale, final Game game) {
-        size = new Dimension(width * scale, height * scale);
+        final Dimension size = new Dimension(width * scale, height * scale);
         frame = new JFrame(title);
         final ImageIcon imageIcon = new ImageIcon("src/main/resources/it/unibo/superpeach/icon/peach_icon.png");
-
         frame.setIconImage(imageIcon.getImage());
         frame.setPreferredSize(size);
         frame.setMinimumSize(size);
@@ -59,8 +59,8 @@ public final class PeachMenu {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        final Color customColor = new Color(218, 165, 32);    //SFONDO BOTTONI
-        final Color customColor1 = new Color(101, 67, 33);    //PER LE SCRITTE
+        final Color customColor = new Color(218, 165, 32); // SFONDO BOTTONI
+        final Color customColor1 = new Color(101, 67, 33); // PER LE SCRITTE
         final Border border = BorderFactory.createLineBorder(customColor1, 2, true);
 
         final String imagePath = "src/main/resources/it/unibo/superpeach/tiles/background.png";
@@ -91,8 +91,7 @@ public final class PeachMenu {
         panel.add(startButton);
         panel.add(Box.createVerticalStrut(10 * scale));
 
-
-        final String[] guiScaleList = {"GUI SCALE", "Tiny", "Small", "Medium", "Large"};
+        final String[] guiScaleList = { "GUI SCALE", "Tiny", "Small", "Medium", "Large" };
         final JComboBox<String> guiComboBox = new JComboBox<>(guiScaleList);
         guiComboBox.setLayout(new FlowLayout());
         guiComboBox.setBackground(customColor);
@@ -103,9 +102,10 @@ public final class PeachMenu {
 
         guiComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(final JList<?> list, final Object value, 
-                                                final int index, final boolean isSelected, final boolean cellHasFocus) {
-                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            public Component getListCellRendererComponent(final JList<?> list, final Object value,
+                    final int index, final boolean isSelected, final boolean cellHasFocus) {
+                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,
+                        cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 return label;
             }
@@ -113,7 +113,7 @@ public final class PeachMenu {
 
         /**
          * Creation of the combo box that permits to choose the size of the menu.
-        */
+         */
         guiComboBox.setPreferredSize(startButton.getPreferredSize());
         guiComboBox.setMaximumSize(startButton.getPreferredSize());
         guiComboBox.addActionListener(new ActionListener() {
@@ -134,13 +134,13 @@ public final class PeachMenu {
                             break;
                         case "Medium":
                             scalerange = 3;
-                            break; 
+                            break;
                         case "Large":
                             scalerange = 4;
                             break;
                         default:
                             break;
-                        }
+                    }
                     game.changeScale(scalerange);
                 }
             }
@@ -150,12 +150,13 @@ public final class PeachMenu {
         panel.add(Box.createVerticalStrut(10 * scale));
 
         /**
-         * Creation of the combo box that permits to choose between 3 songs to be played.
-        */
+         * Creation of the combo box that permits to choose between 3 songs to be
+         * played.
+         */
         final String sound1 = "src/main/resources/it/unibo/superpeach/music/sound1.wav";
         final String sound2 = "src/main/resources/it/unibo/superpeach/music/sound2.wav";
         final String sound3 = "src/main/resources/it/unibo/superpeach/music/sound3.wav";
-        final String[] songList = {"MUSIC", "n. 1", "n. 2", "n. 3", "no music"};
+        final String[] songList = { "MUSIC", "n. 1", "n. 2", "n. 3", "no music" };
         final JComboBox<String> songComboBox = new JComboBox<>(songList);
         songComboBox.setLayout(new FlowLayout());
         songComboBox.setBackground(customColor);
@@ -166,9 +167,10 @@ public final class PeachMenu {
 
         songComboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(final JList<?> list, final Object value, 
-                                                final int index, final boolean isSelected, final boolean cellHasFocus) {
-                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            public Component getListCellRendererComponent(final JList<?> list, final Object value,
+                    final int index, final boolean isSelected, final boolean cellHasFocus) {
+                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,
+                        cellHasFocus);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 return label;
             }
@@ -229,6 +231,7 @@ public final class PeachMenu {
     /**
      * It plays the selected song if there's no other song playing.
      * If there's one playing it stops it.
+     * 
      * @param songFilePath
      */
     private void playSong(final String songFilePath) {
