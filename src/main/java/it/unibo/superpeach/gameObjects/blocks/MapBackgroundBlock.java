@@ -114,4 +114,8 @@ public class MapBackgroundBlock extends Block{
         }
     }
 
+    @Override
+    public void tick() {
+    }
+
 }

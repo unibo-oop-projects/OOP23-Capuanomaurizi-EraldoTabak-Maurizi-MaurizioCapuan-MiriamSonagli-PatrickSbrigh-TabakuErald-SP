@@ -14,7 +14,7 @@ public class LifeMushroom extends PowerUp{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getImage()[1],getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[1],getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override

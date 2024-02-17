@@ -3,12 +3,13 @@ package it.unibo.superpeach.gameObjects.powerups;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.gameObjects.blocks.Block;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
 import it.unibo.superpeach.graphics.Texturer;
 
-public abstract class PowerUp {
+public abstract class PowerUp implements GameObject {
 
     public enum PowerUpType { RED_MUSHROOM, STAR, LIFE_MUSHROOM, COIN};
 
@@ -56,10 +57,14 @@ public abstract class PowerUp {
         this.texturer = texturer;
     }
 
-    public BufferedImage[] getImage() {
+    public BufferedImage[] getSprites() {
         return image;
     }
     
+    public void setSprites(BufferedImage[] image) {
+        this.image = image;
+    }
+
     public void setX(int x) {
         this.x = x * scale;
     }
@@ -152,7 +157,7 @@ public abstract class PowerUp {
         this.isAlive = false;
     }
 
-    public Rectangle getBounds() {
+    public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
 

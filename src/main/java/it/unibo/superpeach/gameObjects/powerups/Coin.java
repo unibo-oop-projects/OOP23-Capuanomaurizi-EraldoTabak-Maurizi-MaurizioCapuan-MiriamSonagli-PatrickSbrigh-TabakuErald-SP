@@ -14,7 +14,7 @@ public class Coin extends PowerUp{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getImage()[3],getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[3],getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override

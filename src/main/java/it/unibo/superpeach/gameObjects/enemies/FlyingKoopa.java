@@ -35,7 +35,7 @@ public class FlyingKoopa extends Enemy {
     }
 
     @Override
-    protected void render(Graphics g) {
+    public void render(Graphics g) {
         if (getDirection()) {
             g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
                     null);
@@ -46,7 +46,7 @@ public class FlyingKoopa extends Enemy {
     }
 
     @Override
-    protected void tick() {
+    public void tick() {
         this.updateCoords();
     }
 }

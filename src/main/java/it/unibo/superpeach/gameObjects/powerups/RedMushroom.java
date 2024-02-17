@@ -14,7 +14,7 @@ public class RedMushroom extends PowerUp {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getImage()[0],getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(getSprites()[0],getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override

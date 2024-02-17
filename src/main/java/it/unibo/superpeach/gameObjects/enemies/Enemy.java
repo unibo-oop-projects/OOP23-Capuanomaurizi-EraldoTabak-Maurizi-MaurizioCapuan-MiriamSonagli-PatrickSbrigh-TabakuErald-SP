@@ -4,17 +4,18 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.gameObjects.blocks.Block;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.Block.BlockType;
 import it.unibo.superpeach.graphics.Texturer;
 
-public abstract class Enemy {
+public abstract class Enemy implements GameObject{
 
     private static final int FALL_SPEED = 1;
     private int PADDING_BOUND = 4;
 
-    protected int x, y, speed, scale;
+    protected int x, y, speed, scale, width, height;
     private Dimension dim;
     private boolean isFalling, direction, isAlive;
     private BlocksHandler blocksHandler;
@@ -24,6 +25,8 @@ public abstract class Enemy {
     public Enemy(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
         this.x = x * scale;
         this.y = y * scale;
+        this.width = width*scale;
+        this.height = height*scale;
         this.scale = scale;
         setDimension(width * scale, height * scale);
         this.blocksHandler = blocksHandler;
@@ -110,6 +113,10 @@ public abstract class Enemy {
         return dim;
     }
 
+    public Rectangle getBoundingBox(){
+        return new Rectangle(x, y, width, height);
+    }
+
     public boolean getIsAlive() {
         return this.isAlive;
     }
@@ -126,12 +133,20 @@ public abstract class Enemy {
         this.sprites = sprites;
     }
 
-    private void setY(int y) {
+    public void setY(int y) {
         this.y = y * scale;
     }
 
-    private void setX(int x) {
+    public void setX(int x) {
         this.x = x * scale;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public void setSpeed(int speed) {
@@ -222,8 +237,8 @@ public abstract class Enemy {
         }
     }
 
-    protected abstract void render(Graphics g);
+    public abstract void render(Graphics g);
 
-    protected abstract void tick();
+    public abstract void tick();
 
 }
