@@ -10,7 +10,8 @@ public class FlyingKoopa extends Enemy {
 
     private int nMoves;
 
-    public FlyingKoopa(int x, int y, int width, int height, int scale, BlocksHandler blocksHandler) {
+    public FlyingKoopa(final int x, final int y, final int width, final int height, final int scale,
+            final BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);
         setSprites(getTexturer().getFlyingKoopa());
         setSpeed(1 * scale);
@@ -22,9 +23,9 @@ public class FlyingKoopa extends Enemy {
     protected void updateCoords() {
         if (this.nMoves < NUMBER_OF_MOVES) {
             if (getDirection()) {
-                this.x -= this.speed;
+                setX(-getSpeed());
             } else {
-                this.x += this.speed;
+                setX(getSpeed());
             }
             this.nMoves++;
         }
@@ -35,7 +36,7 @@ public class FlyingKoopa extends Enemy {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(final Graphics g) {
         if (getDirection()) {
             g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
                     null);
