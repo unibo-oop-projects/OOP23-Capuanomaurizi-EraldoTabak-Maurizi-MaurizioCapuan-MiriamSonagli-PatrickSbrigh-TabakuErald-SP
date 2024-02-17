@@ -17,6 +17,7 @@ import it.unibo.superpeach.gameentities.powerups.PowerUp.PowerUpType;
 
 /**
  * This class implementes the player.
+ * 
  * @author Patrick Sbrighi
  */
 public abstract class Player implements GameObject {
@@ -60,15 +61,16 @@ public abstract class Player implements GameObject {
 
     /**
      * Class constructor.
-     * @param x X
-     * @param y Y
-     * @param width Widht
-     * @param height Height
-     * @param scale Scale dimension
-     * @param blocksHandler Blocks handler
-     * @param enemiesHandler Enemies handler
+     * 
+     * @param x               X
+     * @param y               Y
+     * @param width           Widht
+     * @param height          Height
+     * @param scale           Scale dimension
+     * @param blocksHandler   Blocks handler
+     * @param enemiesHandler  Enemies handler
      * @param powersUpHandler PowerUps handler
-     * @param scoreboard Scoreboard
+     * @param scoreboard      Scoreboard
      */
     public Player(final int x, final int y, final int width, final int height, final int scale,
             final BlocksHandler blocksHandler,
@@ -127,6 +129,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns the actual score.
+     * 
      * @return Return the actual score
      */
     public final int getScore() {
@@ -135,7 +138,9 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns the value of vertical movement.
-     * @return Return 0 if player doesn't move, num < 0 if player is jumping, num > 0 if player is falling
+     * 
+     * @return Return 0 if player doesn't move, num < 0 if player is jumping, num >
+     *         0 if player is falling
      */
     public final int getMoveY() {
         return this.moveY;
@@ -143,7 +148,9 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns the valure of orizzontal movement.
-     * @return Return 0 if player doesn't move, num<0 if player is moveing to the left, num>0 if player is moveing to the right
+     * 
+     * @return Return 0 if player doesn't move, num<0 if player is moveing to the
+     *         left, num>0 if player is moveing to the right
      */
     public final int getMoveX() {
         return this.moveX;
@@ -151,6 +158,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns the actual power up.
+     * 
      * @return Return null is there's no actual power up or a power up
      */
     public final PowerUpType getPowerUp() {
@@ -164,6 +172,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns if the player is jumping.
+     * 
      * @return Return if player is jumping
      */
     public final boolean hasJumped() {
@@ -172,6 +181,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns if the player won.
+     * 
      * @return Return if the player won
      */
     public final boolean hasWon() {
@@ -180,6 +190,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns if the player lost.
+     * 
      * @return Return if the player lost
      */
     public final boolean hasLost() {
@@ -210,6 +221,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method allows to set the vertical movement.
+     * 
      * @param moveY The new value of vertical movement
      */
     public final void setMoveY(final int moveY) {
@@ -218,6 +230,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method allows to set the horizontal movement.
+     * 
      * @param moveX The new value of horizonatl movement
      */
     public final void setMoveX(final int moveX) {
@@ -231,6 +244,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method allows to set if the player is jumping.
+     * 
      * @param jumped Is player jumping
      */
     public final void setHasJumped(final boolean jumped) {
@@ -238,7 +252,8 @@ public abstract class Player implements GameObject {
     }
 
     /**
-     * This method controls if player if the player has not yet finished the available jumps.
+     * This method controls if player if the player has not yet finished the
+     * available jumps.
      */
     public final void incrementConsecutiveJump() {
         if (this.consecutiveJumps + 1 <= CONSECUTIVE_JUMP) {
@@ -248,6 +263,7 @@ public abstract class Player implements GameObject {
 
     /**
      * This method returns if player can jump.
+     * 
      * @return Return if player can jump
      */
     public final boolean canJump() {
@@ -291,12 +307,9 @@ public abstract class Player implements GameObject {
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN) {
                 collisionsWithStaticBlocks(block);
-            } else if (block.getType() == BlockType.LUCKY) {
-                collisionsWithLucky(block);
-            } else if (block.getType() == BlockType.POPPED_LUCKY) {
-                collisionsWithPopped(block);
-            } else if (block.getType() == BlockType.BRICK) {
-                collisionsWithBrick(block);
+            } else if (block.getType() == BlockType.BRICK || block.getType() == BlockType.POPPED_LUCKY
+                    || block.getType() == BlockType.LUCKY) {
+                collisionsWithLuckBrickPopped(block);
             } else if (block.getType() == BlockType.DEATH_BLOCK) {
                 collisionsWithDeathBlock(block);
             } else if (block.getType() == BlockType.CASTLE_DOOR_BOT || block.getType() == BlockType.CASTLE_DOOR_TOP) {
@@ -318,16 +331,16 @@ public abstract class Player implements GameObject {
                 || block.getBoundingBox().contains(getTopBound())
                 || block.getBoundingBox().intersects(getBottomBound())
                 || block.getBoundingBox().contains(getBottomBound())) && !addedPointFlag) {
-                    addPoints(POINT_FLAG_POLE);
-                    addedPointFlag = true;
+            addPoints(POINT_FLAG_POLE);
+            addedPointFlag = true;
         }
     }
 
     private void collisionsWithFlagTip(final MapFixedBlock block) {
         if ((block.getBoundingBox().intersects(getTopBound())
                 || block.getBoundingBox().intersects(getLeftBound())) && !addedPointFlag) {
-                    addPoints(POINT_FLAG_TIP);
-                    addedPointFlag = true;
+            addPoints(POINT_FLAG_TIP);
+            addedPointFlag = true;
         }
     }
 
@@ -352,55 +365,16 @@ public abstract class Player implements GameObject {
         }
     }
 
-    private void collisionsWithBrick(final MapFixedBlock block) {
+    private void collisionsWithLuckBrickPopped(final MapFixedBlock block) {
         if (block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())) {
             setYCollisionTop(block);
-            if (currentPowerUp != null) {
+            if (currentPowerUp != null && block.getType() == BlockType.BRICK) {
                 addPoints(POINT_LUCKY_BRICK);
                 blocksHandler.removeFixedBlock(block);
+            } else if (block.getType() == BlockType.LUCKY) {
+                addPoints(POINT_LUCKY_BRICK);
+                block.popLuckyBlock(powerupsHandler, blocksHandler);
             }
-        } else if (block.getBoundingBox().contains(getBottomBound())) {
-            setYCollisionBottom(block);
-            resetCosecutiveJump();
-        } else if (block.getBoundingBox().contains(getLeftBound())) {
-            setXCollisionLeft(block);
-        } else if (block.getBoundingBox().contains(getRightBound())) {
-            setXCollisionRight(block);
-        } else if (block.getBoundingBox().intersects(getBottomBound())) {
-            setYCollisionBottom(block);
-            resetCosecutiveJump();
-        } else if (block.getBoundingBox().intersects(getLeftBound())) {
-            setXCollisionLeft(block);
-        } else if (block.getBoundingBox().intersects(getRightBound())) {
-            setXCollisionRight(block);
-        }
-    }
-
-    private void collisionsWithPopped(final MapFixedBlock block) {
-        if (block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())) {
-            setYCollisionTop(block);
-        } else if (block.getBoundingBox().contains(getBottomBound())) {
-            setYCollisionBottom(block);
-            resetCosecutiveJump();
-        } else if (block.getBoundingBox().contains(getLeftBound())) {
-            setXCollisionLeft(block);
-        } else if (block.getBoundingBox().contains(getRightBound())) {
-            setXCollisionRight(block);
-        } else if (block.getBoundingBox().intersects(getBottomBound())) {
-            setYCollisionBottom(block);
-            resetCosecutiveJump();
-        } else if (block.getBoundingBox().intersects(getLeftBound())) {
-            setXCollisionLeft(block);
-        } else if (block.getBoundingBox().intersects(getRightBound())) {
-            setXCollisionRight(block);
-        }
-    }
-
-    private void collisionsWithLucky(final MapFixedBlock block) {
-        if (block.getBoundingBox().contains(getTopBound()) || block.getBoundingBox().intersects(getTopBound())) {
-            setYCollisionTop(block);
-            addPoints(POINT_LUCKY_BRICK);
-            block.popLuckyBlock(powerupsHandler, blocksHandler);
         } else if (block.getBoundingBox().contains(getBottomBound())) {
             setYCollisionBottom(block);
             resetCosecutiveJump();
@@ -602,7 +576,7 @@ public abstract class Player implements GameObject {
     public abstract void moveRight();
 
     /**
-     * This method implements the jump. 
+     * This method implements the jump.
      */
     public abstract void jump();
 
