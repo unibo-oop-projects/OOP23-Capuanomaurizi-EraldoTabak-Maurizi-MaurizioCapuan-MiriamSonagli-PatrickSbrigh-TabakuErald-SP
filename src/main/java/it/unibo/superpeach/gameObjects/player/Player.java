@@ -38,19 +38,19 @@ public abstract class Player implements GameObject {
     private int y;
     private int scale;
     private boolean jumped;
-    private BlocksHandler blocksHandler;
-    private EnemiesHandler enemiesHandler;
-    private PowerupsHandler powerupsHandler;
-    private Scoreboard scoreboard;
+    private final BlocksHandler blocksHandler;
+    private final EnemiesHandler enemiesHandler;
+    private final PowerupsHandler powerupsHandler;
+    private final Scoreboard scoreboard;
     private int moveX;
     private int moveY;
-    private int paddingBound;
+    private final int paddingBound;
     private int point;
     private int life;
     private boolean addedPointFlag;
     private boolean addedPointWin;
-    private int respawnX;
-    private int respawnY;
+    private final int respawnX;
+    private final int respawnY;
     private int consecutiveJumps;
     private boolean hasWon;
     private boolean hasLost;
@@ -82,7 +82,7 @@ public abstract class Player implements GameObject {
         this.blocksHandler = blocksHandler;
         this.moveX = 0;
         this.moveY = 0;
-        this.paddingBound = PADDING * getScale();
+        this.paddingBound = PADDING * this.scale;
         this.enemiesHandler = enemiesHandler;
         this.scoreboard = scoreboard;
         this.point = 0;
@@ -286,7 +286,7 @@ public abstract class Player implements GameObject {
     }
 
     private void collisionsWithBlocks() {
-        for (MapFixedBlock block : blocksHandler.getBlocks()) {
+        for (final MapFixedBlock block : blocksHandler.getBlocks()) {
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN) {
@@ -310,28 +310,24 @@ public abstract class Player implements GameObject {
     }
 
     private void collisionsWithFlagPole(final MapFixedBlock block) {
-        if (block.getBoundingBox().intersects(getRightBound())
+        if ((block.getBoundingBox().intersects(getRightBound())
                 || block.getBoundingBox().contains(getRightBound())
                 || block.getBoundingBox().intersects(getLeftBound())
                 || block.getBoundingBox().contains(getLeftBound())
                 || block.getBoundingBox().intersects(getTopBound())
                 || block.getBoundingBox().contains(getTopBound())
                 || block.getBoundingBox().intersects(getBottomBound())
-                || block.getBoundingBox().contains(getBottomBound())) {
-            if (!addedPointFlag) {
-                addPoints(POINT_FLAG_POLE);
-                addedPointFlag = true;
-            }
+                || block.getBoundingBox().contains(getBottomBound())) && !addedPointFlag) {
+                    addPoints(POINT_FLAG_POLE);
+                    addedPointFlag = true;
         }
     }
 
     private void collisionsWithFlagTip(final MapFixedBlock block) {
-        if (block.getBoundingBox().intersects(getTopBound())
-                || block.getBoundingBox().intersects(getLeftBound())) {
-            if (!addedPointFlag) {
-                addPoints(POINT_FLAG_TIP);
-                addedPointFlag = true;
-            }
+        if ((block.getBoundingBox().intersects(getTopBound())
+                || block.getBoundingBox().intersects(getLeftBound())) && !addedPointFlag) {
+                    addPoints(POINT_FLAG_TIP);
+                    addedPointFlag = true;
         }
     }
 
@@ -445,10 +441,10 @@ public abstract class Player implements GameObject {
     }
 
     private void collisionsWithEnemies() {
-        for (Enemy enemy : enemiesHandler.getEnemies()) {
+        for (final Enemy enemy : enemiesHandler.getEnemies()) {
             if (touchedEnemy(enemy) && currentPowerUp != PowerUpType.STAR) {
                 loseLifeOrPowerUp();
-            } else if (killedEnemy(enemy) || (touchedEnemy(enemy) && currentPowerUp == PowerUpType.STAR)) {
+            } else if (killedEnemy(enemy) || touchedEnemy(enemy) && currentPowerUp == PowerUpType.STAR) {
                 addPoints(POINT_KILLED_ENEMY);
                 enemiesHandler.removeEnemy(enemy);
             }
@@ -456,7 +452,7 @@ public abstract class Player implements GameObject {
     }
 
     private void collisionsWithPowersUp() {
-        for (PowerUp power : powerupsHandler.getPowerups()) {
+        for (final PowerUp power : powerupsHandler.getPowerups()) {
             if (touchedPowerUp(power)) {
                 switch (power.getPowerUpType()) {
                     case COIN:
@@ -567,7 +563,7 @@ public abstract class Player implements GameObject {
 
     private Rectangle getTopBound() {
         if (currentPowerUp == PowerUpType.RED_MUSHROOM
-                || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
+                || currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM) {
             return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY(), getWidth() / 2,
                     (paddingBound) * ((paddingBound / getScale())));
         }
@@ -577,7 +573,7 @@ public abstract class Player implements GameObject {
 
     private Rectangle getBottomBound() {
         if (currentPowerUp == PowerUpType.RED_MUSHROOM
-                || (currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM)) {
+                || currentPowerUp == PowerUpType.STAR && lastPowerUp == PowerUpType.RED_MUSHROOM) {
             return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + getHeight() - paddingBound,
                     getWidth() / 2, paddingBound);
         }
@@ -586,13 +582,13 @@ public abstract class Player implements GameObject {
     }
 
     private Rectangle getLeftBound() {
-        return new Rectangle(getX(), getY() + (paddingBound), (paddingBound), getHeight() - 2 * (paddingBound));
+        return new Rectangle(getX(), getY() + paddingBound, paddingBound, getHeight() - 2 * paddingBound);
 
     }
 
     private Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - (paddingBound), getY() + (paddingBound), (paddingBound),
-                getHeight() - 2 * (paddingBound));
+        return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound,
+                getHeight() - 2 * paddingBound);
     }
 
     /**

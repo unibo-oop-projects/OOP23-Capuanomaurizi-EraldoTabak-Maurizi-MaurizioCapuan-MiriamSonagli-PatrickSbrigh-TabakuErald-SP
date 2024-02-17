@@ -1,6 +1,5 @@
 package it.unibo.superpeach.gameObjects.enemies;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -29,7 +28,6 @@ public abstract class Enemy implements GameObject {
     private int scale;
     private int width;
     private int height;
-    private Dimension dim;
     private boolean isFalling, direction, isAlive;
     private BlocksHandler blocksHandler;
     private Texturer texturer = Game.getTexturer();
@@ -83,7 +81,7 @@ public abstract class Enemy implements GameObject {
     /**
      * this method returns the bottom bound rectangle of the enemy.
      * 
-     * @return
+     * @return a Rectangle of the Bottom bound of the the enemy.
      */
     public Rectangle getBottomBound() {
         return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + (getHeight() - paddingBOUND),
@@ -93,7 +91,7 @@ public abstract class Enemy implements GameObject {
     /**
      * this method returns the left bound rectangle of the enemy.
      * 
-     * @return
+     * @return a rectangle of the left bound of the enemy.
      */
     public Rectangle getLeftBound() {
         return new Rectangle(getX(), getY() + paddingBOUND, paddingBOUND, getHeight() - 2 * paddingBOUND);
@@ -102,7 +100,7 @@ public abstract class Enemy implements GameObject {
     /**
      * this method returns the right bound of the enemy.
      * 
-     * @return
+     * @return a rectangle of the right bound of the enemy.
      */
     public Rectangle getRightBound() {
         return new Rectangle(getX() + getWidth() - paddingBOUND, getY() + paddingBOUND, paddingBOUND,
@@ -150,6 +148,7 @@ public abstract class Enemy implements GameObject {
         return this.direction;
     }
 
+    @Override
     public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
