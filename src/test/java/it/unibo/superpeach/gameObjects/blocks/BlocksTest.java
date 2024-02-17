@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.gameobjects.blocks.BlockType;
+import it.unibo.superpeach.gameobjects.blocks.MapFixedBlock;
 
 /**
  * Test class for Blocks

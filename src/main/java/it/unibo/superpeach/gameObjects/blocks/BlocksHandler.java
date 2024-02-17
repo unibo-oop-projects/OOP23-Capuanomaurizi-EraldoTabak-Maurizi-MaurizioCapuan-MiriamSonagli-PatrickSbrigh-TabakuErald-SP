@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameObjects.blocks;
+package it.unibo.superpeach.gameobjects.blocks;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

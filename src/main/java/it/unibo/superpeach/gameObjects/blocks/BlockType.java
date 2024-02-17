@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameObjects.blocks;
+package it.unibo.superpeach.gameobjects.blocks;
 
 /**
  * Enumeration defining each block type of the game,

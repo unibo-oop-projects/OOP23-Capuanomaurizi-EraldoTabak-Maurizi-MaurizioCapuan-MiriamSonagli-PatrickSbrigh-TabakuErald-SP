@@ -8,8 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameobjects.powerups.Coin;
+import it.unibo.superpeach.gameobjects.powerups.LifeMushroom;
+import it.unibo.superpeach.gameobjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameobjects.powerups.RedMushroom;
+import it.unibo.superpeach.gameobjects.powerups.Star;
 
 public class PowerupsHandlerTest {
     

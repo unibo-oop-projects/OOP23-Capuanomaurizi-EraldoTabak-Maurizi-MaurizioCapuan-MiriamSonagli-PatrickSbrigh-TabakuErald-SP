@@ -1,7 +1,8 @@
-package it.unibo.superpeach.gameObjects.powerups;
+package it.unibo.superpeach.gameobjects.powerups;
 
 import java.awt.Graphics;
-import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
+
+import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
 
 /**
  * Implementation of the LIFE MUSHROOM power up.

@@ -1,6 +1,6 @@
 package it.unibo.superpeach.level;
 
-import it.unibo.superpeach.gameObjects.player.Player;
+import it.unibo.superpeach.gameobjects.player.Player;
 
 /**
  * Implementation of an object that translates the Graphics view making it move with the player.

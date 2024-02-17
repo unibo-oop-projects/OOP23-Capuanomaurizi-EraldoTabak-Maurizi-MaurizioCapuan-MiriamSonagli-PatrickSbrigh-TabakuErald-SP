@@ -1,13 +1,13 @@
-package it.unibo.superpeach.gameObjects.blocks;
+package it.unibo.superpeach.gameobjects.blocks;
 
 import java.awt.Graphics;
 
-import it.unibo.superpeach.gameObjects.powerups.Coin;
-import it.unibo.superpeach.gameObjects.powerups.LifeMushroom;
-import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
-import it.unibo.superpeach.gameObjects.powerups.RedMushroom;
-import it.unibo.superpeach.gameObjects.powerups.Star;
-import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
+import it.unibo.superpeach.gameobjects.powerups.Coin;
+import it.unibo.superpeach.gameobjects.powerups.LifeMushroom;
+import it.unibo.superpeach.gameobjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameobjects.powerups.RedMushroom;
+import it.unibo.superpeach.gameobjects.powerups.Star;
+import it.unibo.superpeach.gameobjects.powerups.PowerUp.PowerUpType;
 
 /**
  * Blocks class that inherits from FixedBlock and represents lucky blocks

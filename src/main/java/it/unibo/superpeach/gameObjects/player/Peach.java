@@ -1,14 +1,14 @@
-package it.unibo.superpeach.gameObjects.player;
+package it.unibo.superpeach.gameobjects.player;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.game.Scoreboard;
-import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameObjects.enemies.EnemiesHandler;
-import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
-import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
+import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameobjects.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameobjects.powerups.PowerupsHandler;
+import it.unibo.superpeach.gameobjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.Texturer;
 
 /**

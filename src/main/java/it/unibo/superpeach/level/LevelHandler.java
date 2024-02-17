@@ -2,16 +2,16 @@ package it.unibo.superpeach.level;
 
 import java.awt.image.BufferedImage;
 
-import it.unibo.superpeach.gameObjects.blocks.BlockType;
-import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
-import it.unibo.superpeach.gameObjects.blocks.LuckyBlock;
-import it.unibo.superpeach.gameObjects.blocks.MapBackgroundBlock;
-import it.unibo.superpeach.gameObjects.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameObjects.enemies.EnemiesHandler;
-import it.unibo.superpeach.gameObjects.enemies.FlyingKoopa;
-import it.unibo.superpeach.gameObjects.enemies.Goomba;
-import it.unibo.superpeach.gameObjects.enemies.KoopaTroopa;
-import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
+import it.unibo.superpeach.gameobjects.blocks.BlockType;
+import it.unibo.superpeach.gameobjects.blocks.BlocksHandler;
+import it.unibo.superpeach.gameobjects.blocks.LuckyBlock;
+import it.unibo.superpeach.gameobjects.blocks.MapBackgroundBlock;
+import it.unibo.superpeach.gameobjects.blocks.MapFixedBlock;
+import it.unibo.superpeach.gameobjects.enemies.EnemiesHandler;
+import it.unibo.superpeach.gameobjects.enemies.FlyingKoopa;
+import it.unibo.superpeach.gameobjects.enemies.Goomba;
+import it.unibo.superpeach.gameobjects.enemies.KoopaTroopa;
+import it.unibo.superpeach.gameobjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.BufferedImageLoader;
 
 /**
