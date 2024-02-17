@@ -50,7 +50,8 @@ public abstract class Enemy implements GameObject {
         this.width = width * scale;
         this.height = height * scale;
         this.scale = scale;
-        setDimension(width * scale, height * scale);
+        this.width = width * scale;
+        this.height = height * scale;
         this.blocksHandler = blocksHandler;
         this.direction = false;
         this.isAlive = true;
@@ -73,12 +74,8 @@ public abstract class Enemy implements GameObject {
         return this.isFalling;
     }
 
-    public Dimension getDimension() {
-        return this.dim;
-    }
-
     public Rectangle getBounds() {
-        return new Rectangle(x, y, dim.width, dim.height);
+        return new Rectangle(x, y, this.width, this.height);
     }
 
     /**
@@ -119,11 +116,11 @@ public abstract class Enemy implements GameObject {
     }
 
     public int getWidth() {
-        return this.getDimension().width;
+        return this.width;
     }
 
     public int getHeight() {
-        return this.getDimension().height;
+        return this.height;
     }
 
     /**
@@ -147,13 +144,6 @@ public abstract class Enemy implements GameObject {
         return this.direction;
     }
 
-    /**
-     * @return enemy's Dimension.
-     */
-    public Dimension getDim() {
-        return dim;
-    }
-
     public Rectangle getBoundingBox() {
         return new Rectangle(x, y, width, height);
     }
@@ -170,14 +160,6 @@ public abstract class Enemy implements GameObject {
      */
     public void setIsFalling(final boolean fall) {
         this.isFalling = fall;
-    }
-
-    /**
-     * @param width  of the Dimension to set.
-     * @param height of the Dimension to set.
-     */
-    public void setDimension(final int width, final int height) {
-        this.dim = new Dimension(width, height);
     }
 
     public void setSprites(final BufferedImage[] sprites) {

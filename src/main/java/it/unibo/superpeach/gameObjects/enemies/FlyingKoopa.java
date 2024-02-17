@@ -46,10 +46,10 @@ public class FlyingKoopa extends Enemy {
     @Override
     public void render(final Graphics g) {
         if (getDirection()) {
-            g.drawImage(getSprites()[0], getX(), getY(), getDimension().width, getDimension().height,
+            g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(),
                     null);
         } else {
-            g.drawImage(getSprites()[1], getX(), getY(), getDimension().width, getDimension().height,
+            g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(),
                     null);
         }
     }
