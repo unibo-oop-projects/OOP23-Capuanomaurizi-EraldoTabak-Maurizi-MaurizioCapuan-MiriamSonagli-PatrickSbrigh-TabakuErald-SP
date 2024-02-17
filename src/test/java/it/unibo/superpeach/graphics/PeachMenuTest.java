@@ -21,8 +21,6 @@ public class PeachMenuTest {
         // VERIFICO SE IL MENU E' STATO CREATO CORRETTAMENTE
         assertNotNull(menu);
 
-        // VERIFICO
-
     }
-     
+
 }
