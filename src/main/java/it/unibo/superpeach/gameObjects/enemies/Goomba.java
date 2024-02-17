@@ -9,7 +9,7 @@ public class Goomba extends Enemy {
     public Goomba(final int x, final int y, final int width, final int height, final int scale,
             final BlocksHandler blocksHandler) {
         super(x, y, width, height, scale, blocksHandler);
-        setSpeed(1 * scale);
+        setSpeed(scale);
         setSprites(getTexturer().getGoombaImg());
         setIsFalling(false);
     }
