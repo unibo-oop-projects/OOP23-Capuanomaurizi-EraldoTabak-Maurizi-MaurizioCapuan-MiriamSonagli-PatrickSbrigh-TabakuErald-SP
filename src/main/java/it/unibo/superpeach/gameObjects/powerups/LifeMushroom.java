@@ -1,7 +1,6 @@
 package it.unibo.superpeach.gameObjects.powerups;
 
-import java.awt.*;
-
+import java.awt.Graphics;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
 public class LifeMushroom extends PowerUp {
@@ -14,7 +13,7 @@ public class LifeMushroom extends PowerUp {
 
     @Override
     public void render(final Graphics g) {
-        g.drawImage(getSprites()[1],getX(), getY(), getWidth(), getHeight(), null); 
+        g.drawImage(getSprites()[1], getX(), getY(), getWidth(), getHeight(), null); 
     }
 
     @Override

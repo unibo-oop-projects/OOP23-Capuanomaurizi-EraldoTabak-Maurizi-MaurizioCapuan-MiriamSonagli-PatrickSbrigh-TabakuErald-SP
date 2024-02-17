@@ -1,11 +1,12 @@
 package it.unibo.superpeach.graphics;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.io.File;
+import java.awt.Graphics;
+import javax.swing.JPanel;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 public class ImagePanel extends JPanel {
     private BufferedImage backgroundImage;

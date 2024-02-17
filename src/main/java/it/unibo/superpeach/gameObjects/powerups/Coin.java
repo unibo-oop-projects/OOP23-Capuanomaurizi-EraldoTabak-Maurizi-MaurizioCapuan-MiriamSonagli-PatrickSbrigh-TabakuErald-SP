@@ -1,7 +1,6 @@
 package it.unibo.superpeach.gameObjects.powerups;
 
-import java.awt.*;
-
+import java.awt.Graphics;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
 public class Coin extends PowerUp {
@@ -14,7 +13,7 @@ public class Coin extends PowerUp {
 
     @Override
     public void render(final Graphics g) {
-        g.drawImage(getSprites()[3],getX(), getY(), getWidth(), getHeight(), null); 
+        g.drawImage(getSprites()[3], getX(), getY(), getWidth(), getHeight(), null); 
     }
 
     @Override
