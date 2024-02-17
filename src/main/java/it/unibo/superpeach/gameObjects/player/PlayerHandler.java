@@ -5,31 +5,31 @@ import java.awt.Graphics;
 public class PlayerHandler {
     private Player player;
 
-    public int setPlayer(Player p){
-        if(this.player == null){
+    public int setPlayer(final Player p) {
+        if (this.player == null) {
             this.player = p;
             return 0;
         }
         return -1;
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return this.player;
     }
 
-    public int removePlayer(){
-        if(this.player != null){
+    public int removePlayer() {
+        if (this.player != null) {
             this.player = null;
             return 0;
         }
         return -1;
     }
 
-    public void tick(){
+    public void tick() {
         this.player.tick();
     }
 
-    public void render(Graphics g){
+    public void render(final Graphics g) {
         this.player.render(g);
     }
 }
