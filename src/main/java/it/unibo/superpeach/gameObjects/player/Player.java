@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import it.unibo.superpeach.game.Scoreboard;
+import it.unibo.superpeach.gameObjects.GameObject;
 import it.unibo.superpeach.gameObjects.blocks.Block;
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 import it.unibo.superpeach.gameObjects.blocks.MapFixedBlock;
@@ -14,7 +15,7 @@ import it.unibo.superpeach.gameObjects.powerups.PowerUp;
 import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 
-public abstract class Player {
+public abstract class Player implements GameObject{
     private static final int FALL_SPEED = 3;
     private static final int LIFE_START = 3;
     private static final int POINT_LUCKY_BRICK = 200;
@@ -82,22 +83,27 @@ public abstract class Player {
         this.lastPowerUp = null;
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
     }
 
+    @Override
     public int getWidth() {
         return this.width;
     }
 
+    @Override
     public int getHeight() {
         return this.height;
     }
 
+    @Override
     public int getScale() {
         return this.scale;
     }
@@ -116,6 +122,11 @@ public abstract class Player {
 
     public PowerUpType getPowerUp() {
         return this.currentPowerUp;
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        return new Rectangle(getX(),getY(),getWidth(),getHeight());
     }
 
     public Rectangle getTopBound() {
@@ -160,20 +171,24 @@ public abstract class Player {
         return this.hasLost;
     }
 
+    @Override
     public void setX(final int x) {
         if (x >= MIN_X && x <= MAX_X) {
             this.x = x * this.scale;
         }
     }
 
+    @Override
     public void setY(final int y) {
         this.y = y * this.scale;
     }
 
+    @Override
     public void setHeight(final int height) {
         this.height = height;
     }
-
+ 
+    @Override
     public void setWidth(final int width) {
         this.width = width;
     }
@@ -184,6 +199,11 @@ public abstract class Player {
 
     public void setMoveX(final int moveX) {
         this.moveX = moveX;
+    }
+
+    @Override
+    public void setScale(int scale) {
+        this.scale = scale;
     }
 
     public void setHasJumped(final boolean jumped) {
@@ -508,7 +528,9 @@ public abstract class Player {
 
     public abstract void jump();
 
+    @Override
     public abstract void render(Graphics g);
 
+    @Override
     public abstract void tick();
 }

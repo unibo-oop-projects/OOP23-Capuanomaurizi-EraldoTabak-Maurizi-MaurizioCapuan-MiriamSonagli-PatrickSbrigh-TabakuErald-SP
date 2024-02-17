@@ -11,6 +11,10 @@ import it.unibo.superpeach.gameObjects.powerups.PowerupsHandler;
 import it.unibo.superpeach.gameObjects.powerups.PowerUp.PowerUpType;
 import it.unibo.superpeach.graphics.Texturer;
 
+/**
+ * 
+ * @author Patrick Sbrighi
+ */
 public class Peach extends Player {
     private static final int SPEED_X = 4;
     private static final int JUMP_HEIGHT_NORM = 52;
@@ -32,12 +36,19 @@ public class Peach extends Player {
         this.sprite = texturer.getPeach();
     }
 
+    @Override
     public BufferedImage[] getSprites() {
         return this.sprite;
     }
 
-    public Texturer getPlayerTexture() {
+    @Override
+    public Texturer getTexturer() {
         return this.texturer;
+    }
+
+    @Override
+    public void setSprites(BufferedImage[] sprites) {
+        this.sprite = sprites;
     }
 
     @Override
