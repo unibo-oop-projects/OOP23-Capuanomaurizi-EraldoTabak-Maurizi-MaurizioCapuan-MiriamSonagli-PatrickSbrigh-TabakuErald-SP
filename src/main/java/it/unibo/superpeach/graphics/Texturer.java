@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 /**
  * Sprites manager class, loads from resource files sprites to draw.
  * 
- * @author  Maurizio Capuano
+ * @author Maurizio Capuano
  */
 public final class Texturer {
 
@@ -27,7 +27,7 @@ public final class Texturer {
     private static final int TILE_HEIGHT = 16;
     private static final int KOOPA_HEIGHT = 23;
 
-    private BufferedImageLoader loader;
+    private final BufferedImageLoader loader;
 
     private BufferedImage tileSet;
 
@@ -37,7 +37,8 @@ public final class Texturer {
     private BufferedImage[] powerups;
 
     /**
-     * Texturer construtctor which initializes images arrays and loads sprites inside of them.
+     * Texturer construtctor which initializes images arrays and loads sprites
+     * inside of them.
      */
     public Texturer() {
 
@@ -91,8 +92,8 @@ public final class Texturer {
     }
 
     private void loadTerrain() {
-        int x = 0;
-        int y = 16;
+        final int x = 0;
+        final int y = 16;
         int index = 0;
 
         for (int i = 0; i < BRICKSCASTLEBLOCKS_COUNT / 8; i++) {
@@ -124,8 +125,8 @@ public final class Texturer {
     }
 
     private void loadCloud() {
-        int x = 298;
-        int y = 16;
+        final int x = 298;
+        final int y = 16;
         int index = 0;
 
         for (int i = 0; i < CLOUDBLOCKS_COUNT / 3; i++) {
@@ -138,8 +139,8 @@ public final class Texturer {
     }
 
     private void loadBush() {
-        int x = 0;
-        int y = 213;
+        final int x = 0;
+        final int y = 213;
 
         for (int i = 0; i < BUSHBLOCKS_COUNT; i++) {
             bush[i] = tileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
@@ -149,8 +150,8 @@ public final class Texturer {
     private void loadHill() {
         hill[0] = tileSet.getSubimage(34, 230, TILE_WIDTH, TILE_HEIGHT);
 
-        int x = 0;
-        int y = 247;
+        final int x = 0;
+        final int y = 247;
 
         for (int i = 0; i < HILLBLOCKS_COUNT - 1; i++) {
             hill[i + 1] = tileSet.getSubimage(x + i * (TILE_WIDTH + 1), y, TILE_WIDTH, TILE_HEIGHT);
@@ -263,7 +264,7 @@ public final class Texturer {
     }
 
     /**
-     * @return flying koopa  (turtle) sprites
+     * @return flying koopa (turtle) sprites
      */
     public BufferedImage[] getFlyingKoopa() {
         return flyingKoopa.clone();
@@ -273,6 +274,6 @@ public final class Texturer {
      * @return powerups sprites
      */
     public BufferedImage[] getPowerups() {
-        return powerups;
+        return powerups.clone();
     }
 }

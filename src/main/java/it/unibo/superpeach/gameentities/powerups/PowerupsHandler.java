@@ -12,13 +12,13 @@ import java.util.Set;
  */
 public class PowerupsHandler {
 
-    private List<PowerUp> powerups;
+    private final List<PowerUp> powerups;
 
     /**
      * initializes a new list of power ups.
      */
     public PowerupsHandler() {
-        powerups = new ArrayList<PowerUp>();
+        powerups = new ArrayList<>();
     }
 
     /**
@@ -26,15 +26,15 @@ public class PowerupsHandler {
      * if they die they are removed.
      */
     public final void tickPowerups() {
-        Set<PowerUp> powerupsToRemove = new HashSet<>();
-        for (PowerUp powerUp : powerups) {
+        final Set<PowerUp> powerupsToRemove = new HashSet<>();
+        for (final PowerUp powerUp : powerups) {
             powerUp.tick();
             if (!powerUp.isAlive()) {
                 powerupsToRemove.add(powerUp);
             }
         }
 
-        for (PowerUp powerUp : powerupsToRemove) {
+        for (final PowerUp powerUp : powerupsToRemove) {
             powerups.remove(powerUp);
         }
     }
@@ -44,7 +44,7 @@ public class PowerupsHandler {
      * @param g
      */
     public final void renderPowerups(final Graphics g) {
-        for (PowerUp powerup : powerups) {
+        for (final PowerUp powerup : powerups) {
             powerup.render(g);
         }
     }

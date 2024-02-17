@@ -5,32 +5,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Blocks handler class with manages two lists that contains every block of the game.
+ * Blocks handler class with manages two lists that contains every block of the
+ * game.
  * 
  * @author Maurizio Capuano
  */
 public final class BlocksHandler {
 
-    private List<MapFixedBlock> fixedBlocks;
-    private List<Block> backgroundBlocks;
+    private final List<MapFixedBlock> fixedBlocks;
+    private final List<Block> backgroundBlocks;
 
     /**
-     *  Constructor which initializes lists.
+     * Constructor which initializes lists.
      */
     public BlocksHandler() {
-        fixedBlocks = new ArrayList<MapFixedBlock>();
-        backgroundBlocks = new ArrayList<Block>();
+        fixedBlocks = new ArrayList<>();
+        backgroundBlocks = new ArrayList<>();
     }
 
     /**
      * Renderization of every block.
+     * 
      * @param g Graphics reference
      */
     public void renderBlocks(final Graphics g) {
-        for (MapFixedBlock block : fixedBlocks) {
+        for (final MapFixedBlock block : fixedBlocks) {
             block.render(g);
         }
-        for (Block block : backgroundBlocks) {
+        for (final Block block : backgroundBlocks) {
             block.render(g);
         }
     }
@@ -57,7 +59,7 @@ public final class BlocksHandler {
     }
 
     /**
-     * @return a safe copy of the FixedBlocks list 
+     * @return a safe copy of the FixedBlocks list
      */
     public List<MapFixedBlock> getBlocks() {
         return List.copyOf(fixedBlocks);
