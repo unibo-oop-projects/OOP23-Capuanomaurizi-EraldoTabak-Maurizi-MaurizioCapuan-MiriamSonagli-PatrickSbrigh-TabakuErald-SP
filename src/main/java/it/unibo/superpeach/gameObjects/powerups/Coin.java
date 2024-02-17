@@ -4,20 +4,20 @@ import java.awt.*;
 
 import it.unibo.superpeach.gameObjects.blocks.BlocksHandler;
 
-public class Coin extends PowerUp{
+public class Coin extends PowerUp {
 
-    public Coin (int x, int y, int w, int h, int s, BlocksHandler blocksHandler) {
+    public Coin(final int x, final int y, final int w, final int h, final int s, final BlocksHandler blocksHandler) {
         super(x, y, w, h, s, blocksHandler, PowerUpType.COIN);
         setMovement(0);
         setIsFalling(false);
     }
 
     @Override
-    public void render(Graphics g) {
-        g.drawImage(getSprites()[3],getX(), getY(), getWidth(), getHeight(), null);
+    public void render(final Graphics g) {
+        g.drawImage(getSprites()[3],getX(), getY(), getWidth(), getHeight(), null); 
     }
 
     @Override
-    public void tick() {}
+    public void tick() { }
 
 }

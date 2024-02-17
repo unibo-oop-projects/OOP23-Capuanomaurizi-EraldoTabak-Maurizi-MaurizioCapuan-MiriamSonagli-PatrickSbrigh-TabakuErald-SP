@@ -12,45 +12,46 @@ public class Keyboard extends KeyAdapter {
     private long current;
     private final Game game;
 
-    public Keyboard(PlayerHandler handler, Game game){
+    public Keyboard(final PlayerHandler handler, final Game game) {
         this.playHand = handler;
         this.current = System.currentTimeMillis();
         this.game = game;
     }
-    
+
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(final KeyEvent e) {
         int pressed = e.getKeyCode();
-    
-        if(pressed == KeyEvent.VK_SPACE){
-            if(!playHand.getPlayer().hasJumped() && (System.currentTimeMillis() - current)>=MIN_MILLS){
+
+        if (pressed == KeyEvent.VK_SPACE) {
+            if (!playHand.getPlayer().hasJumped() && (System.currentTimeMillis() - current) >= MIN_MILLS) {
                 current = System.currentTimeMillis();
                 playHand.getPlayer().jump();
             }
         }
-        
-        if(pressed == KeyEvent.VK_A){
+
+        if (pressed == KeyEvent.VK_A) {
             playHand.getPlayer().moveLeft();
         }
-        
-        if(pressed == KeyEvent.VK_D){
+
+        if (pressed == KeyEvent.VK_D) {
             playHand.getPlayer().moveRight();
         }
-        
-        if(pressed == KeyEvent.VK_ESCAPE){
+
+        if (pressed == KeyEvent.VK_ESCAPE) {
             game.restart();
         }
     }
+
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         int pressed = e.getKeyCode();
-    
-        if(pressed == KeyEvent.VK_SPACE){
+
+        if (pressed == KeyEvent.VK_SPACE) {
             playHand.getPlayer().setHasJumped(false);
         }
-        
-        if(pressed == KeyEvent.VK_A || pressed == KeyEvent.VK_D){
-            playHand.getPlayer().setMoveX(0);;
+
+        if (pressed == KeyEvent.VK_A || pressed == KeyEvent.VK_D) {
+            playHand.getPlayer().setMoveX(0);
         }
     }
 }

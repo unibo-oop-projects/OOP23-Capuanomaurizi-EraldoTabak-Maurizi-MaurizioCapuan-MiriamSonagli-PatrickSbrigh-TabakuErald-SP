@@ -11,7 +11,7 @@ import it.unibo.superpeach.graphics.Texturer;
 
 public abstract class PowerUp implements GameObject {
 
-    public enum PowerUpType { RED_MUSHROOM, STAR, LIFE_MUSHROOM, COIN};
+    public enum PowerUpType { RED_MUSHROOM, STAR, LIFE_MUSHROOM, COIN };
 
     private static final int FALL_SPEED = 1;
 
@@ -27,22 +27,21 @@ public abstract class PowerUp implements GameObject {
     private PowerUpType powerUpType;
     private BlocksHandler blocksHandler;
 
-    private int PADDING_BOUND;
+    private int paddingBound;
     private Texturer texturer = Game.getTexturer();
     private BufferedImage[] image = texturer.getPowerups();
-    
-    public PowerUp(int x, int y, int w, int h, int s, BlocksHandler blocksHandler, PowerUpType type) {
-        this.x = x*s;
-        this.y = y*s;
-        this.width = w*s;
-        this.height = h*s;
+    public PowerUp(final int x, final int y, final int w, final int h, final int s, final BlocksHandler blocksHandler, final PowerUpType type) {
+        this.x = x * s;
+        this.y = y * s;
+        this.width = w * s;
+        this.height = h * s;
         this.scale = s;
         this.isFalling = false;
         this.isAlive = true;
         this.direction = false;
         this.powerUpType = type;
         this.blocksHandler = blocksHandler;
-        this.PADDING_BOUND = 4*scale;
+        this.paddingBound = 4 * scale;
     }
 
     public abstract void render(Graphics g);
@@ -53,7 +52,7 @@ public abstract class PowerUp implements GameObject {
         return texturer;
     }
 
-    public void setTextures(Texturer texturer) {
+    public void setTextures(final Texturer texturer) {
         this.texturer = texturer;
     }
 
@@ -61,23 +60,23 @@ public abstract class PowerUp implements GameObject {
         return image;
     }
     
-    public void setSprites(BufferedImage[] image) {
+    public void setSprites(final BufferedImage[] image) {
         this.image = image;
     }
 
-    public void setX(int x) {
+    public void setX(final int x) {
         this.x = x * scale;
     }
 
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y * scale;
     }
 
-    public void setWidth(int w) {
+    public void setWidth(final int w) {
         this.width = w;
     }
 
-    public void setHeight(int h) {
+    public void setHeight(final int h) {
         this.height = h;
     }
 
@@ -105,11 +104,11 @@ public abstract class PowerUp implements GameObject {
         return this.scale;
     }
 
-    public void setScale(int scale) {
+    public void setScale(final int scale) {
         this.scale = scale;
     }
 
-    public void setMovement(int movement) {
+    public void setMovement(final int movement) {
         this.movement = movement;
     }
 
@@ -117,7 +116,7 @@ public abstract class PowerUp implements GameObject {
         return this.movement;
     }
 
-    public void setIsFalling(boolean fall) {
+    public void setIsFalling(final boolean fall) {
         this.isFalling = fall;
     }
     
@@ -162,41 +161,42 @@ public abstract class PowerUp implements GameObject {
     }
 
     public Rectangle getBottomBound() {
-        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, getY() + (getHeight() - PADDING_BOUND),
-                getWidth() / 2, PADDING_BOUND);
+        return new Rectangle(getX() + getWidth() / 2 - getWidth() / 4, 
+                getY() + (getHeight() - paddingBound),
+                getWidth() / 2, paddingBound);
     }
 
     public Rectangle getLeftBound() {
-        return new Rectangle(getX(), getY() + PADDING_BOUND, PADDING_BOUND, getHeight() - 2 * PADDING_BOUND);
+        return new Rectangle(getX(), getY() + paddingBound, paddingBound, getHeight() - 2 * paddingBound);
     }
 
     public Rectangle getRightBound() {
-        return new Rectangle(getX() + getWidth() - PADDING_BOUND, getY() + PADDING_BOUND, PADDING_BOUND, getHeight() - 2 * PADDING_BOUND);
+        return new Rectangle(getX() + getWidth() - paddingBound, getY() + paddingBound, paddingBound, getHeight() - 2 * paddingBound);
     }
 
     public int getPaddingBound() {
-        return PADDING_BOUND;
+        return paddingBound;
     }
 
     public BlocksHandler getBlocksHandler() {
         return blocksHandler;
     }
 
-    public void setBlocksHandler(BlocksHandler blocksHandler) {
+    public void setBlocksHandler(final BlocksHandler blocksHandler) {
         this.blocksHandler = blocksHandler;
     }
 
-    private void setYCollisionBottom(Block block) {
+    private void setYCollisionBottom(final Block block) {
         setY(block.getY() / scale - getHeight() / scale);
         setIsFalling(false);
     }
 
-    private void setXCollisionLeft(Block block) {
+    private void setXCollisionLeft(final Block block) {
         setX((block.getX() + block.getWidth()) / getScale());
         changeDirection();
     }
 
-    private void setXCollisionRight(Block block) {
+    private void setXCollisionRight(final Block block) {
         setX((block.getX() - getWidth()) / getScale());
         changeDirection();
     }
@@ -211,7 +211,8 @@ public abstract class PowerUp implements GameObject {
             if (block.getType() == BlockType.PIPE_LEFT || block.getType() == BlockType.PIPE_RIGHT
                     || block.getType() == BlockType.PIPE_TOP_LEFT || block.getType() == BlockType.PIPE_TOP_RIGHT
                     || block.getType() == BlockType.STONE || block.getType() == BlockType.TERRAIN
-                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.LUCKY || block.getType() == BlockType.BRICK) {
+                    || block.getType() == BlockType.POPPED_LUCKY || block.getType() == BlockType.LUCKY 
+                    || block.getType() == BlockType.BRICK) {
                 if (block.getBoundingBox().contains(getLeftBound())) {
                     setXCollisionLeft(block);
                 } else if (block.getBoundingBox().contains(getRightBound())) {
