@@ -58,24 +58,26 @@ public abstract class Enemy implements GameObject {
         this.paddingBOUND *= scale;
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
     }
 
+    @Override
     public int getScale() {
         return scale;
     }
 
+    /**
+     * @return a boolean for the enemy falling or not status
+     */
     public boolean getIsFalling() {
         return this.isFalling;
-    }
-
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, this.width, this.height);
     }
 
     /**
@@ -107,18 +109,22 @@ public abstract class Enemy implements GameObject {
                 getHeight() - 2 * paddingBOUND);
     }
 
+    @Override
     public BufferedImage[] getSprites() {
         return this.sprites;
     }
 
+    @Override
     public Texturer getTexturer() {
         return texturer;
     }
 
+    @Override
     public int getWidth() {
         return this.width;
     }
 
+    @Override
     public int getHeight() {
         return this.height;
     }
@@ -162,22 +168,27 @@ public abstract class Enemy implements GameObject {
         this.isFalling = fall;
     }
 
+    @Override
     public void setSprites(final BufferedImage[] sprites) {
         this.sprites = sprites;
     }
 
+    @Override
     public void setY(final int y) {
         this.y = y * scale;
     }
 
+    @Override
     public void setX(final int x) {
         this.x = x * scale;
     }
 
+    @Override
     public void setWidth(final int width) {
         this.width = width;
     }
 
+    @Override
     public void setHeight(final int height) {
         this.height = height;
     }
