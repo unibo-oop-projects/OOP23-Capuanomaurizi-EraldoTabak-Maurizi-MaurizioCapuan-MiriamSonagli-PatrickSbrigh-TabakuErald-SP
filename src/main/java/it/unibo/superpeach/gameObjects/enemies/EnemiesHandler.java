@@ -15,6 +15,9 @@ public class EnemiesHandler {
 
     private List<Enemy> enemies;
 
+    /**
+     * EnemiesHandler costructor method that creates a new array of enemies.
+     */
     public EnemiesHandler() {
         enemies = new ArrayList<Enemy>();
     }
