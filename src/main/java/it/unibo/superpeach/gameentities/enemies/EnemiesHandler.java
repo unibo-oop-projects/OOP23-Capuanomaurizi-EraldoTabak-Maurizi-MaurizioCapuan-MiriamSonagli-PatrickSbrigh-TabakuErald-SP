@@ -29,7 +29,7 @@ public class EnemiesHandler {
         final Set<Enemy> enemiesToRemove = new HashSet<>();
         for (final Enemy enemy : enemies) {
             enemy.tick();
-            if (!enemy.getIsAlive()) {
+            if (!enemy.isAlive()) {
                 enemiesToRemove.add(enemy);
             }
         }

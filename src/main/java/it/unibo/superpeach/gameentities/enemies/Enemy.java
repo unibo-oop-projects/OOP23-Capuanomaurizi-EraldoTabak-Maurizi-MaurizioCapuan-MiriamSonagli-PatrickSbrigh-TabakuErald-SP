@@ -144,7 +144,7 @@ public abstract class Enemy implements GameObject {
     /**
      * @return enemy's direction.
      */
-    public boolean getDirection() {
+    public boolean isDirectionLeft() {
         return this.direction;
     }
 
@@ -156,7 +156,7 @@ public abstract class Enemy implements GameObject {
     /**
      * @return boolean indicating enemies isAlive status.
      */
-    public boolean getIsAlive() {
+    public boolean isAlive() {
         return this.isAlive;
     }
 
@@ -263,7 +263,7 @@ public abstract class Enemy implements GameObject {
      * this method changes the enemy coordinates.
      */
     protected void updateCoords() {
-        if (getDirection()) {
+        if (isDirectionLeft()) {
             this.x -= this.speed;
         } else {
             this.x += this.speed;

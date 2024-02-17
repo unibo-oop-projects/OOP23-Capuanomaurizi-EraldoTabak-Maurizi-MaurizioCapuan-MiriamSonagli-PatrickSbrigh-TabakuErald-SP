@@ -63,7 +63,7 @@ public class EnemiesHandlerTest {
         assertEquals(blocksHandler, enemiesHandler1.getEnemies().get(0).getBlocksHandler());
 
         // Checking if the enemy is alive
-        assertTrue(enemiesHandler1.getEnemies().get(0).getIsAlive());
+        assertTrue(enemiesHandler1.getEnemies().get(0).isAlive());
 
         // Removing the previosly added enemy
         enemiesHandler1.removeEnemy(enemiesHandler1.getEnemies().get(0));
@@ -144,7 +144,7 @@ public class EnemiesHandlerTest {
         // to check if dead enemies are removed automatically correctly
         enemiesHandler4.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, blocksHandler));
         enemiesHandler4.getEnemies().get(0).die();
-        assertFalse(enemiesHandler4.getEnemies().get(0).getIsAlive());
+        assertFalse(enemiesHandler4.getEnemies().get(0).isAlive());
         enemiesHandler4.tickEnemies();
 
         assertEquals(0, enemiesHandler4.getEnemies().size());

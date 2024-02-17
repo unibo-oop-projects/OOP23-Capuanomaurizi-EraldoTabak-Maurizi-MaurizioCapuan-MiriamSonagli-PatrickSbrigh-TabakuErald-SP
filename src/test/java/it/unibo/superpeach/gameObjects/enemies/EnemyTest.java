@@ -63,14 +63,14 @@ public class EnemyTest {
         assertEquals(X3 * SCALE2, fkoopa.getX());
 
         // Checking direction changes
-        assertFalse(fkoopa.getDirection());
+        assertFalse(fkoopa.isDirectionLeft());
         fkoopa.changeDirection();
-        assertTrue(fkoopa.getDirection());
+        assertTrue(fkoopa.isDirectionLeft());
 
         // Checking enemy "alive" status
-        assertTrue(goomba.getIsAlive());
+        assertTrue(goomba.isAlive());
         goomba.die();
-        assertFalse(goomba.getIsAlive());
+        assertFalse(goomba.isAlive());
 
     }
 
@@ -87,11 +87,11 @@ public class EnemyTest {
 
         Enemy koopa = new KoopaTroopa(X1, Y1 - 1, WIDTH, KOOPA_HEIGHT, SCALE1, bh);
 
-        assertTrue(koopa.getIsAlive());
+        assertTrue(koopa.isAlive());
 
         // Checking if the enemy is alive after the collision
         koopa.collision();
-        assertFalse(koopa.getIsAlive());
+        assertFalse(koopa.isAlive());
 
     }
 
@@ -107,11 +107,11 @@ public class EnemyTest {
 
         assertEquals(X2, goomba.getX());
         assertEquals(Y2, goomba.getY());
-        assertFalse(goomba.getDirection());
+        assertFalse(goomba.isDirectionLeft());
 
         goomba.collision();
 
-        assertTrue(goomba.getDirection());
+        assertTrue(goomba.isDirectionLeft());
         assertEquals(X2, goomba.getX());
         assertEquals(Y2, goomba.getY());
 

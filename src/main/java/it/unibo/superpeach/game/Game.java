@@ -27,7 +27,7 @@ public final class Game extends Canvas implements Runnable {
     private static int gameScale = 2;
 
     private static final int MILLS_PER_SECOND = 1000;
-    private static final int NANOS_PER_SECOND = 1000000000;
+    private static final int NANOS_PER_SECOND = 1_000_000_000;
     private static final int GRAPHICS_BUFFERS = 3;
     private static final double TICKS_PER_SECOND = 60.0;
     private static final String GAME_NAME = "Super Peach";

@@ -38,7 +38,7 @@ public final class FlyingKoopa extends Enemy {
     @Override
     protected void updateCoords() {
         if (this.nMoves < NUMBER_OF_MOVES) {
-            if (getDirection()) {
+            if (isDirectionLeft()) {
                 setX((getX() - getSpeed()) / getScale());
             } else {
                 setX((getX() + getSpeed()) / getScale());
@@ -53,7 +53,7 @@ public final class FlyingKoopa extends Enemy {
 
     @Override
     public void render(final Graphics g) {
-        if (getDirection()) {
+        if (isDirectionLeft()) {
             g.drawImage(getSprites()[0], getX(), getY(), getWidth(), getHeight(),
                     null);
         } else {
