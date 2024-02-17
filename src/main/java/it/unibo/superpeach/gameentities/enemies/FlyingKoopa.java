@@ -9,7 +9,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * 
  * @author Eraldo Tabaku
  */
-public class FlyingKoopa extends Enemy {
+public final class FlyingKoopa extends Enemy {
 
     private static final int NUMBER_OF_MOVES = 50;
 
