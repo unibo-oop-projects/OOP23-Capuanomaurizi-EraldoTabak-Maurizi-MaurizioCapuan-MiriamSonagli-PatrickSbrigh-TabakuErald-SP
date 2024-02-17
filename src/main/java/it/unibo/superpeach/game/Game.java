@@ -84,6 +84,7 @@ public class Game extends Canvas implements Runnable {
     public void restart() {
         stop();
         window.closeWindow();
+        window.stopBackgroundMusic();
         window = new PeachMenu(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SCALE, new Game());
     }
 
