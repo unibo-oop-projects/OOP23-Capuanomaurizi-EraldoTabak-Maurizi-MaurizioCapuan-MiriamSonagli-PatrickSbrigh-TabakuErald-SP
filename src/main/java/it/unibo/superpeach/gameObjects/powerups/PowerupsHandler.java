@@ -15,7 +15,7 @@ public class PowerupsHandler {
     private List<PowerUp> powerups;
 
     /**
-     * initializes a new list of power ups
+     * initializes a new list of power ups.
      */
     public PowerupsHandler() {
         powerups = new ArrayList<PowerUp>();
@@ -40,7 +40,7 @@ public class PowerupsHandler {
     }
 
     /**
-     * Method that draws all the power ups in the list
+     * Method that draws all the power ups in the list.
      * @param g
      */
     public void renderPowerups(final Graphics g) {
@@ -50,7 +50,7 @@ public class PowerupsHandler {
     }
 
     /**
-     * adds a power up to the power ups handler
+     * adds a power up to the power ups handler.
      * @param p
      */
     public void addPowerUp(final PowerUp p) {
@@ -58,7 +58,7 @@ public class PowerupsHandler {
     }
 
     /**
-     * removes a power up from the power ups handler 
+     * removes a power up from the power ups handler.
      * @param p
      */
     public void removePowerUp(final PowerUp p) {
@@ -66,7 +66,7 @@ public class PowerupsHandler {
     }
 
     /**
-     * @return a copy of the power up list
+     * @return a copy of the power up list.
      */
     public List<PowerUp> getPowerups() {
         return List.copyOf(powerups);

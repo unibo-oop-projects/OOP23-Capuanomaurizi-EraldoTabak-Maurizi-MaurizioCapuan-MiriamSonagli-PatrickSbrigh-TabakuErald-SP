@@ -28,12 +28,24 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Implementation of the starting menu of the game.
+ * @author  Miriam Sonaglia
+ */
 public class PeachMenu {
 
     private JFrame frame;
     private Dimension size;
     private Clip clip;
 
+    /**
+     * It creates a new menu with a title and a dimention that can be resized.
+     * @param title
+     * @param width
+     * @param height
+     * @param scale
+     * @param game
+     */
     public PeachMenu(final String title, final int width, final int height, final int scale, final Game game) {
         size = new Dimension(width * scale, height * scale);
         frame = new JFrame(title);
@@ -62,7 +74,10 @@ public class PeachMenu {
         panel.add(titleLabel);
         panel.add(Box.createVerticalStrut(20 * scale));
 
-        // START GAME BUTTON
+        /**
+         * Creation of the START button.
+         * If clicked it starts the game.
+         */
         CustomButton startButton = new CustomButton("START GAME", customColor, customColor1, scale);
         startButton.addActionListener(new ActionListener() {
             @Override
@@ -96,6 +111,9 @@ public class PeachMenu {
             }
         });
 
+        /**
+         * Creation of the combo box that permits to choose the size of the menu.
+        */
         guiComboBox.setPreferredSize(startButton.getPreferredSize());
         guiComboBox.setMaximumSize(startButton.getPreferredSize());
         guiComboBox.addActionListener(new ActionListener() {
@@ -131,6 +149,9 @@ public class PeachMenu {
         panel.add(guiComboBox);
         panel.add(Box.createVerticalStrut(10 * scale));
 
+        /**
+         * Creation of the combo box that permits to choose between 3 songs to be played.
+        */
         String sound1 = new String("src/main/resources/it/unibo/superpeach/music/sound1.wav");
         String sound2 = new String("src/main/resources/it/unibo/superpeach/music/sound2.wav");
         String sound3 = new String("src/main/resources/it/unibo/superpeach/music/sound3.wav");
@@ -187,6 +208,10 @@ public class PeachMenu {
         panel.add(songComboBox);
         panel.add(Box.createVerticalStrut(10 * scale));
 
+        /**
+         * Creation of the START button.
+         * If clicked it closes the menu.
+         */
         CustomButton exitButton = new CustomButton("EXIT", customColor, customColor1, scale);
         exitButton.addActionListener(new ActionListener() {
             @Override
@@ -201,12 +226,13 @@ public class PeachMenu {
         frame.setVisible(true);
     }
 
+    /**
+     * It plays the selected song if there's no other song playing.
+     * If there's one playing it stops it.
+     * @param songFilePath
+     */
     private void playSong(final String songFilePath) {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-            clip.close();
-        }
-
+        stopBackgroundMusic();
         try {
             File audioFile = new File(songFilePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -218,6 +244,9 @@ public class PeachMenu {
         }
     }
 
+    /**
+     * It stops the music already playing in background.
+     */
     public void stopBackgroundMusic() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
@@ -225,6 +254,9 @@ public class PeachMenu {
         }
     }
 
+    /**
+     * It closes the window.
+     */
     public void closeWindow() {
         frame.setVisible(false);
         frame.dispose();

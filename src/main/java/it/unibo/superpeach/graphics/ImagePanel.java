@@ -8,9 +8,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
+/**
+ * Implementation of a panel with an image on the background.
+ * @author  Miriam Sonaglia
+ */
 public class ImagePanel extends JPanel {
     private BufferedImage backgroundImage;
 
+    /**
+     * reads the path of the image, if it doesn't exist it throws an exception.
+     * @param imagePath
+     */
     public ImagePanel(final String imagePath) {
         try {
             backgroundImage = ImageIO.read(new File(imagePath));
