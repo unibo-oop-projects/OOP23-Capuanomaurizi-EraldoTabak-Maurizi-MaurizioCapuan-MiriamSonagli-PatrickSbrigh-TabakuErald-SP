@@ -49,7 +49,5 @@ class PlayerHandlerTest {
                 new Scoreboard(1, COINS, SCALE));
         pHandler.takePlayer(peach);
         assertNotNull(pHandler.getPlayer());
-        pHandler.removePlayer();
-        // assertEquals(-1, pHandler.takePlayer(peach));
     }
 }
