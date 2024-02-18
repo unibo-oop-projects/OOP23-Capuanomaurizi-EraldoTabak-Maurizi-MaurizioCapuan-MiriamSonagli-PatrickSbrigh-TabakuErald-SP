@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.logging.Logger;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
 import it.unibo.superpeach.gameentities.player.Peach;
@@ -23,6 +24,12 @@ import it.unibo.superpeach.level.LevelHandler;
  * 
  * @author  Maurizio Capuano
  */
+@SuppressFBWarnings(
+    value = {
+        "H", "D", "ST"
+    },
+    justification = "Static fields assignments wich lead the whole game running (e. g. getTexturer())"
+    )
 public final class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 10L;
@@ -121,6 +128,12 @@ public final class Game extends Canvas implements Runnable {
     /**
      * Override of Thread run() method, implementing the actual game loop with framerate and tickrate.
      */
+    @SuppressFBWarnings(
+        value = {
+            "M", "C", "FL"
+        },
+        justification = "Cannot avoid using delta in while() loop since its value oscillates between approximately 0 and 1"
+        )
     @Override
     public void run() {
         long lastTime = System.nanoTime();
