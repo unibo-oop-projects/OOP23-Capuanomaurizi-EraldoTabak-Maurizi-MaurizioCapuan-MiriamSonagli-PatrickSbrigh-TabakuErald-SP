@@ -3,7 +3,6 @@ package it.unibo.superpeach.gameentities.blocks;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ import it.unibo.superpeach.game.Game;
  *
  * @author Eraldo Tabaku
  */
-final class BlockHandlerTest {
+final class BlocksHandlerTest {
 
     private static final int X = 1;
     private static final int Y = 1;
