@@ -40,7 +40,7 @@ public final class Peach extends Player {
      * @param height          Height
      * @param scale           Scale of dimension
      * @param blocksHandler   Blocks handler
-     * @param playerHandler   Enemies handler
+     * @param enemiesHandler  Enemies handler
      * @param powerUpsHandler Power up handler
      * @param scoreboard      Scoreboard
      */
