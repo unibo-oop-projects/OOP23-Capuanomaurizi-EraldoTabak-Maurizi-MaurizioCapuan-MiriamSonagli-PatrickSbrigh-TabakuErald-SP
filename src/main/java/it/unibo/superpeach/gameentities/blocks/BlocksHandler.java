@@ -54,7 +54,7 @@ public final class BlocksHandler {
     /**
      * @param b Block to remove
      */
-    public void removeFixedBlock(final Block b) {
+    public void removeFixedBlock(final MapFixedBlock b) {
         fixedBlocks.remove(b);
     }
 
