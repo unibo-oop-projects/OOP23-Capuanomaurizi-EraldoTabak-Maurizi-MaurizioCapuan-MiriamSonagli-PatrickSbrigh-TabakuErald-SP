@@ -108,23 +108,25 @@ public final class LevelHandler {
 
                 if (!(r == emptyColor[0] && g == emptyColor[1] && b == emptyColor[2])) {
                     if (r == brickColor[0] && g == brickColor[1] && b == brickColor[2]) {
-                        blocksHandler
-                                .get().addFixedBlock(new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.BRICK));
+                        blocksHandler.get()
+                                .addFixedBlock(new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.BRICK));
                     } else if (r == terrainColor[0] && g == terrainColor[1] && b == terrainColor[2]) {
                         blocksHandler.get().addFixedBlock(
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.TERRAIN));
                     } else if (r == stoneColor[0] && g == stoneColor[1] && b == stoneColor[2]) {
-                        blocksHandler
-                                .get().addFixedBlock(new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.STONE));
+                        blocksHandler.get()
+                                .addFixedBlock(new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.STONE));
                     } else if (r == luckyCoinColor[0] && g == luckyCoinColor[1] && b == luckyCoinColor[2]) {
                         blocksHandler.get().addFixedBlock(
                                 new LuckyBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.LUCKY, PowerUpType.COIN));
                     } else if (r == luckyRedColor[0] && g == luckyRedColor[1] && b == luckyRedColor[2]) {
-                        blocksHandler.get().addFixedBlock(new LuckyBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.LUCKY,
-                                PowerUpType.RED_MUSHROOM));
+                        blocksHandler.get()
+                                .addFixedBlock(new LuckyBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.LUCKY,
+                                        PowerUpType.RED_MUSHROOM));
                     } else if (r == luckyLifeColor[0] && g == luckyLifeColor[1] && b == luckyLifeColor[2]) {
-                        blocksHandler.get().addFixedBlock(new LuckyBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.LUCKY,
-                                PowerUpType.LIFE_MUSHROOM));
+                        blocksHandler.get()
+                                .addFixedBlock(new LuckyBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.LUCKY,
+                                        PowerUpType.LIFE_MUSHROOM));
                     } else if (r == luckyStarColor[0] && g == luckyStarColor[1] && b == luckyStarColor[2]) {
                         blocksHandler.get().addFixedBlock(
                                 new LuckyBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.LUCKY, PowerUpType.STAR));
@@ -140,10 +142,11 @@ public final class LevelHandler {
                     } else if (r == bgStoneColor[0] && g == bgStoneColor[1] && b == bgStoneColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.STONE));
-                    } else if (r == cloudTopLeftColor[0] && g == cloudTopLeftColor[1] && b == cloudTopLeftColor[2]) { //CLOUD PARS
+                    } else if (r == cloudTopLeftColor[0] && g == cloudTopLeftColor[1] && b == cloudTopLeftColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CLOUD_TOP_LEFT));
-                    } else if (r == cloudTopMiddleColor[0] && g == cloudTopMiddleColor[1] && b == cloudTopMiddleColor[2]) {
+                    } else if (r == cloudTopMiddleColor[0] && g == cloudTopMiddleColor[1]
+                            && b == cloudTopMiddleColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CLOUD_TOP_MIDDLE));
                     } else if (r == cloudTopRightColor[0] && g == cloudTopRightColor[1] && b == cloudTopRightColor[2]) {
@@ -152,13 +155,14 @@ public final class LevelHandler {
                     } else if (r == cloudBotLeftColor[0] && g == cloudBotLeftColor[1] && b == cloudBotLeftColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CLOUD_BOT_LEFT));
-                    } else if (r == cloudBotMiddleColor[0] && g == cloudBotMiddleColor[1] && b == cloudBotMiddleColor[2]) {
+                    } else if (r == cloudBotMiddleColor[0] && g == cloudBotMiddleColor[1]
+                            && b == cloudBotMiddleColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CLOUD_BOT_MIDDLE));
                     } else if (r == cloudBotRightColor[0] && g == cloudBotRightColor[1] && b == cloudBotRightColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CLOUD_BOT_RIGHT));
-                    } else if (r == bushLeftColor[0] && g == bushLeftColor[1] && b == bushLeftColor[2]) { // BUSH PARSING
+                    } else if (r == bushLeftColor[0] && g == bushLeftColor[1] && b == bushLeftColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.BUSH_LEFT));
                     } else if (r == bushMiddleColor[0] && g == bushMiddleColor[1] && b == bushMiddleColor[2]) {
@@ -167,7 +171,7 @@ public final class LevelHandler {
                     } else if (r == bushRightColor[0] && g == bushRightColor[1] && b == bushRightColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.BUSH_RIGHT));
-                    } else if (r == hillUpColor[0] && g == hillUpColor[1] && b == hillUpColor[2]) { // HILL PARSING
+                    } else if (r == hillUpColor[0] && g == hillUpColor[1] && b == hillUpColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.HILL_UP));
                     } else if (r == hillBlankColor[0] && g == hillBlankColor[1] && b == hillBlankColor[2]) {
@@ -185,7 +189,7 @@ public final class LevelHandler {
                     } else if (r == hillDownColor[0] && g == hillDownColor[1] && b == hillDownColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.HILL_DOWN));
-                    } else if (r == pipeTopLeftColor[0] && g == pipeTopLeftColor[1] && b == pipeTopLeftColor[2]) { // PIPE PARSING
+                    } else if (r == pipeTopLeftColor[0] && g == pipeTopLeftColor[1] && b == pipeTopLeftColor[2]) {
                         blocksHandler.get().addFixedBlock(
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.PIPE_TOP_LEFT));
                     } else if (r == pipeTopRightColor[0] && g == pipeTopRightColor[1] && b == pipeTopRightColor[2]) {
@@ -197,7 +201,7 @@ public final class LevelHandler {
                     } else if (r == pipeRightColor[0] && g == pipeRightColor[1] && b == pipeRightColor[2]) {
                         blocksHandler.get().addFixedBlock(
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.PIPE_RIGHT));
-                    } else if (r == flagTipColor[0] && g == flagTipColor[1] && b == flagTipColor[2]) { // FLAG PARSING
+                    } else if (r == flagTipColor[0] && g == flagTipColor[1] && b == flagTipColor[2]) {
                         blocksHandler.get().addFixedBlock(
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.FLAG_TIP));
                     } else if (r == flagPoleColor[0] && g == flagPoleColor[1] && b == flagPoleColor[2]) {
@@ -211,7 +215,7 @@ public final class LevelHandler {
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.FLAG_POLE));
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.FLAG_RIGHT));
-                    } else if (r == castleDoorColor[0] && g == castleDoorColor[1] && b == castleDoorColor[2]) { // CASTLE PARSING
+                    } else if (r == castleDoorColor[0] && g == castleDoorColor[1] && b == castleDoorColor[2]) {
                         blocksHandler.get().addFixedBlock(
                                 new MapFixedBlock(i * 16, (j - 1) * 16, 16, 16, gameScale, BlockType.CASTLE_DOOR_TOP));
                         blocksHandler.get().addFixedBlock(
@@ -219,26 +223,31 @@ public final class LevelHandler {
                     } else if (r == castleBrickColor[0] && g == castleBrickColor[1] && b == castleBrickColor[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CASTLE_BRICK));
-                    } else if (r == castleBalcony1Color[0] && g == castleBalcony1Color[1] && b == castleBalcony1Color[2]) {
+                    } else if (r == castleBalcony1Color[0] && g == castleBalcony1Color[1]
+                            && b == castleBalcony1Color[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CASTLE_BALCONY1));
-                    } else if (r == castleBalcony2Color[0] && g == castleBalcony2Color[1] && b == castleBalcony2Color[2]) {
+                    } else if (r == castleBalcony2Color[0] && g == castleBalcony2Color[1]
+                            && b == castleBalcony2Color[2]) {
                         blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CASTLE_BALCONY2));
-                    } else if (r == castleWindLeftColor[0] && g == castleWindLeftColor[1] && b == castleWindLeftColor[2]) {
+                    } else if (r == castleWindLeftColor[0] && g == castleWindLeftColor[1]
+                            && b == castleWindLeftColor[2]) {
                         blocksHandler.get().addBackgroundBlock(new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale,
                                 BlockType.CASTLE_WINDOW_LEFT));
-                    } else if (r == castleWindRightColor[0] && g == castleWindRightColor[1] && b == castleWindRightColor[2]) {
+                    } else if (r == castleWindRightColor[0] && g == castleWindRightColor[1]
+                            && b == castleWindRightColor[2]) {
                         blocksHandler.get().addBackgroundBlock(new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale,
                                 BlockType.CASTLE_WINDOW_RIGHT));
-                    } else if (r == goombaColor[0] && g == goombaColor[1] && b == goombaColor[2]) { // ENEMIES PARSING
-                        enemiesHandler.get().addEnemy(new Goomba(i * 16, j * 16, 16, 16, gameScale, blocksHandler.get()));
+                    } else if (r == goombaColor[0] && g == goombaColor[1] && b == goombaColor[2]) {
+                        enemiesHandler.get()
+                                .addEnemy(new Goomba(i * 16, j * 16, 16, 16, gameScale, blocksHandler.get()));
                     } else if (r == koopaColor[0] && g == koopaColor[1] && b == koopaColor[2]) {
-                        enemiesHandler
-                                .get().addEnemy(new KoopaTroopa(i * 16, (j - 1) * 16, 16, flyingKoopaHeight, gameScale, blocksHandler.get()));
+                        enemiesHandler.get().addEnemy(new KoopaTroopa(i * 16, (j - 1) * 16, 16, flyingKoopaHeight,
+                                gameScale, blocksHandler.get()));
                     } else if (r == flyingKoopaColor[0] && g == flyingKoopaColor[1] && b == flyingKoopaColor[2]) {
-                        enemiesHandler
-                                .get().addEnemy(new FlyingKoopa(i * 16, (j - 1) * 16, 16, flyingKoopaHeight, gameScale, blocksHandler.get()));
+                        enemiesHandler.get().addEnemy(new FlyingKoopa(i * 16, (j - 1) * 16, 16, flyingKoopaHeight,
+                                gameScale, blocksHandler.get()));
                     }
                 }
             }
