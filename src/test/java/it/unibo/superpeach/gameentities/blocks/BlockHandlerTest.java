@@ -14,7 +14,7 @@ import it.unibo.superpeach.game.Game;
  * 
  * @author Eraldo Tabaku
  */
-public final class BlockHandlerTest {
+final class BlockHandlerTest {
 
     private static final int X = 1;
     private static final int Y = 1;
@@ -35,9 +35,9 @@ public final class BlockHandlerTest {
      * adding blocks to the handler test.
      */
     @Test
-    public void addBlockTest() {
+    void addBlockTest() {
 
-        BlocksHandler bH = new BlocksHandler();
+        final BlocksHandler bH = new BlocksHandler();
 
         bH.addFixedBlock(new MapFixedBlock(X, Y, WIDTH, HEIGHT, SCALE2, BlockType.BRICK));
         bH.addFixedBlock(new MapFixedBlock(X, Y, WIDTH, HEIGHT, SCALE1, BlockType.BRICK));
@@ -53,9 +53,9 @@ public final class BlockHandlerTest {
      * removing blocks method testing.
      */
     @Test
-    public void removeBlockTest() {
+    void removeBlockTest() {
 
-        BlocksHandler bH1 = new BlocksHandler();
+        final BlocksHandler bH1 = new BlocksHandler();
 
         bH1.addFixedBlock(new MapFixedBlock(X, Y, WIDTH, HEIGHT, SCALE2, BlockType.BRICK));
         bH1.addFixedBlock(new MapFixedBlock(X, Y, WIDTH, HEIGHT, SCALE1, BlockType.BRICK));

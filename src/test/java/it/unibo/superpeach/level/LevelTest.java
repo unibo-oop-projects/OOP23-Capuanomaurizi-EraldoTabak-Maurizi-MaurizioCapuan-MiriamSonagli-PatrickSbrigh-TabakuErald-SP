@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * 
  * @author Eraldo Tabaku
  */
-public class LevelTest {
+class LevelTest {
 
-    private LevelHandler lH = new LevelHandler(new BlocksHandler(), 1, new EnemiesHandler());
+    private final LevelHandler lH = new LevelHandler(new BlocksHandler(), 1, new EnemiesHandler());
 
     @Test
     void testParseLevel() {

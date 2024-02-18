@@ -13,7 +13,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
  * 
  * @author Miriam Sonaglia
  */
-public class PowerupsHandlerTest {
+class PowerupsHandlerTest {
 
     private static final int X = 12;
     private static final int Y = 12;
@@ -26,7 +26,7 @@ public class PowerupsHandlerTest {
     private final BlocksHandler blocksHandler = new BlocksHandler();
     private final PowerupsHandler powerupsHandler = new PowerupsHandler();
 
-    private Game game = new Game();
+    private final Game game = new Game();
 
     @Test
     void powerupsHandlerTest() {

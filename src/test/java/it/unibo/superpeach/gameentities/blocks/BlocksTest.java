@@ -15,7 +15,7 @@ import it.unibo.superpeach.game.Game;
  * 
  * @author Eraldo Tabaku
  */
-public final class BlocksTest {
+final class BlocksTest {
 
     private static final int X = 1;
     private static final int Y = 1;
@@ -26,7 +26,7 @@ public final class BlocksTest {
 
     private final Game game = new Game();
 
-    private MapFixedBlock terrainBlock = null;
+    private MapFixedBlock terrainBlock;
 
     /**
      * game intialization and new terrain block creation before every test.

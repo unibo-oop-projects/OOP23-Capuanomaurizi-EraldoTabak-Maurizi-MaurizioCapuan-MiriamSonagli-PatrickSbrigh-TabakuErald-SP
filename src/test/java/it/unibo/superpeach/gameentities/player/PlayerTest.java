@@ -18,7 +18,7 @@ import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
  * 
  * @author Patrick Sbrighi
  */
-public final class PlayerTest {
+final class PlayerTest {
     private static final int SPEED_X = 4;
     private static final int SPEED_Y = 52;
     private static final int FALL_SPEED = 3;
@@ -29,11 +29,11 @@ public final class PlayerTest {
     private static final int HEIGHT = 16;
     private static final int SCALE = 2;
 
-    private BlocksHandler blocksHandler = new BlocksHandler();
-    private EnemiesHandler enemiesHandler = new EnemiesHandler();
-    private PowerupsHandler powerUpsHandler = new PowerupsHandler();
-    private Scoreboard scoreboard = new Scoreboard(3, 0, SCALE);
-    private Game game = new Game();
+    private final BlocksHandler blocksHandler = new BlocksHandler();
+    private final EnemiesHandler enemiesHandler = new EnemiesHandler();
+    private final PowerupsHandler powerUpsHandler = new PowerupsHandler();
+    private final Scoreboard scoreboard = new Scoreboard(3, 0, SCALE);
+    private final Game game = new Game();
     private Player peach;
 
     @Test

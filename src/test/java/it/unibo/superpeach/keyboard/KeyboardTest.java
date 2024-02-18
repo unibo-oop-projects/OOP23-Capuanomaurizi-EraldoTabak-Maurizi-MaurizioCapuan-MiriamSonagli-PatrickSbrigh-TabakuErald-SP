@@ -13,7 +13,7 @@ import it.unibo.superpeach.gameentities.player.PlayerHandler;
  * 
  * @author Patrick Sbrighi
  */
-public class KeyboardTest {
+class KeyboardTest {
     private Keyboard kb;
 
     @Test

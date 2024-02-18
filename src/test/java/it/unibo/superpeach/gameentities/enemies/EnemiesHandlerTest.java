@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 
  * @author Eraldo Tabaku
  */
-public class EnemiesHandlerTest {
+class EnemiesHandlerTest {
 
     private static final int X = 12;
     private static final int Y = 14;
@@ -38,7 +38,7 @@ public class EnemiesHandlerTest {
     void testEnemyHandlerAddEnemy() {
 
         new Game().init();
-        EnemiesHandler enemiesHandler1 = new EnemiesHandler();
+        final EnemiesHandler enemiesHandler1 = new EnemiesHandler();
 
         // Adding a new goomba to the Enemies Handler
         enemiesHandler1.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, BLOCKS_HANDLER));
@@ -70,12 +70,12 @@ public class EnemiesHandlerTest {
      * Testing the removeEnemy method.
      */
     @Test
-    public void testenemiesHandlerRemoveEnemy() {
+    void testenemiesHandlerRemoveEnemy() {
 
         new Game().init();
 
         final int startingSize = 5;
-        EnemiesHandler enemiesHandler2 = new EnemiesHandler();
+        final EnemiesHandler enemiesHandler2 = new EnemiesHandler();
 
         enemiesHandler2.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
         enemiesHandler2.addEnemy(new FlyingKoopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
@@ -108,11 +108,11 @@ public class EnemiesHandlerTest {
      * Testing the enemiesTick method.
      */
     @Test
-    public void testTickEnemies() {
+    void testTickEnemies() {
 
         new Game().init();
 
-        EnemiesHandler enemiesHandler3 = new EnemiesHandler();
+        final EnemiesHandler enemiesHandler3 = new EnemiesHandler();
 
         // Checking if the tick method correctly updates all enemies coordinates
         enemiesHandler3.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
@@ -131,11 +131,11 @@ public class EnemiesHandlerTest {
      * Testing if the enemies correctly die.
      */
     @Test
-    public void testDeadEnemies() {
+    void testDeadEnemies() {
 
         new Game().init();
 
-        EnemiesHandler enemiesHandler4 = new EnemiesHandler();
+        final EnemiesHandler enemiesHandler4 = new EnemiesHandler();
 
         // Adding a new enemy and then changing his "isAlive" field to "false"
         // to check if dead enemies are removed automatically correctly

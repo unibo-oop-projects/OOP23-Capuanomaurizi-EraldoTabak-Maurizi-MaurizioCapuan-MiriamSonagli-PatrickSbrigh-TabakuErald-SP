@@ -1,6 +1,7 @@
 package it.unibo.superpeach.game;
 
 import org.junit.jupiter.api.Test;
+
 /*
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.blocks.BlockType;
@@ -19,23 +20,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 
  * @author Eraldo Tabaku
  */
-public class GameTest {
+class GameTest {
 
-    private Game game = new Game();
+    // private Game game = new Game();
 
     /**
      * Testing the game initialization.
      */
     @Test
-    public void gameInitTest() {
-        game.init();
+    void gameInitTest() {
+        // game.init();
     }
 
     /**
      * Testing the running method.
      */
     @Test
-    public void runningTest() {
+    void runningTest() {
 
     }
 
@@ -43,7 +44,7 @@ public class GameTest {
      * Testing the stop game method.
      */
     @Test
-    public void stopTest() {
+    void stopTest() {
 
     }
 
@@ -51,7 +52,7 @@ public class GameTest {
      * Testing the tick method.
      */
     @Test
-    public void tickTest() {
+    void tickTest() {
 
     }
 

@@ -17,12 +17,12 @@ import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
  * 
  * @author Patrick Sbrighi
  */
-public class PlayerHandlerTest {
+class PlayerHandlerTest {
     private PlayerHandler pHandler;
     private Player peach;
     private static final int SCALE = 2;
     private static final int COINS = 7;
-    private Game game = new Game();
+    private final Game game = new Game();
 
     @Test
     void testInit() {

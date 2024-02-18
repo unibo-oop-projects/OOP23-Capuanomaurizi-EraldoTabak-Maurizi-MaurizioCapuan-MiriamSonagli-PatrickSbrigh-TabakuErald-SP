@@ -16,7 +16,7 @@ import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
  * 
  * @author Eraldo Tabaku
  */
-public class PowerupsTest {
+class PowerupsTest {
 
     private static final int X1 = 10;
     private static final int Y1 = 10;
@@ -37,7 +37,7 @@ public class PowerupsTest {
 
     private static final BlocksHandler BLOCKSHANDLER = new BlocksHandler();
 
-    private Game game = new Game();
+    private final Game game = new Game();
 
     @Test
     void powerupsTest() {
@@ -45,10 +45,10 @@ public class PowerupsTest {
         game.init();
 
         // CREO UN POWERUP PER OGNI TIPO
-        PowerUp redMushroom = new RedMushroom(X1, Y1, WIDTH, HEIGHT, SCALE1, BLOCKSHANDLER);
-        PowerUp lifeMushroom = new LifeMushroom(X2, Y2, WIDTH, HEIGHT, SCALE2, BLOCKSHANDLER);
-        PowerUp star = new Star(X3, Y3, WIDTH, HEIGHT, SCALE3, BLOCKSHANDLER);
-        PowerUp coin = new RedMushroom(X4, Y4, WIDTH, HEIGHT, SCALE4, BLOCKSHANDLER);
+        final PowerUp redMushroom = new RedMushroom(X1, Y1, WIDTH, HEIGHT, SCALE1, BLOCKSHANDLER);
+        final PowerUp lifeMushroom = new LifeMushroom(X2, Y2, WIDTH, HEIGHT, SCALE2, BLOCKSHANDLER);
+        final PowerUp star = new Star(X3, Y3, WIDTH, HEIGHT, SCALE3, BLOCKSHANDLER);
+        final PowerUp coin = new RedMushroom(X4, Y4, WIDTH, HEIGHT, SCALE4, BLOCKSHANDLER);
 
         // VERIFICO SE I POWERUPS SONO STATI CREATI CORRETTAMENTE
         assertNotNull(redMushroom);
@@ -109,10 +109,10 @@ public class PowerupsTest {
 
         new Game().init();
 
-        BlocksHandler bh1 = new BlocksHandler();
+        final BlocksHandler bh1 = new BlocksHandler();
         bh1.addFixedBlock(new MapFixedBlock(X2, Y2, WIDTH, HEIGHT, SCALE1, BlockType.PIPE_LEFT));
 
-        PowerUp rm = new RedMushroom(X2, Y2, WIDTH, HEIGHT, SCALE1, bh1);
+        final PowerUp rm = new RedMushroom(X2, Y2, WIDTH, HEIGHT, SCALE1, bh1);
 
         assertEquals(X2, rm.getX());
         assertEquals(Y2, rm.getY());
@@ -120,7 +120,7 @@ public class PowerupsTest {
 
         rm.collisions();
 
-        assertEquals((X2 + WIDTH), rm.getX());
+        assertEquals(X2 + WIDTH, rm.getX());
         assertEquals(Y2, rm.getY());
 
     }
@@ -130,10 +130,10 @@ public class PowerupsTest {
 
         new Game().init();
 
-        BlocksHandler bh = new BlocksHandler();
+        final BlocksHandler bh = new BlocksHandler();
         bh.addFixedBlock(new MapFixedBlock(X1 + 8, Y1 + 8, WIDTH, HEIGHT, SCALE1, BlockType.DEATH_BLOCK));
 
-        PowerUp star = new Star(X1, Y1, WIDTH, HEIGHT, SCALE1, bh);
+        final PowerUp star = new Star(X1, Y1, WIDTH, HEIGHT, SCALE1, bh);
 
         assertTrue(star.isAlive());
         star.collisions();
