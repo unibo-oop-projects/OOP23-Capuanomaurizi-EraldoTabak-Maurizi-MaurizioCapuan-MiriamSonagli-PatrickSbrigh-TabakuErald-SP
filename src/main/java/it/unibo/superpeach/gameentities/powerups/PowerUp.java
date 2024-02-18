@@ -3,6 +3,8 @@ package it.unibo.superpeach.gameentities.powerups;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
+
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.GameObject;
 import it.unibo.superpeach.gameentities.blocks.Block;
@@ -51,11 +53,11 @@ public abstract class PowerUp implements GameObject {
     private boolean isAlive;
     private boolean direction;
     private final PowerUpType powerUpType;
-    private BlocksHandler blocksHandler;
+    private Optional<BlocksHandler> blocksHandler;
 
     private final int paddingBound;
     private Texturer texturer = Game.getTexturer();
-    private BufferedImage[] image = texturer.getPowerups();
+    private Optional<BufferedImage[]> image = Optional.of(texturer.getPowerups());
 
     /**
      * Power ups constructor.
@@ -79,8 +81,7 @@ public abstract class PowerUp implements GameObject {
         this.isAlive = true;
         this.direction = false;
         this.powerUpType = type;
-        final BlocksHandler aux = blocksHandler;
-        this.blocksHandler = aux;
+        this.blocksHandler = Optional.of(blocksHandler);
         this.paddingBound = 4 * scale;
     }
 
@@ -106,13 +107,12 @@ public abstract class PowerUp implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        final BufferedImage[] aux = this.image;
-        return aux;
+        return this.image.get();
     }
 
     @Override
     public final void setSprites(final BufferedImage[] image) {
-        this.image = image.clone();
+        this.image = Optional.of(image);
     }
 
     @Override
@@ -295,7 +295,7 @@ public abstract class PowerUp implements GameObject {
      * @return the blocks handler.
      */
     public final BlocksHandler getBlocksHandler() {
-        return blocksHandler;
+        return blocksHandler.get();
     }
 
     /**
@@ -304,8 +304,7 @@ public abstract class PowerUp implements GameObject {
      * @param blocksHandler
      */
     public final void setBlocksHandler(final BlocksHandler blocksHandler) {
-        final BlocksHandler aux = blocksHandler;
-        this.blocksHandler = aux;
+        this.blocksHandler = Optional.of(blocksHandler);
     }
 
     /**
@@ -345,7 +344,7 @@ public abstract class PowerUp implements GameObject {
      * It handles the collisions between the power up and the blocks.
      */
     public final void collisions() {
-        for (final Block block : blocksHandler.getBlocks()) {
+        for (final Block block : blocksHandler.get().getBlocks()) {
             if (block.getType() == BlockType.DEATH_BLOCK && block.getBoundingBox().intersects(getBottomBound())) {
                 die();
             }

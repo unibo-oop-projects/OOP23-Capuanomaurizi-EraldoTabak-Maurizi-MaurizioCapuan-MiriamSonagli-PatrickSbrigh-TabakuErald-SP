@@ -2,6 +2,7 @@ package it.unibo.superpeach.keyboard;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Optional;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.player.PlayerHandler;
@@ -12,10 +13,10 @@ import it.unibo.superpeach.gameentities.player.PlayerHandler;
  * @author Patrick Sbrighi
  */
 public final class Keyboard extends KeyAdapter {
-    private final PlayerHandler playHand;
+    private final Optional<PlayerHandler> playHand;
     private static final long MIN_MILLS = 150;
     private long current;
-    private final Game game;
+    private final Optional<Game> game;
 
     /**
      * Class constructor.
@@ -24,11 +25,9 @@ public final class Keyboard extends KeyAdapter {
      * @param game    Game
      */
     public Keyboard(final PlayerHandler handler, final Game game) {
-        final PlayerHandler playAux = handler;
-        this.playHand = playAux;
+        this.playHand = Optional.of(handler);
         this.current = System.currentTimeMillis();
-        final Game gameAux = game;
-        this.game = gameAux;
+        this.game = Optional.of(game);
     }
 
     /**
@@ -40,22 +39,22 @@ public final class Keyboard extends KeyAdapter {
     public void keyPressed(final KeyEvent e) {
         final int pressed = e.getKeyCode();
 
-        if (pressed == KeyEvent.VK_SPACE && !playHand.getPlayer().hasJumped()
+        if (pressed == KeyEvent.VK_SPACE && !playHand.get().getPlayer().hasJumped()
                 && (System.currentTimeMillis() - current) >= MIN_MILLS) {
             current = System.currentTimeMillis();
-            playHand.getPlayer().jump();
+            playHand.get().getPlayer().jump();
         }
 
         if (pressed == KeyEvent.VK_A) {
-            playHand.getPlayer().moveLeft();
+            playHand.get().getPlayer().moveLeft();
         }
 
         if (pressed == KeyEvent.VK_D) {
-            playHand.getPlayer().moveRight();
+            playHand.get().getPlayer().moveRight();
         }
 
         if (pressed == KeyEvent.VK_ESCAPE) {
-            game.restart();
+            game.get().restart();
         }
     }
 
@@ -69,11 +68,11 @@ public final class Keyboard extends KeyAdapter {
         final int pressed = e.getKeyCode();
 
         if (pressed == KeyEvent.VK_SPACE) {
-            playHand.getPlayer().setHasJumped(false);
+            playHand.get().getPlayer().setHasJumped(false);
         }
 
         if (pressed == KeyEvent.VK_A || pressed == KeyEvent.VK_D) {
-            playHand.getPlayer().setMoveX(0);
+            playHand.get().getPlayer().setMoveX(0);
         }
     }
 }

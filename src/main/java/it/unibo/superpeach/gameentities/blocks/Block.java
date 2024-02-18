@@ -2,6 +2,7 @@ package it.unibo.superpeach.gameentities.blocks;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.GameObject;
@@ -21,7 +22,7 @@ public abstract class Block implements GameObject {
     private int scale;
 
     private final Texturer texturer = Game.getTexturer();
-    private BufferedImage[] sprites;
+    private Optional<BufferedImage[]> sprites;
 
     private BlockType type;
 
@@ -79,7 +80,7 @@ public abstract class Block implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        return sprites.clone();
+        return this.sprites.get();
     }
 
     /**
@@ -116,8 +117,7 @@ public abstract class Block implements GameObject {
 
     @Override
     public final void setSprites(final BufferedImage[] sprites) {
-        final BufferedImage[] aux = sprites;
-        this.sprites = aux;
+        this.sprites = Optional.of(sprites);
     }
 
     /**
