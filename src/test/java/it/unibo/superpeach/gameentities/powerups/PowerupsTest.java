@@ -8,8 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.superpeach.game.Game;
+import it.unibo.superpeach.gameentities.blocks.BlockType;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
+import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
+import it.unibo.superpeach.gameentities.enemies.Enemy;
+import it.unibo.superpeach.gameentities.enemies.Goomba;
 
+/**
+ * Powerup testing class
+ * 
+ * @author Miriam Sonaglia
+ */
 public class PowerupsTest {
 
     private static final int X1 = 10;
@@ -96,7 +105,27 @@ public class PowerupsTest {
         star.die();
         assertFalse(star.isAlive());
 
-        // VERIFICO SE LE COLLISIONI VENGONO GESTITE CORRETTAMENTE
+    }
+
+    @Test
+    public void testCollisions() {
+
+        new Game().init();
+
+        BlocksHandler bh1 = new BlocksHandler();
+        bh1.addFixedBlock(new MapFixedBlock(X2 + 1, Y2, WIDTH, HEIGHT, SCALE1, BlockType.PIPE_LEFT));
+
+        PowerUp rm = new RedMushroom(X2, Y2, WIDTH, HEIGHT, SCALE1, bh1);
+
+        assertEquals(X2, rm.getX());
+        assertEquals(Y2, rm.getY());
+        assertFalse(rm.isDirectionLeft());
+
+        rm.collisions();
+        /*
+         * assertEquals(X2, rm.getX());
+         * assertEquals(Y2, rm.getY());
+         */
 
     }
 

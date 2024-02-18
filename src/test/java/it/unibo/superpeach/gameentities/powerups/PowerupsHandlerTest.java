@@ -3,20 +3,18 @@ package it.unibo.superpeach.gameentities.powerups;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
-import it.unibo.superpeach.gameentities.powerups.Coin;
-import it.unibo.superpeach.gameentities.powerups.LifeMushroom;
-import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
-import it.unibo.superpeach.gameentities.powerups.RedMushroom;
-import it.unibo.superpeach.gameentities.powerups.Star;
 
+/**
+ * Powerup Handler Testing Class
+ * 
+ * @author Miriam Sonaglia
+ */
 public class PowerupsHandlerTest {
-    
+
     private static final int X = 12;
     private static final int Y = 12;
 
@@ -32,7 +30,7 @@ public class PowerupsHandlerTest {
 
     @Test
     void powerupsHandlerTest() {
-        
+
         game.init();
 
         // VERIFICO SE I POWERUPS VENGONO CORRETTAMENTE AGGIUNTI ALL'HANDLER
@@ -53,7 +51,6 @@ public class PowerupsHandlerTest {
         assertFalse(powerupsHandler.getPowerups().get(0).isAlive());
         powerupsHandler.removePowerUp(powerupsHandler.getPowerups().get(0));
         assertEquals(2, powerupsHandler.getPowerups().size());
-
 
     }
 
