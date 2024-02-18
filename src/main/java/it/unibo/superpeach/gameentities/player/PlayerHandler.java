@@ -1,13 +1,21 @@
 package it.unibo.superpeach.gameentities.player;
 
 import java.awt.Graphics;
+import java.util.Optional;
 
 /**
  * This class manages the player.
  * @author Patrick Sbrighi
  */
 public final class PlayerHandler {
-    private Player player;
+    private Optional<Player> player;
+
+    /**
+     * Class constructor.
+     */
+    public PlayerHandler() {
+        this.player = Optional.empty();
+    }
 
     /**
      * This method allows to set the player.
@@ -15,8 +23,8 @@ public final class PlayerHandler {
      * @return Return 0 if the operation was successful -1 otherwise
      */
     public int takePlayer(final Player p) {
-        if (this.player == null) {
-            this.player = p;
+        if (!this.player.isPresent()) {
+            this.player = Optional.of(p);
             return 0;
         }
         return -1;
@@ -27,7 +35,7 @@ public final class PlayerHandler {
      * @return Return the player
      */
     public Player getPlayer() {
-        return this.player;
+        return this.player.get();
     }
 
     /**
@@ -46,7 +54,7 @@ public final class PlayerHandler {
      * This method calls the player tick.
      */
     public void tick() {
-        this.player.tick();
+        this.player.get().tick();
     }
 
     /**
@@ -54,6 +62,8 @@ public final class PlayerHandler {
      * @param g The graphics
      */
     public void render(final Graphics g) {
-        this.player.render(g);
+        if (this.player.isPresent()) {
+            this.player.get().render(g);
+        }
     }
 }
