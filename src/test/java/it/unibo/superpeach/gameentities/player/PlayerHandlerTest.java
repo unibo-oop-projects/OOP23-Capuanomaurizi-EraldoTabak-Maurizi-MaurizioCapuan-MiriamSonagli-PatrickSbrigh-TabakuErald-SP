@@ -1,6 +1,5 @@
 package it.unibo.superpeach.gameentities.player;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -37,7 +36,7 @@ class PlayerHandlerTest {
         pHandler = new PlayerHandler();
         peach = new Peach(1, 1, 16, 16, SCALE, new BlocksHandler(), new EnemiesHandler(), new PowerupsHandler(),
                 new Scoreboard(3, COINS, SCALE));
-        assertEquals(0, pHandler.takePlayer(peach));
+        pHandler.takePlayer(peach);
         assertNotNull(pHandler.getPlayer());
     }
 

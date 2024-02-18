@@ -20,14 +20,11 @@ public final class PlayerHandler {
     /**
      * This method allows to set the player.
      * @param p The player to set
-     * @return Return 0 if the operation was successful -1 otherwise
      */
-    public int takePlayer(final Player p) {
+    public void takePlayer(final Player p) {
         if (!this.player.isPresent()) {
             this.player = Optional.of(p);
-            return 0;
         }
-        return -1;
     }
 
     /**
@@ -35,19 +32,19 @@ public final class PlayerHandler {
      * @return Return the player
      */
     public Player getPlayer() {
+        if (!this.player.isPresent()) {
+            return null;
+        }
         return this.player.get();
     }
 
     /**
      * This method removes the player.
-     * @return Return 0 if the operation was successful -1 otherwise
      */
-    public int removePlayer() {
-        if (this.player != null) {
-            this.player = null;
-            return 0;
+    public void removePlayer() {
+        if (!player.isPresent()) {
+            this.player = Optional.empty();
         }
-        return -1;
     }
 
     /**
