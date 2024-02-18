@@ -24,11 +24,6 @@ public class MapFixedBlock extends Block {
         super(x, y, width, height, scale);
         setType(type);
         switch (type) {
-            case TERRAIN:
-            case BRICK:
-            case STONE:
-                setSprites(getTexturer().getTerrain());
-                break;
             case LUCKY:
                 setSprites(getTexturer().getLucky());
                 break;

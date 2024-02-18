@@ -3,6 +3,7 @@ package it.unibo.superpeach.gameentities.enemies;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.GameObject;
@@ -29,9 +30,9 @@ public abstract class Enemy implements GameObject {
     private int width;
     private int height;
     private boolean isFalling, direction, isAlive;
-    private BlocksHandler blocksHandler;
+    private Optional<BlocksHandler> blocksHandler;
     private Texturer texturer = Game.getTexturer();
-    private BufferedImage[] sprites;
+    private Optional<BufferedImage[]> sprites;
 
     /**
      * @param x             coordinate of the enemy.
@@ -48,10 +49,11 @@ public abstract class Enemy implements GameObject {
         this.scale = scale;
         this.width = width * scale;
         this.height = height * scale;
-        this.blocksHandler = blocksHandler;
+        this.blocksHandler = Optional.of(blocksHandler);
         this.direction = false;
         this.isAlive = true;
         this.paddingBOUND *= scale;
+        this.sprites = Optional.empty();
     }
 
     @Override
@@ -107,7 +109,7 @@ public abstract class Enemy implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        return this.sprites.clone();
+        return this.sprites.get();
     }
 
     @Override
@@ -129,7 +131,7 @@ public abstract class Enemy implements GameObject {
      * @return BlockHandler used by the enemy.
      */
     public BlocksHandler getBlocksHandler() {
-        return this.blocksHandler;
+        return this.blocksHandler.get();
     }
 
     /**
@@ -167,7 +169,7 @@ public abstract class Enemy implements GameObject {
 
     @Override
     public final void setSprites(final BufferedImage[] sprites) {
-        this.sprites = sprites.clone();
+        this.sprites = Optional.of(sprites);
     }
 
     @Override
@@ -208,7 +210,7 @@ public abstract class Enemy implements GameObject {
      * @param blocksHandler to set the BlockHandler used by the enemy.
      */
     public void setBlocksHandler(final BlocksHandler blocksHandler) {
-        this.blocksHandler = blocksHandler;
+        this.blocksHandler = Optional.of(blocksHandler);
     }
 
     /**
@@ -277,7 +279,7 @@ public abstract class Enemy implements GameObject {
      * in order to define their behavior.
      */
     public void collision() {
-        for (final Block block : blocksHandler.getBlocks()) {
+        for (final Block block : blocksHandler.get().getBlocks()) {
             if (block.getBoundingBox().intersects(getBottomBound()) && block.getType() == BlockType.DEATH_BLOCK) {
                 die();
             }
