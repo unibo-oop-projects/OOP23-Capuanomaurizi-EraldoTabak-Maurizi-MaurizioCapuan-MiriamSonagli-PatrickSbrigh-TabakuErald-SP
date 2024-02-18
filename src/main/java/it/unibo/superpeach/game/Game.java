@@ -22,14 +22,11 @@ import it.unibo.superpeach.level.LevelHandler;
 /**
  * Implementation of the runnable game.
  * 
- * @author  Maurizio Capuano
+ * @author Maurizio Capuano
  */
-@SuppressFBWarnings(
-    value = {
+@SuppressFBWarnings(value = {
         "H", "D", "ST"
-    },
-    justification = "Static fields assignments wich lead the whole game running (e. g. getTexturer())"
-    )
+}, justification = "Static fields assignments wich lead the whole game running (e. g. getTexturer())")
 public final class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 10L;
@@ -65,7 +62,9 @@ public final class Game extends Canvas implements Runnable {
     private transient Scoreboard scoreboard;
 
     /**
-     * Creation of the window frame with the constructor call of a Game object within parameters.
+     * Creation of the window frame with the constructor call of a Game object
+     * within parameters.
+     * 
      * @param args possible command line arguments
      */
     public static void main(final String[] args) {
@@ -102,7 +101,9 @@ public final class Game extends Canvas implements Runnable {
     }
 
     /**
-     * Restarting the whole game with a new scale for the window and every internal graphic component.
+     * Restarting the whole game with a new scale for the window and every internal
+     * graphic component.
+     * 
      * @param newScale new scale of the game to restart from
      */
     public void changeScale(final int newScale) {
@@ -126,14 +127,12 @@ public final class Game extends Canvas implements Runnable {
     }
 
     /**
-     * Override of Thread run() method, implementing the actual game loop with framerate and tickrate.
+     * Override of Thread run() method, implementing the actual game loop with
+     * framerate and tickrate.
      */
-    @SuppressFBWarnings(
-        value = {
+    @SuppressFBWarnings(value = {
             "M", "C", "FL"
-        },
-        justification = "Cannot avoid using delta in while() loop since its value oscillates between approximately 0 and 1"
-        )
+    }, justification = "Cannot avoid using delta in while() loop since its value oscillates between approximately 0 and 1")
     @Override
     public void run() {
         long lastTime = System.nanoTime();

@@ -3,7 +3,6 @@ package it.unibo.superpeach.gameentities.powerups;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,10 +10,6 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.blocks.BlockType;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameentities.enemies.Enemy;
-import it.unibo.superpeach.gameentities.enemies.FlyingKoopa;
-import it.unibo.superpeach.gameentities.enemies.Goomba;
-import it.unibo.superpeach.gameentities.enemies.KoopaTroopa;
 
 /**
  * Powerup testing class

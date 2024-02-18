@@ -14,6 +14,7 @@ import it.unibo.superpeach.graphics.Texturer;
 
 /**
  * This class implements the main character Peach.
+ * 
  * @author Patrick Sbrighi
  */
 public final class Peach extends Player {
@@ -32,18 +33,20 @@ public final class Peach extends Player {
 
     /**
      * Class constructor.
-     * @param x X
-     * @param y Y
-     * @param width Width
-     * @param height Height
-     * @param scale Scale of dimension
-     * @param blocksHandler Blocks handler
-     * @param enemiesHandler Enemies handler
+     * 
+     * @param x               X
+     * @param y               Y
+     * @param width           Width
+     * @param height          Height
+     * @param scale           Scale of dimension
+     * @param blocksHandler   Blocks handler
+     * @param playerHandler   Enemies handler
      * @param powerUpsHandler Power up handler
-     * @param scoreboard Scoreboard
+     * @param scoreboard      Scoreboard
      */
-    public Peach(final int x, final int y, final int width, final int height, final int scale, final BlocksHandler blocksHandler,
-            final EnemiesHandler enemiesHandler, final PowerupsHandler powerUpsHandler, final Scoreboard scoreboard) {
+    public Peach(final int x, final int y, final int width, final int height, final int scale,
+            final BlocksHandler blocksHandler, final EnemiesHandler enemiesHandler,
+            final PowerupsHandler powerUpsHandler, final Scoreboard scoreboard) {
         super(x, y, width, height, scale, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
         this.texturer = Game.getTexturer();
         this.sprite = Optional.of(texturer.getPeach());
