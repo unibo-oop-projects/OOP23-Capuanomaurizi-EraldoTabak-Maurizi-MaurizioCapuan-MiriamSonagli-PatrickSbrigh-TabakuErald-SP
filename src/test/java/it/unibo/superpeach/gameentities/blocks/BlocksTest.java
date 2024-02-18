@@ -34,12 +34,12 @@ final class BlocksTest {
     @BeforeEach
     public void initGameTest() {
         game.init();
-        terrainBlock = new MapFixedBlock(X, Y, WIDTH, HEIGHT, SCALE2, BlockType.TERRAIN);
     }
 
     @Test
     void testCreation() {
 
+        terrainBlock = new MapFixedBlock(X, Y, WIDTH, HEIGHT, SCALE2, BlockType.TERRAIN);
         assertNotNull(terrainBlock);
 
         assertNotEquals(X * SCALE1, terrainBlock.getX());
@@ -57,6 +57,7 @@ final class BlocksTest {
     @Test
     void testBoundingBox() {
 
+        terrainBlock = new MapFixedBlock(X, Y, WIDTH, HEIGHT, SCALE2, BlockType.TERRAIN);
         assertNotEquals(new Rectangle(X, Y, WIDTH, HEIGHT), terrainBlock.getBoundingBox());
         assertEquals(new Rectangle(X * SCALE2, Y * SCALE2, WIDTH * SCALE2, HEIGHT * SCALE2),
                 terrainBlock.getBoundingBox());

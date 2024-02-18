@@ -113,9 +113,9 @@ final class EnemyTest {
         new Game().init();
 
         final BlocksHandler bh1 = new BlocksHandler();
-        bh1.addFixedBlock(new MapFixedBlock(X2 + 1, Y2, WIDTH, GOOMBA_HEIGHT, SCALE1, BlockType.BRICK));
+        bh1.addFixedBlock(new MapFixedBlock(X2, Y2, WIDTH, GOOMBA_HEIGHT, SCALE1, BlockType.BRICK));
 
-        final Enemy goomba = new Goomba(X2, Y2, WIDTH, GOOMBA_HEIGHT, SCALE1, BLOCKS_HANDLER);
+        final Enemy goomba = new Goomba(X2, Y2, WIDTH, GOOMBA_HEIGHT, SCALE1, bh1);
 
         assertEquals(X2, goomba.getX());
         assertEquals(Y2, goomba.getY());
@@ -123,7 +123,7 @@ final class EnemyTest {
 
         goomba.collision();
 
-        assertEquals(X2, goomba.getX());
+        assertEquals(X2 + WIDTH, goomba.getX());
         assertEquals(Y2, goomba.getY());
 
     }
