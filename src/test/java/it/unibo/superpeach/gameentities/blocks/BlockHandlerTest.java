@@ -11,7 +11,7 @@ import it.unibo.superpeach.game.Game;
 
 /**
  * Block Handler testing class.
- * 
+ *
  * @author Eraldo Tabaku
  */
 final class BlockHandlerTest {
@@ -70,5 +70,4 @@ final class BlockHandlerTest {
         bH1.removeFixedBlock(bH1.getBlocks().get(0));
         assertEquals(0, bH1.getBlocks().size());
     }
-
 }
