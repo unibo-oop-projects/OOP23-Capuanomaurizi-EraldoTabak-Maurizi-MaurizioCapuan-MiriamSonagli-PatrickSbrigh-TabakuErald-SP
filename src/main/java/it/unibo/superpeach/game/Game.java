@@ -79,7 +79,7 @@ public final class Game extends Canvas implements Runnable {
                 PLAYER_DEFAULT_WID_HEIG, gameScale, blocksHandler, enemiesHandler, powerupsHandler, scoreboard));
         LevelHandler levelHandler;
         levelHandler = new LevelHandler(blocksHandler, gameScale, enemiesHandler);
-        levelHandler.drawLevel();
+        levelHandler.parseDrawLevel();
         camera = new Camera(WINDOW_WIDTH, gameScale);
         this.addKeyListener(new Keyboard(playerHandler, this));
         start();

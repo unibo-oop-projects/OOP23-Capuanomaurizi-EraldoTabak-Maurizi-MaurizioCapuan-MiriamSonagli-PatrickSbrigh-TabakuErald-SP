@@ -48,12 +48,8 @@ public final class LevelHandler {
      * Methods that adds all blocks and enemies to their handlers which will then
      * render them.
      */
-    public void drawLevel() {
-        parseLevel("it/unibo/superpeach/level/level_blocks.png");
-    }
-
-    private void parseLevel(final String lvlImagePath) {
-        final BufferedImage levelImage = loader.loadImage(lvlImagePath);
+    public void parseDrawLevel() {
+        final BufferedImage levelImage = loader.loadImage("it/unibo/superpeach/level/level_blocks.png");
         final int width = levelImage.getWidth();
         final int height = levelImage.getHeight();
         final int trueAnd = 0xff, flyingKoopaHeight = 23;
