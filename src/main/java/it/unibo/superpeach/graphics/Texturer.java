@@ -194,90 +194,102 @@ public final class Texturer {
      * @return peach sprites
      */
     public BufferedImage[] getPeach() {
-        return peach.clone();
+        final BufferedImage[] aux = this.peach;
+        return (BufferedImage[]) aux.clone();
     }
 
     /**
      * @return bricks and ground sprites
      */
     public BufferedImage[] getTerrain() {
-        return terrain.clone();
+        final BufferedImage[] aux = this.terrain;
+        return aux;
     }
 
     /**
      * @return lucky blocks sprites
      */
     public BufferedImage[] getLucky() {
-        return lucky.clone();
+        final BufferedImage[] aux = this.lucky;
+        return aux;
     }
 
     /**
      * @return coins and hearts sprites
      */
     public BufferedImage[] getScoreboard() {
-        return scoreboard.clone();
+        final BufferedImage[] aux = this.scoreboard;
+        return aux;
     }
 
     /**
      * @return pipes sprites
      */
     public BufferedImage[] getPipe() {
-        return pipe.clone();
+        final BufferedImage[] aux = this.pipe;
+        return aux;
     }
 
     /**
      * @return cloud blocks sprites
      */
     public BufferedImage[] getCloud() {
-        return cloud.clone();
+        final BufferedImage[] aux = this.cloud;
+        return aux;
     }
 
     /**
      * @return bush blocks sprites
      */
     public BufferedImage[] getBush() {
-        return bush.clone();
+        final BufferedImage[] aux = this.bush;
+        return aux;
     }
 
     /**
      * @return hills blocks sprites
      */
     public BufferedImage[] getHill() {
-        return hill.clone();
+        final BufferedImage[] aux = this.hill;
+        return aux;
     }
 
     /**
      * @return flag, flag pole and flag tip sprites
      */
     public BufferedImage[] getFlag() {
-        return flag.clone();
+        final BufferedImage[] aux = this.flag;
+        return aux;
     }
 
     /**
      * @return goomba (enemy mushroom) sprites
      */
     public BufferedImage[] getGoombaImg() {
-        return goomba.clone();
+        final BufferedImage[] aux = this.goomba;
+        return aux;
     }
 
     /**
      * @return koopa (turtle) sprites
      */
     public BufferedImage[] getKoopaImg() {
-        return koopaTroopa.clone();
+        final BufferedImage[] aux = this.koopaTroopa;
+        return aux;
     }
 
     /**
      * @return flying koopa (turtle) sprites
      */
     public BufferedImage[] getFlyingKoopa() {
-        return flyingKoopa.clone();
+        final BufferedImage[] aux = this.flyingKoopa;
+        return aux;
     }
-
     /**
      * @return powerups sprites
      */
     public BufferedImage[] getPowerups() {
-        return powerups.clone();
+        final BufferedImage[] aux = this.powerups;
+        return aux;
     }
 }

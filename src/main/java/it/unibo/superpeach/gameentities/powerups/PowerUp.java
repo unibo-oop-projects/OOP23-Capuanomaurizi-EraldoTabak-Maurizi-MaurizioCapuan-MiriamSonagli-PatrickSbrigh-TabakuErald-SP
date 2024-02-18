@@ -79,7 +79,8 @@ public abstract class PowerUp implements GameObject {
         this.isAlive = true;
         this.direction = false;
         this.powerUpType = type;
-        this.blocksHandler = blocksHandler;
+        final BlocksHandler aux = blocksHandler;
+        this.blocksHandler = aux;
         this.paddingBound = 4 * scale;
     }
 
@@ -105,7 +106,8 @@ public abstract class PowerUp implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        return image.clone();
+        final BufferedImage[] aux = this.image;
+        return aux;
     }
 
     @Override
@@ -302,7 +304,8 @@ public abstract class PowerUp implements GameObject {
      * @param blocksHandler
      */
     public final void setBlocksHandler(final BlocksHandler blocksHandler) {
-        this.blocksHandler = blocksHandler;
+        final BlocksHandler aux = blocksHandler;
+        this.blocksHandler = aux;
     }
 
     /**

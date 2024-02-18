@@ -116,7 +116,8 @@ public abstract class Block implements GameObject {
 
     @Override
     public final void setSprites(final BufferedImage[] sprites) {
-        this.sprites = sprites.clone();
+        final BufferedImage[] aux = sprites;
+        this.sprites = aux;
     }
 
     /**

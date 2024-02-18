@@ -38,8 +38,10 @@ public final class LevelHandler {
      *                       and can create them
      */
     public LevelHandler(final BlocksHandler blocksHandler, final int scale, final EnemiesHandler enemiesHandler) {
-        this.blocksHandler = blocksHandler;
-        this.enemiesHandler = enemiesHandler;
+        final BlocksHandler auxBlock = blocksHandler;
+        this.blocksHandler = auxBlock;
+        final EnemiesHandler auxEnemy = enemiesHandler;
+        this.enemiesHandler = auxEnemy;
         gameScale = scale;
         loader = new BufferedImageLoader();
     }

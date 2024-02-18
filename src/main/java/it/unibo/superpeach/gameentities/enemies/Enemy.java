@@ -48,7 +48,8 @@ public abstract class Enemy implements GameObject {
         this.scale = scale;
         this.width = width * scale;
         this.height = height * scale;
-        this.blocksHandler = blocksHandler;
+        final BlocksHandler aux = blocksHandler;
+        this.blocksHandler = aux;
         this.direction = false;
         this.isAlive = true;
         this.paddingBOUND *= scale;
@@ -107,7 +108,8 @@ public abstract class Enemy implements GameObject {
 
     @Override
     public final BufferedImage[] getSprites() {
-        return this.sprites.clone();
+        final BufferedImage[] aux = this.sprites;
+        return aux;
     }
 
     @Override
@@ -129,7 +131,8 @@ public abstract class Enemy implements GameObject {
      * @return BlockHandler used by the enemy.
      */
     public BlocksHandler getBlocksHandler() {
-        return this.blocksHandler;
+        final BlocksHandler aux = this.blocksHandler;
+        return aux;
     }
 
     /**
@@ -167,7 +170,8 @@ public abstract class Enemy implements GameObject {
 
     @Override
     public final void setSprites(final BufferedImage[] sprites) {
-        this.sprites = sprites.clone();
+        final BufferedImage[] aux = sprites;
+        this.sprites = aux;
     }
 
     @Override
@@ -208,7 +212,8 @@ public abstract class Enemy implements GameObject {
      * @param blocksHandler to set the BlockHandler used by the enemy.
      */
     public void setBlocksHandler(final BlocksHandler blocksHandler) {
-        this.blocksHandler = blocksHandler;
+        final BlocksHandler aux = blocksHandler;
+        this.blocksHandler = aux;
     }
 
     /**

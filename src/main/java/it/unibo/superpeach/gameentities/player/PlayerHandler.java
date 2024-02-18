@@ -10,7 +10,10 @@ import java.util.Optional;
 public final class PlayerHandler {
     private Optional<Player> player;
 
-    public PlayerHandler(){
+    /**
+     * Class constructor.
+     */
+    public PlayerHandler() {
         this.player = Optional.empty();
     }
 
@@ -59,7 +62,7 @@ public final class PlayerHandler {
      * @param g The graphics
      */
     public void render(final Graphics g) {
-        if(this.player.isPresent()){
+        if (this.player.isPresent()) {
             this.player.get().render(g);
         }
     }
