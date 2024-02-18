@@ -12,12 +12,14 @@ import it.unibo.superpeach.gameentities.blocks.BlockType;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
 import it.unibo.superpeach.gameentities.enemies.Enemy;
+import it.unibo.superpeach.gameentities.enemies.FlyingKoopa;
 import it.unibo.superpeach.gameentities.enemies.Goomba;
+import it.unibo.superpeach.gameentities.enemies.KoopaTroopa;
 
 /**
  * Powerup testing class
  * 
- * @author Miriam Sonaglia
+ * @author Eraldo Tabaku
  */
 public class PowerupsTest {
 
@@ -113,7 +115,7 @@ public class PowerupsTest {
         new Game().init();
 
         BlocksHandler bh1 = new BlocksHandler();
-        bh1.addFixedBlock(new MapFixedBlock(X2 + 1, Y2, WIDTH, HEIGHT, SCALE1, BlockType.PIPE_LEFT));
+        bh1.addFixedBlock(new MapFixedBlock(X2, Y2, WIDTH, HEIGHT, SCALE1, BlockType.PIPE_LEFT));
 
         PowerUp rm = new RedMushroom(X2, Y2, WIDTH, HEIGHT, SCALE1, bh1);
 
@@ -122,10 +124,25 @@ public class PowerupsTest {
         assertFalse(rm.isDirectionLeft());
 
         rm.collisions();
-        /*
-         * assertEquals(X2, rm.getX());
-         * assertEquals(Y2, rm.getY());
-         */
+
+        assertEquals((X2 + WIDTH), rm.getX());
+        assertEquals(Y2, rm.getY());
+
+    }
+
+    @Test
+    void testEnemyDeathCollision() {
+
+        new Game().init();
+
+        BlocksHandler bh = new BlocksHandler();
+        bh.addFixedBlock(new MapFixedBlock(X1 + 8, Y1 + 8, WIDTH, HEIGHT, SCALE1, BlockType.DEATH_BLOCK));
+
+        PowerUp star = new Star(X1, Y1, WIDTH, HEIGHT, SCALE1, bh);
+
+        assertTrue(star.isAlive());
+        star.collisions();
+        assertFalse(star.isAlive());
 
     }
 
