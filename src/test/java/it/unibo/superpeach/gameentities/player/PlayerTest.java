@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameObjects.player;
+package it.unibo.superpeach.gameentities.player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

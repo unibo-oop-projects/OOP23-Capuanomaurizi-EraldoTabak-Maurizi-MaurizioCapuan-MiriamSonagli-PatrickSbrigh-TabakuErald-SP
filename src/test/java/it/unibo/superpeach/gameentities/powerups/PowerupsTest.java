@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameObjects.powerups;
+package it.unibo.superpeach.gameentities.powerups;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package it.unibo.superpeach.gameObjects.enemies;
+package it.unibo.superpeach.gameentities.enemies;
 
 import org.junit.jupiter.api.Test;
 
