@@ -1,6 +1,7 @@
 package it.unibo.superpeach.level;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import it.unibo.superpeach.gameentities.blocks.BlockType;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
@@ -23,10 +24,10 @@ import it.unibo.superpeach.graphics.BufferedImageLoader;
 public final class LevelHandler {
 
     private final BufferedImageLoader loader;
-    private final BlocksHandler blocksHandler;
+    private final Optional<BlocksHandler> blocksHandler;
     private final int gameScale;
 
-    private final EnemiesHandler enemiesHandler;
+    private final Optional<EnemiesHandler> enemiesHandler;
 
     /**
      * Level handler constructor.
@@ -38,8 +39,8 @@ public final class LevelHandler {
      *                       and can create them
      */
     public LevelHandler(final BlocksHandler blocksHandler, final int scale, final EnemiesHandler enemiesHandler) {
-        this.blocksHandler = blocksHandler;
-        this.enemiesHandler = enemiesHandler;
+        this.blocksHandler = Optional.of(blocksHandler);
+        this.enemiesHandler = Optional.of(enemiesHandler);
         gameScale = scale;
         loader = new BufferedImageLoader();
     }
@@ -208,12 +209,12 @@ public final class LevelHandler {
                     } else if (r == flagRightColor[0] && g == flagRightColor[1] && b == flagRightColor[2]) {
                         blocksHandler.addFixedBlock(
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.FLAG_POLE));
-                        blocksHandler.addBackgroundBlock(
+                        blocksHandler.get().addBackgroundBlock(
                                 new MapBackgroundBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.FLAG_RIGHT));
                     } else if (r == castleDoorColor[0] && g == castleDoorColor[1] && b == castleDoorColor[2]) { // CASTLE PARSING
                         blocksHandler.addFixedBlock(
                                 new MapFixedBlock(i * 16, (j - 1) * 16, 16, 16, gameScale, BlockType.CASTLE_DOOR_TOP));
-                        blocksHandler.addFixedBlock(
+                        blocksHandler.get().addFixedBlock(
                                 new MapFixedBlock(i * 16, j * 16, 16, 16, gameScale, BlockType.CASTLE_DOOR_BOT));
                     } else if (r == castleBrickColor[0] && g == castleBrickColor[1] && b == castleBrickColor[2]) {
                         blocksHandler.addBackgroundBlock(
