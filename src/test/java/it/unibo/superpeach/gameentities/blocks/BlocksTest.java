@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.Rectangle;
 import it.unibo.superpeach.game.Game;
-import it.unibo.superpeach.gameentities.blocks.BlockType;
-import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
 
 /**
  * Test class for Blocks

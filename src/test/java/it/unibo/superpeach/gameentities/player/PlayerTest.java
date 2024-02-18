@@ -11,11 +11,9 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.game.Scoreboard;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
-import it.unibo.superpeach.gameentities.player.Peach;
-import it.unibo.superpeach.gameentities.player.Player;
 import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
 
-public class PlayerTest{
+public class PlayerTest {
     private static final int SPEED_X = 4;
     private static final int SPEED_Y = 52;
     private static final int FALL_SPEED = 3;
@@ -34,15 +32,15 @@ public class PlayerTest{
     private Player peach;
 
     @Test
-    void testCreation(){
-        //checking the initial parameter
+    void testCreation() {
+        // checking the initial parameter
         game.init();
-        peach = new Peach(X,Y,WIDTH, HEIGHT, SCALE, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
+        peach = new Peach(X, Y, WIDTH, HEIGHT, SCALE, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
         assertNotNull(peach);
-        assertEquals(X*SCALE, peach.getX());
-        assertEquals(Y*SCALE, peach.getY());
-        assertEquals(WIDTH*SCALE, peach.getWidth());
-        assertEquals(HEIGHT*SCALE, peach.getHeight());
+        assertEquals(X * SCALE, peach.getX());
+        assertEquals(Y * SCALE, peach.getY());
+        assertEquals(WIDTH * SCALE, peach.getWidth());
+        assertEquals(HEIGHT * SCALE, peach.getHeight());
         assertEquals(null, peach.getPowerUp());
         assertEquals(SCALE, peach.getScale());
         assertEquals(0, peach.getScore());
@@ -53,9 +51,9 @@ public class PlayerTest{
     }
 
     @Test
-    void testMovement(){
+    void testMovement() {
         game.init();
-        peach = new Peach(X,Y,WIDTH, HEIGHT, SCALE, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
+        peach = new Peach(X, Y, WIDTH, HEIGHT, SCALE, blocksHandler, enemiesHandler, powerUpsHandler, scoreboard);
         peach.moveLeft();
         assertEquals(peach.getMoveX(), -SPEED_X);
         peach.moveRight();

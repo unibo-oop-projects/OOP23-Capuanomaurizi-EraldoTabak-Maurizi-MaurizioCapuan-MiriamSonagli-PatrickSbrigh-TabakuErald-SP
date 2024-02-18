@@ -6,10 +6,6 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.blocks.BlockType;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
-import it.unibo.superpeach.gameentities.enemies.Enemy;
-import it.unibo.superpeach.gameentities.enemies.FlyingKoopa;
-import it.unibo.superpeach.gameentities.enemies.Goomba;
-import it.unibo.superpeach.gameentities.enemies.KoopaTroopa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

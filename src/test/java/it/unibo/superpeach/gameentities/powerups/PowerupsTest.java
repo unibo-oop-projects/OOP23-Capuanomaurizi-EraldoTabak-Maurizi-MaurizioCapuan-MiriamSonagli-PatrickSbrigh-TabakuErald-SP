@@ -9,11 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
-import it.unibo.superpeach.gameentities.powerups.Coin;
-import it.unibo.superpeach.gameentities.powerups.LifeMushroom;
-import it.unibo.superpeach.gameentities.powerups.PowerUp;
-import it.unibo.superpeach.gameentities.powerups.RedMushroom;
-import it.unibo.superpeach.gameentities.powerups.Star;
 
 public class PowerupsTest {
 
@@ -36,8 +31,8 @@ public class PowerupsTest {
 
     private static final BlocksHandler BLOCKSHANDLER = new BlocksHandler();
 
-     Game game = new Game();
-    
+    Game game = new Game();
+
     @Test
     void powerupsTest() {
 
@@ -89,7 +84,7 @@ public class PowerupsTest {
         assertFalse(star.isDirectionLeft());
         star.changeDirection();
         assertTrue(star.isDirectionLeft());
-        
+
         // VERIFICO CHE IL POWERUP MUOIA CORRETTAMENTE
         assertTrue(redMushroom.isAlive());
         redMushroom.die();
@@ -103,19 +98,6 @@ public class PowerupsTest {
 
         // VERIFICO SE LE COLLISIONI VENGONO GESTITE CORRETTAMENTE
 
-
-
-
-
-
-
-
     }
-    
-
-
-
-
-
 
 }

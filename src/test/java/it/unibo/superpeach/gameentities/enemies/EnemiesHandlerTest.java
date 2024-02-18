@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
-import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
-import it.unibo.superpeach.gameentities.enemies.FlyingKoopa;
-import it.unibo.superpeach.gameentities.enemies.Goomba;
-import it.unibo.superpeach.gameentities.enemies.KoopaTroopa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
