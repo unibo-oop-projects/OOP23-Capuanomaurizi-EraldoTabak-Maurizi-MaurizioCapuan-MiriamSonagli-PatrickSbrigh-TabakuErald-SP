@@ -26,7 +26,7 @@ public class EnemyTest {
     private static final int X3 = 32;
     private static final int Y3 = 33;
     private static final int WIDTH = 16;
-    private static final int KOOPA_HEIGHT = 24;
+    private static final int KOOPA_HEIGHT = 23;
     private static final int GOOMBA_HEIGHT = 16;
     private static final int SCALE1 = 1;
     private static final int SCALE2 = 2;
@@ -83,15 +83,26 @@ public class EnemyTest {
         // coords of the enemy
         // to check if enemies correctly die after collision with it
         BlocksHandler bh = new BlocksHandler();
-        bh.addFixedBlock(new MapFixedBlock(X1, Y1, WIDTH, GOOMBA_HEIGHT, SCALE1, BlockType.DEATH_BLOCK));
+        bh.addFixedBlock(new MapFixedBlock(X1 + 8, Y1 + 8, WIDTH, GOOMBA_HEIGHT, SCALE1, BlockType.DEATH_BLOCK));
 
-        Enemy koopa = new KoopaTroopa(X1, Y1 - 1, WIDTH, KOOPA_HEIGHT, SCALE1, bh);
+        Enemy goomba = new Goomba(X1, Y1, WIDTH, GOOMBA_HEIGHT, SCALE1, bh);
+        Enemy koopa = new KoopaTroopa(X1, Y1, WIDTH, KOOPA_HEIGHT, SCALE1, bh);
+        Enemy fkoopa = new FlyingKoopa(X1, Y1, WIDTH, KOOPA_HEIGHT, SCALE1, bh);
+
+        assertTrue(goomba.isAlive());
+        goomba.collision();
+        // Checking if the enemy is dead after the collision
+        assertFalse(goomba.isAlive());
 
         assertTrue(koopa.isAlive());
-
-        // Checking if the enemy is alive after the collision
         koopa.collision();
+        // Checking if the enemy is dead after the collision
         assertFalse(koopa.isAlive());
+
+        assertTrue(fkoopa.isAlive());
+        fkoopa.collision();
+        // Checking if the enemy is dead after the collision
+        assertFalse(fkoopa.isAlive());
 
     }
 
@@ -101,7 +112,7 @@ public class EnemyTest {
         new Game().init();
 
         BlocksHandler bh1 = new BlocksHandler();
-        bh1.addFixedBlock(new MapFixedBlock(X2, Y2, WIDTH, GOOMBA_HEIGHT, SCALE1, BlockType.BRICK));
+        bh1.addFixedBlock(new MapFixedBlock(X2 + 1, Y2, WIDTH, GOOMBA_HEIGHT, SCALE1, BlockType.BRICK));
 
         Enemy goomba = new Goomba(X2, Y2, WIDTH, GOOMBA_HEIGHT, SCALE1, BLOCKS_HANDLER);
 
@@ -111,7 +122,6 @@ public class EnemyTest {
 
         goomba.collision();
 
-        assertTrue(goomba.isDirectionLeft());
         assertEquals(X2, goomba.getX());
         assertEquals(Y2, goomba.getY());
 

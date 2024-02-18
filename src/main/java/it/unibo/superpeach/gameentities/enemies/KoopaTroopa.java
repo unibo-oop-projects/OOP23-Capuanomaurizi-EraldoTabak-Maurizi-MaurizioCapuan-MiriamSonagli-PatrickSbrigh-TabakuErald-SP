@@ -26,7 +26,7 @@ public final class KoopaTroopa extends Enemy {
         super(x, y, width, height, scale, blocksHandler);
         setSprites(getTexturer().getKoopaImg());
         setSpeed(2 * scale);
-        setFalling(true);
+        setFalling(false);
     }
 
     @Override
