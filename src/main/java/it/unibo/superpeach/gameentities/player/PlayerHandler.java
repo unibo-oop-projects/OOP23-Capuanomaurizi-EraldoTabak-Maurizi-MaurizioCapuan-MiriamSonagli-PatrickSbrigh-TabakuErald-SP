@@ -20,7 +20,7 @@ public final class PlayerHandler {
      * @return Return 0 if the operation was successful -1 otherwise
      */
     public int takePlayer(final Player p) {
-        if (this.player.isPresent()) {
+        if (!this.player.isPresent()) {
             this.player = Optional.of(p);
             return 0;
         }
@@ -59,6 +59,8 @@ public final class PlayerHandler {
      * @param g The graphics
      */
     public void render(final Graphics g) {
-        this.player.get().render(g);
+        if(this.player.isPresent()){
+            this.player.get().render(g);
+        }
     }
 }
