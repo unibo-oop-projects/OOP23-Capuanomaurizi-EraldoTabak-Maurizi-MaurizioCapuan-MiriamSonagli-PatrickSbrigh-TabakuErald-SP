@@ -6,9 +6,11 @@ import org.junit.jupiter.api.Test;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
 
+/*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+*/
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
@@ -18,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class LevelTest {
 
-    LevelHandler lH = new LevelHandler(new BlocksHandler(), 1, new EnemiesHandler());
+    private LevelHandler lH = new LevelHandler(new BlocksHandler(), 1, new EnemiesHandler());
 
     @Test
-    public void testParseLevel() {
+    void testParseLevel() {
 
         assertNotNull(lH);
         // lH.drawLevel("it/unibo/superpeach/resources/level/level_blocks.png");

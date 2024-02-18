@@ -11,11 +11,11 @@ import java.awt.Rectangle;
 import it.unibo.superpeach.game.Game;
 
 /**
- * Test class for Blocks
+ * Test class for Blocks.
  * 
  * @author Eraldo Tabaku
  */
-final class BlocksTest {
+public final class BlocksTest {
 
     private static final int X = 1;
     private static final int Y = 1;
@@ -28,6 +28,9 @@ final class BlocksTest {
 
     private MapFixedBlock terrainBlock = null;
 
+    /**
+     * game intialization and new terrain block creation before every test.
+     */
     @BeforeEach
     public void initGameTest() {
         game.init();
@@ -35,7 +38,7 @@ final class BlocksTest {
     }
 
     @Test
-    public void testCreation() {
+    void testCreation() {
 
         assertNotNull(terrainBlock);
 
@@ -52,7 +55,7 @@ final class BlocksTest {
     }
 
     @Test
-    public void testBoundingBox() {
+    void testBoundingBox() {
 
         assertNotEquals(new Rectangle(X, Y, WIDTH, HEIGHT), terrainBlock.getBoundingBox());
         assertEquals(new Rectangle(X * SCALE2, Y * SCALE2, WIDTH * SCALE2, HEIGHT * SCALE2),

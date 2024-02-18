@@ -13,7 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class EnemyTest {
+/**
+ * Enemy generation testing class.
+ * 
+ * @author Eraldo Tabaku
+ */
+public final class EnemyTest {
 
     private static final int X1 = 12;
     private static final int Y1 = 13;
@@ -103,7 +108,7 @@ public class EnemyTest {
     }
 
     @Test
-    public void testCollisions() {
+    void testCollisions() {
 
         new Game().init();
 

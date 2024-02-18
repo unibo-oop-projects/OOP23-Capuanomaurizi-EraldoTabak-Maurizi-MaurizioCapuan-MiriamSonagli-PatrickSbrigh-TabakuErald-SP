@@ -12,7 +12,7 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.blocks.MapFixedBlock;
 
 /**
- * Powerup testing class
+ * Powerup testing class.
  * 
  * @author Eraldo Tabaku
  */
@@ -37,7 +37,7 @@ public class PowerupsTest {
 
     private static final BlocksHandler BLOCKSHANDLER = new BlocksHandler();
 
-    Game game = new Game();
+    private Game game = new Game();
 
     @Test
     void powerupsTest() {
@@ -105,7 +105,7 @@ public class PowerupsTest {
     }
 
     @Test
-    public void testCollisions() {
+    void testCollisions() {
 
         new Game().init();
 

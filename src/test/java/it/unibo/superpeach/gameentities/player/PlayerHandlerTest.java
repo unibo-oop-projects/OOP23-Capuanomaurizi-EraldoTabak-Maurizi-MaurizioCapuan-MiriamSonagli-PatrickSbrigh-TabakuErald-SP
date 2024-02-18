@@ -12,10 +12,16 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
 import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
 
+/**
+ * PlayerHandler testing class.
+ * 
+ * @author Patrick Sbrighi
+ */
 public class PlayerHandlerTest {
     private PlayerHandler pHandler;
     private Player peach;
-    private final static int SCALE = 2;
+    private static final int SCALE = 2;
+    private static final int COINS = 7;
     private Game game = new Game();
 
     @Test
@@ -30,7 +36,7 @@ public class PlayerHandlerTest {
         game.init();
         pHandler = new PlayerHandler();
         peach = new Peach(1, 1, 16, 16, SCALE, new BlocksHandler(), new EnemiesHandler(), new PowerupsHandler(),
-                new Scoreboard(3, 7, SCALE));
+                new Scoreboard(3, COINS, SCALE));
         assertEquals(0, pHandler.takePlayer(peach));
         assertNotNull(pHandler.getPlayer());
     }
@@ -40,7 +46,7 @@ public class PlayerHandlerTest {
         game.init();
         pHandler = new PlayerHandler();
         peach = new Peach(1, 1, 16, 32, SCALE, new BlocksHandler(), new EnemiesHandler(), new PowerupsHandler(),
-                new Scoreboard(1, 7, SCALE));
+                new Scoreboard(1, COINS, SCALE));
         pHandler.takePlayer(peach);
         assertNotNull(pHandler.getPlayer());
         pHandler.removePlayer();

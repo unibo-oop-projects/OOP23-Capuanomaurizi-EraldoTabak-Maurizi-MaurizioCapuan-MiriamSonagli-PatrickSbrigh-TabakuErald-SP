@@ -29,7 +29,7 @@ public class EnemiesHandlerTest {
     private static final int FKOOPA_SPEED = 1;
     private static final int GOOMBA_SPEED = 1;
 
-    private final static BlocksHandler blocksHandler = new BlocksHandler();
+    private static final BlocksHandler BLOCKS_HANDLER = new BlocksHandler();
 
     /**
      * testing the method addEnemy.
@@ -41,8 +41,8 @@ public class EnemiesHandlerTest {
         EnemiesHandler enemiesHandler1 = new EnemiesHandler();
 
         // Adding a new goomba to the Enemies Handler
-        enemiesHandler1.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, blocksHandler));
-        assertNotNull(blocksHandler);
+        enemiesHandler1.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, BLOCKS_HANDLER));
+        assertNotNull(BLOCKS_HANDLER);
 
         // Checking if the enemy got added correctly by checking if the first enemy in
         // enemis<Enemy> has the correct fields values
@@ -56,7 +56,7 @@ public class EnemiesHandlerTest {
         assertNotEquals(KOOPA_HEIGHT, enemiesHandler1.getEnemies().get(0).getHeight());
         assertEquals(SCALE, enemiesHandler1.getEnemies().get(0).getScale());
         assertNotEquals(KOOPA_HEIGHT, enemiesHandler1.getEnemies().get(0).getScale());
-        assertEquals(blocksHandler, enemiesHandler1.getEnemies().get(0).getBlocksHandler());
+        assertEquals(BLOCKS_HANDLER, enemiesHandler1.getEnemies().get(0).getBlocksHandler());
 
         // Checking if the enemy is alive
         assertTrue(enemiesHandler1.getEnemies().get(0).isAlive());
@@ -74,23 +74,24 @@ public class EnemiesHandlerTest {
 
         new Game().init();
 
+        final int startingSize = 5;
         EnemiesHandler enemiesHandler2 = new EnemiesHandler();
 
-        enemiesHandler2.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, blocksHandler));
-        enemiesHandler2.addEnemy(new FlyingKoopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, blocksHandler));
-        enemiesHandler2.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, blocksHandler));
-        enemiesHandler2.addEnemy(new FlyingKoopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, blocksHandler));
-        enemiesHandler2.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, blocksHandler));
+        enemiesHandler2.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
+        enemiesHandler2.addEnemy(new FlyingKoopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
+        enemiesHandler2.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, BLOCKS_HANDLER));
+        enemiesHandler2.addEnemy(new FlyingKoopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
+        enemiesHandler2.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, BLOCKS_HANDLER));
 
         // Checking if the number of enemies in List<Enemy> of the EnemyHandler is
         // correct
-        assertEquals(5, enemiesHandler2.getEnemies().size());
+        assertEquals(startingSize, enemiesHandler2.getEnemies().size());
         enemiesHandler2.removeEnemy(enemiesHandler2.getEnemies().get(1));
-        assertEquals(4, enemiesHandler2.getEnemies().size());
+        assertEquals(startingSize - 1, enemiesHandler2.getEnemies().size());
         enemiesHandler2.removeEnemy(enemiesHandler2.getEnemies().get(1));
-        assertEquals(3, enemiesHandler2.getEnemies().size());
+        assertEquals(startingSize - 2, enemiesHandler2.getEnemies().size());
         enemiesHandler2.removeEnemy(enemiesHandler2.getEnemies().get(1));
-        assertEquals(2, enemiesHandler2.getEnemies().size());
+        assertEquals(startingSize - 3, enemiesHandler2.getEnemies().size());
         enemiesHandler2.removeEnemy(enemiesHandler2.getEnemies().get(1));
         assertEquals(1, enemiesHandler2.getEnemies().size());
 
@@ -100,7 +101,7 @@ public class EnemiesHandlerTest {
         assertEquals(WIDTH, enemiesHandler2.getEnemies().get(0).getWidth());
         assertEquals(KOOPA_HEIGHT, enemiesHandler2.getEnemies().get(0).getHeight());
         assertEquals(SCALE, enemiesHandler2.getEnemies().get(0).getScale());
-        assertEquals(blocksHandler, enemiesHandler2.getEnemies().get(0).getBlocksHandler());
+        assertEquals(BLOCKS_HANDLER, enemiesHandler2.getEnemies().get(0).getBlocksHandler());
     }
 
     /**
@@ -114,9 +115,9 @@ public class EnemiesHandlerTest {
         EnemiesHandler enemiesHandler3 = new EnemiesHandler();
 
         // Checking if the tick method correctly updates all enemies coordinates
-        enemiesHandler3.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, blocksHandler));
-        enemiesHandler3.addEnemy(new FlyingKoopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, blocksHandler));
-        enemiesHandler3.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, blocksHandler));
+        enemiesHandler3.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
+        enemiesHandler3.addEnemy(new FlyingKoopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
+        enemiesHandler3.addEnemy(new Goomba(X, Y, WIDTH, GOOMBA_HEIGHT, SCALE, BLOCKS_HANDLER));
 
         enemiesHandler3.tickEnemies();
 
@@ -138,7 +139,7 @@ public class EnemiesHandlerTest {
 
         // Adding a new enemy and then changing his "isAlive" field to "false"
         // to check if dead enemies are removed automatically correctly
-        enemiesHandler4.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, blocksHandler));
+        enemiesHandler4.addEnemy(new KoopaTroopa(X, Y, WIDTH, KOOPA_HEIGHT, SCALE, BLOCKS_HANDLER));
         enemiesHandler4.getEnemies().get(0).die();
         assertFalse(enemiesHandler4.getEnemies().get(0).isAlive());
         enemiesHandler4.tickEnemies();

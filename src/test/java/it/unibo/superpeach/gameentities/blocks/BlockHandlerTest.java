@@ -9,7 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.superpeach.game.Game;
 
-public class BlockHandlerTest {
+/**
+ * Block Handler testing class.
+ * 
+ * @author Eraldo Tabaku
+ */
+public final class BlockHandlerTest {
 
     private static final int X = 1;
     private static final int Y = 1;
@@ -18,11 +23,17 @@ public class BlockHandlerTest {
     private static final int SCALE1 = 1;
     private static final int SCALE2 = 2;
 
+    /**
+     * Game inialization before every test.
+     */
     @BeforeEach
     public void initGameTest() {
         new Game().init();
     }
 
+    /**
+     * adding blocks to the handler test.
+     */
     @Test
     public void addBlockTest() {
 
@@ -38,6 +49,9 @@ public class BlockHandlerTest {
         assertNotNull(bH.getBlocks().get(1));
     }
 
+    /**
+     * removing blocks method testing.
+     */
     @Test
     public void removeBlockTest() {
 

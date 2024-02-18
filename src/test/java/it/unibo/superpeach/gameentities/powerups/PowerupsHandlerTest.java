@@ -9,7 +9,7 @@ import it.unibo.superpeach.game.Game;
 import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 
 /**
- * Powerup Handler Testing Class
+ * Powerup Handler Testing Class.
  * 
  * @author Miriam Sonaglia
  */
@@ -26,7 +26,7 @@ public class PowerupsHandlerTest {
     private final BlocksHandler blocksHandler = new BlocksHandler();
     private final PowerupsHandler powerupsHandler = new PowerupsHandler();
 
-    Game game = new Game();
+    private Game game = new Game();
 
     @Test
     void powerupsHandlerTest() {

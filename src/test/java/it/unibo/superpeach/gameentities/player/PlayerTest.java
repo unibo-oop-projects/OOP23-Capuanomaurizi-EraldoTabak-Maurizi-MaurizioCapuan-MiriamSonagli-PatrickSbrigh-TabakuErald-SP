@@ -13,7 +13,12 @@ import it.unibo.superpeach.gameentities.blocks.BlocksHandler;
 import it.unibo.superpeach.gameentities.enemies.EnemiesHandler;
 import it.unibo.superpeach.gameentities.powerups.PowerupsHandler;
 
-public class PlayerTest {
+/**
+ * player testing class.
+ * 
+ * @author Patrick Sbrighi
+ */
+public final class PlayerTest {
     private static final int SPEED_X = 4;
     private static final int SPEED_Y = 52;
     private static final int FALL_SPEED = 3;
