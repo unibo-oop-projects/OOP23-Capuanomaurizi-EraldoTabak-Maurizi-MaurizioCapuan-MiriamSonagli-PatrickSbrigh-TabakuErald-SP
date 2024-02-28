@@ -89,6 +89,7 @@ public final class PeachMenu {
                 frame.remove(panel);
                 frame.add(game);
                 game.init();
+                game.requestFocusInWindow();
             }
         });
         panel.add(startButton);
